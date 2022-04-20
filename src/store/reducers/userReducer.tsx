@@ -2,10 +2,9 @@ import { AnyAction } from "redux";
 
 const INITIAL_STATE = {
   isLoggedIn: false,
-}
+};
 
-
-const userReducer = ( state: any = INITIAL_STATE, action: AnyAction ) => {
+const userReducer = ( state: any, action: AnyAction ) => {
   if(action.type === 'SET_LOGIN') {
     return {
       ...state,
@@ -26,6 +25,8 @@ const userReducer = ( state: any = INITIAL_STATE, action: AnyAction ) => {
 
     }
   }
+
+  return state;
 }
 
 export default userReducer;
