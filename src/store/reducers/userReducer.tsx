@@ -4,7 +4,7 @@ const INITIAL_STATE = {
   isLoggedIn: false,
 };
 
-const userReducer = ( state: any, action: AnyAction ) => {
+const userReducer = ( state: any = INITIAL_STATE, action: AnyAction ) => {
   if(action.type === 'SET_LOGIN') {
     return {
       ...state,
