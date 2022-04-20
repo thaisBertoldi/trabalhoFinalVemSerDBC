@@ -14,10 +14,5 @@ export const Theme = {
     width: "1152px",
     height: "820px",
   },
-  button: {
-    width: "322px",
-    heigth: "42px",
-    borderRadius: "4px",
-  },
   fontFamily: "'Poppins', sans-serif",
 };
