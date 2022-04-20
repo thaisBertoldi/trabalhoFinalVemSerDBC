@@ -1,8 +1,9 @@
 import logoImg from '../../images/logo-vemser.png'
+import { Img } from './Logo.style'
 
 function Logo() {
   return (
-    <img src={logoImg} alt="Logo VemSer DBC" />
+    <Img src={logoImg} alt="Logo VemSer DBC"/>
   )
 }
 

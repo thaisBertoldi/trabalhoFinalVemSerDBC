@@ -5,7 +5,7 @@ export const DivLogo = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: ${Theme.margin};
+    margin: ${Theme.margin} 0;
 `;
 
 export const DivInputsLogin = styled.div`
@@ -17,7 +17,7 @@ export const DivInputsLogin = styled.div`
 
 export const DivEye = styled.div`
     position: absolute;
-    margin-left: 90%;
-    margin-top: -6%;
+    margin-left: 85%;
+    margin-top: -9%;
     color: ${Theme.color.white};
 `;
