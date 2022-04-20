@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Theme } from "./theme";
-import image from "./images/dbc-background.jpg";
+import image from "./images/background-div.jpg";
 import { Link } from "react-router-dom";
 
 export const ContainerPrincipal = styled.div`
