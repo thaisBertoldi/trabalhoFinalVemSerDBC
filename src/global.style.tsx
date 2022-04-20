@@ -14,13 +14,13 @@ export const ContainerPrincipal = styled.div`
 `;
 
 export const ContainerTitle = styled.div`
-    display: flex;
-    flex-direction: column;
-    color: ${Theme.color.white};
-    text-shadow: 0.1em 0.1em 0.2em black;
-    align-items: center;
-    justify-content: center;
-    line-height: 5px;
+  display: flex;
+  flex-direction: column;
+  color: ${Theme.color.white};
+  text-shadow: 0.1em 0.1em 0.2em black;
+  align-items: center;
+  justify-content: center;
+  line-height: 5px;
 `;
 
 export const Title = styled.h1<{size: string, spacing: string}>`
@@ -29,10 +29,11 @@ export const Title = styled.h1<{size: string, spacing: string}>`
 `;
 
 export const ContainerGetInfo = styled.div`
-  width: 395px;
-  height: 562px;
+  width: 600px;
+  height: 700px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   border-radius: 14px;
   box-shadow: 0px 0px 4px 1px ${Theme.color.white};
   background: linear-gradient(
@@ -40,30 +41,39 @@ export const ContainerGetInfo = styled.div`
     rgba(0, 0, 0, 0.35) 0.39%,
     rgba(0, 0, 0, 0) 101.3%
   );
-  backdrop-filter: blur(35px);
+  backdrop-filter: blur(25px);
 `;
 
 export const Input = styled.input`
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+
+  margin-bottom: 10px;
+
   border: none;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
   border-bottom: 2px solid ${Theme.color.white};
+  
+  background: none;
+  color: ${Theme.color.white};
+  font-size: ${Theme.fontSize};
+
   ::placeholder {
     font-family: ${Theme.fontFamily};
     color: ${Theme.color.white};
     font-size: ${Theme.fontSize};
   }
-  background: none;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-  width: ${(props) => props.width};
-  height: ${(props) => props.height};
-  color: ${Theme.color.white};
-  font-size: ${Theme.fontSize};
+
+  :focus {
+    outline: none;
+  }
 `;
 
-export const Btn = styled.button`
-  background-color: ${Theme.color.primary};
-  width: 322px;
+export const Btn = styled.button<{width: string}>`
+  width: ${(props) => props.width};
   height: 42px;
+  background-color: ${Theme.color.primary};
   border-radius: 4px;
   outline: none;
   border: none;
@@ -71,12 +81,13 @@ export const Btn = styled.button`
 `;
 
 export const Paragraph = styled.p`
-    font-size: ${Theme.fontSize};
-    color: ${Theme.color.white};
+  font-size: ${Theme.fontSize};
+  color: ${Theme.color.white};
+  text-align: center;
 `;
 
 export const LinkCustom = styled(Link)`
-    list-style: none;
-    text-decoration: none;
-    color: ${Theme.color.primary};
+  list-style: none;
+  text-decoration: none;
+  color: ${Theme.color.primary};
 `;

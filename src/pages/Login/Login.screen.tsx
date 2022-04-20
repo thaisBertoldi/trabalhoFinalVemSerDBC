@@ -16,19 +16,8 @@ import { DivEye, DivInputsLogin, DivLogo } from "./Login.style";
 
 
 const Login = () => {
-  const [typePassword, setTypePassword] = useState("password");
-  const [isPassword, setIsPassword] = useState(true);
-
-
-  const changeTypePasswordText = () => {
-    setIsPassword(false);
-    setTypePassword("text");
-  };
-
-  const changeTypePasswordOcult = () => {
-    setIsPassword(true);
-    setTypePassword("password");
-  };
+  
+  const [showPassword, setShowPassword] = useState<boolean>(true);
 
   const formik = useFormik({
     initialValues: {
@@ -58,8 +47,8 @@ const Login = () => {
           <DivInputsLogin>
             <div>
               <Input
-                width="90%"
-                height="30%"
+                width="99%"
+                height="40px"
                 placeholder="Username"
                 id="user"
                 name="user"
@@ -70,30 +59,31 @@ const Login = () => {
             </div>
             <div>
               <Input
-                width="90%"
-                height="30%"
+                width="99%"
+                height="40px"
                 placeholder="Password"
                 id="password"
                 name="password"
-                type={typePassword}
+                type={ showPassword ? 'password' : 'text' }
                 onChange={formik.handleChange}
                 value={formik.values.password}
               />
               <DivEye>
-                  {isPassword && (
-                    <FaEye onClick={() => changeTypePasswordText()} />
-                  )}
-                  {!isPassword && (
-                    <FaEyeSlash onClick={() => changeTypePasswordOcult()} />
-                  )}
-                </DivEye>
+                {
+                  showPassword ? (
+                    <FaEye onClick={() => setShowPassword(!showPassword)} />
+                  ) : (
+                    <FaEyeSlash onClick={() => setShowPassword(!showPassword)} />
+                  )
+                }
+              </DivEye>
             </div>
             <div>
-              <Btn type="submit">Submit</Btn>
+              <Btn width="100%" type="submit">Submit</Btn>
             </div>
             <div>
               <Paragraph>
-                Não possui uma conta?<LinkCustom to="/register">Registrar</LinkCustom>
+                Não possui uma conta? <LinkCustom to="/register">Registrar</LinkCustom>
               </Paragraph>
             </div>
           </DivInputsLogin>
