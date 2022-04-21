@@ -1,9 +1,10 @@
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Logo from "../../components/Logo/Logo";
+import Notiflix from "notiflix";
 import {
   Btn,
   ContainerGetInfo,
@@ -19,6 +20,7 @@ import { DivEye, DivInputsLogin, DivLogo } from "../Login/Login.style";
 import { RegisterDTO } from "../../models/UserDTO";
 import { handleRegister } from "../../store/action/authActions";
 import PasswordStrengthBar from "react-password-strength-bar";
+import { hasLogin } from "../../utils/utils";
 
 const Register = ({ auth, dispatch }: any) => {
   const [showPassword, setShowPassword] = useState<boolean>(true);
@@ -32,6 +34,10 @@ const Register = ({ auth, dispatch }: any) => {
       console.log("A senha deve ser igual a confirmação");
     }
   };
+
+  useEffect( () => {
+    hasLogin(navigate)
+  },[] )
 
   const formik = useFormik({
     initialValues: {

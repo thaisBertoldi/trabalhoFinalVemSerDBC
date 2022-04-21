@@ -20,13 +20,17 @@ import { DivEye, DivInputsLogin, DivLogo } from "./Login.style";
 
 import { handleLogin } from "../../store/action/authActions";
 import { Theme } from "../../theme";
+import { hasLogin } from "../../utils/utils";
 
 const Login = ({auth, dispatch}: any) => {
-  
   
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState<boolean>(true);
+
+  useEffect( () => {
+    hasLogin(navigate)
+  },[] )
 
   const formik = useFormik({
     initialValues: {
