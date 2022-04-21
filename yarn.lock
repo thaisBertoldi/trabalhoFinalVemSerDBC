@@ -6973,7 +6973,7 @@ prompts@^2.0.1, prompts@^2.4.2:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.6.0, prop-types@^15.8.1:
+prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -7129,13 +7129,12 @@ react-is@^18.0.0:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.0.0.tgz#026f6c4a27dbe33bf4a35655b9e1327c4e55e3f5"
   integrity sha512-yUcBYdBBbo3QiPsgYDcfQcIkGZHfxOaoE6HLSnr1sPzMhdyxusbfKOSUbSd/ocGi32dxcj366PsTj+5oggeKKw==
 
-react-password-strength@^2.4.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/react-password-strength/-/react-password-strength-2.4.0.tgz#07bdbe243d7c97b0a7732da898860beb76e02b8e"
-  integrity sha512-8ksh5zfF4uXRxJDGgleABu0dS5hN+mQSvzxLpVWEPVwWMxKikLEVUnB0mrbnBHul7mbjVD9QTjzQ78/wm5bewQ==
+react-password-strength-bar@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/react-password-strength-bar/-/react-password-strength-bar-0.4.0.tgz#8c8814e95fc61bdb2c24f971ec1cd1a810c97887"
+  integrity sha512-gXgFdGJfeqLKC/xR76kqD8z9w84Rb9YOTcJXKopBzMx8dIdxNTfXGZ64Y2yTvpbnfxLdRNSV3vgAGD7CtdcnIQ==
   dependencies:
-    prop-types "^15.6.0"
-    zxcvbn "^4.3.0"
+    zxcvbn "4.4.2"
 
 react-redux@^8.0.0:
   version "8.0.0"
@@ -8919,7 +8918,7 @@ yocto-queue@^0.1.0:
   resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-0.1.0.tgz#0294eb3dee05028d31ee1a5fa2c556a6aaf10a1b"
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
 
-zxcvbn@^4.3.0:
+zxcvbn@4.4.2:
   version "4.4.2"
   resolved "https://registry.yarnpkg.com/zxcvbn/-/zxcvbn-4.4.2.tgz#28ec17cf09743edcab056ddd8b1b06262cc73c30"
   integrity sha1-KOwXzwl0PtyrBW3dixsGJizHPDA=
