@@ -16,8 +16,9 @@ export const DivInputsLogin = styled.div`
 `;
 
 export const DivEye = styled.div`
+    font-size: 25px;
     position: absolute;
-    margin-left: 85%;
-    margin-top: -9%;
+    margin-left: 88%;
+    margin-top: -8.5%;
     color: ${Theme.color.white};
 `;

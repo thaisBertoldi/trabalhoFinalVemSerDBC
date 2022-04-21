@@ -29,8 +29,8 @@ export const Title = styled.h1<{size: string, spacing: string}>`
 `;
 
 export const ContainerGetInfo = styled.div`
-  max-width: 100%;
-  max-height: 80%;
+  width: 600px;
+  height: 700px;
   display: flex;
   flex-direction: column;
   justify-content: center;
