@@ -1,6 +1,4 @@
-import React from 'react'
-
-function Quotation() {
+const Quotation = () => {
   return (
     <div>Quotation</div>
   )
