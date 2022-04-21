@@ -4,7 +4,7 @@ import { UlNav, DropDown, DivArrow } from './Header.style';
 import { IoMdArrowDropdown } from 'react-icons/io';
 import { handleLogout } from '../../store/action/authActions';
 
-import teste from '../../images/foto-perfil.png'
+import ImgDefault from '../../images/foto-perfil.png'
 import { useState } from 'react';
 
 
@@ -14,11 +14,16 @@ const Menu = ({auth, dispatch}:any) => {
  
   const [open, setOpen] = useState<boolean>(false);
 
+  const hasUser: string | any = localStorage.getItem('token');
+  const User = JSON.parse(hasUser);
+  console.log(User);
+
   return (
     <UlNav>
       <Link to={'/'}>Home</Link>
+      <p> { User?.fullName } </p>
       <figure onClick={ () => setOpen(!open) }>
-        <img src={teste} alt="Foto do usuário" />
+        <img src={ User?.profileImage !== null ? `data:image/jpeg;base64,${User?.profileImage}` : ImgDefault} alt="Foto do usuário"  />
         <DivArrow>
           <IoMdArrowDropdown />
         </DivArrow>

@@ -3,9 +3,11 @@ import { isLoggedDTO } from '../../models/UserDTO'
 
 const INITIAL_STATE = {
   username: '',
+  fullName: '',
   token: '',
   profile: '',
-  isLogged: false
+  isLogged: false,
+  profileImage: ''
 };
 
 const authReducer = ( state: isLoggedDTO = INITIAL_STATE, action: AnyAction ) => {
@@ -13,8 +15,10 @@ const authReducer = ( state: isLoggedDTO = INITIAL_STATE, action: AnyAction ) =>
     return {
       ...state,
       username: action.username,
+      fullName: action.fullName,
       token: action.token,
       profile: action.profile,
+      profileImage: action.profileImage,
       isLogged: action.isLogged
     }
   }

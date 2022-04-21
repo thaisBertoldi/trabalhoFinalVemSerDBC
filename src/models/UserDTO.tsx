@@ -5,9 +5,11 @@ export interface LoginDTO {
 
 export interface isLoggedDTO {
   username: string;
+  fullName: string;
   token: string;
   profile: string;
   isLogged: boolean;
+  profileImage: string;
 }
 
 export interface RegisterDTO {

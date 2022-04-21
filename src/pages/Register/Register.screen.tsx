@@ -45,7 +45,7 @@ const Register = ({ auth, dispatch }: any) => {
       email: "",
       password: "",
       confirmPassword: "",
-      image: ""
+      image: null
     },
     onSubmit: (values) => {
       // register(values);
@@ -141,8 +141,7 @@ const Register = ({ auth, dispatch }: any) => {
               id="image"
               name="image"
               type="file"
-              onChange={formik.handleChange}
-              value={formik.values.image}
+              onChange={(event) => formik.setFieldValue("image", event.target.files)}
             />
 
             <Btn width="100%" type="submit">

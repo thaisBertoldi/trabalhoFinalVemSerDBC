@@ -7,6 +7,7 @@ export const handleLogin = async (values: LoginDTO, dispatch: AppDispatch, navig
   try {    
     Loading.circle();
     const {data} = await api.post("/auth/login", values);
+    console.log(data);
     setLogin(dispatch, data);
     navigate('/');
   } catch (error) {
@@ -41,6 +42,7 @@ export const setLogin = (dispatch: AppDispatch, data: isLoggedDTO) => {
     username: data.username,
     token: data.token,
     profile: data.profile,
+    profileImage: data.profileImage,
     isLogged: true
   }
 
