@@ -11,7 +11,6 @@ export interface isLoggedDTO {
   isLogged: boolean;
   profileImage: string;
 }
-
 export interface RegisterDTO {
   user: string;
   password: string;

@@ -14,5 +14,4 @@ export const Theme = {
     width: "1152px",
     height: "820px",
   },
-  fontFamily: "'Poppins', sans-serif",
 };

@@ -6,6 +6,10 @@ import { setLogin } from "./store/action/authActions";
 
 import { Header, Footer } from './components';
 import { Login, Register, Home } from './pages';
+import { RootState } from './store';
+import { isLoggedDTO } from './models/UserDTO';
+import Quotation from './pages/Quotation/Quotation';
+
 
 const Routers = ({auth, dispatch}: any) => {
 
@@ -24,6 +28,7 @@ const Routers = ({auth, dispatch}: any) => {
           <Route path='/' element={ <Home /> } />
           <Route path='/login' element={ <Login /> }/>
           <Route path='/register' element={ <Register /> }/>
+          <Route path='/quotation' element={<Quotation />} />
         </Routes>
       <Footer />
     </BrowserRouter>

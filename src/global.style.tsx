@@ -3,6 +3,10 @@ import { Theme } from "./theme";
 import image from "./images/background-div.jpg";
 import { Link } from "react-router-dom";
 
+export const Container = styled.div`
+  height: 100vh;
+`;
+
 export const ContainerPrincipal = styled.div`
   display: grid;
   grid-template-columns: auto auto;
@@ -60,7 +64,8 @@ export const Input = styled.input`
   font-size: ${Theme.fontSize};
 
   ::placeholder {
-    font-family: ${Theme.fontFamily};
+    @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+    font-family: 'Poppins', sans-serif;
     color: ${Theme.color.white};
     font-size: ${Theme.fontSize};
   }
@@ -73,7 +78,7 @@ export const Input = styled.input`
 export const Btn = styled.button<{width: string}>`
   width: ${(props) => props.width};
   height: 42px;
-  background-color: ${Theme.color.primary};
+  background-color: ${props => props.color};
   border-radius: 4px;
   outline: none;
   border: none;
