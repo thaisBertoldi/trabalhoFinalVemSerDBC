@@ -146,7 +146,7 @@ const Register = ({auth, dispatch}: any) => {
 }
 
 const mapStateToProps = (state: any) => ({
-  auth: state.user
+  auth: state.authReducer
 })
 
 export default connect(mapStateToProps)(Register);
