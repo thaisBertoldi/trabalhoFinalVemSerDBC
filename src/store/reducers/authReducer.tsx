@@ -4,7 +4,8 @@ import { isLoggedDTO } from '../../models/UserDTO'
 const INITIAL_STATE = {
   username: '',
   token: '',
-  profile: ''
+  profile: '',
+  isLogged: false
 };
 
 const authReducer = ( state: isLoggedDTO = INITIAL_STATE, action: AnyAction ) => {

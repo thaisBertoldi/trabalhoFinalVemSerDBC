@@ -6,7 +6,8 @@ export interface LoginDTO {
 export interface isLoggedDTO {
   username: string,
   token: string,
-  profile: string
+  profile: string,
+  isLogged: boolean
 }
 
 export interface RegisterDTO {

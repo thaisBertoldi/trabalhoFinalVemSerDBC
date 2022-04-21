@@ -1,5 +1,5 @@
 import api from '../../service/api';
-import { LoginDTO } from "../../models/UserDTO";
+import { LoginDTO, RegisterDTO } from "../../models/UserDTO";
 
 export const handleLogin = async (values: LoginDTO, dispatch: any, navigate: any) => {
   try {    
@@ -10,7 +10,8 @@ export const handleLogin = async (values: LoginDTO, dispatch: any, navigate: any
       type: 'SET_LOGIN',
       username: data.username,
       token: data.token,
-      profile: data.profile
+      profile: data.profile,
+      isLogged: true
     }
 
     dispatch(setLogged);
@@ -18,4 +19,8 @@ export const handleLogin = async (values: LoginDTO, dispatch: any, navigate: any
   } catch (error) {
     console.log(error);
   }
+}
+
+export const handleRegister = async (values: RegisterDTO, dispatch: any, navigate: any) => {
+
 }
