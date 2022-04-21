@@ -3,6 +3,10 @@ import { Theme } from "./theme";
 import image from "./images/background-div.jpg";
 import { Link } from "react-router-dom";
 
+export const Container = styled.div`
+  height: 100vh;
+`;
+
 export const ContainerPrincipal = styled.div`
   display: grid;
   grid-template-columns: auto auto;
