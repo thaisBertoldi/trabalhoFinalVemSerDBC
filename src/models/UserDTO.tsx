@@ -1,12 +1,17 @@
 export interface LoginDTO {
-    user: string,
-    password: string
+  email: string,
+  password: string
+}
+
+export interface isLoggedDTO {
+  username: string,
+  token: string,
+  profile: string
 }
 
 export interface RegisterDTO {
-    user: string,
-    password: string,
-    photo: string,
-    type: string,
-    email: string,
+  user: string,
+  password: string,
+  confirmPassword: string,
+  email: string,
 }

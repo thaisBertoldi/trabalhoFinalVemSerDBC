@@ -44,19 +44,17 @@ const Login = () => {
           <Logo />
         </DivLogo>
         <form onSubmit={formik.handleSubmit}>
-          <DivInputsLogin>
-            <div>
-              <Input
-                width="99%"
-                height="40px"
-                placeholder="Username"
-                id="user"
-                name="user"
-                type="text"
-                onChange={formik.handleChange}
-                value={formik.values.user}
-              />
-            </div>
+          <DivInputsLogin>            
+            <Input
+              width="99%"
+              height="40px"
+              placeholder="Username"
+              id="user"
+              name="user"
+              type="text"
+              onChange={formik.handleChange}
+              value={formik.values.user}
+            />
             <div>
               <Input
                 width="99%"
@@ -78,14 +76,12 @@ const Login = () => {
                 }
               </DivEye>
             </div>
-            <div>
-              <Btn width="100%" type="submit">Submit</Btn>
-            </div>
-            <div>
-              <Paragraph>
-                Não possui uma conta? <LinkCustom to="/register">Registrar</LinkCustom>
-              </Paragraph>
-            </div>
+            
+            <Btn width="100%" type="submit">Submit</Btn>
+           
+            <Paragraph>
+              Não possui uma conta? <LinkCustom to="/register">Registrar</LinkCustom>
+            </Paragraph>
           </DivInputsLogin>
         </form>
       </ContainerGetInfo>
