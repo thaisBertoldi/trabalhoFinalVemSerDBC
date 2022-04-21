@@ -1,5 +1,5 @@
 import api from '../../service/api';
-import { LoginDTO, RegisterDTO } from "../../models/UserDTO";
+import { LoginDTO, RegisterDTO, isLoggedDTO } from "../../models/UserDTO";
 import { AppDispatch } from '..';
 
 export const handleLogin = async (values: LoginDTO, dispatch: AppDispatch, navigate: any) => {
@@ -25,13 +25,13 @@ export const handleRegister = async (values: RegisterDTO, dispatch: AppDispatch,
   }
 }
 
-const setLogin = (dispatch: AppDispatch, navigate: any, data: any) => {
+const setLogin = (dispatch: AppDispatch, navigate: any, data: isLoggedDTO) => {
   const setLogged = {
     type: 'SET_LOGIN',
     username: data.username,
     token: data.token,
     profile: data.profile,
-    isLogged: data.isLogged
+    isLogged: true
   }
 
   api.defaults.headers.common['Authorization'] = data.token;
