@@ -1,5 +1,7 @@
 import { useFormik } from "formik";
 import { useState } from "react";
+import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Logo from "../../components/Logo/Logo";
 import {
@@ -15,17 +17,18 @@ import {
 import { DivEye, DivInputsLogin, DivLogo } from "../Login/Login.style";
 
 import { RegisterDTO } from "../../models/UserDTO";
+import { handleRegister } from "../../store/action/authActions";
 import PasswordStrengthBar from "react-password-strength-bar";
 
-const Register = () => {
+const Register = ({auth, dispatch}: any) => {
 
   const [showPassword, setShowPassword] = useState<boolean>(true);
 
-  const register = (values: RegisterDTO) => {
-    console.log(values);
+  const navigate = useNavigate();
 
+  const register = (values: RegisterDTO) => {
     if (values.password === values.confirmPassword) {
-      console.log('ok');
+      handleRegister(values, dispatch, navigate)
     } else {
       console.log('A senha deve ser igual a confirmação');
     }
@@ -141,4 +144,9 @@ const Register = () => {
     </ContainerPrincipal>
   );
 }
-export default Register;
+
+const mapStateToProps = (state: any) => ({
+  auth: state.user
+})
+
+export default connect(mapStateToProps)(Register);
