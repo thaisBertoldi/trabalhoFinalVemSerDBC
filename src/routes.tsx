@@ -5,11 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { setLogin } from "./store/action/authActions";
 
 import { Header, Footer } from './components';
-import { Login, Register, Home } from './pages';
-import { RootState } from './store';
-import { isLoggedDTO } from './models/UserDTO';
-import Quotation from './pages/Quotation/Quotation';
-
+import { Login, Register, Home, Quotation } from './pages';
 
 const Routers = ({auth, dispatch}: any) => {
 
