@@ -19,6 +19,7 @@ import {
 import { DivEye, DivInputsLogin, DivLogo } from "./Login.style";
 
 import { handleLogin } from "../../store/action/authActions";
+import { Theme } from "../../theme";
 
 const Login = ({auth, dispatch}: any) => {
   
@@ -90,7 +91,7 @@ const Login = ({auth, dispatch}: any) => {
               </DivEye>
             </div>
 
-            <Btn width="100%" type="submit">
+            <Btn width="100%" type="submit" color={Theme.color.primary}>
               Submit
             </Btn>
 
