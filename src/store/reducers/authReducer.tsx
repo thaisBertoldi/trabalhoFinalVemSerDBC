@@ -14,7 +14,8 @@ const authReducer = ( state: isLoggedDTO = INITIAL_STATE, action: AnyAction ) =>
       ...state,
       username: action.username,
       token: action.token,
-      profile: action.profile
+      profile: action.profile,
+      isLogged: action.isLogged
     }
   }
 
