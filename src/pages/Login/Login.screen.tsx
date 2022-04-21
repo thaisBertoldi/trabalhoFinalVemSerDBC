@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Logo from "../../components/Logo/Logo";
@@ -22,10 +22,10 @@ import { handleLogin } from "../../store/action/authActions";
 
 const Login = ({auth, dispatch}: any) => {
   
+  
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState<boolean>(true);
-
 
   const formik = useFormik({
     initialValues: {
@@ -36,6 +36,8 @@ const Login = ({auth, dispatch}: any) => {
       email: Yup.string()
         .email("Este campo precisa ser preenchido com um email.")
         .required("Você precisa preencher esse campo"),
+      password: Yup.string()
+      .required("Você precisa preencher esse campo"),
     }),
     onSubmit: (values) => {
       handleLogin(values, dispatch, navigate);
