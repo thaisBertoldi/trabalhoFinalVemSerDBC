@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Logo from "../../components/Logo/Logo";
+import { Theme } from "../../theme";
 import Notiflix from "notiflix";
 import {
   Btn,
@@ -144,7 +145,7 @@ const Register = ({ auth, dispatch }: any) => {
               onChange={(event) => formik.setFieldValue("image", event.target.files)}
             />
 
-            <Btn width="100%" type="submit">
+            <Btn width="100%" type="submit" color={Theme.color.primary}>
               Submit
             </Btn>
           </DivInputsLogin>
