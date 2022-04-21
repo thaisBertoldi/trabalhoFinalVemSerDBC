@@ -1,4 +1,5 @@
 import api from '../../service/api';
+import Notiflix from "notiflix";
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import { LoginDTO, RegisterDTO, isLoggedDTO } from "../../models/UserDTO";
 import { AppDispatch } from '..';
@@ -10,6 +11,9 @@ export const handleLogin = async (values: LoginDTO, dispatch: AppDispatch, navig
     setLogin(dispatch, data);
     navigate('/');
   } catch (error) {
+    Notiflix.Notify.failure(
+      `Sinto muito, mas nao foi possivel acessar a api. ${error}`
+    );
     console.log(error);
   } finally {
     Loading.remove();
@@ -28,6 +32,9 @@ export const handleRegister = async (values: RegisterDTO, dispatch: AppDispatch,
     setLogin(dispatch, data);
     navigate('/');
   } catch (error) {
+    Notiflix.Notify.failure(
+      `Sinto muito, mas nao foi possivel acessar a api. ${error}`
+    );
     console.log(error);
   } finally {
     Loading.remove();
