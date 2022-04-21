@@ -1,10 +1,11 @@
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import PasswordStrengthBar from "react-password-strength-bar";
 import Logo from "../../components/Logo/Logo";
 import Notiflix from "notiflix";
+import { connect } from 'react-redux';
 import {
   Btn,
   ContainerGetInfo,
@@ -17,9 +18,14 @@ import {
 } from "../../global.style";
 import { DivEye, DivInputsLogin, DivLogo } from "./Login.style";
 
+import { handleLogin } from "../../store/action/authActions";
 
-const Login = () => {
+const Login = ({auth, dispatch}: any) => {
+  
+  const navigate = useNavigate();
+
   const [showPassword, setShowPassword] = useState<boolean>(true);
+
 
   const formik = useFormik({
     initialValues: {
@@ -32,7 +38,7 @@ const Login = () => {
         .required("Você precisa preencher esse campo"),
     }),
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      handleLogin(values, dispatch, navigate);
     },
   });
 
@@ -82,19 +88,6 @@ const Login = () => {
               </DivEye>
             </div>
 
-            <PasswordStrengthBar
-              password={formik.values.password}
-              barColors={[
-                "#B83E26",
-                "#FFB829",
-                "#009200",
-                "#009200",
-                "#009200",
-                "#009200",
-              ]}
-              minLength={8}
-            />
-
             <Btn width="100%" type="submit">
               Submit
             </Btn>
@@ -109,4 +102,9 @@ const Login = () => {
     </ContainerPrincipal>
   );
 };
-export default Login;
+
+const mapStateToProps = (state: any) => ({
+  auth: state.user
+})
+
+export default connect(mapStateToProps)(Login);

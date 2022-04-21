@@ -15,7 +15,7 @@ import {
 import { DivEye, DivInputsLogin, DivLogo } from "../Login/Login.style";
 
 import { RegisterDTO } from "../../models/UserDTO";
-// import ReactPasswordStrength from 'react-password-strength';
+import PasswordStrengthBar from "react-password-strength-bar";
 
 const Register = () => {
 
@@ -101,15 +101,22 @@ const Register = () => {
                 </DivEye>
               </div>
 
-              {/* <ReactPasswordStrength
-                  className="customClass"
-                  style={{ display: 'none' }}
-                  minLength={5}
-                  minScore={2}
-                  scoreWords={['weak', 'okay', 'good', 'strong', 'stronger']}
-                  changeCallback={formik.values.password}
-                  inputProps={{ name: "password_input", autoComplete: "off", className: "form-control" }}
-              /> */}
+              {
+                formik.values.password.length > 0 && (
+                  <PasswordStrengthBar
+                  password={formik.values.password}
+                  barColors={[
+                    "#B83E26",
+                    "#FFB829",
+                    "#009200",
+                    "#009200",
+                    "#009200",
+                    "#009200",
+                  ]}
+                  minLength={8}
+                  />
+                )
+              }
 
               <Input
                 width="99%"
