@@ -27,6 +27,14 @@ const Login = ({auth, dispatch}: any) => {
 
   const [showPassword, setShowPassword] = useState<boolean>(true);
 
+  useEffect( () => {
+    const hasToken:string | any = localStorage.getItem('token');
+    const User = JSON.parse(hasToken);
+    if(User?.token) {
+      navigate('/');
+    }
+  },[] )
+
   const formik = useFormik({
     initialValues: {
       email: "",

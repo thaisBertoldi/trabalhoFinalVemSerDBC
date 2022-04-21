@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { setLogin } from "./store/action/authActions";
 
@@ -12,7 +12,7 @@ const Routers = ({auth, dispatch}: any) => {
   useEffect( () => {
     const hasToken:string | any = localStorage.getItem('token');
     const User = JSON.parse(hasToken);
-    if(User.token) {
+    if(User?.token) {
       setLogin(dispatch, User)
     }
   },[] )

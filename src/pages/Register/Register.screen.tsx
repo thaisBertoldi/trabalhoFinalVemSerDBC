@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -33,6 +33,14 @@ const Register = ({auth, dispatch}: any) => {
       console.log('A senha deve ser igual a confirmação');
     }
   }
+
+  useEffect( () => {
+    const hasToken:string | any = localStorage.getItem('token');
+    const User = JSON.parse(hasToken);
+    if(User?.token) {
+      navigate('/');
+    }
+  },[] )
 
   const formik = useFormik({
     initialValues: {
