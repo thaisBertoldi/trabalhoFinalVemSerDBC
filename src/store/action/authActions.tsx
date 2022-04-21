@@ -49,3 +49,11 @@ export const setLogin = (dispatch: AppDispatch, data: isLoggedDTO) => {
   dispatch(setLogged);
   Loading.remove();
 }
+
+export const handleLogout = (dispatch: AppDispatch, navigate: any) => {
+  Loading.circle();
+  localStorage.removeItem('token');
+  dispatch({type: 'SET_LOGOUT'});
+  navigate('/login');
+  Loading.remove();
+}
