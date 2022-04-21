@@ -1,8 +1,10 @@
+import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import PasswordStrengthBar from "react-password-strength-bar";
 import Logo from "../../components/Logo/Logo";
+import Notiflix from "notiflix";
 import {
   Btn,
   ContainerGetInfo,
@@ -15,14 +17,20 @@ import {
 } from "../../global.style";
 import { DivEye, DivInputsLogin, DivLogo } from "./Login.style";
 
+
 const Login = () => {
   const [showPassword, setShowPassword] = useState<boolean>(true);
 
   const formik = useFormik({
     initialValues: {
-      user: "",
+      email: "",
       password: "",
     },
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .email("Este campo precisa ser preenchido com um email.")
+        .required("Você precisa preencher esse campo"),
+    }),
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
     },
@@ -48,11 +56,11 @@ const Login = () => {
               width="99%"
               height="40px"
               placeholder="Username"
-              id="user"
-              name="user"
+              id="email"
+              name="email"
               type="text"
               onChange={formik.handleChange}
-              value={formik.values.user}
+              value={formik.values.email}
             />
             <div>
               <Input
