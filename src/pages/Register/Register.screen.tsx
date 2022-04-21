@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Logo from "../../components/Logo/Logo";
+import Notiflix from "notiflix";
 import {
   Btn,
   ContainerGetInfo,
@@ -19,6 +20,7 @@ import { DivEye, DivInputsLogin, DivLogo } from "../Login/Login.style";
 import { RegisterDTO } from "../../models/UserDTO";
 import { handleRegister } from "../../store/action/authActions";
 import PasswordStrengthBar from "react-password-strength-bar";
+import { hasLogin } from "../../utils/utils";
 
 const Register = ({auth, dispatch}: any) => {
 
@@ -35,11 +37,7 @@ const Register = ({auth, dispatch}: any) => {
   }
 
   useEffect( () => {
-    const hasToken:string | any = localStorage.getItem('token');
-    const User = JSON.parse(hasToken);
-    if(User?.token) {
-      navigate('/');
-    }
+    hasLogin(navigate)
   },[] )
 
   const formik = useFormik({
