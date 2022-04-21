@@ -22,19 +22,18 @@ import { handleRegister } from "../../store/action/authActions";
 import PasswordStrengthBar from "react-password-strength-bar";
 import { hasLogin } from "../../utils/utils";
 
-const Register = ({auth, dispatch}: any) => {
-
+const Register = ({ auth, dispatch }: any) => {
   const [showPassword, setShowPassword] = useState<boolean>(true);
 
   const navigate = useNavigate();
 
   const register = (values: RegisterDTO) => {
     if (values.password === values.confirmPassword) {
-      handleRegister(values, dispatch, navigate)
+      handleRegister(values, dispatch, navigate);
     } else {
-      console.log('A senha deve ser igual a confirmação');
+      console.log("A senha deve ser igual a confirmação");
     }
-  }
+  };
 
   useEffect( () => {
     hasLogin(navigate)
@@ -46,9 +45,11 @@ const Register = ({auth, dispatch}: any) => {
       email: "",
       password: "",
       confirmPassword: "",
+      image: ""
     },
     onSubmit: (values) => {
-      register(values);
+      // register(values);
+      console.log(values)
     },
   });
 
@@ -68,87 +69,94 @@ const Register = ({auth, dispatch}: any) => {
         </DivLogo>
         <form onSubmit={formik.handleSubmit}>
           <DivInputsLogin>
+            <Input
+              width="99%"
+              height="40px"
+              placeholder="Nome Completo"
+              id="user"
+              name="user"
+              type="text"
+              onChange={formik.handleChange}
+              value={formik.values.user}
+            />
+            <Input
+              width="99%"
+              height="40px"
+              placeholder="E-mail"
+              id="email"
+              name="email"
+              type="email"
+              onChange={formik.handleChange}
+              value={formik.values.email}
+            />
+            <div>
               <Input
                 width="99%"
                 height="40px"
-                placeholder="Nome Completo"
-                id="user"
-                name="user"
-                type="text"
+                placeholder="Password"
+                id="password"
+                name="password"
+                type={showPassword ? "password" : "text"}
                 onChange={formik.handleChange}
-                value={formik.values.user}
+                value={formik.values.password}
               />
-              <Input
-                width="99%"
-                height="40px"
-                placeholder="E-mail"
-                id="email"
-                name="email"
-                type="email"
-                onChange={formik.handleChange}
-                value={formik.values.email}
+              <DivEye>
+                {showPassword ? (
+                  <FaEye onClick={() => setShowPassword(!showPassword)} />
+                ) : (
+                  <FaEyeSlash onClick={() => setShowPassword(!showPassword)} />
+                )}
+              </DivEye>
+            </div>
+
+            {formik.values.password.length > 0 && (
+              <PasswordStrengthBar
+                password={formik.values.password}
+                barColors={[
+                  "#B83E26",
+                  "#FFB829",
+                  "#009200",
+                  "#009200",
+                  "#009200",
+                  "#009200",
+                ]}
+                minLength={8}
               />
-              <div>
-                <Input
-                  width="99%"
-                  height="40px"
-                  placeholder="Password"
-                  id="password"
-                  name="password"
-                  type={ showPassword ? 'password' : 'text' }
-                  onChange={formik.handleChange}
-                  value={formik.values.password}
-                />
-                <DivEye>
-                  {
-                    showPassword ? (
-                      <FaEye onClick={() => setShowPassword(!showPassword)} />
-                    ) : (
-                      <FaEyeSlash onClick={() => setShowPassword(!showPassword)} />
-                    )
-                  }
-                </DivEye>
-              </div>
+            )}
 
-              {
-                formik.values.password.length > 0 && (
-                  <PasswordStrengthBar
-                  password={formik.values.password}
-                  barColors={[
-                    "#B83E26",
-                    "#FFB829",
-                    "#009200",
-                    "#009200",
-                    "#009200",
-                    "#009200",
-                  ]}
-                  minLength={8}
-                  />
-                )
-              }
+            <Input
+              width="99%"
+              height="40px"
+              placeholder="Confirm Password"
+              id="confirmPassword"
+              name="confirmPassword"
+              type="password"
+              onChange={formik.handleChange}
+              value={formik.values.confirmPassword}
+            />
 
-              <Input
-                width="99%"
-                height="40px"
-                placeholder="Confirm Password"
-                id="confirmPassword"
-                name="confirmPassword"
-                type='password'
-                onChange={formik.handleChange}
-                value={formik.values.confirmPassword}
-              />
+            <Input
+              width="99%"
+              height="40px"
+              id="image"
+              name="image"
+              type="file"
+              onChange={formik.handleChange}
+              value={formik.values.image}
+            />
 
-              <Btn width="100%" type="submit">Submit</Btn>
-
+            <Btn width="100%" type="submit">
+              Submit
+            </Btn>
           </DivInputsLogin>
         </form>
       </ContainerGetInfo>
     </ContainerPrincipal>
   );
-}
+};
 
 const mapStateToProps = (state: any) => ({
-  auth: state.authReducer
-})
+  auth: state.authReducer,
+});
 
 export default connect(mapStateToProps)(Register);
