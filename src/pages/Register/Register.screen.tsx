@@ -134,10 +134,6 @@ const Register = ({auth, dispatch}: any) => {
 
               <Btn width="100%" type="submit">Submit</Btn>
 
-              <Paragraph>
-                Não possui uma conta? <LinkCustom to="/register">Registrar</LinkCustom>
-              </Paragraph>
-
           </DivInputsLogin>
         </form>
       </ContainerGetInfo>
