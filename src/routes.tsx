@@ -1,13 +1,20 @@
 import { useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
+
+import { setLogin } from "./store/action/authActions";
 
 import { Header, Footer } from './components';
 import { Login, Register, Home } from './pages';
 
-const Routers = () => {
+const Routers = ({auth, dispatch}: any) => {
 
   useEffect( () => {
-    
+    const hasToken:string | any = localStorage.getItem('token');
+    const User = JSON.parse(hasToken);
+    if(User.token) {
+      setLogin(dispatch, User)
+    }
   },[] )
 
   return (
@@ -23,4 +30,8 @@ const Routers = () => {
   );
 }
 
-export default Routers;
+const mapStateToProps = (state: any) => ({
+  auth: state.authReducer
+})
+
+export default connect(mapStateToProps)(Routers);

@@ -5,7 +5,8 @@ import { AppDispatch } from '..';
 export const handleLogin = async (values: LoginDTO, dispatch: AppDispatch, navigate: any) => {
   try {    
     const {data} = await api.post("/auth/login", values);
-    setLogin(dispatch, navigate, data);
+    setLogin(dispatch, data);
+    navigate('/');
   } catch (error) {
     console.log(error);
   }
@@ -19,13 +20,14 @@ export const handleRegister = async (values: RegisterDTO, dispatch: AppDispatch,
   }
   try {
     const {data} = await api.post("/auth/sign-up", ObjRegister);
-    setLogin(dispatch, navigate, data);
+    setLogin(dispatch, data);
+    navigate('/');
   } catch (error) {
     console.log(error);
   }
 }
 
-const setLogin = (dispatch: AppDispatch, navigate: any, data: isLoggedDTO) => {
+export const setLogin = (dispatch: AppDispatch, data: isLoggedDTO) => {
   const setLogged = {
     type: 'SET_LOGIN',
     username: data.username,
@@ -37,5 +39,4 @@ const setLogin = (dispatch: AppDispatch, navigate: any, data: isLoggedDTO) => {
   api.defaults.headers.common['Authorization'] = data.token;
   localStorage.setItem('token', JSON.stringify(data));
   dispatch(setLogged);
-  navigate('/');
 }
