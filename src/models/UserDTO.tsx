@@ -9,7 +9,7 @@ export interface isLoggedDTO {
   token: string;
   profile: string;
   isLogged: boolean;
-  profileImage: string;
+  profileImage?: string;
 }
 export interface RegisterDTO {
   email: string,

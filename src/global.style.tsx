@@ -4,7 +4,7 @@ import image from "./images/background-div.jpg";
 import { Link } from "react-router-dom";
 
 export const Container = styled.div`
-  height: 100vh;
+  height: 100%;
 `;
 
 export const ContainerPrincipal = styled.div`

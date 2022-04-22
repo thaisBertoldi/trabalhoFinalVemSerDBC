@@ -27,8 +27,6 @@ const Register = ({ auth, dispatch }: any) => {
 
   const navigate = useNavigate();
 
-  const data = new FormData();
-
   const register = (values: RegisterDTO) => {
     if (values.password === values.confirmPassword) {
       handleRegister(values, dispatch, navigate);
@@ -53,7 +51,7 @@ const Register = ({ auth, dispatch }: any) => {
       email: "",
       password: "",
       confirmPassword: "",
-      profileImage: File,
+      profileImage: null,
     },
     validationSchema: Yup.object({
       fullName: Yup.string()
