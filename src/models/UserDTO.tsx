@@ -20,3 +20,13 @@ export interface RegisterDTO {
   profileImage?: any;
   confirmPassword?: string;
 }
+
+export interface PurshaceDTO {
+  auth: {
+    listName: string;
+    itemName: string;
+    description: string;
+    price: number;
+    file: File;
+  };
+}
