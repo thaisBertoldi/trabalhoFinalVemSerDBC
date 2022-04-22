@@ -30,14 +30,6 @@ const Register = ({ auth, dispatch }: any) => {
   const data = new FormData();
 
   const register = (values: RegisterDTO) => {
-    const objTeste = {
-      fullname: formik.values.fullName,
-      email: formik.values.email,
-      password: formik.values.password,
-      profileImage: formik.values.profileImage
-    };
-    data.append("dados", JSON.stringify(objTeste));
-    console.log(data)
     if (values.password === values.confirmPassword) {
       handleRegister(values, dispatch, navigate);
     } else {
@@ -47,9 +39,8 @@ const Register = ({ auth, dispatch }: any) => {
 
   const imgConverter = (event: any) => {
     const profileImage = event?.target?.files[0];
+    console.log(profileImage);
     formik.setFieldValue("profileImage", profileImage);
-    data.append("profileImage", profileImage);
-    console.log(data)
   };
 
   useEffect(() => {

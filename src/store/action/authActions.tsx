@@ -22,15 +22,15 @@ export const handleLogin = async (values: LoginDTO, dispatch: AppDispatch, navig
 }
 
 export const handleRegister = async (values: RegisterDTO, dispatch: AppDispatch, navigate: Function) => {
-  const ObjRegister = {
-    email: values.email,
-    fullName: values.fullName,
-    password: values.password,
-    profileImage: values.profileImage
-  }
+  const formData = new FormData();
+  formData.append('file', values.profileImage);
+  formData.append('email', values.email);
+  formData.append('fullName', values.fullName);
+  formData.append('password', values.password);
+
   try {
     Loading.circle();
-    const {data} = await api.post("/auth/sign-up", values);
+    const {data} = await api.post("/auth/sign-up", formData);
     setLogin(dispatch, data);
     Notiflix.Notify.success(
       `Usuário cadastrado com sucesso.`
