@@ -21,13 +21,6 @@ export const ContainerRequest = styled.div`
     height: 436px;
 `;
 
-export const InputForm = styled.input`
-    width: 100%;
-    height: 30px;
-    border-radius: 4px;
-    border: 1px ${Theme.color.primary} solid;
-`;
-
 export const InputLabelDiv = styled.div`
     display: flex;
 `;
