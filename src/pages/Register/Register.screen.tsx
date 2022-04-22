@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 import PasswordStrengthBar from "react-password-strength-bar";
 import { useFormik } from "formik";
-import { useState, useEffect, SyntheticEvent } from "react";
+import { useState, useEffect } from "react";
 import { connect, DispatchProp } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";

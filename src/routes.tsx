@@ -5,10 +5,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { setLogin } from "./store/action/authActions";
 
 import { Header, Footer } from './components';
-import { Login, Register, Home, Quotation } from './pages';
+import { Login, Register, Home, RequestPurshace, Administration } from './pages';
 import { isLoggedDTO } from './models/UserDTO';
 import { RootState } from './store';
-import Administration from './pages/Administration/Administration';
 
 const Routers = ({auth, dispatch}: isLoggedDTO & DispatchProp) => {
 
@@ -27,7 +26,7 @@ const Routers = ({auth, dispatch}: isLoggedDTO & DispatchProp) => {
           <Route path='/' element={ <Home /> } />
           <Route path='/login' element={ <Login /> }/>
           <Route path='/register' element={ <Register /> }/>
-          <Route path='/quotation' element={<Quotation />} />
+          <Route path='/request-purshace' element={<RequestPurshace />} />
           <Route path='/administration' element={<Administration />} />
         </Routes>
       <Footer />
