@@ -185,6 +185,7 @@ const Register = ({ auth, dispatch }: isLoggedDTO & DispatchProp) => {
               id="profileImage"
               name="profileImage"
               type="file"
+              accept="image/*"
               onChange={(event) => imgConverter(event)}
             />
 
