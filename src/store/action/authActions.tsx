@@ -4,7 +4,7 @@ import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import { LoginDTO, RegisterDTO, isLoggedDTO } from "../../models/UserDTO";
 import { AppDispatch } from '..';
 
-export const handleLogin = async (values: LoginDTO, dispatch: AppDispatch, navigate: any) => {
+export const handleLogin = async (values: LoginDTO, dispatch: AppDispatch, navigate: Function) => {
   try {    
     Loading.circle();
     const {data} = await api.post("/auth/login", values);
@@ -21,15 +21,16 @@ export const handleLogin = async (values: LoginDTO, dispatch: AppDispatch, navig
   }
 }
 
-export const handleRegister = async (dataObj: any, dispatch: AppDispatch, navigate: any) => {
-  // const ObjRegister = {
-  //   email: values.email,
-  //   fullName: values.user,
-  //   password: values.password
-  // }
+export const handleRegister = async (values: RegisterDTO, dispatch: AppDispatch, navigate: Function) => {
+  const ObjRegister = {
+    email: values.email,
+    fullName: values.fullName,
+    password: values.password,
+    profileImage: values.profileImage
+  }
   try {
     Loading.circle();
-    const {data} = await api.post("/auth/sign-up", dataObj);
+    const {data} = await api.post("/auth/sign-up", values);
     setLogin(dispatch, data);
     Notiflix.Notify.success(
       `Usuário cadastrado com sucesso.`
@@ -62,7 +63,7 @@ export const setLogin = (dispatch: AppDispatch, data: isLoggedDTO) => {
   Loading.remove();
 }
 
-export const handleLogout = (dispatch: AppDispatch, navigate: any) => {
+export const handleLogout = (dispatch: AppDispatch, navigate: Function) => {
   Loading.circle();
   localStorage.removeItem('token');
   dispatch({type: 'SET_LOGOUT'});

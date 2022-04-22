@@ -12,9 +12,10 @@ export interface isLoggedDTO {
   profileImage: string;
 }
 export interface RegisterDTO {
-  user: string;
-  password: string;
-  confirmPassword: string;
-  email: string;
+  email: string,
+  fullName: string,
+  password: string,
+  profileImage?: any,
+  confirmPassword?: string
 }
 

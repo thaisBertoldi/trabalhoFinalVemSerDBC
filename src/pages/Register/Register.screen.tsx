@@ -31,13 +31,15 @@ const Register = ({ auth, dispatch }: any) => {
 
   const register = (values: RegisterDTO) => {
     const objTeste = {
-      fullname: formik.values.user,
+      fullname: formik.values.fullName,
       email: formik.values.email,
       password: formik.values.password,
+      profileImage: formik.values.profileImage
     };
     data.append("dados", JSON.stringify(objTeste));
+    console.log(data)
     if (values.password === values.confirmPassword) {
-      handleRegister(data, dispatch, navigate);
+      handleRegister(values, dispatch, navigate);
     } else {
       console.log("A senha deve ser igual a confirmação");
     }
@@ -47,6 +49,7 @@ const Register = ({ auth, dispatch }: any) => {
     const profileImage = event?.target?.files[0];
     formik.setFieldValue("profileImage", profileImage);
     data.append("profileImage", profileImage);
+    console.log(data)
   };
 
   useEffect(() => {
@@ -55,14 +58,14 @@ const Register = ({ auth, dispatch }: any) => {
 
   const formik = useFormik({
     initialValues: {
-      user: "",
+      fullName: "",
       email: "",
       password: "",
       confirmPassword: "",
-      profileImage: null,
+      profileImage: File,
     },
     validationSchema: Yup.object({
-      user: Yup.string()
+      fullName: Yup.string()
         .min(2, "Este é um nome muito curto.")
         .max(50, "Esse é mesmo o seu nome ou você deitou no teclado?")
         .matches(
@@ -85,8 +88,7 @@ const Register = ({ auth, dispatch }: any) => {
       ),
     }),
     onSubmit: (values) => {
-      // register(values);
-      console.log(values);
+      register(values);
     },
   });
 
@@ -110,15 +112,15 @@ const Register = ({ auth, dispatch }: any) => {
               width="99%"
               height="40px"
               placeholder="Nome Completo"
-              id="user"
-              name="user"
+              id="fullName"
+              name="fullName"
               type="text"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              value={formik.values.user}
+              value={formik.values.fullName}
             />
-            {formik.errors.user && formik.touched.user ? (
-              <DivErrorYup>{formik.errors.user}</DivErrorYup>
+            {formik.errors.fullName && formik.touched.fullName ? (
+              <DivErrorYup>{formik.errors.fullName}</DivErrorYup>
             ) : null}
             <Input
               width="99%"

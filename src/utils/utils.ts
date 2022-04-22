@@ -1,4 +1,4 @@
-export const hasLogin = (navigate: any) => {
+export const hasLogin = (navigate: Function) => {
   const hasToken:string | any = localStorage.getItem('token');
   const User = JSON.parse(hasToken);
   if(User?.token) {
@@ -6,7 +6,7 @@ export const hasLogin = (navigate: any) => {
   }
 }
 
-export const redirectToLogin = (navigate: any) => {
+export const redirectToLogin = (navigate: Function) => {
   const hasToken:string | any = localStorage.getItem('token');
   const User = JSON.parse(hasToken);
   if(!User?.token) {
