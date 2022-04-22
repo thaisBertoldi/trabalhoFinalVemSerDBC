@@ -21,6 +21,8 @@ const Menu = ({auth, dispatch}:any) => {
   return (
     <UlNav>
       <Link to={'/'}>Home</Link>
+      <Link to={'/administration'}>Administrador</Link>
+      <Link to={'/quotation'}>Solicitar compra</Link>
       <p> { User?.fullName } </p>
       <figure onClick={ () => setOpen(!open) }>
         <img src={ User?.profileImage !== null ? `data:image/jpeg;base64,${User?.profileImage}` : ImgDefault} alt="Foto do usuário"  />

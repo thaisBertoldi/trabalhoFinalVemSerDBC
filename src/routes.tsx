@@ -8,6 +8,7 @@ import { Header, Footer } from './components';
 import { Login, Register, Home, Quotation } from './pages';
 import { isLoggedDTO } from './models/UserDTO';
 import { RootState } from './store';
+import Administration from './pages/Administration/Administration';
 
 const Routers = ({auth, dispatch}: isLoggedDTO & DispatchProp) => {
 
@@ -27,6 +28,7 @@ const Routers = ({auth, dispatch}: isLoggedDTO & DispatchProp) => {
           <Route path='/login' element={ <Login /> }/>
           <Route path='/register' element={ <Register /> }/>
           <Route path='/quotation' element={<Quotation />} />
+          <Route path='/administration' element={<Administration />} />
         </Routes>
       <Footer />
     </BrowserRouter>
