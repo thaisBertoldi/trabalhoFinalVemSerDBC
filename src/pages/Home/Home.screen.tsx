@@ -9,6 +9,11 @@ import { RootState } from "../../store";
 import { redirectToLogin } from "../../utils/utils";
 import { Card, ContainerPrincipalCards, ContainerTitles } from "./Home.style";
 
+//listas apenas do colaborador se for usuario tipo colaborador
+//lista geral com botao de aprovar ou reprovar pro gestor se tiver mais de duas cotacoes
+//lista geral com botao de aprovar ou reprovar pro financeiro se o gestor tiver aprovado
+//lista geral pro comprador com modal pra solicitar cotacao
+
 const Home = ({ auth, dispatch }: isLoggedDTO & DispatchProp) => {
   const navigate = useNavigate();
   const hasUser: string | any = localStorage.getItem("token");
