@@ -1,8 +1,8 @@
 import * as Yup from "yup";
 import PasswordStrengthBar from "react-password-strength-bar";
 import { useFormik } from "formik";
-import { useState, useEffect } from "react";
-import { connect } from "react-redux";
+import { useState, useEffect, SyntheticEvent } from "react";
+import { connect, DispatchProp } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Logo from "../../components/Logo/Logo";
@@ -18,11 +18,12 @@ import {
 } from "../../global.style";
 import { DivEye, DivInputsLogin, DivLogo } from "../Login/Login.style";
 
-import { RegisterDTO } from "../../models/UserDTO";
+import { isLoggedDTO, RegisterDTO } from "../../models/UserDTO";
 import { handleRegister } from "../../store/action/authActions";
 import { hasLogin } from "../../utils/utils";
+import { RootState } from "../../store";
 
-const Register = ({ auth, dispatch }: any) => {
+const Register = ({ auth, dispatch }: isLoggedDTO & DispatchProp) => {
   const [showPassword, setShowPassword] = useState<boolean>(true);
 
   const navigate = useNavigate();
@@ -37,7 +38,6 @@ const Register = ({ auth, dispatch }: any) => {
 
   const imgConverter = (event: any) => {
     const profileImage = event?.target?.files[0];
-    console.log(profileImage);
     formik.setFieldValue("profileImage", profileImage);
   };
 
@@ -48,7 +48,7 @@ const Register = ({ auth, dispatch }: any) => {
   const formik = useFormik({
     initialValues: {
       fullName: "",
-      email: "",
+      username: "",
       password: "",
       confirmPassword: "",
       profileImage: null,
@@ -62,7 +62,7 @@ const Register = ({ auth, dispatch }: any) => {
           "Você precisa preencher esse campo apenas com letras"
         )
         .required("Você precisa preencher esse campo"),
-      email: Yup.string()
+      username: Yup.string()
         .email("Este campo precisa ser preenchido com um email.")
         .required("Você precisa preencher esse campo"),
       password: Yup.string()
@@ -115,15 +115,15 @@ const Register = ({ auth, dispatch }: any) => {
               width="99%"
               height="40px"
               placeholder="E-mail"
-              id="email"
-              name="email"
+              id="username"
+              name="username"
               type="email"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              value={formik.values.email}
+              value={formik.values.username}
             />
-            {formik.errors.email && formik.touched.email ? (
-              <DivErrorYup>{formik.errors.email}</DivErrorYup>
+            {formik.errors.username && formik.touched.username ? (
+              <DivErrorYup>{formik.errors.username}</DivErrorYup>
             ) : null}
             <div>
               <Input
@@ -198,7 +198,7 @@ const Register = ({ auth, dispatch }: any) => {
   );
 };
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState) => ({
   auth: state.authReducer,
 });
 

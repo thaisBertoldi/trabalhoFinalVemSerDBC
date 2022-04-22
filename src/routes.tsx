@@ -1,13 +1,15 @@
 import { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { connect, DispatchProp } from 'react-redux';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { setLogin } from "./store/action/authActions";
 
 import { Header, Footer } from './components';
 import { Login, Register, Home, Quotation } from './pages';
+import { isLoggedDTO } from './models/UserDTO';
+import { RootState } from './store';
 
-const Routers = ({auth, dispatch}: any) => {
+const Routers = ({auth, dispatch}: isLoggedDTO & DispatchProp) => {
 
   useEffect( () => {
     const hasToken:string | any = localStorage.getItem('token');
@@ -31,7 +33,7 @@ const Routers = ({auth, dispatch}: any) => {
   );
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState) => ({
   auth: state.authReducer
 })
 

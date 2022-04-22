@@ -24,7 +24,7 @@ export const handleLogin = async (values: LoginDTO, dispatch: AppDispatch, navig
 export const handleRegister = async (values: RegisterDTO, dispatch: AppDispatch, navigate: Function) => {
   const formData = new FormData();
   formData.append('file', values.profileImage);
-  formData.append('email', values.email);
+  formData.append('email', values.username);
   formData.append('fullName', values.fullName);
   formData.append('password', values.password);
 
@@ -46,7 +46,7 @@ export const handleRegister = async (values: RegisterDTO, dispatch: AppDispatch,
   }
 }
 
-export const setLogin = (dispatch: AppDispatch, data: isLoggedDTO) => {
+export const setLogin = (dispatch: AppDispatch, data: isLoggedDTO["auth"]) => {
   Loading.circle();
   const setLogged = {
     type: 'SET_LOGIN',

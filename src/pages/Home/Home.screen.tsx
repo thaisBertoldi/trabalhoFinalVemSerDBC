@@ -1,22 +1,22 @@
 import { useEffect } from "react";
-import { connect } from "react-redux";
+import { connect, DispatchProp } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Container } from "../../global.style";
+import { isLoggedDTO } from "../../models/UserDTO";
 
 import api from "../../service/api";
+import { RootState } from "../../store";
 import { redirectToLogin } from "../../utils/utils";
 import { Card, ContainerPrincipalCards, ContainerTitles } from "./Home.style";
 
-const Home = ({ auth, dispatch }: any) => {
+const Home = ({ auth, dispatch }: isLoggedDTO & DispatchProp) => {
   const navigate = useNavigate();
   const hasUser: string | any = localStorage.getItem("token");
   const User = JSON.parse(hasUser);
 
-  const hasToken: string | any = localStorage.getItem("token");
-
   useEffect(() => {
     redirectToLogin(navigate);
-  }, [hasToken]);
+  }, []);
 
   const setup = async () => {
     try {
@@ -102,7 +102,7 @@ const Home = ({ auth, dispatch }: any) => {
   );
 };
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState) => ({
   auth: state.authReducer,
 });
 

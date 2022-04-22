@@ -4,18 +4,19 @@ export interface LoginDTO {
 }
 
 export interface isLoggedDTO {
-  username: string;
-  fullName: string;
-  token: string;
-  profile: string;
-  isLogged: boolean;
-  profileImage?: string;
+  auth: {
+    username: string;
+    fullName: string;
+    token: string;
+    profile: string;
+    isLogged: boolean;
+    profileImage?: string;
+  };
 }
 export interface RegisterDTO {
-  email: string,
-  fullName: string,
-  password: string,
-  profileImage?: any,
-  confirmPassword?: string
+  username: string;
+  fullName: string;
+  password: string;
+  profileImage?: any;
+  confirmPassword?: string;
 }
-

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Logo from "../../components/Logo/Logo";
 import Notiflix from "notiflix";
-import { connect } from "react-redux";
+import { connect, DispatchProp } from "react-redux";
 import {
   Btn,
   Container,
@@ -22,8 +22,10 @@ import { DivEye, DivInputsLogin, DivLogo } from "./Login.style";
 import { handleLogin } from "../../store/action/authActions";
 import { Theme } from "../../theme";
 import { hasLogin } from "../../utils/utils";
+import { RootState } from "../../store";
+import { isLoggedDTO } from "../../models/UserDTO";
 
-const Login = ({ auth, dispatch }: any) => {
+const Login = ({ auth, dispatch }: isLoggedDTO & DispatchProp) => {
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState<boolean>(true);
@@ -113,7 +115,7 @@ const Login = ({ auth, dispatch }: any) => {
   );
 };
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState) => ({
   auth: state.authReducer,
 });
 
