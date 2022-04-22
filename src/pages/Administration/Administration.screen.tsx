@@ -1,7 +1,7 @@
 
 
 //tipá-los
-function Administration() {
+const Administration = () => {
   return (
     <div>Administration</div>
   )
