@@ -1,9 +1,16 @@
 import { useFormik } from "formik";
 import { connect, DispatchProp } from "react-redux";
-import { Container } from "../../global.style";
+import { Btn, Container, InputForm } from "../../global.style";
 import { PurshaceDTO } from "../../models/UserDTO";
 import { RootState } from "../../store";
-import { ContainerRequest, ContainerRequestForm } from "./RequestPurshace.style";
+import { Theme } from "../../theme";
+import {
+  ContainerRequest,
+  ContainerRequestForm,
+  InputLabelDiv,
+  RequestCenter,
+  TextAreaCustom,
+} from "./RequestPurshace.style";
 
 //pagina de compra pro usuário tipo colaborador
 const RequestPurshace = ({ auth, dispatch }: PurshaceDTO & DispatchProp) => {
@@ -11,6 +18,7 @@ const RequestPurshace = ({ auth, dispatch }: PurshaceDTO & DispatchProp) => {
     initialValues: {
       listName: "",
       itemName: "",
+      description: "",
       value: "",
       file: "",
     },
@@ -20,34 +28,59 @@ const RequestPurshace = ({ auth, dispatch }: PurshaceDTO & DispatchProp) => {
   });
   return (
     <Container>
+      <RequestCenter>
+        <h3>Cadastrar compra</h3>
+      </RequestCenter>
       <ContainerRequest>
         <form onSubmit={formik.handleSubmit}>
           <ContainerRequestForm>
-            <label htmlFor="listName">Título da lista: </label>
-            <input
-              id="listName"
-              name="listName"
-              type="text"
-              onChange={formik.handleChange}
-              value={formik.values.listName}
-            />
-            <label htmlFor="itemName">Nome do item: </label>
-            <input
-              id="itemName"
-              name="itemName"
-              type="text"
-              onChange={formik.handleChange}
-              value={formik.values.itemName}
-            />
-            <label htmlFor="value">Valor do item: </label>
-            <input
-              id="value"
-              name="value"
-              type="text"
-              onChange={formik.handleChange}
-              value={formik.values.value}
-            />
-            <input
+            <InputLabelDiv>
+              <label htmlFor="listName">Título da lista: </label>
+              <InputForm
+                id="listName"
+                name="listName"
+                type="text"
+                onChange={formik.handleChange}
+                value={formik.values.listName}
+              />
+            </InputLabelDiv>
+
+            <InputLabelDiv>
+              <label htmlFor="itemName">Nome do item: </label>
+              <InputForm
+                id="itemName"
+                name="itemName"
+                type="text"
+                onChange={formik.handleChange}
+                value={formik.values.itemName}
+              />
+            </InputLabelDiv>
+
+            
+            <InputLabelDiv>
+              <label htmlFor="description">Descrição: </label>
+              <TextAreaCustom
+              placeholder="Something in here"
+              rows={10}
+                id="description"
+                name="description"
+                onChange={formik.handleChange}
+                value={formik.values.description}
+              ></TextAreaCustom>
+            </InputLabelDiv>
+
+            <InputLabelDiv>
+              <label htmlFor="value">Valor do item: </label>
+              <InputForm
+                id="value"
+                name="value"
+                type="text"
+                onChange={formik.handleChange}
+                value={formik.values.value}
+              />
+            </InputLabelDiv>
+
+            <InputForm
               width="99%"
               height="40px"
               id="profileImage"
@@ -56,8 +89,14 @@ const RequestPurshace = ({ auth, dispatch }: PurshaceDTO & DispatchProp) => {
               accept="image/*"
               onChange={formik.handleChange}
             />
-            <button type="button">Adicionar</button>
-            <button type="submit">Finalizar</button>
+            <RequestCenter>
+              <Btn width={"300px"} color={Theme.color.yellow} type="button">
+                Adicionar
+              </Btn>
+              <Btn width={"300px"} color={Theme.color.grayDark} type="submit">
+                Finalizar
+              </Btn>
+            </RequestCenter>
           </ContainerRequestForm>
         </form>
       </ContainerRequest>
