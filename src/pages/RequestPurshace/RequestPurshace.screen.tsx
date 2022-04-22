@@ -60,8 +60,8 @@ const RequestPurshace = ({ auth, dispatch }: PurshaceDTO & DispatchProp) => {
             <InputLabelDiv>
               <label htmlFor="description">Descrição: </label>
               <TextAreaCustom
-              placeholder="Something in here"
-              rows={10}
+                placeholder="Something in here"
+                rows={10}
                 id="description"
                 name="description"
                 onChange={formik.handleChange}
