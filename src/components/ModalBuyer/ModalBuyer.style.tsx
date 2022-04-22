@@ -23,12 +23,21 @@ export const Modal = styled.div`
   border-radius: 5px;
   padding: 20px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-top: 20px;
+    gap: 15px;
+  }
 `;
 
 export const BtnClose = styled.button`
   width: 25px;
   height: 25px;
-  margin-left: 98%;
+  margin-left: 97%;
   
   font-size: 25px;
 

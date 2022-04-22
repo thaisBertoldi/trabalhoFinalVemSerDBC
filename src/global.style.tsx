@@ -80,6 +80,12 @@ export const InputForm = styled.input`
     height: ${props => props.height};
     border-radius: 4px;
     border: 1px ${Theme.color.primary} solid;
+
+    padding: 0 10px;
+
+    :focus {
+      outline: none;
+    }
 `;
 
 export const Btn = styled.button<{width: string}>`
