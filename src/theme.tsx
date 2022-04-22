@@ -6,6 +6,7 @@ export const Theme = {
     grayDark: "#5F5F5F",
     grayLight: "#878787",
     white: "#FFFFFF",
+    danger: "#ee161d",
   },
   padding: "15px",
   margin: "15px",

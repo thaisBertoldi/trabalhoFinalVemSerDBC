@@ -21,17 +21,20 @@ export const handleLogin = async (values: LoginDTO, dispatch: AppDispatch, navig
   }
 }
 
-export const handleRegister = async (values: RegisterDTO, dispatch: AppDispatch, navigate: any) => {
-  const ObjRegister = {
-    email: values.email,
-    fullName: values.user,
-    password: values.password
-  }
+export const handleRegister = async (dataObj: any, dispatch: AppDispatch, navigate: any) => {
+  // const ObjRegister = {
+  //   email: values.email,
+  //   fullName: values.user,
+  //   password: values.password
+  // }
   try {
     Loading.circle();
-    const {data} = await api.post("/auth/sign-up", ObjRegister);
+    const {data} = await api.post("/auth/sign-up", dataObj);
     setLogin(dispatch, data);
-    navigate('/');
+    Notiflix.Notify.success(
+      `Usuário cadastrado com sucesso.`
+    );
+    navigate('/login');
   } catch (error) {
     Notiflix.Notify.failure(
       `Sinto muito, mas nao foi possivel acessar a api. ${error}`

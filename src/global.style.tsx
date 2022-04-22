@@ -96,3 +96,7 @@ export const LinkCustom = styled(Link)`
   text-decoration: none;
   color: ${Theme.color.primary};
 `;
+
+export const DivErrorYup = styled.div`
+  color: ${Theme.color.danger}
+`;

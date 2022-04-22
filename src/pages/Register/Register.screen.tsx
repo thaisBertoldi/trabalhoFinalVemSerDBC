@@ -1,3 +1,5 @@
+import * as Yup from "yup";
+import PasswordStrengthBar from "react-password-strength-bar";
 import { useFormik } from "formik";
 import { useState, useEffect } from "react";
 import { connect } from "react-redux";
@@ -5,22 +7,19 @@ import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Logo from "../../components/Logo/Logo";
 import { Theme } from "../../theme";
-import Notiflix from "notiflix";
 import {
   Btn,
+  Input,
+  Title,
+  DivErrorYup,
+  ContainerTitle,
   ContainerGetInfo,
   ContainerPrincipal,
-  ContainerTitle,
-  Input,
-  LinkCustom,
-  Paragraph,
-  Title,
 } from "../../global.style";
 import { DivEye, DivInputsLogin, DivLogo } from "../Login/Login.style";
 
 import { RegisterDTO } from "../../models/UserDTO";
 import { handleRegister } from "../../store/action/authActions";
-import PasswordStrengthBar from "react-password-strength-bar";
 import { hasLogin } from "../../utils/utils";
 
 const Register = ({ auth, dispatch }: any) => {
@@ -28,17 +27,31 @@ const Register = ({ auth, dispatch }: any) => {
 
   const navigate = useNavigate();
 
+  const data = new FormData();
+
   const register = (values: RegisterDTO) => {
+    const objTeste = {
+      fullname: formik.values.user,
+      email: formik.values.email,
+      password: formik.values.password,
+    };
+    data.append("dados", JSON.stringify(objTeste));
     if (values.password === values.confirmPassword) {
-      handleRegister(values, dispatch, navigate);
+      handleRegister(data, dispatch, navigate);
     } else {
       console.log("A senha deve ser igual a confirmação");
     }
   };
 
-  useEffect( () => {
-    hasLogin(navigate)
-  },[] )
+  const imgConverter = (event: any) => {
+    const profileImage = event?.target?.files[0];
+    formik.setFieldValue("profileImage", profileImage);
+    data.append("profileImage", profileImage);
+  };
+
+  useEffect(() => {
+    hasLogin(navigate);
+  }, []);
 
   const formik = useFormik({
     initialValues: {
@@ -46,11 +59,34 @@ const Register = ({ auth, dispatch }: any) => {
       email: "",
       password: "",
       confirmPassword: "",
-      image: null
+      profileImage: null,
     },
+    validationSchema: Yup.object({
+      user: Yup.string()
+        .min(2, "Este é um nome muito curto.")
+        .max(50, "Esse é mesmo o seu nome ou você deitou no teclado?")
+        .matches(
+          /[^0-9$*&@#]/gi,
+          "Você precisa preencher esse campo apenas com letras"
+        )
+        .required("Você precisa preencher esse campo"),
+      email: Yup.string()
+        .email("Este campo precisa ser preenchido com um email.")
+        .required("Você precisa preencher esse campo"),
+      password: Yup.string()
+        .min(8, "Sua senha deve conter pelo menos 8 caracteres")
+        .max(30, "Sua senha deve ter no máximo 30 caracteres")
+        .matches(
+          /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]/,
+          "Sua senha precisa conter pelo menos um caractere especial, uma letra maiúscula, uma letra minúscula e um número."
+        ),
+      confirmPassword: Yup.string().when("password", (password, field) =>
+        password ? field.required().oneOf([Yup.ref("password")]) : field
+      ),
+    }),
     onSubmit: (values) => {
       // register(values);
-      console.log(values)
+      console.log(values);
     },
   });
 
@@ -78,8 +114,12 @@ const Register = ({ auth, dispatch }: any) => {
               name="user"
               type="text"
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               value={formik.values.user}
             />
+            {formik.errors.user && formik.touched.user ? (
+              <DivErrorYup>{formik.errors.user}</DivErrorYup>
+            ) : null}
             <Input
               width="99%"
               height="40px"
@@ -88,8 +128,12 @@ const Register = ({ auth, dispatch }: any) => {
               name="email"
               type="email"
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               value={formik.values.email}
             />
+            {formik.errors.email && formik.touched.email ? (
+              <DivErrorYup>{formik.errors.email}</DivErrorYup>
+            ) : null}
             <div>
               <Input
                 width="99%"
@@ -99,8 +143,12 @@ const Register = ({ auth, dispatch }: any) => {
                 name="password"
                 type={showPassword ? "password" : "text"}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 value={formik.values.password}
               />
+              {formik.errors.password && formik.touched.password ? (
+                <DivErrorYup>{formik.errors.password}</DivErrorYup>
+              ) : null}
               <DivEye>
                 {showPassword ? (
                   <FaEye onClick={() => setShowPassword(!showPassword)} />
@@ -133,16 +181,20 @@ const Register = ({ auth, dispatch }: any) => {
               name="confirmPassword"
               type="password"
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               value={formik.values.confirmPassword}
             />
+            {formik.errors.confirmPassword && formik.touched.confirmPassword ? (
+              <DivErrorYup>As senhas estão diferentes.</DivErrorYup>
+            ) : null}
 
             <Input
               width="99%"
               height="40px"
-              id="image"
-              name="image"
+              id="profileImage"
+              name="profileImage"
               type="file"
-              onChange={(event) => formik.setFieldValue("image", event.target.files)}
+              onChange={(event) => imgConverter(event)}
             />
 
             <Btn width="100%" type="submit" color={Theme.color.primary}>
