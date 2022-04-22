@@ -76,8 +76,8 @@ export const Input = styled.input`
 `;
 
 export const InputForm = styled.input`
-    width: 100%;
-    height: 30px;
+    width: ${props => props.width};
+    height: ${props => props.height};
     border-radius: 4px;
     border: 1px ${Theme.color.primary} solid;
 `;
