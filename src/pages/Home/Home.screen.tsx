@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { connect, DispatchProp } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Container } from "../../global.style";
@@ -9,6 +9,8 @@ import { RootState } from "../../store";
 import { redirectToLogin } from "../../utils/utils";
 import { Card, ContainerPrincipalCards, ContainerTitles } from "./Home.style";
 
+import { ModalBuyer } from "../../components"
+
 //listas apenas do colaborador se for usuario tipo colaborador
 //lista geral com botao de aprovar ou reprovar pro gestor se tiver mais de duas cotacoes
 //lista geral com botao de aprovar ou reprovar pro financeiro se o gestor tiver aprovado
@@ -18,6 +20,8 @@ const Home = ({ auth, dispatch }: isLoggedDTO & DispatchProp) => {
   const navigate = useNavigate();
   const hasUser: string | any = localStorage.getItem("token");
   const User = JSON.parse(hasUser);
+
+  const [modal, setModal] = useState<boolean>(false);
 
   useEffect(() => {
     redirectToLogin(navigate);
@@ -84,6 +88,7 @@ const Home = ({ auth, dispatch }: isLoggedDTO & DispatchProp) => {
             <p>00/00/0000</p>
             <p>R$ 800,00</p>
             <p>Aberto</p>
+            <button onClick={ () => setModal(!modal) }> Adicinar cotação </button>
           </ContainerTitles>
 
           <ContainerTitles>
@@ -103,6 +108,8 @@ const Home = ({ auth, dispatch }: isLoggedDTO & DispatchProp) => {
           </ContainerTitles>
         </Card>
       </ContainerPrincipalCards>
+
+      { modal && ( <ModalBuyer onClick={ () => setModal(!modal) } /> ) }
     </Container>
   );
 };
