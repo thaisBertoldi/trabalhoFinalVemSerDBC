@@ -37,6 +37,8 @@ const RequestPurshace = ({ auth, dispatch }: PurshaceDTO & DispatchProp) => {
             <InputLabelDiv>
               <label htmlFor="listName">Título da lista: </label>
               <InputForm
+                width={"100%"}
+                height={"30px"}
                 id="listName"
                 name="listName"
                 type="text"
@@ -48,6 +50,8 @@ const RequestPurshace = ({ auth, dispatch }: PurshaceDTO & DispatchProp) => {
             <InputLabelDiv>
               <label htmlFor="itemName">Nome do item: </label>
               <InputForm
+                width={"100%"}
+                height={"30px"}
                 id="itemName"
                 name="itemName"
                 type="text"
@@ -56,12 +60,11 @@ const RequestPurshace = ({ auth, dispatch }: PurshaceDTO & DispatchProp) => {
               />
             </InputLabelDiv>
 
-            
             <InputLabelDiv>
               <label htmlFor="description">Descrição: </label>
               <TextAreaCustom
-              placeholder="Something in here"
-              rows={10}
+                placeholder="Something in here"
+                rows={10}
                 id="description"
                 name="description"
                 onChange={formik.handleChange}
@@ -72,6 +75,8 @@ const RequestPurshace = ({ auth, dispatch }: PurshaceDTO & DispatchProp) => {
             <InputLabelDiv>
               <label htmlFor="value">Valor do item: </label>
               <InputForm
+                width={"100%"}
+                height={"30px"}
                 id="value"
                 name="value"
                 type="text"
@@ -81,8 +86,8 @@ const RequestPurshace = ({ auth, dispatch }: PurshaceDTO & DispatchProp) => {
             </InputLabelDiv>
 
             <InputForm
-              width="99%"
-              height="40px"
+              width={"100%"}
+              height={"30px"}
               id="profileImage"
               name="profileImage"
               type="file"
