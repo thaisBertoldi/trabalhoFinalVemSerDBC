@@ -141,5 +141,5 @@ export const CenterCustom = styled.div`
   display: flex;
   justify-content: center;
   gap: 15px;
-  color: ${Theme.color.white};
+  color: ${Theme.color.black};
 `;

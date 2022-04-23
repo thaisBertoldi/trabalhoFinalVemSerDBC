@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Theme } from "../../theme";
 
 export const FooterCustom = styled.footer`
-  background-color: ${Theme.color.primary};
+  background: ${Theme.color.black};
   padding: 30px;
   height: 140px;
   margin-top: 50px;

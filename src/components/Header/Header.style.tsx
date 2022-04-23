@@ -1,15 +1,29 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 import { Theme } from "../../theme";
-
 
 export const HeaderNav = styled.header`
   width: 100%;
   height: 70px;
-  background-color: ${Theme.color.primary};
+  background-color: ${Theme.color.black};
 
   display: flex;
   align-items: center;
   flex-direction: row-reverse;
+`;
+
+export const DivLinksMenu = styled.div`
+  display: flex;
+  gap: 30px;
+
+  a {
+    color: #dde2ff;
+    text-decoration: none;
+  }
+
+  a:hover {
+    background-color: #9fa2b436;
+    border-bottom: 3px solid #dde2ff;
+  }
 `;
 
 export const UlNav = styled.ul`
@@ -17,7 +31,6 @@ export const UlNav = styled.ul`
   padding: 0;
   display: flex;
   align-items: center;
-
   padding-right: 20px;
 
   figure {
@@ -32,20 +45,10 @@ export const UlNav = styled.ul`
     }
   }
 
-  a {
-    color: #DDE2FF;
-    text-decoration: none;
-  }
-
-  a:hover {
-    background-color: #9fa2b436 ;
-    border-bottom: 3px solid  #DDE2FF;
-  }
-
   button {
     width: 100px;
     height: 50px;
-    background: #FF505A;
+    background: #ff505a;
     color: white;
 
     box-shadow: 0px 4px 12px ${Theme.color.grayDark};
@@ -74,4 +77,9 @@ export const DropDown = styled.div`
   right: 0%;
   width: 100px;
   transform: translateX(-45%);
+`;
+
+export const ParagraphNameUser = styled.p`
+  color: #dde2ff;
+  padding-left: 30px;
 `;
