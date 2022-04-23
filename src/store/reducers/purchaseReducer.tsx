@@ -1,5 +1,5 @@
 import { AnyAction } from "redux";
-import { PurshaceDTO } from "../../models/PurshaceDTO";
+import { PurchaseDTO } from "../../models/PurchaseDTO";
 
 const INITIAL_STATE = {
     auth: {
@@ -11,7 +11,7 @@ const INITIAL_STATE = {
       },
 }
 
-const purshaceReducer = (state: PurshaceDTO = INITIAL_STATE, action: AnyAction) => {
+const purchaseReducer = (state: PurchaseDTO = INITIAL_STATE, action: AnyAction) => {
     if (action.type === "SET_REQUEST") {
       return {
         ...state,
@@ -26,4 +26,4 @@ const purshaceReducer = (state: PurshaceDTO = INITIAL_STATE, action: AnyAction) 
     return state;
   };
   
-  export default purshaceReducer;
+  export default purchaseReducer;

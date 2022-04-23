@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import { useState } from "react";
 import { connect, DispatchProp } from "react-redux";
 import { Btn, Container, InputForm, CenterCustom } from "../../global.style";
-import { NewRequestPurshace,PurshaceDTO  } from "../../models/PurshaceDTO";
+import { NewRequestPurchase,PurchaseDTO  } from "../../models/PurchaseDTO";
 import api from "../../service/api";
 import { RootState } from "../../store";
 import { Theme } from "../../theme";
@@ -10,12 +10,12 @@ import {
   ContainerRequest,
   ContainerRequestForm,
   TextAreaCustom,
-} from "./RequestPurshace.style";
+} from "./RequestPurchase.style";
 
 //pagina de compra pro usuário tipo colaborador
-const RequestPurshace = ({ auth, dispatch }: PurshaceDTO & DispatchProp) => {
+const RequestPurchase = ({ auth, dispatch }: PurchaseDTO & DispatchProp) => {
 
-  const [arrayItens, setArrayItens] = useState<NewRequestPurshace[]>([]);
+  const [arrayItens, setArrayItens] = useState<NewRequestPurchase[]>([]);
 
   const imgConverter = (event: React.ChangeEvent) => {
     const target = event.target as HTMLInputElement;
@@ -38,7 +38,7 @@ const RequestPurshace = ({ auth, dispatch }: PurshaceDTO & DispatchProp) => {
       // });
   }
 
-  const handleCreateList = async (values: PurshaceDTO["auth"]) => {
+  const handleCreateList = async (values: PurchaseDTO["auth"]) => {
     console.log(values.listName);
     try {
       const options = {
@@ -52,7 +52,7 @@ const RequestPurshace = ({ auth, dispatch }: PurshaceDTO & DispatchProp) => {
   }
 
   const postItensToTopic = async (id: string) => {
-    arrayItens.forEach( async (item: NewRequestPurshace) => {
+    arrayItens.forEach( async (item: NewRequestPurchase) => {
       const formData = new FormData();
       formData.append("file", item.file);
       formData.append("description", item.description);
@@ -154,7 +154,7 @@ const RequestPurshace = ({ auth, dispatch }: PurshaceDTO & DispatchProp) => {
 };
 
 const mapStateToProps = (state: RootState) => ({
-  auth: state.purshaceReducer.auth,
+  auth: state.purchaseReducer.auth,
 });
 
-export default connect(mapStateToProps)(RequestPurshace);
+export default connect(mapStateToProps)(RequestPurchase);
