@@ -1,17 +1,17 @@
 import { AnyAction } from "redux";
-import { isLoggedDTO } from '../../models/UserDTO'
+import { isLoggedDTO } from "../../models/UserDTO";
 
 const INITIAL_STATE = {
-  username: '',
-  fullName: '',
-  token: '',
-  profile: '',
-  isLogged: false,
-  profileImage: ''
+    username: "",
+    fullName: "",
+    token: "",
+    profile: "",
+    isLogged: false,
+    profileImage: "",
 };
 
-const authReducer = ( state: isLoggedDTO["auth"] = INITIAL_STATE, action: AnyAction ) => {
-  if(action.type === 'SET_LOGIN') {
+const authReducer = (state: isLoggedDTO['auth'] = INITIAL_STATE, action: AnyAction) => {
+  if (action.type === "SET_LOGIN") {
     return {
       ...state,
       username: action.username,
@@ -19,16 +19,16 @@ const authReducer = ( state: isLoggedDTO["auth"] = INITIAL_STATE, action: AnyAct
       token: action.token,
       profile: action.profile,
       profileImage: action.profileImage,
-      isLogged: action.isLogged
-    }
+      isLogged: action.isLogged,
+    };
   }
 
-  if(action.type === 'SET_LOGOUT') {
+  if (action.type === "SET_LOGOUT") {
     state = INITIAL_STATE;
     return state;
   }
 
   return state;
-}
+};
 
 export default authReducer;

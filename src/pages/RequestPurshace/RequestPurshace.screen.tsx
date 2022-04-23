@@ -2,21 +2,20 @@ import { useFormik } from "formik";
 import { useState } from "react";
 import { connect, DispatchProp } from "react-redux";
 import { Btn, Container, InputForm, CenterCustom } from "../../global.style";
-import { PurshaceDTO } from "../../models/UserDTO";
+import { NewRequestPurshace,PurshaceDTO  } from "../../models/PurshaceDTO";
 import api from "../../service/api";
 import { RootState } from "../../store";
 import { Theme } from "../../theme";
 import {
   ContainerRequest,
   ContainerRequestForm,
-  InputLabelDiv,
   TextAreaCustom,
 } from "./RequestPurshace.style";
 
 //pagina de compra pro usuário tipo colaborador
 const RequestPurshace = ({ auth, dispatch }: PurshaceDTO & DispatchProp) => {
 
-  const [arrayItens, setArrayItens] = useState<any[]>([]);
+  const [arrayItens, setArrayItens] = useState<NewRequestPurshace[]>([]);
 
   const imgConverter = (event: React.ChangeEvent) => {
     const target = event.target as HTMLInputElement;
@@ -39,7 +38,7 @@ const RequestPurshace = ({ auth, dispatch }: PurshaceDTO & DispatchProp) => {
       // });
   }
 
-  const handleCreateList = async (values: any) => {
+  const handleCreateList = async (values: PurshaceDTO["auth"]) => {
     console.log(values.listName);
     try {
       const options = {
@@ -53,7 +52,7 @@ const RequestPurshace = ({ auth, dispatch }: PurshaceDTO & DispatchProp) => {
   }
 
   const postItensToTopic = async (id: string) => {
-    arrayItens.forEach( async (item: any) => {
+    arrayItens.forEach( async (item: NewRequestPurshace) => {
       const formData = new FormData();
       formData.append("file", item.file);
       formData.append("description", item.description);
@@ -155,7 +154,7 @@ const RequestPurshace = ({ auth, dispatch }: PurshaceDTO & DispatchProp) => {
 };
 
 const mapStateToProps = (state: RootState) => ({
-  auth: state.authReducer,
+  auth: state.purshaceReducer.auth,
 });
 
-export default connect(mapStateToProps)<any>(RequestPurshace);
+export default connect(mapStateToProps)(RequestPurshace);
