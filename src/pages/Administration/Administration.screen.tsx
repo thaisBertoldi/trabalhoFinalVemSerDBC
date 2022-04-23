@@ -21,12 +21,19 @@ const exemplo = {
 
 //tipá-los
 const Administration = () => {
+  
+  const test = (values: any) => {
+    //post
+    alert(JSON.stringify(values, null, 2));
+    formik.resetForm();
+  }
+
   const formik = useFormik({
     initialValues: {
-      type: "",
+      type: "Colaborador",
     },
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      test(values);
     },
   });
   return (

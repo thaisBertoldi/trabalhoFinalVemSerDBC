@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 import PasswordStrengthBar from "react-password-strength-bar";
 import { useFormik } from "formik";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { connect, DispatchProp } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -36,8 +36,9 @@ const Register = ({ auth, dispatch }: isLoggedDTO & DispatchProp) => {
     }
   };
 
-  const imgConverter = (event: any) => {
-    const profileImage = event?.target?.files[0];
+  const imgConverter = (event: React.ChangeEvent) => {
+    const target = event.target as HTMLInputElement;
+    const profileImage = target.files?.[0];
     formik.setFieldValue("profileImage", profileImage);
   };
 
