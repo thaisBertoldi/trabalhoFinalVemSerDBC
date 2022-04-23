@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import { useState } from "react";
 import { connect, DispatchProp } from "react-redux";
-import { Btn, Container, InputForm, CenterCustom } from "../../global.style";
+import { BtnForm, Container, InputForm, CenterCustom } from "../../global.style";
 import { NewRequestPurchase,PurchaseDTO  } from "../../models/PurchaseDTO";
 import { RootState } from "../../store";
 import { handleCreateList } from "../../store/action/purchaseAction";
@@ -103,12 +103,12 @@ const RequestPurchase = ({ auth, dispatch }: PurchaseDTO & DispatchProp) => {
               onChange={(event) => imgConverter(event, formik.setFieldValue, 'file')}
             />
             <CenterCustom>
-              <Btn width={"300px"} color={Theme.color.yellow} type="button" onClick={ () => addItenToList() } >
+              <BtnForm width={"300px"} color={Theme.color.yellow} type="button" onClick={ () => addItenToList() } >
                 Adicionar
-              </Btn>
-              <Btn width={"300px"} color={Theme.color.grayDark} type="submit">
+              </BtnForm>
+              <BtnForm width={"300px"} color={Theme.color.grayDark} type="submit">
                 Finalizar
-              </Btn>
+              </BtnForm>
             </CenterCustom>
           </ContainerRequestForm>
         </form>

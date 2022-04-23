@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Logo from "../../components/Logo/Logo";
 import Notiflix from "notiflix";
@@ -105,7 +105,9 @@ const Login = ({ auth, dispatch }: isLoggedDTO & DispatchProp) => {
 
               <Paragraph>
                 Não possui uma conta?{" "}
-                <LinkCustom to="/register">Registrar</LinkCustom>
+                <LinkCustom >
+                  <Link to="/register">Registrar</Link>  
+                </LinkCustom>
               </Paragraph>
             </DivInputsLogin>
           </form>

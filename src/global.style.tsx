@@ -91,7 +91,18 @@ export const InputForm = styled.input`
 export const Btn = styled.button<{ width: string }>`
   width: ${(props) => props.width};
   height: 42px;
-  background-color: ${(props) => props.color};
+  background: rgb(29,184,67);
+  background: linear-gradient(90deg, rgba(29,184,67,1) 0%, rgba(0,113,191,1) 100%);
+  border-radius: 4px;
+  outline: none;
+  border: none;
+  color: ${Theme.color.white};
+`;
+
+export const BtnForm = styled.button<{ width: string }>`
+  width: ${(props) => props.width};
+  height: 42px;
+  background: ${(props) => props.color};
   border-radius: 4px;
   outline: none;
   border: none;
@@ -99,15 +110,27 @@ export const Btn = styled.button<{ width: string }>`
 `;
 
 export const Paragraph = styled.p`
+  display: flex;
+  justify-content: center;
+  gap: 5px;
   font-size: ${Theme.fontSize};
   color: ${Theme.color.white};
   text-align: center;
 `;
 
-export const LinkCustom = styled(Link)`
+export const LinkCustom = styled.div`
   list-style: none;
   text-decoration: none;
-  color: ${Theme.color.primary};
+  background-image: linear-gradient(90deg, rgba(29,184,67,1) 0%, rgba(0,113,191,1) 100%);
+  color: black;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  a {
+    list-style: none;
+    text-decoration: none;
+  }
 `;
 
 export const DivErrorYup = styled.div`
