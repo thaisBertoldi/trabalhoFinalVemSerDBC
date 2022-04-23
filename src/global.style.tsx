@@ -57,7 +57,7 @@ export const ContainerGetInfo = styled.div`
 
   @media (max-width: 700px) {
     width: 400px;
-    height: 500px;
+    height: 600px;
   }
 
 `;
