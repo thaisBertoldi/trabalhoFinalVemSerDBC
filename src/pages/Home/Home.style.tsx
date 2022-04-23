@@ -26,9 +26,19 @@ export const CardItem = styled.div`
 
 export const TitleCard = styled.div`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   align-items: center;
 
+  @media (max-width: 1170px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+`;
+
+export const DivButtonsCard = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
 `;
 
 export const ButtonCard = styled.button`
@@ -41,4 +51,8 @@ export const ButtonCard = styled.button`
   color: #fff;
   font-size: 14px;
   cursor: pointer;
+
+  @media (max-width: 580px) {
+    width: 150px;
+  } 
 `;

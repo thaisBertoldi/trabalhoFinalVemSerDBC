@@ -8,9 +8,10 @@ import moment from "moment";
 import api from "../../service/api";
 import { RootState } from "../../store";
 import { redirectToLogin } from "../../utils/utils";
-import { ContainerCard, TitleCard, ButtonCard } from "./Home.style";
+import { ContainerCard, TitleCard, ButtonCard, DivButtonsCard } from "./Home.style";
 
 import { ModalBuyer, ModalCotation } from "../../components"
+import { StatusEnum } from "../../enums/StatusEnum";
 
 //listas apenas do colaborador se for usuario tipo colaborador
 //lista geral com botao de aprovar ou reprovar pro gestor se tiver mais de duas cotacoes
@@ -57,11 +58,13 @@ const Home = ({ auth, dispatch }: isLoggedDTO & DispatchProp) => {
             <p>Título: {item.title}</p>
             <p>Data: {moment(item.date).format("DD/MM/YYYY")}</p>
             <p>Valor total: R$ {item.totalValue}</p>
-            <p>Status: {item.status}</p>
-            <ButtonCard onClick={ () => setOpenModalAddCotation(!OpenModalAddCotation) }> Adicinar cotação </ButtonCard>
+            <p>Status: { StatusEnum[item.status]}</p>
           </TitleCard>
-          <ButtonCard onClick={ () => setShowItensTopic(!showItensTopic)}> Visualizar Itens do tópico </ButtonCard>
-          <ButtonCard onClick={ () => setOpenModalCotation(!OpenModalCotation) } > Visualizar cotações </ButtonCard>
+          <DivButtonsCard>
+            <ButtonCard onClick={ () => setShowItensTopic(!showItensTopic)}> Visualizar Itens do tópico </ButtonCard>
+            <ButtonCard onClick={ () => setOpenModalCotation(!OpenModalCotation) } > Visualizar cotações </ButtonCard>
+            <ButtonCard onClick={ () => setOpenModalAddCotation(!OpenModalAddCotation) }> Adicinar cotação </ButtonCard>
+          </DivButtonsCard>
           {/* {
             showItensTopic && (
               exemplo.Itens.map((item, index) => (

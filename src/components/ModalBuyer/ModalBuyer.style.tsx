@@ -25,19 +25,25 @@ export const Modal = styled.div`
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 
   form {
+    width: 50%;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
 
     margin-top: 20px;
     gap: 15px;
+
+    @media (max-width: 768px) {
+      width: 80%;
+    }
   }
 `;
 
 export const BtnClose = styled.button`
   width: 25px;
   height: 25px;
-  margin-left: 97%;
+  margin-left: 95%;
   
   font-size: 25px;
 
@@ -46,5 +52,7 @@ export const BtnClose = styled.button`
   border: none;
   cursor: pointer;
   
-  
+  @media (max-width: 840px) {
+    margin-left: 90%;
+  }
 `;
