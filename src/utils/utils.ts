@@ -13,3 +13,9 @@ export const redirectToLogin = (navigate: Function) => {
     navigate('/login');
   }
 }
+
+export const imgConverter = (event: React.ChangeEvent, formik: Function, value: string) => {
+  const target = event.target as HTMLInputElement;
+  const profileImage = target.files?.[0];
+  return formik(value, profileImage);
+};

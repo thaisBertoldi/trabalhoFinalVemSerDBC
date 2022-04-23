@@ -20,7 +20,7 @@ import { DivEye, DivInputsLogin, DivLogo } from "../Login/Login.style";
 
 import { isLoggedDTO, RegisterDTO } from "../../models/UserDTO";
 import { handleRegister } from "../../store/action/authActions";
-import { hasLogin } from "../../utils/utils";
+import { hasLogin, imgConverter } from "../../utils/utils";
 import { RootState } from "../../store";
 
 const Register = ({ auth, dispatch }: isLoggedDTO & DispatchProp) => {
@@ -34,12 +34,6 @@ const Register = ({ auth, dispatch }: isLoggedDTO & DispatchProp) => {
     } else {
       console.log("A senha deve ser igual a confirmação");
     }
-  };
-
-  const imgConverter = (event: React.ChangeEvent) => {
-    const target = event.target as HTMLInputElement;
-    const profileImage = target.files?.[0];
-    formik.setFieldValue("profileImage", profileImage);
   };
 
   useEffect(() => {
@@ -187,7 +181,7 @@ const Register = ({ auth, dispatch }: isLoggedDTO & DispatchProp) => {
               name="profileImage"
               type="file"
               accept="image/*"
-              onChange={(event) => imgConverter(event)}
+              onChange={(event) => imgConverter(event, formik.setFieldValue, 'profileImage')}
             />
 
             <Btn width="100%" type="submit" color={Theme.color.primary}>

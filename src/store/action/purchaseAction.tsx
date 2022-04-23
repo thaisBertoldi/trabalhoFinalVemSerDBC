@@ -1,9 +1,12 @@
+import Notiflix from "notiflix";
+import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import { NewRequestPurchase, NewRequestPurchaseArray, PurchaseDTO } from "../../models/PurchaseDTO";
 import api from "../../service/api";
 
 export const handleCreateList = async (values: PurchaseDTO["auth"], arrayItens: NewRequestPurchaseArray['item']) => {
     console.log(values.listName);
     try {
+      Loading.circle();
       const options = {
         headers: {"content-type": "application/json"}
       }
@@ -11,6 +14,7 @@ export const handleCreateList = async (values: PurchaseDTO["auth"], arrayItens: 
       postItensToTopic(data, arrayItens);
     } catch (error) {
       console.log(error);
+      Loading.remove();
     }
   }
 
@@ -28,4 +32,5 @@ export const handleCreateList = async (values: PurchaseDTO["auth"], arrayItens: 
         console.log(error);
       }
     });
+    Loading.remove();
   }
