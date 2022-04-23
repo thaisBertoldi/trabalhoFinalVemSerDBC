@@ -54,6 +54,12 @@ export const ContainerGetInfo = styled.div`
     rgba(0, 0, 0, 0) 101.3%
   );
   backdrop-filter: blur(25px);
+
+  @media (max-width: 700px) {
+    width: 400px;
+    height: 500px;
+  }
+
 `;
 
 export const Input = styled.input`
