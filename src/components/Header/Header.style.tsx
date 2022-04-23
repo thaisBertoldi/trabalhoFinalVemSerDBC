@@ -13,6 +13,8 @@ export const HeaderNav = styled.header`
 
 export const DivLinksMenu = styled.div`
   display: flex;
+  align-items: center;
+  padding-left: 20px;
   gap: 30px;
 
   a {
@@ -22,16 +24,21 @@ export const DivLinksMenu = styled.div`
 
   a:hover {
     background-color: #9fa2b436;
-    border-bottom: 3px solid #dde2ff;
+  }
+
+  @media (max-width: 768px) {
+    display: none;
   }
 `;
 
 export const UlNav = styled.ul`
+  width: 100%;
   margin: 0;
   padding: 0;
   display: flex;
   align-items: center;
-  padding-right: 20px;
+  justify-content: space-between;
+
 
   figure {
     width: 60px;
@@ -63,12 +70,50 @@ export const UlNav = styled.ul`
   }
 `;
 
-export const DivArrow = styled.div`
+export const MenuHamburguer = styled.div`
+  color: white;
+  font-size: 30px;
+  display: none;
+  padding-left: 20px;
+
+  @media (max-width: 768px) {
+    display: flex;
+    align-items: center;
+  }
+`;
+
+export const HamburguerDiv = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  background-color: ${Theme.color.black};
   position: absolute;
+  top: 8%;
+
+  a {
+    color: #dde2ff;
+    text-decoration: none; 
+    padding: 10px;
+  }
+
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+`;
+
+export const DivArrow = styled.div`
+  position: fixed;
   top: 5%;
   right: 2.5%;
   font-size: 30px;
   color: white;
+`;
+
+export const DivUserMenu = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 export const DropDown = styled.div`
@@ -77,6 +122,7 @@ export const DropDown = styled.div`
   right: 0%;
   width: 100px;
   transform: translateX(-45%);
+  z-index: 1;
 `;
 
 export const ParagraphNameUser = styled.p`
