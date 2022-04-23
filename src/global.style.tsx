@@ -3,6 +3,10 @@ import { Theme } from "./theme";
 import image from "./images/background-div.jpg";
 import { Link } from "react-router-dom";
 
+export const Container = styled.div`
+  min-height: 100%;
+`;
+
 export const ContainerPrincipal = styled.div`
   display: grid;
   grid-template-columns: auto auto;
@@ -23,9 +27,9 @@ export const ContainerTitle = styled.div`
   line-height: 5px;
 `;
 
-export const Title = styled.h1<{size: string, spacing: string}>`
-    font-size: ${props => props.size};
-    letter-spacing: ${props => props.spacing};
+export const Title = styled.h1<{ size: string; spacing: string }>`
+  font-size: ${(props) => props.size};
+  letter-spacing: ${(props) => props.spacing};
 `;
 
 export const ContainerGetInfo = styled.div`
@@ -54,13 +58,14 @@ export const Input = styled.input`
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
   border-bottom: 2px solid ${Theme.color.white};
-  
+
   background: none;
   color: ${Theme.color.white};
   font-size: ${Theme.fontSize};
 
   ::placeholder {
-    font-family: ${Theme.fontFamily};
+    @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+    font-family: "Poppins", sans-serif;
     color: ${Theme.color.white};
     font-size: ${Theme.fontSize};
   }
@@ -70,10 +75,23 @@ export const Input = styled.input`
   }
 `;
 
-export const Btn = styled.button<{width: string}>`
+export const InputForm = styled.input`
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  border-radius: 4px;
+  border: 1px ${Theme.color.primary} solid;
+
+  padding: 0 10px;
+
+  :focus {
+    outline: none;
+  }
+`;
+
+export const Btn = styled.button<{ width: string }>`
   width: ${(props) => props.width};
   height: 42px;
-  background-color: ${Theme.color.primary};
+  background-color: ${(props) => props.color};
   border-radius: 4px;
   outline: none;
   border: none;
@@ -90,4 +108,15 @@ export const LinkCustom = styled(Link)`
   list-style: none;
   text-decoration: none;
   color: ${Theme.color.primary};
+`;
+
+export const DivErrorYup = styled.div`
+  color: ${Theme.color.danger};
+`;
+
+export const CenterCustom = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  color: ${Theme.color.white};
 `;

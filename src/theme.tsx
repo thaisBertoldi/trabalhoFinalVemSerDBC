@@ -6,6 +6,8 @@ export const Theme = {
     grayDark: "#5F5F5F",
     grayLight: "#878787",
     white: "#FFFFFF",
+    danger: "#ee161d",
+    yellow: "#b9c515"
   },
   padding: "15px",
   margin: "15px",
@@ -14,5 +16,4 @@ export const Theme = {
     width: "1152px",
     height: "820px",
   },
-  fontFamily: "'Poppins', sans-serif",
 };
