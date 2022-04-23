@@ -34,16 +34,19 @@ const Administration = () => {
       <CenterCustom>
         <h3>Usuários Cadastrados: </h3>
       </CenterCustom>
-      {exemplo.users.map((e: any) => {
+      {exemplo.users.map((e: any, index: number) => {
         return (
           <>
-            <form onSubmit={formik.handleSubmit}>
+            <form onSubmit={formik.handleSubmit} key={index}>
               <UserFormAdmin>
                 <DivNameUser>
                   <p>{e.nome}</p>
                 </DivNameUser>
-                <select name="select">
-                  <option value="Colaborador" selected>
+                <select
+                  name="type"
+                  onChange={formik.handleChange}
+                >
+                  <option value="Colaborador">
                     Colaborador
                   </option>
                   <option value="Administrador">Administrador</option>
