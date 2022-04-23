@@ -18,36 +18,12 @@ import { ModalBuyer } from "../../components"
 //lista geral com botao de aprovar ou reprovar pro financeiro se o gestor tiver aprovado
 //lista geral pro comprador com modal pra solicitar cotacao
 
-const exemplo = {
-  Itens: [
-    {
-      nome: "Tv",
-      data: "12/02/2022",
-      valor: "R$ 2000,00",
-    },
-    {
-      nome: "Monitor",
-      data: "12/02/2022",
-      valor: "R$ 1200,00",
-    },
-    {
-      nome: "Mouse Gamer",
-      data: "12/02/2022",
-      valor: "R$ 200,00",
-    },
-    {
-      nome: "Teclado Gamer",
-      data: "12/02/2022",
-      valor: "R$ 500,00",
-    },
-  ],
-};
-
 const Home = ({ auth, dispatch }: isLoggedDTO & DispatchProp) => {
   const navigate = useNavigate();
   const hasUser: string | any = localStorage.getItem("token");
   const User = JSON.parse(hasUser);
 
+  const [list, setList] = useState<any>([]);
   const [modal, setModal] = useState<boolean>(false);
   const [showItensTopic, setShowItensTopic] = useState<boolean>(false);
 
@@ -57,7 +33,8 @@ const Home = ({ auth, dispatch }: isLoggedDTO & DispatchProp) => {
 
   const setup = async () => {
     try {
-      const { data } = await api.get("user/get-hello");
+      const { data } = await api.get("/main-page/topics?page=0");
+      setList(data);
       console.log(data);
     } catch (error) {
       console.log(error);
@@ -70,32 +47,37 @@ const Home = ({ auth, dispatch }: isLoggedDTO & DispatchProp) => {
 
   return (
     <Container>
-      {/* <CenterCustom>
+      <CenterCustom>
         <h1>Seja bem-vindo(a), {User?.fullName}</h1>
       </CenterCustom>
-      <ContainerCard>
-        <TitleCard>
-          <p>TÍTULO</p>
-          <p>DATA</p>
-          <p>VALOR TOTAL</p>
-          <p>SITUAÇÃO</p>
-          <button onClick={ () => setModal(!modal) }> Adicinar cotação </button>
-        </TitleCard>
-        <button onClick={ () => setShowItensTopic(!showItensTopic)}> Visualizar Itens do tópico </button>
-        {
-          showItensTopic && (
-            exemplo.Itens.map((item, index) => (
-              <CardItem key={index}>
-                <img src={Image} alt="imagem do iten" />
-                <p>{item.nome}</p>
-                <p>{item.data}</p>
-                <p>{item.valor}</p>
-              </CardItem>
-            ))
-          )
-        }
-      </ContainerCard>
-      { modal && ( <ModalBuyer onClick={ () => setModal(!modal) } /> ) } */}
+      {
+        list?.content?.map((item: any) => (
+        <ContainerCard key={item.topicId}>
+          <TitleCard>
+            <p>Título: {item.title}</p>
+            <p>Data: {item.date} </p>
+            <p>Valor total: {item.totalValue}</p>
+            <p>Status: {item.status}</p>
+            <button onClick={ () => setModal(!modal) }> Adicinar cotação </button>
+          </TitleCard>
+          <button onClick={ () => setShowItensTopic(!showItensTopic)}> Visualizar Itens do tópico </button>
+          {/* {
+            showItensTopic && (
+              exemplo.Itens.map((item, index) => (
+                <CardItem key={index}>
+                  <img src={Image} alt="imagem do iten" />
+                  <p>{item.nome}</p>
+                  <p>{item.data}</p>
+                  <p>{item.valor}</p>
+                </CardItem>
+              ))
+            )
+          } */}
+        </ContainerCard>
+        ))
+      }
+      
+      { modal && ( <ModalBuyer onClick={ () => setModal(!modal) } /> ) }
     </Container>
   );
 };

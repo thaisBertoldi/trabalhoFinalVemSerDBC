@@ -4,6 +4,7 @@ import { Theme } from "../../theme";
 export const ContainerCard = styled.div`
   width: 80%;
   margin: 0 auto;
+  margin-bottom: 20px;
   background-color: #fff;
   border-radius: 5px;
   padding: 20px;
