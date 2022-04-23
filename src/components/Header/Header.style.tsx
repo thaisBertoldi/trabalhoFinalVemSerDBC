@@ -72,9 +72,9 @@ export const UlNav = styled.ul`
 
 export const MenuHamburguer = styled.div`
   color: white;
-  font-size: 30px;
-  display: none;
+  font-size: 20px;
   padding-left: 20px;
+  display: none;
 
   @media (max-width: 768px) {
     display: flex;
@@ -97,7 +97,6 @@ export const HamburguerDiv = styled.div`
     padding: 10px;
   }
 
-
   @media (min-width: 768px) {
     display: none;
   }
@@ -106,7 +105,7 @@ export const HamburguerDiv = styled.div`
 export const DivArrow = styled.div`
   position: fixed;
   top: 5%;
-  right: 2.5%;
+  right: 1.5%;
   font-size: 30px;
   color: white;
 `;
@@ -119,10 +118,11 @@ export const DivUserMenu = styled.div`
 export const DropDown = styled.div`
   position: absolute;
   top: 7.5%;
-  right: 0%;
-  width: 100px;
+  right: -1%;
   transform: translateX(-45%);
-  z-index: 1;
+  @media (max-width: 1875px) {
+    top: 8%;
+  }
 `;
 
 export const ParagraphNameUser = styled.p`

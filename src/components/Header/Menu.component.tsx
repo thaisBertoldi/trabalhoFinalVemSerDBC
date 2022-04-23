@@ -1,12 +1,13 @@
 import { connect } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { UlNav, DropDown, DivArrow, DivLinksMenu, ParagraphNameUser, DivUserMenu, MenuHamburguer, HamburguerDiv } from "./Header.style";
+import { UlNav, DropDown, DivArrow, DivLinksMenu, ParagraphNameUser, DivUserMenu, MenuHamburguer } from "./Header.style";
 import { IoMdArrowDropdown } from "react-icons/io";
-import { MdMenu } from "react-icons/md";
 import { handleLogout } from "../../store/action/authActions";
 
 import ImgDefault from "../../images/foto-perfil.png";
 import { useState } from "react";
+import Hamburguer from "./Hamburguer.component";
+import { MdMenu } from "react-icons/md";
 
 const Menu = ({ auth, dispatch }: any) => {
   const navigate = useNavigate();
@@ -23,44 +24,35 @@ const Menu = ({ auth, dispatch }: any) => {
       <MenuHamburguer>
         <MdMenu onClick={() => setOpenHamburguer(!openHamburguer)} />
       </MenuHamburguer>
-      {
-        openHamburguer && (
-        <HamburguerDiv>
-          <Link to={"/"}>Home</Link>
-          <Link to={"/administration"}>Administrador</Link>
-          <Link to={"/request-purchase"}>Solicitar compra</Link>
-        </HamburguerDiv>
-        )
-      }
+      { openHamburguer && ( <Hamburguer /> ) }  
+
       <DivLinksMenu>
         <Link to={"/"}>Home</Link>
         <Link to={"/administration"}>Administrador</Link>
         <Link to={"/request-purchase"}>Solicitar compra</Link>
       </DivLinksMenu>
+
       <DivUserMenu>
         <ParagraphNameUser> {User?.fullName} </ParagraphNameUser>
         <figure onClick={() => setOpen(!open)}>
-          <img
-            src={
-              User?.profileImage !== null
-                ? `data:image/jpeg;base64,${User?.profileImage}`
-                : ImgDefault
-            }
+          <img 
+            src={User?.profileImage !== null ? `data:image/jpeg;base64,${User?.profileImage}` : ImgDefault}
             alt="Foto do usuário"
           />
           <DivArrow>
             <IoMdArrowDropdown />
           </DivArrow>
         </figure>
-        {open && (
-          <DropDown>
-            <button onClick={() => handleLogout(dispatch, navigate)}>
-              {" "}
-              Logout{" "}
-            </button>
-          </DropDown>
-        )}
       </DivUserMenu>
+      
+      {open && (
+        <DropDown>
+          <button onClick={() => handleLogout(dispatch, navigate)}>
+            {" "}
+            Logout{" "}
+          </button>
+        </DropDown>
+      )}
     </UlNav>
   );
 };
