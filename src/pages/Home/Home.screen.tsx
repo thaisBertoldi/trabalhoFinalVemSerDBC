@@ -3,15 +3,14 @@ import { connect, DispatchProp } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { CenterCustom, Container } from "../../global.style";
 import { isLoggedDTO } from "../../models/UserDTO";
+import moment from "moment";
 
 import api from "../../service/api";
 import { RootState } from "../../store";
 import { redirectToLogin } from "../../utils/utils";
-import { ContainerCard, CardItem, TitleCard } from "./Home.style";
+import { ContainerCard, TitleCard, ButtonCard } from "./Home.style";
 
-import Image from "../../images/testeImageIten.png";
-
-import { ModalBuyer } from "../../components"
+import { ModalBuyer, ModalCotation } from "../../components"
 
 //listas apenas do colaborador se for usuario tipo colaborador
 //lista geral com botao de aprovar ou reprovar pro gestor se tiver mais de duas cotacoes
@@ -24,7 +23,8 @@ const Home = ({ auth, dispatch }: isLoggedDTO & DispatchProp) => {
   const User = JSON.parse(hasUser);
 
   const [list, setList] = useState<any>([]);
-  const [modal, setModal] = useState<boolean>(false);
+  const [OpenModalAddCotation, setOpenModalAddCotation] = useState<boolean>(false);
+  const [OpenModalCotation, setOpenModalCotation] = useState<boolean>(false);
   const [showItensTopic, setShowItensTopic] = useState<boolean>(false);
 
   useEffect(() => {
@@ -55,12 +55,13 @@ const Home = ({ auth, dispatch }: isLoggedDTO & DispatchProp) => {
         <ContainerCard key={item.topicId}>
           <TitleCard>
             <p>Título: {item.title}</p>
-            <p>Data: {item.date} </p>
-            <p>Valor total: {item.totalValue}</p>
+            <p>Data: {moment(item.date).format("DD/MM/YYYY")}</p>
+            <p>Valor total: R$ {item.totalValue}</p>
             <p>Status: {item.status}</p>
-            <button onClick={ () => setModal(!modal) }> Adicinar cotação </button>
+            <ButtonCard onClick={ () => setOpenModalAddCotation(!OpenModalAddCotation) }> Adicinar cotação </ButtonCard>
           </TitleCard>
-          <button onClick={ () => setShowItensTopic(!showItensTopic)}> Visualizar Itens do tópico </button>
+          <ButtonCard onClick={ () => setShowItensTopic(!showItensTopic)}> Visualizar Itens do tópico </ButtonCard>
+          <ButtonCard onClick={ () => setOpenModalCotation(!OpenModalCotation) } > Visualizar cotações </ButtonCard>
           {/* {
             showItensTopic && (
               exemplo.Itens.map((item, index) => (
@@ -77,7 +78,8 @@ const Home = ({ auth, dispatch }: isLoggedDTO & DispatchProp) => {
         ))
       }
       
-      { modal && ( <ModalBuyer onClick={ () => setModal(!modal) } /> ) }
+      { OpenModalAddCotation && ( <ModalBuyer onClick={ () => setOpenModalAddCotation(!OpenModalAddCotation) } /> ) }
+      { OpenModalCotation && ( <ModalCotation onClick={ () => setOpenModalCotation(!OpenModalCotation) } /> ) }
     </Container>
   );
 };

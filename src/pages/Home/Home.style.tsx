@@ -29,15 +29,16 @@ export const TitleCard = styled.div`
   grid-template-columns: repeat(5, 1fr);
   align-items: center;
 
-  button {
-    width: 200px;
-    height: 40px;
-    border: none;
-    border-radius: 5px;
-    background: rgb(29,184,67);
-    background: linear-gradient(90deg, rgba(29,184,67,1) 0%, rgba(0,113,191,1) 100%);
-    color: #fff;
-    font-size: 14px;
-    cursor: pointer;
-  }
+`;
+
+export const ButtonCard = styled.button`
+  width: 200px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  background: rgb(29,184,67);
+  background: linear-gradient(90deg, rgba(29,184,67,1) 0%, rgba(0,113,191,1) 100%);
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
 `;
