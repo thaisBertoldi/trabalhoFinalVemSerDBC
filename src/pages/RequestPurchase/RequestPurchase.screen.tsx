@@ -27,8 +27,17 @@ const RequestPurchase = ({ auth, dispatch }: PurchaseDTO & DispatchProp) => {
       value,
       file,
     };
+    formik.resetForm({
+      values: {
+        listName: formik.values.listName,
+        itemName: '',
+        description: '',
+        value: '',
+        file: "",
+      },
+
+    });
     setArrayItens([...arrayItens, newItem]);
-    // formik.resetForm({ listName: formik.values.listName});
   }
 
   const formik  = useFormik({
@@ -39,8 +48,19 @@ const RequestPurchase = ({ auth, dispatch }: PurchaseDTO & DispatchProp) => {
       value: "",
       file: "",
     },
-    onSubmit: (values) => {
-      handleCreateList(values, arrayItens);
+    onSubmit: (values, actions) => {
+      // handleCreateList(values, arrayItens);
+      console.log(values, arrayItens)
+      actions.resetForm({
+        values: {
+          listName: formik.values.listName,
+          itemName: '',
+          description: '',
+          value: '',
+          file: "",
+        },
+
+      });
     },
   });
   return (
