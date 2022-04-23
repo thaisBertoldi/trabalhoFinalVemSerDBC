@@ -60,10 +60,6 @@ export const setLogin = (dispatch: AppDispatch, data: isLoggedDTO["auth"]) => {
   api.defaults.headers.common['Authorization'] = data.token;
   localStorage.setItem('token', JSON.stringify(data));
   dispatch(setLogged);
-<<<<<<< HEAD
-  navigate('/');
-}
-=======
   Loading.remove();
 }
 
@@ -74,4 +70,3 @@ export const handleLogout = (dispatch: AppDispatch, navigate: Function) => {
   navigate('/login');
   Loading.remove();
 }
->>>>>>> main

@@ -5,6 +5,7 @@ import { Btn, Container, InputForm, CenterCustom } from "../../global.style";
 import { NewRequestPurchase,PurchaseDTO  } from "../../models/PurchaseDTO";
 import api from "../../service/api";
 import { RootState } from "../../store";
+import { handleCreateList } from "../../store/action/purchaseAction";
 import { Theme } from "../../theme";
 import {
   ContainerRequest,
@@ -38,34 +39,34 @@ const RequestPurchase = ({ auth, dispatch }: PurchaseDTO & DispatchProp) => {
       // });
   }
 
-  const handleCreateList = async (values: PurchaseDTO["auth"]) => {
-    console.log(values.listName);
-    try {
-      const options = {
-        headers: {"content-type": "application/json"}
-      }
-      const { data } = await api.post('topic/create-topic', JSON.stringify(values.listName), options);
-      postItensToTopic(data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  // const handleCreateList = async (values: PurchaseDTO["auth"]) => {
+  //   console.log(values.listName);
+  //   try {
+  //     const options = {
+  //       headers: {"content-type": "application/json"}
+  //     }
+  //     const { data } = await api.post('topic/create-topic', JSON.stringify(values.listName), options);
+  //     postItensToTopic(data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
-  const postItensToTopic = async (id: string) => {
-    arrayItens.forEach( async (item: NewRequestPurchase) => {
-      const formData = new FormData();
-      formData.append("file", item.file);
-      formData.append("description", item.description);
-      formData.append("name", item.itemName);
-      formData.append("price", item.value);
+  // const postItensToTopic = async (id: string) => {
+  //   arrayItens.forEach( async (item: NewRequestPurchase) => {
+  //     const formData = new FormData();
+  //     formData.append("file", item.file);
+  //     formData.append("description", item.description);
+  //     formData.append("name", item.itemName);
+  //     formData.append("price", item.value);
      
-      try {
-        const { data } = await api.post(`topic/create-item/${id}`, formData);
-      } catch (error) {
-        console.log(error);
-      }
-    });
-  }
+  //     try {
+  //       const { data } = await api.post(`topic/create-item/${id}`, formData);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   });
+  // }
 
   const formik  = useFormik({
     initialValues: {
@@ -76,7 +77,7 @@ const RequestPurchase = ({ auth, dispatch }: PurchaseDTO & DispatchProp) => {
       file: "",
     },
     onSubmit: (values) => {
-      handleCreateList(values);
+      handleCreateList(values, arrayItens);
     },
   });
   return (
