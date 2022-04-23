@@ -1,7 +1,9 @@
 import { useFormik } from "formik";
+import { useState } from "react";
 import { connect, DispatchProp } from "react-redux";
 import { Btn, Container, InputForm, CenterCustom } from "../../global.style";
 import { PurshaceDTO } from "../../models/UserDTO";
+import api from "../../service/api";
 import { RootState } from "../../store";
 import { Theme } from "../../theme";
 import {
@@ -13,7 +15,60 @@ import {
 
 //pagina de compra pro usuário tipo colaborador
 const RequestPurshace = ({ auth, dispatch }: PurshaceDTO & DispatchProp) => {
-  const formik = useFormik({
+
+  const [arrayItens, setArrayItens] = useState<any[]>([]);
+
+  const imgConverter = (event: React.ChangeEvent) => {
+    const target = event.target as HTMLInputElement;
+    const profileImage = target.files?.[0];
+    formik.setFieldValue("file", profileImage);
+  };
+
+  const addItenToList = () => {
+    console.log('teste');
+    const { itemName, description, value, file } = formik.values;
+    const newItem = {
+      itemName,
+      description,
+      value,
+      file,
+    };
+    setArrayItens([...arrayItens, newItem]);
+    // formik.resetForm({
+      //   values?: { listName: listName, },
+      // });
+  }
+
+  const handleCreateList = async (values: any) => {
+    console.log(values.listName);
+    try {
+      const options = {
+        headers: {"content-type": "application/json"}
+      }
+      const { data } = await api.post('topic/create-topic', JSON.stringify(values.listName), options);
+      postItensToTopic(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const postItensToTopic = async (id: string) => {
+    arrayItens.forEach( async (item: any) => {
+      const formData = new FormData();
+      formData.append("file", item.file);
+      formData.append("description", item.description);
+      formData.append("name", item.itemName);
+      formData.append("price", item.value);
+     
+      try {
+        const { data } = await api.post(`topic/create-item/${id}`, formData);
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  }
+
+  const formik  = useFormik({
     initialValues: {
       listName: "",
       itemName: "",
@@ -22,7 +77,7 @@ const RequestPurshace = ({ auth, dispatch }: PurshaceDTO & DispatchProp) => {
       file: "",
     },
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      handleCreateList(values);
     },
   });
   return (
@@ -82,11 +137,10 @@ const RequestPurshace = ({ auth, dispatch }: PurshaceDTO & DispatchProp) => {
               id="profileImage"
               name="profileImage"
               type="file"
-              accept="image/*"
-              onChange={formik.handleChange}
+              onChange={(event) => imgConverter(event)}
             />
             <CenterCustom>
-              <Btn width={"300px"} color={Theme.color.yellow} type="button">
+              <Btn width={"300px"} color={Theme.color.yellow} type="button" onClick={ () => addItenToList() } >
                 Adicionar
               </Btn>
               <Btn width={"300px"} color={Theme.color.grayDark} type="submit">
