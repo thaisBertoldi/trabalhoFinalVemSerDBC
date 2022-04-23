@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { connect, DispatchProp } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Container } from "../../global.style";
+import { CenterCustom, Container } from "../../global.style";
 import { isLoggedDTO } from "../../models/UserDTO";
 
 import api from "../../service/api";
@@ -42,8 +42,9 @@ const Home = ({ auth, dispatch }: isLoggedDTO & DispatchProp) => {
 
   return (
     <Container>
-      <h1>Seja bem-vindo(a), {User?.fullName}</h1>
-
+      <CenterCustom>
+        <h1>Seja bem-vindo(a), {User?.fullName}</h1>
+      </CenterCustom>
       <ContainerPrincipalCards>
         <Card>
           <ContainerTitles>

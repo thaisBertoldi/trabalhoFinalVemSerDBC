@@ -10,8 +10,7 @@ export const UserFormAdmin = styled.div`
     justify-content: center;
 `;
 
-export const AdminCenter = styled.div`
-    display: flex;
-    justify-content: center;
-    gap: 15px;
+export const DivNameUser = styled.div`
+  background-color: ${Theme.color.white};
+  padding-left: 15px;
 `;

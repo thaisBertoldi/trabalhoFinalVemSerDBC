@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import { connect, DispatchProp } from "react-redux";
-import { Btn, Container, InputForm } from "../../global.style";
+import { Btn, Container, InputForm, CenterCustom } from "../../global.style";
 import { PurshaceDTO } from "../../models/UserDTO";
 import { RootState } from "../../store";
 import { Theme } from "../../theme";
@@ -8,7 +8,6 @@ import {
   ContainerRequest,
   ContainerRequestForm,
   InputLabelDiv,
-  RequestCenter,
   TextAreaCustom,
 } from "./RequestPurshace.style";
 
@@ -28,64 +27,56 @@ const RequestPurshace = ({ auth, dispatch }: PurshaceDTO & DispatchProp) => {
   });
   return (
     <Container>
-      <RequestCenter>
+      <CenterCustom>
         <h3>Cadastrar compra</h3>
-      </RequestCenter>
+      </CenterCustom>
       <ContainerRequest>
         <form onSubmit={formik.handleSubmit}>
           <ContainerRequestForm>
-            <InputLabelDiv>
-              <label htmlFor="listName">Título da lista: </label>
-              <InputForm
-                width={"100%"}
-                height={"30px"}
-                id="listName"
-                name="listName"
-                type="text"
-                onChange={formik.handleChange}
-                value={formik.values.listName}
-              />
-            </InputLabelDiv>
-
-            <InputLabelDiv>
-              <label htmlFor="itemName">Nome do item: </label>
-              <InputForm
-                width={"100%"}
-                height={"30px"}
-                id="itemName"
-                name="itemName"
-                type="text"
-                onChange={formik.handleChange}
-                value={formik.values.itemName}
-              />
-            </InputLabelDiv>
-
-            <InputLabelDiv>
-              <label htmlFor="description">Descrição: </label>
-              <TextAreaCustom
-                placeholder="Something in here"
-                rows={10}
-                id="description"
-                name="description"
-                onChange={formik.handleChange}
-                value={formik.values.description}
-              ></TextAreaCustom>
-            </InputLabelDiv>
-
-            <InputLabelDiv>
-              <label htmlFor="value">Valor do item: </label>
-              <InputForm
-                width={"100%"}
-                height={"30px"}
-                id="value"
-                name="value"
-                type="text"
-                onChange={formik.handleChange}
-                value={formik.values.value}
-              />
-            </InputLabelDiv>
+            <InputForm
+              placeholder="Título da lista"
+              width={"100%"}
+              height={"30px"}
+              id="listName"
+              name="listName"
+              type="text"
+              onChange={formik.handleChange}
+              value={formik.values.listName}
+            />
 
             <InputForm
+              placeholder="Nome do item"
+              width={"100%"}
+              height={"30px"}
+              id="itemName"
+              name="itemName"
+              type="text"
+              onChange={formik.handleChange}
+              value={formik.values.itemName}
+            />
+
+            <TextAreaCustom
+              placeholder="Descrição"
+              rows={10}
+              id="description"
+              name="description"
+              onChange={formik.handleChange}
+              value={formik.values.description}
+            />
+
+            <InputForm
+              placeholder="Valor do item"
+              width={"100%"}
+              height={"30px"}
+              id="value"
+              name="value"
+              type="text"
+              onChange={formik.handleChange}
+              value={formik.values.value}
+            />
+
+            <InputForm
+              placeholder="Arquivo"
               width={"100%"}
               height={"30px"}
               id="profileImage"
@@ -94,14 +85,14 @@ const RequestPurshace = ({ auth, dispatch }: PurshaceDTO & DispatchProp) => {
               accept="image/*"
               onChange={formik.handleChange}
             />
-            <RequestCenter>
+            <CenterCustom>
               <Btn width={"300px"} color={Theme.color.yellow} type="button">
                 Adicionar
               </Btn>
               <Btn width={"300px"} color={Theme.color.grayDark} type="submit">
                 Finalizar
               </Btn>
-            </RequestCenter>
+            </CenterCustom>
           </ContainerRequestForm>
         </form>
       </ContainerRequest>

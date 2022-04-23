@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
-import { Container } from "../../global.style";
-import { AdminCenter, UserFormAdmin } from "./Administration.style";
+import { CenterCustom, Container } from "../../global.style";
+import { DivNameUser, UserFormAdmin } from "./Administration.style";
 
 const exemplo = {
   users: [
@@ -31,15 +31,17 @@ const Administration = () => {
   });
   return (
     <Container>
-      <AdminCenter>
+      <CenterCustom>
         <h3>Usuários Cadastrados: </h3>
-      </AdminCenter>
+      </CenterCustom>
       {exemplo.users.map((e: any) => {
         return (
           <>
             <form onSubmit={formik.handleSubmit}>
               <UserFormAdmin>
-                <p>{e.nome}</p>
+                <DivNameUser>
+                  <p>{e.nome}</p>
+                </DivNameUser>
                 <select name="select">
                   <option value="Colaborador" selected>
                     Colaborador

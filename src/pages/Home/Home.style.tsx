@@ -16,6 +16,7 @@ export const ContainerPrincipalCards = styled.div`
 
 export const Card = styled.div`
   width: 80%;
-  border: 1px solid ${Theme.color.primary};
   margin: ${Theme.margin};
+  background-color: ${Theme.color.white};
+  border-radius: 14px;
 `;
