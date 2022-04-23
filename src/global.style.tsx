@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { Theme } from "./theme";
 import image from "./images/background-div.jpg";
-import { Link } from "react-router-dom";
 
 export const Container = styled.div`
   min-height: 100%;
@@ -15,6 +14,11 @@ export const ContainerPrincipal = styled.div`
   justify-content: center;
   gap: 10%;
   height: 100vh;
+
+  @media (max-width: 1190px) {
+    display: flex;
+    justify-content: center;
+  }
 `;
 
 export const ContainerTitle = styled.div`
@@ -25,6 +29,10 @@ export const ContainerTitle = styled.div`
   align-items: center;
   justify-content: center;
   line-height: 5px;
+
+  @media (max-width: 1190px) {
+    display: none;
+  }
 `;
 
 export const Title = styled.h1<{ size: string; spacing: string }>`
