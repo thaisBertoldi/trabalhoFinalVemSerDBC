@@ -27,6 +27,16 @@ const RequestPurchase = ({ auth, dispatch }: PurchaseDTO & DispatchProp) => {
       value,
       file,
     };
+    formik.resetForm({
+      values: {
+        listName: formik.values.listName,
+        itemName: '',
+        description: '',
+        value: '',
+        file: "",
+      },
+
+    });
     setArrayItens([...arrayItens, newItem]);
   }
 
