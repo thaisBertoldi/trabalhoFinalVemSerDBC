@@ -9,6 +9,7 @@ import { useState } from "react";
 import Hamburguer from "./Hamburguer.component";
 import { MdMenu } from "react-icons/md";
 import ItensMenu from "./ItensMenu.component";
+import { DefaultImage } from "../../constants";
 
 const Menu = ({ auth, dispatch }: any) => {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ const Menu = ({ auth, dispatch }: any) => {
 
   const hasUser: string | any = localStorage.getItem("token");
   const User = JSON.parse(hasUser);
-  
+
   return (
     <UlNav>
       <MenuHamburguer>
@@ -34,7 +35,7 @@ const Menu = ({ auth, dispatch }: any) => {
         <ParagraphNameUser> {User?.fullName} </ParagraphNameUser>
         <figure onClick={() => setOpen(!open)}>
           <img 
-            src={ `data:image/jpeg;base64,${User?.profileImage}` ?? ImgDefault }
+            src={`data:image/jpeg;base64,${User?.profileImage ?? DefaultImage}`}
             alt="Foto do usuário"
           />
           <DivArrow>
