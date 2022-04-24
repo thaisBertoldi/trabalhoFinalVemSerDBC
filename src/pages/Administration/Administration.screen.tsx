@@ -15,6 +15,7 @@ import {
 } from "./Administration.style";
 import imgPerfil from "../../images/foto-perfil.png";
 import { getAllUsers, handleProfile } from "../../store/action/adminActions";
+import { StatusEnum } from "../../enums/StatusEnum";
 
 //tipá-los
 const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
@@ -69,7 +70,7 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
                   <strong>Usuário:</strong> {user.fullName}
                 </p>
                 <p>
-                  <strong>Perfil:</strong> {user.groups}
+                  <strong>Perfil:</strong> {StatusEnum[user.groups]}
                 </p>
               </DataUser>
               {
