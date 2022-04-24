@@ -1,20 +1,21 @@
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
-import { connect } from "react-redux";
+import { connect, DispatchProp } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import ModalCreateUserAdm from "../../components/ModalCreateUserAdm/ModalCreateUserAdm.component";
 import { CenterCustom, Container } from "../../global.style";
+import { isLoggedDTO, UsersAdmDTO } from "../../models/UserDTO";
 import api from "../../service/api";
 import { DivNameUser, UserFormAdmin } from "./Administration.style";
 
 //tipá-los
-const Administration = ({ auth, dispatch }: any) => {
+const Administration = ({ auth, dispatch }:  isLoggedDTO & DispatchProp) => {
   const navigate = useNavigate();
-  const [allUsers, setAllUsers] = useState([]);
+  const [allUsers, setAllUsers] = useState<Array<UsersAdmDTO>>([]);
   
   const [isAddUser, setIsAddUser] = useState(false);
 
-  const handleProfile = async (event: any, id: number, type: any) => {
+  const handleProfile = async (event: React.FormEvent, id: number, type: string) => {
     event.preventDefault();
     try {
       const { data } = await api.put(
@@ -58,7 +59,7 @@ const Administration = ({ auth, dispatch }: any) => {
       <button onClick={() => setIsAddUser(true)}>Cadastrar novo usuário</button>
       {isAddUser && <ModalCreateUserAdm onClick={() => setIsAddUser(false)} />}
       {
-      allUsers.map((user: any) => (
+      allUsers?.map((user: UsersAdmDTO) => (
             <form
               onSubmit={(event) =>
                 handleProfile(event, user.userId, formik.values.type)

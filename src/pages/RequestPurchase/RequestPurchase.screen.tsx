@@ -30,7 +30,7 @@ const RequestPurchase = ({ profile, auth, dispatch }: any & PurchaseDTO & Dispat
   const navigate = useNavigate();
   
   useEffect(() => {
-    redirectAdmin(navigate, profile);
+    redirectAdmin(navigate, profile.profile);
   }, [profile]);
 
   const addItenToList = () => {

@@ -56,7 +56,7 @@ const Home = ({ auth, dispatch }: isLoggedDTO & DispatchProp) => {
 
   useEffect(() => {
     redirectToLogin(navigate);
-    redirectAdmin(navigate, auth);
+    redirectAdmin(navigate, auth.profile);
     setup();
   }, [auth]);
 
