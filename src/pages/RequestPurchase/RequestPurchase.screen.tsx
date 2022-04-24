@@ -14,6 +14,7 @@ import { Theme } from "../../theme";
 import {
   ContainerRequest,
   ContainerRequestForm,
+  DivItens,
   TextAreaCustom,
 } from "./RequestPurchase.style";
 
@@ -43,6 +44,11 @@ const RequestPurchase = ({ auth, dispatch }: PurchaseDTO & DispatchProp) => {
     setArrayItens([...arrayItens, newItem]);
   };
 
+  const handleDeleteItem = (index: number) => {
+    const newArray = arrayItens.filter((item, i) => i !== index);
+    setArrayItens(newArray);
+  }
+
   const formik = useFormik({
     initialValues: {
       listName: "",
@@ -52,8 +58,7 @@ const RequestPurchase = ({ auth, dispatch }: PurchaseDTO & DispatchProp) => {
       file: "",
     },
     onSubmit: (values, actions) => {
-      // handleCreateList(values, arrayItens);
-      console.log(values, arrayItens);
+      handleCreateList(values, arrayItens);
       actions.resetForm({
         values: {
           listName: "",
@@ -76,7 +81,7 @@ const RequestPurchase = ({ auth, dispatch }: PurchaseDTO & DispatchProp) => {
             <InputForm
               placeholder="Título da lista"
               width={"100%"}
-              height={"30px"}
+              height={"40px"}
               id="listName"
               name="listName"
               type="text"
@@ -87,7 +92,7 @@ const RequestPurchase = ({ auth, dispatch }: PurchaseDTO & DispatchProp) => {
             <InputForm
               placeholder="Nome do item"
               width={"100%"}
-              height={"30px"}
+              height={"40px"}
               id="itemName"
               name="itemName"
               type="text"
@@ -107,7 +112,7 @@ const RequestPurchase = ({ auth, dispatch }: PurchaseDTO & DispatchProp) => {
             <InputForm
               placeholder="Valor do item"
               width={"100%"}
-              height={"30px"}
+              height={"40px"}
               id="value"
               name="value"
               type="text"
@@ -118,7 +123,7 @@ const RequestPurchase = ({ auth, dispatch }: PurchaseDTO & DispatchProp) => {
             <InputForm
               placeholder="Arquivo"
               width={"100%"}
-              height={"30px"}
+              height={"40px"}
               id="profileImage"
               name="profileImage"
               type="file"
@@ -126,6 +131,7 @@ const RequestPurchase = ({ auth, dispatch }: PurchaseDTO & DispatchProp) => {
                 imgConverter(event, formik.setFieldValue, "file")
               }
             />
+            
             <CenterCustom>
               <BtnForm
                 width={"300px"}
@@ -145,7 +151,16 @@ const RequestPurchase = ({ auth, dispatch }: PurchaseDTO & DispatchProp) => {
             </CenterCustom>
           </ContainerRequestForm>
         </form>
-        <h1>a</h1>
+        {
+          arrayItens.map( (item, index) => (
+            <DivItens>
+              <p>Nome: {item.itemName}</p>
+              <p>Descrição: {item.description}</p>
+              <p>Valor: R$ { item.value.replace('.', ',')}</p>
+              <button onClick={ () => handleDeleteItem(index) }> Deltar Item </button>
+            </DivItens>
+          ))  
+        }
       </ContainerRequest>
     </Container>
   );

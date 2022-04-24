@@ -2,9 +2,9 @@ import styled from "styled-components";
 import { Theme } from "./theme";
 import image from "./images/background-div.jpg";
 
-export const Container = styled.div`
-  min-height: 100%;
-  height: 65.8vh;
+export const Container = styled.div`  
+  width: 100%;
+
 `;
 
 export const ContainerPrincipal = styled.div`
@@ -97,6 +97,7 @@ export const InputForm = styled.input`
   border: 1px ${Theme.color.primary} solid;
 
   padding: 0 10px;
+  box-sizing: border-box;
 
   :focus {
     outline: none;
