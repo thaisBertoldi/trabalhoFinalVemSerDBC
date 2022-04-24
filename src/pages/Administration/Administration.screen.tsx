@@ -2,50 +2,53 @@ import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import ModalCreateUserAdm from "../../components/ModalCreateUserAdm/ModalCreateUserAdm.component";
 import { CenterCustom, Container } from "../../global.style";
 import api from "../../service/api";
 import { DivNameUser, UserFormAdmin } from "./Administration.style";
 
 //tipá-los
-const Administration = ({auth, dispatch}: any) => {
-
+const Administration = ({ auth, dispatch }: any) => {
   const navigate = useNavigate();
-  const [allUsers, setAllUsers] = useState([])
-  
+  const [allUsers, setAllUsers] = useState([]);
+  const [isChangeType, setIsChangeType] = useState(false);
+  const [isAddUser, setIsAddUser] = useState(false)
+
   const handleProfile = async (event: any, id: number, type: any) => {
-    event.preventDefault()
+    event.preventDefault();
     try {
-      const { data } = await api.put(`/admin/adm-set-group-user?groups=${type}&idUser=${id}`);
+      const { data } = await api.put(
+        `/admin/adm-set-group-user?groups=${type}&idUser=${id}`
+      );
+      getAllUsers();
     } catch (error) {
       console.log(error);
     }
     formik.resetForm();
-  }
+  };
 
   const getAllUsers = async () => {
     try {
       const { data } = await api.get("/admin/adm-get-all-users?page=0");
-      setAllUsers(data.content)
-      console.log(data.content)
+      setAllUsers(data.content);
+      console.log(data.content);
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
-  useEffect( () => {
-    if(auth?.profile !== "ADMINISTRATOR") {
-      navigate('/')
+  useEffect(() => {
+    if (auth?.profile !== "ADMINISTRATOR") {
+      navigate("/");
     }
-    getAllUsers()
-  },[] )
+    getAllUsers();
+  }, []);
 
   const formik = useFormik({
     initialValues: {
       type: "COLLABORATOR",
     },
     onSubmit: (values) => {
-      // handleProfile(values);
-      console.log('onsubmit do formik')
     },
   });
   return (
@@ -53,27 +56,39 @@ const Administration = ({auth, dispatch}: any) => {
       <CenterCustom>
         <h3>Usuários Cadastrados: </h3>
       </CenterCustom>
-      {allUsers.map((e: any) => {
+      <button onClick={() => setIsAddUser(true)}>Cadastrar novo usuário</button>
+      {isAddUser && <ModalCreateUserAdm onClick={() => setIsAddUser(false)}/>}
+      {allUsers.map((user: any) => {
         return (
           <>
-            <form onSubmit={(event) => handleProfile(event, e.userId, formik.values.type)} key={e.userId}>
+            <form
+              onSubmit={(event) =>
+                handleProfile(event, user.userId, formik.values.type)
+              }
+              key={user.userId}
+            >
               <UserFormAdmin>
                 <DivNameUser>
-                  <p>{e.fullName}</p>
+                  <p>{user.fullName}</p>
+                  <p>{user.groups}</p>
                 </DivNameUser>
-                <select
-                  name="type"
-                  onChange={formik.handleChange}
-                >
-                  <option value="COLLABORATOR">
-                  Colaborador
-                  </option>
-                  <option value="ADMINISTRATOR">Administrador</option>
-                  <option value="BUYER">Comprador</option>
-                  <option value="MANEGER">Gestor</option>
-                  <option value="FINANCIER">Financeiro</option>
-                </select>
-                <button type="submit">Submit</button>
+                {!isChangeType && (
+                  <button type="button" onClick={() => setIsChangeType(true)}>
+                    Alterar tipo do usuário
+                  </button>
+                )}
+                {isChangeType && (
+                  <>
+                    <select name="type" onChange={formik.handleChange}>
+                      <option value="COLLABORATOR">Colaborador</option>
+                      <option value="ADMINISTRATOR">Administrador</option>
+                      <option value="BUYER">Comprador</option>
+                      <option value="MANEGER">Gestor</option>
+                      <option value="FINANCIER">Financeiro</option>
+                    </select>
+                    <button type="submit" onClick={() => setIsChangeType(false)}>Submit</button>
+                  </>
+                )}
               </UserFormAdmin>
             </form>
           </>

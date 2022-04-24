@@ -29,7 +29,7 @@ const Routers = ({auth, dispatch}: isLoggedDTO & DispatchProp) => {
           <Route path='/request-purchase' element={<RequestPurchase />} />
           <Route path='/administration' element={<Administration />} />
         </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </BrowserRouter>
   );
 };
