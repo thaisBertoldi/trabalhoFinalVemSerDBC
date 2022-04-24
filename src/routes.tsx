@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { connect, DispatchProp } from 'react-redux';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import { setLogin } from "./store/action/authActions";
 
@@ -23,7 +23,7 @@ const Routers = ({user, dispatch}: isLoggedDTO & DispatchProp) => {
     <BrowserRouter>
       <Header />
         <Routes>
-          <Route path='/' element={ <Home /> } />
+          <Route path='/' element={<Home />} />
           <Route path='/login' element={ <Login /> }/>
           <Route path='/register' element={ <Register /> }/>
           <Route path='/request-purchase' element={<RequestPurchase />} />

@@ -38,7 +38,10 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   const User = JSON.parse(hasUser);
 
   const [list, setList] = useState<any>([]);
-  const [OpenModalAddCotation, setOpenModalAddCotation] = useState<boolean>(false);
+  const [OpenModalAddCotation, setOpenModalAddCotation] = useState<any>({
+    open: false,
+    id: null
+  });
   const [OpenModalCotation, setOpenModalCotation] = useState<boolean>(false);
   const [showItensTopic, setShowItensTopic] = useState<boolean>(false);
 
@@ -74,7 +77,7 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
             <DivButtonsCard>
               <ButtonCard onClick={ () => setShowItensTopic(!showItensTopic)}> Visualizar Itens do tópico </ButtonCard>
               <ButtonCard onClick={ () => setOpenModalCotation(!OpenModalCotation) } > Visualizar cotações </ButtonCard>
-              <ButtonCard onClick={ () => setOpenModalAddCotation(!OpenModalAddCotation) }> Adicinar cotação </ButtonCard>
+              <ButtonCard onClick={ () => setOpenModalAddCotation({open: true, id: item.topicId}) }> Adicinar cotação </ButtonCard>
             </DivButtonsCard>
             {/* {
               showItensTopic && (
@@ -92,7 +95,7 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
         ))
       }
       
-      { OpenModalAddCotation && ( <ModalBuyer onClick={ () => setOpenModalAddCotation(!OpenModalAddCotation) } /> ) }
+      { OpenModalAddCotation.open && ( <ModalBuyer id={OpenModalAddCotation.id} onClick={ () => setOpenModalAddCotation({open: false}) }/> ) }
       { OpenModalCotation && ( <ModalCotation onClick={ () => setOpenModalCotation(!OpenModalCotation) } /> ) }
     </Container>
   );

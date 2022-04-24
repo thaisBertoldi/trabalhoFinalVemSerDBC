@@ -6,19 +6,34 @@ import { ContainerModal, Modal, BtnClose } from './ModalBuyer.style';
 import { InputForm, Btn } from '../../global.style';
 import { Theme } from "../../theme";
 import { maskMoney } from '../../utils/utils';
+import api from '../../service/api';
 
-const ModalBuyer = ({onClick}: any) => {
+const ModalBuyer = ({onClick, id}: any) => {
+
+  const handleAddCotation = async (values: any) => {
+    console.log(id);
+    const finalValue = values.replace('R$ ', '').replace('.', '').replace(',', '.');
+    const obj =  {
+      id: id,
+      value: finalValue
+    }
+    try {
+      const {data} = await api.post('/quotation/create', obj);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const formik = useFormik({
     initialValues: {
       value: "",
-      
     },
     validationSchema: Yup.object({
       value: Yup.string()
     }),
     onSubmit: (values) => {
-      
+      handleAddCotation(values.value);
     },
   });
 
