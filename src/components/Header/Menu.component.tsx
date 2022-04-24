@@ -34,7 +34,7 @@ const Menu = ({ auth, dispatch }: any) => {
         <ParagraphNameUser> {User?.fullName} </ParagraphNameUser>
         <figure onClick={() => setOpen(!open)}>
           <img 
-            src={User?.profileImage !== null || '' ? `data:image/jpeg;base64,${User?.profileImage}` : ImgDefault}
+            src={ `data:image/jpeg;base64,${User?.profileImage}` ?? ImgDefault }
             alt="Foto do usuário"
           />
           <DivArrow>

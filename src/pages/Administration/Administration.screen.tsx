@@ -44,8 +44,7 @@ const Administration = ({auth, dispatch}: any) => {
       type: "COLLABORATOR",
     },
     onSubmit: (values) => {
-      // handleProfile(values);
-      console.log('onsubmit do formik')
+
     },
   });
   return (
@@ -53,10 +52,9 @@ const Administration = ({auth, dispatch}: any) => {
       <CenterCustom>
         <h3>Usuários Cadastrados: </h3>
       </CenterCustom>
-      {allUsers.map((e: any) => {
-        return (
-          <>
-            <form onSubmit={(event) => handleProfile(event, e.userId, formik.values.type)} key={e.userId}>
+      {
+        allUsers.map((e: any) => (
+          <form onSubmit={(event) => handleProfile(event, e.userId, formik.values.type)} key={e.userId}>
               <UserFormAdmin>
                 <DivNameUser>
                   <p>{e.fullName}</p>
@@ -76,9 +74,8 @@ const Administration = ({auth, dispatch}: any) => {
                 <button type="submit">Submit</button>
               </UserFormAdmin>
             </form>
-          </>
-        );
-      })}
+        ))
+      }
     </Container>
   );
 };
