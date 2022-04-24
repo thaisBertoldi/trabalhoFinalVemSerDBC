@@ -3,18 +3,30 @@ import { useEffect, useState } from "react";
 import { connect, DispatchProp } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import ModalCreateUserAdm from "../../components/ModalCreateUserAdm/ModalCreateUserAdm.component";
-import { CenterCustom, Container } from "../../global.style";
+import { Btn, CenterCustom, Container } from "../../global.style";
 import { isLoggedDTO, UsersAdmDTO } from "../../models/UserDTO";
 import api from "../../service/api";
-import { DivNameUser, UserFormAdmin } from "./Administration.style";
+import { RootState } from "../../store";
+import {
+  CardUSerAdmin,
+  ContainerAdmin,
+  DataUser,
+  DivImage,
+  ImageUser,
+} from "./Administration.style";
+import imgPerfil from "../../images/foto-perfil.png";
 
 //tipá-los
-const Administration = ({ user, dispatch }:  isLoggedDTO & DispatchProp) => {
+const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   const navigate = useNavigate();
   const [allUsers, setAllUsers] = useState<Array<UsersAdmDTO>>([]);
   const [isAddUser, setIsAddUser] = useState(false);
 
-  const handleProfile = async (event: React.FormEvent, id: number, type: string) => {
+  const handleProfile = async (
+    event: React.FormEvent,
+    id: number,
+    type: string
+  ) => {
     event.preventDefault();
     try {
       const { data } = await api.put(
@@ -53,50 +65,67 @@ const Administration = ({ user, dispatch }:  isLoggedDTO & DispatchProp) => {
   return (
     <Container>
       <CenterCustom>
+        <Btn width={"300px"} onClick={() => setIsAddUser(true)}>
+          Cadastrar novo usuário
+        </Btn>
+      </CenterCustom>
+      <CenterCustom>
         <h3>Usuários Cadastrados: </h3>
       </CenterCustom>
-      <button onClick={() => setIsAddUser(true)}>Cadastrar novo usuário</button>
 
-      {
-      allUsers?.map((user: UsersAdmDTO) => (
-            <form
-              onSubmit={(event) =>
-                handleProfile(event, user.userId, formik.values.type)
+      <ContainerAdmin>
+        {allUsers?.map((user: UsersAdmDTO) => (
+          <form
+            onSubmit={(event) =>
+              handleProfile(event, user.userId, formik.values.type)
+            }
+            key={user.userId}
+          >
+            <CardUSerAdmin>
+              <DataUser>
+                <DivImage>
+                <ImageUser
+                  src={
+                    user?.image !== null || '' ? `data:image/jpeg;base64,${user?.image}` : imgPerfil
+                  }
+                  alt="imagem de perfil"
+                />
+                </DivImage>
+
+                <p>
+                  <strong>Usuário:</strong> {user.fullName}
+                </p>
+                <p>
+                  <strong>Perfil:</strong> {user.groups}
+                </p>
+              </DataUser>
+              {
+                <>
+                  <select name="type" onChange={formik.handleChange}>
+                    <option value="COLLABORATOR">Colaborador</option>
+                    <option value="ADMINISTRATOR">Administrador</option>
+                    <option value="BUYER">Comprador</option>
+                    <option value="MANEGER">Gestor</option>
+                    <option value="FINANCIER">Financeiro</option>
+                  </select>
+                  <Btn width={"200px"} type="submit">
+                    Alterar Usuário
+                  </Btn>
+                </>
               }
-              key={user.userId}
-            >
-              <UserFormAdmin>
-                <DivNameUser>
-                  <p>Usuário: {user.fullName}</p>
-                  <p>Tipo: {user.groups}</p>
-                </DivNameUser>
-                {
-                  <>
-                    <select name="type" onChange={formik.handleChange}>
-                      <option value="COLLABORATOR">Colaborador</option>
-                      <option value="ADMINISTRATOR">Administrador</option>
-                      <option value="BUYER">Comprador</option>
-                      <option value="MANEGER">Gestor</option>
-                      <option value="FINANCIER">Financeiro</option>
-                    </select>
-                    <button
-                      type="submit"
-                    >
-                      Alterar Usuário
-                    </button>
-                  </>
-                }
-              </UserFormAdmin>
-            </form>
-        ))
-      }
+            </CardUSerAdmin>
+          </form>
+        ))}
 
-    {isAddUser && <ModalCreateUserAdm onClick={() => setIsAddUser(false)} />}
+        {isAddUser && (
+          <ModalCreateUserAdm onClick={() => setIsAddUser(false)} />
+        )}
+      </ContainerAdmin>
     </Container>
   );
 };
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState) => ({
   user: state.authReducer,
 });
 
