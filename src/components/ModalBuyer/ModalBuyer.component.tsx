@@ -27,7 +27,7 @@ const ModalBuyer = ({onClick}: any) => {
         <BtnClose onClick={onClick}> <AiFillCloseCircle /> </BtnClose>
         <form onSubmit={formik.handleSubmit}>
           <InputForm
-            width={'50%'}
+            width={'100%'}
             height={'40px'}
             id="value"
             name="value"
@@ -36,7 +36,7 @@ const ModalBuyer = ({onClick}: any) => {
             onChange={formik.handleChange}
             value={formik.values.value}
           />
-          <Btn width='50.9%' color={Theme.color.primary}> Adicionar cotação </Btn>
+          <Btn width='100%' color={Theme.color.primary}> Adicionar cotação </Btn>
         </form>
       </Modal>
     </ContainerModal>
