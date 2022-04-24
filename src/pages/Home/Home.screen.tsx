@@ -57,7 +57,7 @@ const Home = ({ auth, dispatch }: isLoggedDTO & DispatchProp) => {
 
   const setup = async () => {
     try {
-      const { data } = await api.get("user/get-hello");
+      const { data } = await api.get("/main-page/topics/0");
       console.log(data);
     } catch (error) {
       console.log(error);

@@ -1,8 +1,13 @@
 import { useFormik } from "formik";
 import { useState } from "react";
 import { connect, DispatchProp } from "react-redux";
-import { BtnForm, Container, InputForm, CenterCustom } from "../../global.style";
-import { NewRequestPurchase,PurchaseDTO  } from "../../models/PurchaseDTO";
+import {
+  BtnForm,
+  Container,
+  InputForm,
+  CenterCustom,
+} from "../../global.style";
+import { NewRequestPurchase, PurchaseDTO } from "../../models/PurchaseDTO";
 import { RootState } from "../../store";
 import { handleCreateList } from "../../store/action/purchaseAction";
 import { Theme } from "../../theme";
@@ -15,11 +20,10 @@ import {
 import { imgConverter } from "../../utils/utils";
 //pagina de compra pro usuário tipo colaborador
 const RequestPurchase = ({ auth, dispatch }: PurchaseDTO & DispatchProp) => {
-
   const [arrayItens, setArrayItens] = useState<NewRequestPurchase[]>([]);
 
   const addItenToList = () => {
-    console.log('teste');
+    console.log("teste");
     const { itemName, description, value, file } = formik.values;
     const newItem = {
       itemName,
@@ -30,17 +34,16 @@ const RequestPurchase = ({ auth, dispatch }: PurchaseDTO & DispatchProp) => {
     formik.resetForm({
       values: {
         listName: formik.values.listName,
-        itemName: '',
-        description: '',
-        value: '',
+        itemName: "",
+        description: "",
+        value: "",
         file: "",
       },
-
     });
     setArrayItens([...arrayItens, newItem]);
-  }
+  };
 
-  const formik  = useFormik({
+  const formik = useFormik({
     initialValues: {
       listName: "",
       itemName: "",
@@ -50,16 +53,15 @@ const RequestPurchase = ({ auth, dispatch }: PurchaseDTO & DispatchProp) => {
     },
     onSubmit: (values, actions) => {
       // handleCreateList(values, arrayItens);
-      console.log(values, arrayItens)
+      console.log(values, arrayItens);
       actions.resetForm({
         values: {
-          listName: formik.values.listName,
-          itemName: '',
-          description: '',
-          value: '',
+          listName: "",
+          itemName: "",
+          description: "",
+          value: "",
           file: "",
         },
-
       });
     },
   });
@@ -120,13 +122,24 @@ const RequestPurchase = ({ auth, dispatch }: PurchaseDTO & DispatchProp) => {
               id="profileImage"
               name="profileImage"
               type="file"
-              onChange={(event) => imgConverter(event, formik.setFieldValue, 'file')}
+              onChange={(event) =>
+                imgConverter(event, formik.setFieldValue, "file")
+              }
             />
             <CenterCustom>
-              <BtnForm width={"300px"} color={Theme.color.yellow} type="button" onClick={ () => addItenToList() } >
+              <BtnForm
+                width={"300px"}
+                color={Theme.color.yellow}
+                type="button"
+                onClick={() => addItenToList()}
+              >
                 Adicionar
               </BtnForm>
-              <BtnForm width={"300px"} color={Theme.color.grayDark} type="submit">
+              <BtnForm
+                width={"300px"}
+                color={Theme.color.grayDark}
+                type="submit"
+              >
                 Finalizar
               </BtnForm>
             </CenterCustom>
