@@ -26,5 +26,6 @@ export interface UsersAdmDTO {
   userId: number;
   fullName: string;
   groups: string;
-  email: string
+  email: string;
+  image?: string;
 }

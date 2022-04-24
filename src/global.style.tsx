@@ -159,4 +159,5 @@ export const CenterCustom = styled.div`
   justify-content: center;
   gap: 15px;
   color: ${Theme.color.black};
+  margin-top: ${Theme.margin};
 `;
