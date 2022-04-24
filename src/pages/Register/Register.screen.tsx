@@ -17,6 +17,7 @@ import {
   ContainerPrincipal,
 } from "../../global.style";
 import { DivEye, DivInputsLogin, DivLogo } from "../Login/Login.style";
+import { DivLabelFile } from './Register.style';
 
 import { isLoggedDTO, RegisterDTO } from "../../models/UserDTO";
 import { handleRegister } from "../../store/action/authActions";
@@ -174,15 +175,18 @@ const Register = ({ auth, dispatch }: isLoggedDTO & DispatchProp) => {
               <DivErrorYup>As senhas estão diferentes.</DivErrorYup>
             ) : null}
 
-            <Input
-              width="99%"
-              height="40px"
-              id="profileImage"
-              name="profileImage"
-              type="file"
-              accept="image/*"
-              onChange={(event) => imgConverter(event, formik.setFieldValue, 'profileImage')}
-            />
+            <DivLabelFile>
+              <label htmlFor="profileImage">ENVIO DE ARQUIVO</label>
+              <Input
+                width="99%"
+                height="40px"
+                id="profileImage"
+                name="profileImage"
+                type="file"
+                accept="image/*"
+                onChange={(event) => imgConverter(event, formik.setFieldValue, 'profileImage')}
+              />
+            </DivLabelFile>
 
             <Btn width="100%" type="submit" color={Theme.color.primary}>
               Submit

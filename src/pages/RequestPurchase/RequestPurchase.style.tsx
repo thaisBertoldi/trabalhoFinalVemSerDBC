@@ -3,22 +3,40 @@ import { Theme } from "../../theme";
 
 export const ContainerRequest = styled.div`
   width: 100%;
-  height: 436px;
   
   margin-top: 30px;
 `;
 
 export const ContainerRequestForm = styled.div`
-  width: 80%;
+  width: 60%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 15px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 
   input[type="file"] {
-    padding: 0.375rem 0.75rem;
-    font-size: 1rem;
+    display: none;
   }
+
+  label {
+    padding: 20px 10px;
+    width: 200px;
+    background: #333;
+    color:#FFF;
+    text-transform: uppercase;
+    display: block;
+    margin-top: 10OPX;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    cursor: pointer;
+    transition: .5s;
+    border: 1px solid #333;
+  }
+
 `;
 
 export const InputLabelDiv = styled.div`
@@ -37,13 +55,22 @@ export const TextAreaCustom = styled.textarea`
 `;
 
 export const DivItens = styled.div`
-  width: 80%;
+  width: 60%;
 
   display: flex;
   justify-content: space-between;
   
+  background-color: #fff;
+  border-radius: 5px;
   padding: 0 20px;
   margin: 0 auto;
   margin-top: 20px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+
+  button {
+    outline: none;
+    border: none;
+    background: transparent;
+    font-size: 25px;
+  }
 `;

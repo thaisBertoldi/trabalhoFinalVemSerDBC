@@ -11,7 +11,7 @@ import { DivNameUser, UserFormAdmin } from "./Administration.style";
 const Administration = ({ auth, dispatch }: any) => {
   const navigate = useNavigate();
   const [allUsers, setAllUsers] = useState([]);
-  const [isChangeType, setIsChangeType] = useState(false);
+  
   const [isAddUser, setIsAddUser] = useState(false);
 
   const handleProfile = async (event: any, id: number, type: any) => {
@@ -57,9 +57,8 @@ const Administration = ({ auth, dispatch }: any) => {
       </CenterCustom>
       <button onClick={() => setIsAddUser(true)}>Cadastrar novo usuário</button>
       {isAddUser && <ModalCreateUserAdm onClick={() => setIsAddUser(false)} />}
-      {allUsers.map((user: any) => {
-        return (
-          <>
+      {
+      allUsers.map((user: any) => (
             <form
               onSubmit={(event) =>
                 handleProfile(event, user.userId, formik.values.type)
@@ -68,15 +67,10 @@ const Administration = ({ auth, dispatch }: any) => {
             >
               <UserFormAdmin>
                 <DivNameUser>
-                  <p>{user.fullName}</p>
-                  <p>{user.groups}</p>
+                  <p>Usuário: {user.fullName}</p>
+                  <p>Tipo: {user.groups}</p>
                 </DivNameUser>
-                {!isChangeType && (
-                  <button type="button" onClick={() => setIsChangeType(true)}>
-                    Alterar tipo do usuário
-                  </button>
-                )}
-                {isChangeType && (
+                {
                   <>
                     <select name="type" onChange={formik.handleChange}>
                       <option value="COLLABORATOR">Colaborador</option>
@@ -87,17 +81,15 @@ const Administration = ({ auth, dispatch }: any) => {
                     </select>
                     <button
                       type="submit"
-                      onClick={() => setIsChangeType(false)}
                     >
-                      Submit
+                      Alterar Usuário
                     </button>
                   </>
-                )}
+                }
               </UserFormAdmin>
             </form>
-          </>
-        );
-      })}
+        ))
+      }
     </Container>
   );
 };

@@ -5,6 +5,7 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import { ContainerModal, Modal, BtnClose } from './ModalBuyer.style';
 import { InputForm, Btn } from '../../global.style';
 import { Theme } from "../../theme";
+import { maskMoney } from '../../utils/utils';
 
 const ModalBuyer = ({onClick}: any) => {
 
@@ -33,7 +34,7 @@ const ModalBuyer = ({onClick}: any) => {
             name="value"
             type="text"
             placeholder='Digite o valor'
-            onChange={formik.handleChange}
+            onChange={ (e) => maskMoney(e, formik.setFieldValue, "value") }
             value={formik.values.value}
           />
           <Btn width='100%' color={Theme.color.primary}> Adicionar cotação </Btn>

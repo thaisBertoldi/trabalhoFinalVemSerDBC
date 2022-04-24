@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 const ItensMenu = ({auth}: any) => {
   return (
     <>
-      <Link to={"/"}>Home</Link>
+      { auth?.profile !== 'ADMINISTRATOR' && ( <Link to={"/"}>Home</Link> )} 
       { auth?.profile === 'ADMINISTRATOR' && ( <Link to={"/administration"}>Administrador</Link> ) } 
-      <Link to={"/request-purchase"}>Solicitar compra</Link>
+      { auth?.profile !== 'ADMINISTRATOR' && ( <Link to={"/request-purchase"}>Solicitar compra</Link> )}
     </>
   );
 }

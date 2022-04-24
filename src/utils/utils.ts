@@ -1,3 +1,5 @@
+import { isLoggedDTO } from "../models/UserDTO";
+
 export const hasLogin = (navigate: Function) => {
   const hasToken:string | any = localStorage.getItem('token');
   const User = JSON.parse(hasToken);
@@ -13,6 +15,20 @@ export const redirectToLogin = (navigate: Function) => {
     navigate('/login');
   }
 }
+
+export const redirectAdmin = (navigate: Function, auth: isLoggedDTO["auth"]) => {
+  if(auth?.profile === 'ADMINISTRATOR' ) {
+    navigate('/administration')
+  }
+}
+
+export const maskMoney = (e: React.ChangeEvent<HTMLInputElement>, formik: Function, value: string) => {
+  let money = e.target.value;
+  money = money.replace(/\D/g, "");
+  money = money.replace(/(\d)(\d{2})$/, "$1,$2");
+  money = money.replace(/(?=(\d{3})+(\D))\B/g, ".");
+  formik(value, `R$ ${money}`);
+};
 
 export const imgConverter = (event: React.ChangeEvent, formik: Function, value: string) => {
   const target = event.target as HTMLInputElement;

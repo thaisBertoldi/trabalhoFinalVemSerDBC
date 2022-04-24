@@ -7,8 +7,8 @@ import moment from "moment";
 
 import api from "../../service/api";
 import { RootState } from "../../store";
-import { redirectToLogin } from "../../utils/utils";
-import { ContainerCard, TitleCard, ButtonCard, DivButtonsCard } from "./Home.style";
+import { redirectAdmin, redirectToLogin } from "../../utils/utils";
+import { ContainerCard, TitleCard, ButtonCard, DivButtonsCard, CardItem } from "./Home.style";
 
 import { ModalBuyer, ModalCotation } from "../../components"
 import { StatusEnum } from "../../enums/StatusEnum";
@@ -18,7 +18,21 @@ import { StatusEnum } from "../../enums/StatusEnum";
 //lista geral com botao de aprovar ou reprovar pro financeiro se o gestor tiver aprovado
 //lista geral pro comprador com modal pra solicitar cotacao
 
+const exemplo = [
+  {
+    nome: 'TV',
+    valor: 'R$ 1.000,00',
+    data: '01/01/2020',
+  },
+  {
+    nome: 'TV',
+    valor: 'R$ 1.000,00',
+    data: '01/01/2020',
+  }
+]
+
 const Home = ({ auth, dispatch }: isLoggedDTO & DispatchProp) => {
+
   const navigate = useNavigate();
   const hasUser: string | any = localStorage.getItem("token");
   const User = JSON.parse(hasUser);
@@ -27,10 +41,6 @@ const Home = ({ auth, dispatch }: isLoggedDTO & DispatchProp) => {
   const [OpenModalAddCotation, setOpenModalAddCotation] = useState<boolean>(false);
   const [OpenModalCotation, setOpenModalCotation] = useState<boolean>(false);
   const [showItensTopic, setShowItensTopic] = useState<boolean>(false);
-
-  useEffect(() => {
-    redirectToLogin(navigate);
-  }, []);
 
   const setup = async () => {
     try {
@@ -42,8 +52,10 @@ const Home = ({ auth, dispatch }: isLoggedDTO & DispatchProp) => {
   };
 
   useEffect(() => {
+    redirectToLogin(navigate);
+    redirectAdmin(navigate, auth);
     setup();
-  }, []);
+  }, [auth]);
 
   return (
     <Container>
@@ -52,31 +64,31 @@ const Home = ({ auth, dispatch }: isLoggedDTO & DispatchProp) => {
       </CenterCustom>
       {
         list?.content?.map((item: any) => (
-        <ContainerCard key={item.topicId}>
-          <TitleCard>
-            <p>Título: {item.title}</p>
-            <p>Data: {moment(item.date).format("DD/MM/YYYY")}</p>
-            <p>Valor total: R$ {item.totalValue}</p>
-            <p>Status: { StatusEnum[item.status]}</p>
-          </TitleCard>
-          <DivButtonsCard>
-            <ButtonCard onClick={ () => setShowItensTopic(!showItensTopic)}> Visualizar Itens do tópico </ButtonCard>
-            <ButtonCard onClick={ () => setOpenModalCotation(!OpenModalCotation) } > Visualizar cotações </ButtonCard>
-            <ButtonCard onClick={ () => setOpenModalAddCotation(!OpenModalAddCotation) }> Adicinar cotação </ButtonCard>
-          </DivButtonsCard>
-          {/* {
-            showItensTopic && (
-              exemplo.Itens.map((item, index) => (
-                <CardItem key={index}>
-                  <img src={Image} alt="imagem do iten" />
-                  <p>{item.nome}</p>
-                  <p>{item.data}</p>
-                  <p>{item.valor}</p>
-                </CardItem>
-              ))
-            )
-          } */}
-        </ContainerCard>
+          <ContainerCard key={item.topicId}>
+            <TitleCard>
+              <p>Título: {item.title}</p>
+              <p>Data: {moment(item.date).format("DD/MM/YYYY")}</p>
+              <p>Valor total: R$ {item.totalValue}</p>
+              <p>Status: { StatusEnum[item.status]}</p>
+            </TitleCard>
+            <DivButtonsCard>
+              <ButtonCard onClick={ () => setShowItensTopic(!showItensTopic)}> Visualizar Itens do tópico </ButtonCard>
+              <ButtonCard onClick={ () => setOpenModalCotation(!OpenModalCotation) } > Visualizar cotações </ButtonCard>
+              <ButtonCard onClick={ () => setOpenModalAddCotation(!OpenModalAddCotation) }> Adicinar cotação </ButtonCard>
+            </DivButtonsCard>
+            {/* {
+              showItensTopic && (
+                exemplo.map((item, index) => (
+                  <CardItem key={index}>
+                    <img src={Image} alt="imagem do iten" />
+                    <p>{item.nome}</p>
+                    <p>{item.data}</p>
+                    <p>{item.valor}</p>
+                  </CardItem>
+                ))
+              )
+            } */}
+          </ContainerCard>
         ))
       }
       
