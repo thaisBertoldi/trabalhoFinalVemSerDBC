@@ -15,8 +15,7 @@ const Administration = ({auth, dispatch}: any) => {
   const handleProfile = async (event: any, id: number, type: any) => {
     event.preventDefault()
     try {
-      const { data } = await api.get(`/admin/adm-set-group-user?groups=${type}&idUser=${id}`);
-      console.log(data)
+      const { data } = await api.put(`/admin/adm-set-group-user?groups=${type}&idUser=${id}`);
     } catch (error) {
       console.log(error);
     }
@@ -42,7 +41,7 @@ const Administration = ({auth, dispatch}: any) => {
 
   const formik = useFormik({
     initialValues: {
-      type: "Colaborador",
+      type: "COLLABORATOR",
     },
     onSubmit: (values) => {
       // handleProfile(values);
@@ -67,7 +66,7 @@ const Administration = ({auth, dispatch}: any) => {
                   onChange={formik.handleChange}
                 >
                   <option value="COLLABORATOR">
-                    Colaborador
+                  Colaborador
                   </option>
                   <option value="ADMINISTRATOR">Administrador</option>
                   <option value="BUYER">Comprador</option>
