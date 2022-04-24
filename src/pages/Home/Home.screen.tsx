@@ -5,13 +5,13 @@ import { CenterCustom, Container } from "../../global.style";
 import { isLoggedDTO } from "../../models/UserDTO";
 import moment from "moment";
 
-import api from "../../service/api";
 import { RootState } from "../../store";
 import { redirectAdmin, redirectToLogin } from "../../utils/utils";
 import { ContainerCard, TitleCard, ButtonCard, DivButtonsCard, CardItem } from "./Home.style";
 
 import { ModalBuyer, ModalCotation } from "../../components"
 import { StatusEnum } from "../../enums/StatusEnum";
+import { getTopics } from "../../store/action/topicActions";
 
 //listas apenas do colaborador se for usuario tipo colaborador
 //lista geral com botao de aprovar ou reprovar pro gestor se tiver mais de duas cotacoes
@@ -38,26 +38,19 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   const User = JSON.parse(hasUser);
 
   const [list, setList] = useState<any>([]);
+  
   const [OpenModalAddCotation, setOpenModalAddCotation] = useState<any>({
     open: false,
     id: null
   });
+
   const [OpenModalCotation, setOpenModalCotation] = useState<boolean>(false);
   const [showItensTopic, setShowItensTopic] = useState<boolean>(false);
-
-  const setup = async () => {
-    try {
-      const { data } = await api.get("/main-page/topics?page=0");
-      setList(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   useEffect(() => {
     redirectToLogin(navigate);
     redirectAdmin(navigate, user.profile);
-    setup();
+    getTopics(setList);
   }, [user]);
 
   return (

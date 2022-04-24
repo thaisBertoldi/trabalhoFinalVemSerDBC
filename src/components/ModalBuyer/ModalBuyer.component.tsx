@@ -7,6 +7,7 @@ import { InputForm, Btn } from '../../global.style';
 import { Theme } from "../../theme";
 import { maskMoney } from '../../utils/utils';
 import api from '../../service/api';
+import { ENDPOINT_COTATION } from '../../constants';
 
 const ModalBuyer = ({onClick, id}: any) => {
 
@@ -18,7 +19,7 @@ const ModalBuyer = ({onClick, id}: any) => {
       value: finalValue
     }
     try {
-      const {data} = await api.post('/quotation/create', obj);
+      const {data} = await api.post(ENDPOINT_COTATION.CREATE_COTATION, obj);
       console.log(data);
     } catch (error) {
       console.log(error);

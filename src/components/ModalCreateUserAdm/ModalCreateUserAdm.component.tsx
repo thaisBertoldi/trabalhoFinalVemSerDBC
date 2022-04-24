@@ -8,6 +8,7 @@ import PasswordStrengthBar from "react-password-strength-bar";
 import { Theme } from "../../theme";
 import { imgConverter } from "../../utils/utils";
 import api from "../../service/api";
+import { ENDPOINT_ADMIN } from "../../constants";
 
 function ModalCreateUserAdm({ onClick }: any) {
 
@@ -20,7 +21,7 @@ function ModalCreateUserAdm({ onClick }: any) {
     dataUserCreate.append('groups', values.groups)
     if (values.password === values.confirmPassword) {
       try {
-          const {data} = await api.post('/admin/adm-creat-user', dataUserCreate)
+          const {data} = await api.post(ENDPOINT_ADMIN.CREATE_PROFILE, dataUserCreate)
           Notiflix.Notify.success(
             `Usuário cadastrado com sucesso.`
           );

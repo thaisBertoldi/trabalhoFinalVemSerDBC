@@ -3,11 +3,12 @@ import Notiflix from "notiflix";
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import { LoginDTO, RegisterDTO, isLoggedDTO } from "../../models/UserDTO";
 import { AppDispatch } from '..';
+import { ENDPOINT_AUTH } from '../../constants';
 
 export const handleLogin = async (values: LoginDTO, dispatch: AppDispatch, navigate: Function) => {
   try {    
     Loading.circle();
-    const {data} = await api.post("/auth/login", values);
+    const {data} = await api.post(ENDPOINT_AUTH.LOGIN, values);
     console.log(data);
     setLogin(dispatch, data);
     navigate('/');
@@ -30,7 +31,7 @@ export const handleRegister = async (values: RegisterDTO, dispatch: AppDispatch,
 
   try {
     Loading.circle();
-    const {data} = await api.post("/auth/sign-up", formData);
+    const {data} = await api.post(ENDPOINT_AUTH.SING, formData);
     setLogin(dispatch, data);
     Notiflix.Notify.success(
       `Usuário cadastrado com sucesso.`

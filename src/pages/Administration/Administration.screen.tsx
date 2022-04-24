@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import ModalCreateUserAdm from "../../components/ModalCreateUserAdm/ModalCreateUserAdm.component";
 import { Btn, CenterCustom, Container } from "../../global.style";
 import { isLoggedDTO, UsersAdmDTO } from "../../models/UserDTO";
-import api from "../../service/api";
 import { RootState } from "../../store";
 import {
   CardUSerAdmin,
@@ -15,6 +14,7 @@ import {
   ImageUser,
 } from "./Administration.style";
 import imgPerfil from "../../images/foto-perfil.png";
+import { getAllUsers, handleProfile } from "../../store/action/adminActions";
 
 //tipá-los
 const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
@@ -22,38 +22,11 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   const [allUsers, setAllUsers] = useState<Array<UsersAdmDTO>>([]);
   const [isAddUser, setIsAddUser] = useState(false);
 
-  const handleProfile = async (
-    event: React.FormEvent,
-    id: number,
-    type: string
-  ) => {
-    event.preventDefault();
-    try {
-      const { data } = await api.put(
-        `/admin/adm-set-group-user?groups=${type}&idUser=${id}`
-      );
-      getAllUsers();
-    } catch (error) {
-      console.log(error);
-    }
-    formik.resetForm();
-  };
-
-  const getAllUsers = async () => {
-    try {
-      const { data } = await api.get("/admin/adm-get-all-users?page=0");
-      setAllUsers(data.content);
-      console.log(data.content);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
     if (user?.profile !== "ADMINISTRATOR") {
       navigate("/");
     }
-    getAllUsers();
+    getAllUsers(setAllUsers);
   }, []);
 
   const formik = useFormik({
@@ -77,7 +50,7 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
         {allUsers?.map((user: UsersAdmDTO) => (
           <form
             onSubmit={(event) =>
-              handleProfile(event, user.userId, formik.values.type)
+              handleProfile(setAllUsers, formik.resetForm, event, user.userId, formik.values.type)
             }
             key={user.userId}
           >

@@ -1,5 +1,6 @@
 import Notiflix from "notiflix";
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
+import { ENDPOINT_TOPICS } from "../../constants";
 import { NewRequestPurchase, NewRequestPurchaseArray, PurchaseDTO } from "../../models/PurchaseDTO";
 import api from "../../service/api";
 
@@ -10,7 +11,7 @@ export const handleCreateList = async (values: PurchaseDTO["auth"], arrayItens: 
       const options = {
         headers: {"content-type": "application/json"}
       }
-      const { data } = await api.post('topic/create-topic', JSON.stringify(values.listName), options);
+      const { data } = await api.post(ENDPOINT_TOPICS.CREATE_TOPIC, JSON.stringify(values.listName), options);
       postItensToTopic(data, arrayItens);
     } catch (error) {
       console.log(error);
@@ -27,7 +28,7 @@ export const handleCreateList = async (values: PurchaseDTO["auth"], arrayItens: 
       formData.append("price", item.value);
      
       try {
-        const { data } = await api.post(`topic/create-item/${id}`, formData);
+        const { data } = await api.post(`${ENDPOINT_TOPICS.CREATE_ITEM_TOPIC}/${id}`, formData);
       } catch (error) {
         console.log(error);
       }

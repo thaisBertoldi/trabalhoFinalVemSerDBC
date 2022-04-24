@@ -1,5 +1,6 @@
 import axios from 'axios';
+import { API_URL } from '../constants';
 
 export default axios.create({
-  baseURL: 'https://e-commerce-vemser-back.herokuapp.com/',
+  baseURL: API_URL,
 })
