@@ -9,7 +9,7 @@ import { Login, Register, Home, RequestPurchase, Administration } from './pages'
 import { isLoggedDTO } from './models/UserDTO';
 import { RootState } from './store';
 
-const Routers = ({auth, dispatch}: isLoggedDTO & DispatchProp) => {
+const Routers = ({user, dispatch}: isLoggedDTO & DispatchProp) => {
 
   useEffect( () => {
     const hasToken:string | any = localStorage.getItem('token');
@@ -35,7 +35,7 @@ const Routers = ({auth, dispatch}: isLoggedDTO & DispatchProp) => {
 };
 
 const mapStateToProps = (state: RootState) => ({
-  auth: state.authReducer
+  user: state.authReducer,
 })
 
 export default connect(mapStateToProps)(Routers);

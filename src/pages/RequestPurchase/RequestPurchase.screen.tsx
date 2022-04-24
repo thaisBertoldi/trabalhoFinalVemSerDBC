@@ -23,15 +23,15 @@ import { useNavigate } from "react-router-dom";
 import { isLoggedDTO } from "../../models/UserDTO";
 import { FaTrashAlt } from "react-icons/fa";
 //pagina de compra pro usuário tipo colaborador
-const RequestPurchase = ({ profile, auth, dispatch }: any & PurchaseDTO & DispatchProp) => {
+const RequestPurchase = ({ user, auth, dispatch }: isLoggedDTO & PurchaseDTO & DispatchProp) => {
 
   const [arrayItens, setArrayItens] = useState<NewRequestPurchase[]>([]);
 
   const navigate = useNavigate();
   
   useEffect(() => {
-    redirectAdmin(navigate, profile);
-  }, [profile]);
+    redirectAdmin(navigate, user.profile);
+  }, [user]);
 
   const addItenToList = () => {
     console.log("teste");
@@ -182,8 +182,8 @@ const RequestPurchase = ({ profile, auth, dispatch }: any & PurchaseDTO & Dispat
 };
 
 const mapStateToProps = (state: RootState) => ({
-  auth: state.purchaseReducer.auth,
-  profile: state.authReducer
+  auth: state.purchaseReducer,
+  user: state.authReducer,
 });
 
-export default connect(mapStateToProps)(RequestPurchase);
+export default connect(mapStateToProps)<any>(RequestPurchase);

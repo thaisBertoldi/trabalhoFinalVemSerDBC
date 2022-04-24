@@ -24,3 +24,11 @@ export const DivNameUser = styled.div`
   background-color: ${Theme.color.white};
   padding-left: 15px;
 `;
+
+export const DivAllCardUser = styled.div`
+  display: grid;
+  grid-template-columns: auto auto auto;
+  width: 100px;
+  height: 200px;
+  background-color: white;
+`;

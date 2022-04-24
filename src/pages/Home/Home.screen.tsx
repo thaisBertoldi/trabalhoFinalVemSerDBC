@@ -31,7 +31,7 @@ const exemplo = [
   }
 ]
 
-const Home = ({ auth, dispatch }: isLoggedDTO & DispatchProp) => {
+const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
 
   const navigate = useNavigate();
   const hasUser: string | any = localStorage.getItem("token");
@@ -53,9 +53,9 @@ const Home = ({ auth, dispatch }: isLoggedDTO & DispatchProp) => {
 
   useEffect(() => {
     redirectToLogin(navigate);
-    redirectAdmin(navigate, auth);
+    redirectAdmin(navigate, user.profile);
     setup();
-  }, [auth]);
+  }, [user]);
 
   return (
     <Container>
@@ -99,7 +99,7 @@ const Home = ({ auth, dispatch }: isLoggedDTO & DispatchProp) => {
 };
 
 const mapStateToProps = (state: RootState) => ({
-  auth: state.authReducer,
+  user: state.authReducer,
 });
 
 export default connect(mapStateToProps)(Home);

@@ -25,7 +25,7 @@ import { hasLogin } from "../../utils/utils";
 import { RootState } from "../../store";
 import { isLoggedDTO } from "../../models/UserDTO";
 
-const Login = ({ auth, dispatch }: isLoggedDTO & DispatchProp) => {
+const Login = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState<boolean>(true);
@@ -118,7 +118,7 @@ const Login = ({ auth, dispatch }: isLoggedDTO & DispatchProp) => {
 };
 
 const mapStateToProps = (state: RootState) => ({
-  auth: state.authReducer,
+  user: state.authReducer,
 });
 
 export default connect(mapStateToProps)(Login);

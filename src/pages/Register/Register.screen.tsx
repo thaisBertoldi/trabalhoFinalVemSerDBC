@@ -24,7 +24,7 @@ import { handleRegister } from "../../store/action/authActions";
 import { hasLogin, imgConverter } from "../../utils/utils";
 import { RootState } from "../../store";
 
-const Register = ({ auth, dispatch }: isLoggedDTO & DispatchProp) => {
+const Register = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   const [showPassword, setShowPassword] = useState<boolean>(true);
 
   const navigate = useNavigate();
@@ -199,7 +199,7 @@ const Register = ({ auth, dispatch }: isLoggedDTO & DispatchProp) => {
 };
 
 const mapStateToProps = (state: RootState) => ({
-  auth: state.authReducer,
+  user: state.authReducer,
 });
 
 export default connect(mapStateToProps)(Register);

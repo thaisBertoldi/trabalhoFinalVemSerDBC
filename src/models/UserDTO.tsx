@@ -4,7 +4,7 @@ export interface LoginDTO {
 }
 
 export interface isLoggedDTO {
-  auth: {
+  user: {
     username: string;
     fullName: string;
     token: string;

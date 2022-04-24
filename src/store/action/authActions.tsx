@@ -46,7 +46,7 @@ export const handleRegister = async (values: RegisterDTO, dispatch: AppDispatch,
   }
 }
 
-export const setLogin = (dispatch: AppDispatch, data: isLoggedDTO["auth"]) => {
+export const setLogin = (dispatch: AppDispatch, data: isLoggedDTO["user"]) => {
   Loading.circle();
   const setLogged = {
     type: 'SET_LOGIN',

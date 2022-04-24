@@ -16,8 +16,8 @@ export const redirectToLogin = (navigate: Function) => {
   }
 }
 
-export const redirectAdmin = (navigate: Function, auth: isLoggedDTO["auth"]) => {
-  if(auth?.profile === 'ADMINISTRATOR' ) {
+export const redirectAdmin = (navigate: Function, profile: string) => {
+  if(profile === 'ADMINISTRATOR' ) {
     navigate('/administration')
   }
 }

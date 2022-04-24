@@ -10,7 +10,7 @@ const INITIAL_STATE = {
     profileImage: "",
 };
 
-const authReducer = (state: isLoggedDTO['auth'] = INITIAL_STATE, action: AnyAction) => {
+const authReducer = (state: isLoggedDTO['user'] = INITIAL_STATE, action: AnyAction) => {
   if (action.type === "SET_LOGIN") {
     return {
       ...state,
