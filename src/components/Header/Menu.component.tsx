@@ -8,6 +8,7 @@ import ImgDefault from "../../images/foto-perfil.png";
 import { useState } from "react";
 import Hamburguer from "./Hamburguer.component";
 import { MdMenu } from "react-icons/md";
+import ItensMenu from "./ItensMenu.component";
 
 const Menu = ({ auth, dispatch }: any) => {
   const navigate = useNavigate();
@@ -17,8 +18,7 @@ const Menu = ({ auth, dispatch }: any) => {
 
   const hasUser: string | any = localStorage.getItem("token");
   const User = JSON.parse(hasUser);
-  console.log(User);
-
+  
   return (
     <UlNav>
       <MenuHamburguer>
@@ -27,9 +27,7 @@ const Menu = ({ auth, dispatch }: any) => {
       { openHamburguer && ( <Hamburguer /> ) }  
 
       <DivLinksMenu>
-        <Link to={"/"}>Home</Link>
-        <Link to={"/administration"}>Administrador</Link>
-        <Link to={"/request-purchase"}>Solicitar compra</Link>
+        <ItensMenu />
       </DivLinksMenu>
 
       <DivUserMenu>

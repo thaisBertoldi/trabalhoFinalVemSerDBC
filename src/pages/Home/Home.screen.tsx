@@ -36,7 +36,6 @@ const Home = ({ auth, dispatch }: isLoggedDTO & DispatchProp) => {
     try {
       const { data } = await api.get("/main-page/topics?page=0");
       setList(data);
-      console.log(data);
     } catch (error) {
       console.log(error);
     }

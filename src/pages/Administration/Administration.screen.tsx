@@ -1,4 +1,7 @@
 import { useFormik } from "formik";
+import { useEffect } from "react";
+import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { CenterCustom, Container } from "../../global.style";
 import { DivNameUser, UserFormAdmin } from "./Administration.style";
 
@@ -20,13 +23,22 @@ const exemplo = {
 };
 
 //tipá-los
-const Administration = () => {
+const Administration = ({auth, dispatch}: any) => {
+
+  const navigate = useNavigate();
   
   const test = (values: any) => {
     //post
     alert(JSON.stringify(values, null, 2));
     formik.resetForm();
   }
+
+  useEffect( () => {
+    if(auth?.profile !== "ADMINISTRATOR") {
+      navigate('/')
+    }
+    
+  },[] )
 
   const formik = useFormik({
     initialValues: {
@@ -71,4 +83,8 @@ const Administration = () => {
   );
 };
 
-export default Administration;
+const mapStateToProps = (state: any) => ({
+  auth: state.authReducer,
+});
+
+export default connect(mapStateToProps)(Administration);

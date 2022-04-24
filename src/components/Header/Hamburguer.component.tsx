@@ -1,12 +1,11 @@
 import { Link } from "react-router-dom";
 import { HamburguerDiv } from "./Header.style";
+import ItensMenu from "./ItensMenu.component";
 
 const Hamburguer = () => {
   return (
     <HamburguerDiv>
-      <Link to={"/"}>Home</Link>
-      <Link to={"/administration"}>Administrador</Link>
-      <Link to={"/request-purchase"}>Solicitar compra</Link>
+      <ItensMenu />
     </HamburguerDiv>
   );
 }
