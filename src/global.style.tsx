@@ -2,8 +2,9 @@ import styled from "styled-components";
 import { Theme } from "./theme";
 import image from "./images/background-div.jpg";
 
-export const Container = styled.div`
-  height: 65.8vh;
+export const Container = styled.div`  
+  width: 100%;
+
 `;
 
 export const ContainerPrincipal = styled.div`
@@ -96,6 +97,7 @@ export const InputForm = styled.input`
   border: 1px ${Theme.color.primary} solid;
 
   padding: 0 10px;
+  box-sizing: border-box;
 
   :focus {
     outline: none;
@@ -105,12 +107,13 @@ export const InputForm = styled.input`
 export const Btn = styled.button<{ width: string }>`
   width: ${(props) => props.width};
   height: 42px;
-  background: rgb(29,184,67);
-  background: linear-gradient(90deg, rgba(29,184,67,1) 0%, rgba(0,113,191,1) 100%);
+  background: rgb(0,113,191);
+  background: radial-gradient(circle, rgba(0,113,191,1) 20%, rgba(2,50,85,1) 100%);
   border-radius: 4px;
   outline: none;
   border: none;
   color: ${Theme.color.white};
+  cursor: pointer;
 `;
 
 export const BtnForm = styled.button<{ width: string }>`
@@ -135,7 +138,7 @@ export const Paragraph = styled.p`
 export const LinkCustom = styled.div`
   list-style: none;
   text-decoration: none;
-  background-image: linear-gradient(90deg, rgba(29,184,67,1) 0%, rgba(0,113,191,1) 100%);
+  background: radial-gradient(circle, rgba(0,113,191,1) 20%, rgba(2,50,85,1) 100%);
   color: black;
   background-clip: text;
   -webkit-background-clip: text;

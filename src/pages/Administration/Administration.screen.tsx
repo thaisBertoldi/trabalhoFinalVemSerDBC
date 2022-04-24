@@ -12,7 +12,7 @@ const Administration = ({ auth, dispatch }: any) => {
   const navigate = useNavigate();
   const [allUsers, setAllUsers] = useState([]);
   const [isChangeType, setIsChangeType] = useState(false);
-  const [isAddUser, setIsAddUser] = useState(false)
+  const [isAddUser, setIsAddUser] = useState(false);
 
   const handleProfile = async (event: any, id: number, type: any) => {
     event.preventDefault();
@@ -48,8 +48,7 @@ const Administration = ({ auth, dispatch }: any) => {
     initialValues: {
       type: "COLLABORATOR",
     },
-    onSubmit: (values) => {
-    },
+    onSubmit: (values) => {},
   });
   return (
     <Container>
@@ -57,7 +56,7 @@ const Administration = ({ auth, dispatch }: any) => {
         <h3>Usuários Cadastrados: </h3>
       </CenterCustom>
       <button onClick={() => setIsAddUser(true)}>Cadastrar novo usuário</button>
-      {isAddUser && <ModalCreateUserAdm onClick={() => setIsAddUser(false)}/>}
+      {isAddUser && <ModalCreateUserAdm onClick={() => setIsAddUser(false)} />}
       {allUsers.map((user: any) => {
         return (
           <>
@@ -86,7 +85,12 @@ const Administration = ({ auth, dispatch }: any) => {
                       <option value="MANEGER">Gestor</option>
                       <option value="FINANCIER">Financeiro</option>
                     </select>
-                    <button type="submit" onClick={() => setIsChangeType(false)}>Submit</button>
+                    <button
+                      type="submit"
+                      onClick={() => setIsChangeType(false)}
+                    >
+                      Submit
+                    </button>
                   </>
                 )}
               </UserFormAdmin>

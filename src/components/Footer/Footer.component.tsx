@@ -6,11 +6,11 @@ const Footer = () => {
 
   return (
     <>
-      {User?.token && (
+      {/* {User?.token && (
         <FooterCustom>
           <Copyright>©{new Date().getFullYear()} Copyright</Copyright>
         </FooterCustom>
-      )}
+      )} */}
     </>
   );
 };
