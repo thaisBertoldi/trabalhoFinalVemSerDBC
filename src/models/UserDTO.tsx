@@ -25,7 +25,7 @@ export interface RegisterDTO {
 export interface UsersAdmDTO {
   userId: number;
   fullName: string;
-  groups: string;
+  groups: number;
   email: string;
   image?: string;
 }

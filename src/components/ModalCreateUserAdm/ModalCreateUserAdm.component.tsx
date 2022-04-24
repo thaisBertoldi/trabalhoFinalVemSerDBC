@@ -9,6 +9,7 @@ import { Theme } from "../../theme";
 import { imgConverter } from "../../utils/utils";
 import api from "../../service/api";
 import { ENDPOINT_ADMIN } from "../../constants";
+import { ModalAdm } from "./ModalCreateUser.style";
 
 function ModalCreateUserAdm({ onClick }: any) {
 
@@ -76,7 +77,7 @@ function ModalCreateUserAdm({ onClick }: any) {
 
   return (
     <ContainerModal>
-      <Modal>
+      <ModalAdm>
         <button onClick={onClick}> Fechar </button>
         <form onSubmit={formik.handleSubmit}>
           <DivInputsLogin>
@@ -187,7 +188,7 @@ function ModalCreateUserAdm({ onClick }: any) {
             </Btn>
           </DivInputsLogin>
         </form>
-      </Modal>
+      </ModalAdm>
     </ContainerModal>
   );
 }

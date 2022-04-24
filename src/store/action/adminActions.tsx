@@ -1,3 +1,4 @@
+import Notiflix from "notiflix";
 import { ENDPOINT_ADMIN } from "../../constants";
 import api from "../../service/api";
 
@@ -17,8 +18,14 @@ export const handleProfile = async ( setAllUsers: Function, formik: Function, ev
       `${ENDPOINT_ADMIN.ALTER_PROFILE}=${type}&idUser=${id}`
     );
     getAllUsers(setAllUsers);
+    Notiflix.Notify.success(
+      `Perfil do usuário alterado com sucesso.`
+    );
   } catch (error) {
     console.log(error);
+    Notiflix.Notify.failure(
+      `Sinto muito, mas nao foi possivel alterar o perfil desse usuário. ${error}`
+    );
   }
   formik();
 };

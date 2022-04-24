@@ -157,6 +157,7 @@ export const DivErrorYup = styled.div`
 export const CenterCustom = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 15px;
   color: ${Theme.color.black};
   margin-top: ${Theme.margin};
