@@ -79,18 +79,18 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
               <ButtonCard onClick={ () => setOpenModalCotation(!OpenModalCotation) } > Visualizar cotações </ButtonCard>
               <ButtonCard onClick={ () => setOpenModalAddCotation({open: true, id: item.topicId}) }> Adicinar cotação </ButtonCard>
             </DivButtonsCard>
-            {/* {
+            {
               showItensTopic && (
                 exemplo.map((item, index) => (
                   <CardItem key={index}>
-                    <img src={Image} alt="imagem do iten" />
+                    {/* <img src={Image} alt="imagem do iten" /> */}
                     <p>{item.nome}</p>
                     <p>{item.data}</p>
                     <p>{item.valor}</p>
                   </CardItem>
                 ))
               )
-            } */}
+            }
           </ContainerCard>
         ))
       }
