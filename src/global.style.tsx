@@ -3,7 +3,6 @@ import { Theme } from "./theme";
 import image from "./images/background-div.jpg";
 
 export const Container = styled.div`
-  min-height: 100%;
   height: 65.8vh;
 `;
 

@@ -1,51 +1,54 @@
 import { useFormik } from "formik";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { CenterCustom, Container } from "../../global.style";
+import api from "../../service/api";
 import { DivNameUser, UserFormAdmin } from "./Administration.style";
-
-const exemplo = {
-  users: [
-    {
-      nome: "Fulano",
-    },
-    {
-      nome: "Pedro",
-    },
-    {
-      nome: "João",
-    },
-    {
-      nome: "Tiago",
-    },
-  ],
-};
 
 //tipá-los
 const Administration = ({auth, dispatch}: any) => {
 
   const navigate = useNavigate();
+  const [allUsers, setAllUsers] = useState([])
   
-  const test = (values: any) => {
-    //post
-    alert(JSON.stringify(values, null, 2));
+  const handleProfile = async (values: any) => {
+    try {
+      const { data } = await api.get(`/admin/adm-set-group-user?groups=${values.type}&idUser=${values.id}`);
+      console.log(data)
+    } catch (error) {
+      console.log(error);
+    }
     formik.resetForm();
+  }
+
+  const getAllUsers = async () => {
+    try {
+      const { data } = await api.get("/admin/adm-get-all-users?page=0");
+      setAllUsers(data.content)
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   useEffect( () => {
     if(auth?.profile !== "ADMINISTRATOR") {
       navigate('/')
     }
-    
+    getAllUsers()
   },[] )
+
+  const teste = () => {
+    console.log('olá')
+  }
 
   const formik = useFormik({
     initialValues: {
       type: "Colaborador",
     },
     onSubmit: (values) => {
-      test(values);
+      // handleProfile(values);
+      console.log('onsubmit do formik')
     },
   });
   return (
@@ -53,13 +56,13 @@ const Administration = ({auth, dispatch}: any) => {
       <CenterCustom>
         <h3>Usuários Cadastrados: </h3>
       </CenterCustom>
-      {exemplo.users.map((e: any, index: number) => {
+      {allUsers.map((e: any) => {
         return (
           <>
-            <form onSubmit={formik.handleSubmit} key={index}>
+            <form onSubmit={formik.handleSubmit} key={e.userId}>
               <UserFormAdmin>
                 <DivNameUser>
-                  <p>{e.nome}</p>
+                  <p>{e.fullName}</p>
                 </DivNameUser>
                 <select
                   name="type"
