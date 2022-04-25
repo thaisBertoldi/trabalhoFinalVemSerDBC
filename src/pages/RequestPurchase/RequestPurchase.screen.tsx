@@ -9,7 +9,7 @@ import {
 } from "../../global.style";
 import { NewRequestPurchase, PurchaseDTO } from "../../models/PurchaseDTO";
 import { RootState } from "../../store";
-import { handleCreateList, handleCreateTopic, handleFinallyTopic } from "../../store/action/purchaseAction";
+import { handleCreateList, handleCreateTopic, handleDeleteItem, handleFinallyTopic } from "../../store/action/purchaseAction";
 import { Theme } from "../../theme";
 import {
   ContainerRequest,
@@ -145,7 +145,7 @@ const RequestPurchase = ({
           </form>
         </ContainerRequestForm>
         {arrayItens.map((item, index) => (
-          <DivItens>
+          <DivItens key={index}>
             <p>Nome: {item.name}</p>
             <p>Descrição: {item.description}</p>
             <p>Valor: R$ {item.price}</p>

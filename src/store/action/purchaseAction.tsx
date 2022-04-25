@@ -34,6 +34,7 @@ export const handleCreateTopic = async (valuesTopic: any, setIdTopic: Function) 
       try {
         Loading.circle();
         const { data } = await api.post(`${ENDPOINT_TOPICS.CREATE_ITEM_TOPIC}/${id}`, formData);
+        console.log("item" + data)
         Notiflix.Notify.success(
           `Item ${values.name} adicionado com sucesso.`
         );
@@ -65,10 +66,19 @@ export const handleCreateTopic = async (valuesTopic: any, setIdTopic: Function) 
     Loading.remove();
   }
 
-  export const handleDeleteItem = (index: number) => {
-    try {
-      
-    } catch (error) {
-      
-    }
+  export const handleDeleteItem = async (id: number) => {
+      try {
+        Loading.circle();
+        const { data } = await api.delete(`${ENDPOINT_TOPICS.DELETE_ITEM}/${id}`);
+        console.log(data)
+        Notiflix.Notify.success(
+          `Item excluído.`
+        );
+      } catch (error) {
+        console.log(error);
+        Notiflix.Notify.failure(
+          `Sinto muito, mas nao foi possivel excluir esse item. ${error}`
+        );
+      }
+      Loading.remove();
   };
