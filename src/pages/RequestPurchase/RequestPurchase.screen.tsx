@@ -42,7 +42,8 @@ const RequestPurchase = ({
       title: "",
     },
     onSubmit: (valuesTopic) => {
-      handleCreateTopic(valuesTopic, setIdTopic);
+      // handleCreateTopic(valuesTopic, setIdTopic);
+      console.log(valuesTopic)
     },
   });
 
@@ -78,8 +79,9 @@ const RequestPurchase = ({
               type="text"
               onChange={formikTopic.handleChange}
               value={formikTopic.values.title}
+              onBlur={() => handleCreateTopic(formikTopic.values, setIdTopic)}
             />
-            <button type="submit" >Criar tarefa</button>
+            {/* <button type="submit" >Criar tarefa</button> */}
           </form>
 
           <form onSubmit={formik.handleSubmit}>
