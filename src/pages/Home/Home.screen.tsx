@@ -29,13 +29,15 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
 
   const [list, setList] = useState<any>([]);
   
-  //MONTAR DTO PARA OPEN E ID
   const [OpenModalAddCotation, setOpenModalAddCotation] = useState<ModalDTO>({
     open: false,
     id: 0
   });
 
-  const [OpenModalCotation, setOpenModalCotation] = useState<boolean>(false);
+  const [OpenModalCotation, setOpenModalCotation] = useState<ModalDTO>({
+    open: false,
+    id: 0
+  });
 
   const [showItensTopic, setShowItensTopic] = useState<ModalDTO>({
     open: false,
@@ -67,7 +69,7 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
             </TitleCard>
             <DivButtonsCard>
               <ButtonCard onClick={ () => setShowItensTopic({open: !showItensTopic.open, id: item.topicId})}> Visualizar Itens do tópico </ButtonCard>
-              <ButtonCard onClick={ () => setOpenModalCotation(!OpenModalCotation) } > Visualizar cotações </ButtonCard>
+              <ButtonCard onClick={ () => setOpenModalCotation({open: true, id: item.topicId}) } > Visualizar cotações </ButtonCard>
               <ButtonCard onClick={ () => setOpenModalAddCotation({open: true, id: item.topicId}) }> Adicinar cotação </ButtonCard>
             </DivButtonsCard>
             { showItensTopic.open && showItensTopic.id === item.topicId && ( <CardHome id={item.topicId} /> ) } 
@@ -75,8 +77,8 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
         ))
       }
       
-      { OpenModalAddCotation.open && ( <ModalBuyer id={OpenModalAddCotation.id} onClick={ () => setOpenModalAddCotation({open: false}) }/> ) }
-      { OpenModalCotation && ( <ModalCotation onClick={ () => setOpenModalCotation(!OpenModalCotation) } /> ) }
+      { OpenModalAddCotation.open && ( <ModalBuyer id={OpenModalAddCotation.id} onClick={ () => setOpenModalAddCotation({open: false})}/> )}
+      { OpenModalCotation.open && ( <ModalCotation id={OpenModalCotation.id} onClick={ () => setOpenModalCotation({open: false})}/> )}
     </Container>
   );
 };
