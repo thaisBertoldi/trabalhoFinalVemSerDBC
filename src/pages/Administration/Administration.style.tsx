@@ -17,7 +17,7 @@ export const ContainerAdmin = styled.div`
   @media (max-width: 1000px) {
     grid-template-columns: auto auto;
   }
-  @media (max-width: 500px) {
+  @media (max-width: 650px) {
     grid-template-columns: auto;
   }
 `;
@@ -95,9 +95,21 @@ export const DivSearch = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: ${Theme.margin};
 `;
 
 export const IconSearch = styled(FaSearch)`
   position: absolute;
   left: 73%;
+  opacity: 0.5;
+
+  @media (max-width: 1000px) {
+    left: 72%;
+  }
+  @media (max-width: 600px) {
+    left: 71%;
+  }
+  @media (max-width: 400px) {
+    display: none;
+  }
 `;
