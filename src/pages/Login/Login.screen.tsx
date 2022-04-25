@@ -42,7 +42,7 @@ const Login = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
     const userFilter = allUsers.filter((user: UsersAdmDTO) => {
       return user.email.match(email);
     });
-    if (userFilter.length === 0) {
+    if (userFilter.length !== 0) {
       setHasUserName(false);
     } else {
       setHasUserName(true);
