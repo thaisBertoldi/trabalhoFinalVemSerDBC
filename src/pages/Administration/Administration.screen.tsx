@@ -20,6 +20,7 @@ import {
 import imgPerfil from "../../images/foto-perfil.png";
 import { getAllUsers, handleProfile } from "../../store/action/adminActions";
 import { TypeUserEnum } from "../../enums/TypeUserEnum";
+import { DefaultImage } from "../../constants";
 
 //tipá-los
 const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
@@ -88,11 +89,7 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
               <DataUser>
                 <DivImage>
                   <ImageUser
-                    src={
-                      user?.image !== null || ""
-                        ? `data:image/jpeg;base64,${user?.image}`
-                        : imgPerfil
-                    }
+                     src={`data:image/jpeg;base64,${user?.image ?? DefaultImage}`}
                     alt="imagem de perfil"
                   />
                 </DivImage>
@@ -140,11 +137,7 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
               <DataUser>
                 <DivImage>
                   <ImageUser
-                    src={
-                      user?.image !== null || ""
-                        ? `data:image/jpeg;base64,${user?.image}`
-                        : imgPerfil
-                    }
+                    src={`data:image/jpeg;base64,${user?.image ?? DefaultImage}`}
                     alt="imagem de perfil"
                   />
                 </DivImage>
