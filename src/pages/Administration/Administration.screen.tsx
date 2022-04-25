@@ -26,7 +26,7 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   const navigate = useNavigate();
   const [allUsers, setAllUsers] = useState<Array<UsersAdmDTO>>([]);
   const [isSearchUser, setIsSearchUser] = useState<boolean>(false);
-  const [userFind, setUserFind] = useState<any>([]);
+  const [userFind, setUserFind] = useState<Array<UsersAdmDTO>>([]);
   const [isAddUser, setIsAddUser] = useState(false);
 
   useEffect(() => {
@@ -83,7 +83,7 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
 
       <ContainerAdmin>
         {isSearchUser ? 
-          userFind.map((user: any) => (
+          userFind.map((user: UsersAdmDTO) => (
             <CardUSerAdmin>
               <DataUser>
                 <DivImage>

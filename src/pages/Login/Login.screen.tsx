@@ -31,7 +31,7 @@ const Login = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
 
   const [showPassword, setShowPassword] = useState<boolean>(true);
   const [hasUserName, setHasUserName] = useState<boolean>(true);
-  const [allUsers, setAllUsers] = useState<any>([]);
+  const [allUsers, setAllUsers] = useState<Array<UsersAdmDTO>>([]);
 
   useEffect(() => {
     hasLogin(navigate);
