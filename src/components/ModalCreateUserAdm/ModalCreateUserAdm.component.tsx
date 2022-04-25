@@ -1,15 +1,16 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Notiflix from "notiflix";
+import { AiFillCloseCircle } from "react-icons/ai";
 import { ContainerModal, Modal } from "../ModalBuyer/ModalBuyer.style";
 import { DivInputsLogin } from "../../pages/Login/Login.style";
-import { Btn, DivErrorYup, Input } from "../../global.style";
+import { Btn, DivErrorYup, Input, InputForm, SelectCustom } from "../../global.style";
 import PasswordStrengthBar from "react-password-strength-bar";
 import { Theme } from "../../theme";
 import { imgConverter } from "../../utils/utils";
 import api from "../../service/api";
 import { ENDPOINT_ADMIN } from "../../constants";
-import { ModalAdm } from "./ModalCreateUser.style";
+import { DivClose, ModalAdm } from "./ModalCreateUser.style";
 
 function ModalCreateUserAdm({ onClick }: any) {
 
@@ -78,12 +79,13 @@ function ModalCreateUserAdm({ onClick }: any) {
   return (
     <ContainerModal>
       <ModalAdm>
-        <button onClick={onClick}> Fechar </button>
+        <DivClose><AiFillCloseCircle onClick={onClick}/></DivClose>
+        <h4>Por favor, preencha o formulário: </h4>
         <form onSubmit={formik.handleSubmit}>
-          <DivInputsLogin>
-            <input
-              width="99%"
-              height="40px"
+
+            <InputForm
+              width={"100%"}
+              height={"40px"}
               placeholder="Nome Completo"
               id="fullName"
               name="fullName"
@@ -95,9 +97,9 @@ function ModalCreateUserAdm({ onClick }: any) {
             {formik.errors.fullName && formik.touched.fullName ? (
               <DivErrorYup>{formik.errors.fullName}</DivErrorYup>
             ) : null}
-            <input
-              width="99%"
-              height="40px"
+            <InputForm
+              width={"100%"}
+              height={"40px"}
               placeholder="E-mail"
               id="username"
               name="username"
@@ -110,9 +112,9 @@ function ModalCreateUserAdm({ onClick }: any) {
               <DivErrorYup>{formik.errors.username}</DivErrorYup>
             ) : null}
             <div>
-              <input
-                width="99%"
-                height="40px"
+              <InputForm
+                width={"100%"}
+                height={"40px"}
                 placeholder="Password"
                 id="password"
                 name="password"
@@ -148,9 +150,9 @@ function ModalCreateUserAdm({ onClick }: any) {
               />
             )}
 
-            <input
-              width="99%"
-              height="40px"
+            <InputForm
+              width={"100%"}
+              height={"40px"}
               placeholder="Confirm Password"
               id="confirmPassword"
               name="confirmPassword"
@@ -163,17 +165,17 @@ function ModalCreateUserAdm({ onClick }: any) {
               <DivErrorYup>As senhas estão diferentes.</DivErrorYup>
             ) : null}
 
-            <select name="groups" onChange={formik.handleChange}>
+            <SelectCustom width={"100%"} height={"40px"} name="groups" onChange={formik.handleChange}>
               <option value="COLLABORATOR">Colaborador</option>
               <option value="ADMINISTRATOR">Administrador</option>
               <option value="BUYER">Comprador</option>
               <option value="MANEGER">Gestor</option>
               <option value="FINANCIER">Financeiro</option>
-            </select>
+            </SelectCustom>
 
-            <input
-              width="99%"
-              height="40px"
+            <InputForm
+              width={"100%"}
+              height={"40px"}
               id="profileImage"
               name="profileImage"
               type="file"
@@ -186,7 +188,7 @@ function ModalCreateUserAdm({ onClick }: any) {
             <Btn width="100%" type="submit" color={Theme.color.primary}>
               Submit
             </Btn>
-          </DivInputsLogin>
+
         </form>
       </ModalAdm>
     </ContainerModal>

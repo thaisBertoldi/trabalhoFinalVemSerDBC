@@ -2,9 +2,8 @@ import styled from "styled-components";
 import { Theme } from "./theme";
 import image from "./images/background-div.jpg";
 
-export const Container = styled.div`  
+export const Container = styled.div`
   width: 100%;
-
 `;
 
 export const ContainerPrincipal = styled.div`
@@ -60,7 +59,6 @@ export const ContainerGetInfo = styled.div`
     width: 400px;
     height: 600px;
   }
-
 `;
 
 export const Input = styled.input`
@@ -95,6 +93,8 @@ export const InputForm = styled.input`
   height: ${(props) => props.height};
   border-radius: 4px;
   border: 1px ${Theme.color.primary} solid;
+  @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+  font-family: "Poppins", sans-serif;
 
   padding: 0 10px;
   box-sizing: border-box;
@@ -102,13 +102,22 @@ export const InputForm = styled.input`
   :focus {
     outline: none;
   }
+
+  ::placeholder {
+    @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+    font-family: "Poppins", sans-serif;
+  }
 `;
 
 export const Btn = styled.button<{ width: string }>`
   width: ${(props) => props.width};
   height: 42px;
-  background: rgb(0,113,191);
-  background: radial-gradient(circle, rgba(0,113,191,1) 20%, rgba(2,50,85,1) 100%);
+  background: rgb(0, 113, 191);
+  background: radial-gradient(
+    circle,
+    rgba(0, 113, 191, 1) 20%,
+    rgba(2, 50, 85, 1) 100%
+  );
   border-radius: 4px;
   outline: none;
   border: none;
@@ -138,7 +147,11 @@ export const Paragraph = styled.p`
 export const LinkCustom = styled.div`
   list-style: none;
   text-decoration: none;
-  background: radial-gradient(circle, rgba(0,113,191,1) 20%, rgba(2,50,85,1) 100%);
+  background: radial-gradient(
+    circle,
+    rgba(0, 113, 191, 1) 20%,
+    rgba(2, 50, 85, 1) 100%
+  );
   color: black;
   background-clip: text;
   -webkit-background-clip: text;
@@ -161,4 +174,20 @@ export const CenterCustom = styled.div`
   gap: 15px;
   color: ${Theme.color.black};
   margin-top: ${Theme.margin};
+`;
+
+export const SelectCustom = styled.select<{ width: string; height: string }>`
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  :focus {
+    outline: none;
+  }
+
+  @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+  font-family: "Poppins", sans-serif;
+  border-radius: 4px;
+  border: 1px ${Theme.color.primary} solid;
+
+  padding: 0 10px;
+  box-sizing: border-box;
 `;

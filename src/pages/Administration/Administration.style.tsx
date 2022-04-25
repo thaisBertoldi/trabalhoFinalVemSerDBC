@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Theme } from "../../theme";
+import { FaSearch } from "react-icons/fa";
 
 export const ContainerAdmin = styled.div`
   display: grid;
@@ -88,4 +89,15 @@ export const ParagraphInfo = styled.p`
   @media (max-width: 1000px) {
     display: none;
   }
+`;
+
+export const DivSearch = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const IconSearch = styled(FaSearch)`
+  position: absolute;
+  left: 73%;
 `;

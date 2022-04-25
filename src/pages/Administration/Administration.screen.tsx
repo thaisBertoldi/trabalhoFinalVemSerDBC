@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { connect, DispatchProp } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import ModalCreateUserAdm from "../../components/ModalCreateUserAdm/ModalCreateUserAdm.component";
-import { Btn, CenterCustom, Container } from "../../global.style";
+import { CenterCustom, Container, InputForm } from "../../global.style";
 import { isLoggedDTO, UsersAdmDTO } from "../../models/UserDTO";
 import { RootState } from "../../store";
 import {
@@ -12,6 +12,8 @@ import {
   ContainerAdmin,
   DataUser,
   DivImage,
+  DivSearch,
+  IconSearch,
   ImageUser,
   ParagraphInfo,
 } from "./Administration.style";
@@ -23,6 +25,8 @@ import { TypeUserEnum } from "../../enums/TypeUserEnum";
 const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   const navigate = useNavigate();
   const [allUsers, setAllUsers] = useState<Array<UsersAdmDTO>>([]);
+  const [isSearchUser, setIsSearchUser] = useState<boolean>(false);
+  const [userFind, setUserFind] = useState<any>([]);
   const [isAddUser, setIsAddUser] = useState(false);
 
   useEffect(() => {
@@ -32,12 +36,25 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
     getAllUsers(setAllUsers);
   }, []);
 
+  const handleUserSearch = (value: string) => {
+    const userFilter = allUsers.filter((user: UsersAdmDTO) => {
+      return user.fullName.match(value);
+    });
+    if (userFilter.length !== 0) {
+      setUserFind(userFilter);
+      setIsSearchUser(true);
+    } else {
+      setIsSearchUser(false);
+    }
+  };
+
   const formik = useFormik({
     initialValues: {
       type: "COLLABORATOR",
     },
     onSubmit: (values) => {},
   });
+
   return (
     <Container>
       <CenterCustom>
@@ -47,16 +64,66 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
           background={"#4CAF50"}
           color={"#FFFFFF"}
           onClick={() => setIsAddUser(true)}
-          >
+        >
           Cadastrar novo usuário
         </BtnAdm>
       </CenterCustom>
+      <DivSearch>
+        <InputForm
+          width={"50%"}
+          height={"40px"}
+          placeholder="Pesquisar"
+          onChange={(event) => handleUserSearch(event.target.value)}
+        ></InputForm>
+        <IconSearch />
+      </DivSearch>
       <CenterCustom>
         <h3>Usuários Cadastrados: </h3>
       </CenterCustom>
 
       <ContainerAdmin>
-        {allUsers?.map((user: UsersAdmDTO) => (
+        {isSearchUser ? 
+          userFind.map((user: any) => (
+            <CardUSerAdmin>
+              <DataUser>
+                <DivImage>
+                  <ImageUser
+                    src={
+                      user?.image !== null || ""
+                        ? `data:image/jpeg;base64,${user?.image}`
+                        : imgPerfil
+                    }
+                    alt="imagem de perfil"
+                  />
+                </DivImage>
+
+                <p>
+                  <strong>Usuário:</strong> {user.fullName}
+                </p>
+                <p>
+                  <strong>Perfil:</strong> {TypeUserEnum[user.groups]}
+                </p>
+              </DataUser>
+              <select name="type" onChange={formik.handleChange}>
+                <option value="COLLABORATOR">Colaborador</option>
+                <option value="ADMINISTRATOR">Administrador</option>
+                <option value="BUYER">Comprador</option>
+                <option value="MANEGER">Gestor</option>
+                <option value="FINANCIER">Financeiro</option>
+              </select>
+              <BtnAdm
+                width={"200px"}
+                background={"#C5C5C5"}
+                color={"#202124"}
+                type="submit"
+              >
+                Alterar perfil do usuário
+              </BtnAdm>
+            </CardUSerAdmin>
+          )
+          )
+      :
+        allUsers?.map((user: UsersAdmDTO) => (
           <form
             onSubmit={(event) =>
               handleProfile(
