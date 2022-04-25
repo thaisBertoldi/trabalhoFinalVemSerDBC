@@ -1,8 +1,8 @@
 export interface NewRequestPurchase {
-  itemName: string;
-  description: string;
-  value: string;
-  file: string;
+  name: string,
+  description: string,
+  price: string,
+  file: string,
 }
 
 export interface NewRequestPurchaseArray {
