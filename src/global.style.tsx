@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Theme } from "./theme";
 import image from "./images/background-div.jpg";
+import { FaSearch } from "react-icons/fa";
 
 export const Container = styled.div`
   width: 100%;
@@ -191,4 +192,21 @@ export const SelectCustom = styled.select<{ width: string; height: string }>`
 
   padding: 0 10px;
   box-sizing: border-box;
+`;
+
+
+export const IconSearch = styled(FaSearch)`
+  position: absolute;
+  left: 73%;
+  opacity: 0.5;
+
+  @media (max-width: 1000px) {
+    left: 72%;
+  }
+  @media (max-width: 600px) {
+    left: 71%;
+  }
+  @media (max-width: 400px) {
+    display: none;
+  }
 `;

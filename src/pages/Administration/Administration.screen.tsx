@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { connect, DispatchProp } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import ModalCreateUserAdm from "../../components/ModalCreateUserAdm/ModalCreateUserAdm.component";
-import { CenterCustom, Container, InputForm } from "../../global.style";
+import { CenterCustom, Container, InputForm, IconSearch } from "../../global.style";
 import { isLoggedDTO, UsersAdmDTO } from "../../models/UserDTO";
 import { RootState } from "../../store";
 import {
@@ -13,7 +13,6 @@ import {
   DataUser,
   DivImage,
   DivSearch,
-  IconSearch,
   ImageUser,
   ParagraphInfo,
 } from "./Administration.style";

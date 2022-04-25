@@ -42,3 +42,10 @@ export const ButtonCard = styled.button`
     width: 150px;
   } 
 `;
+
+export const DivSearch = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: ${Theme.margin};
+`
