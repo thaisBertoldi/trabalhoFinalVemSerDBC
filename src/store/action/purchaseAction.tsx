@@ -1,10 +1,10 @@
 import Notiflix from "notiflix";
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import { ENDPOINT_TOPICS } from "../../constants";
-import { NewRequestPurchase, NewRequestPurchaseArray, PurchaseDTO } from "../../models/PurchaseDTO";
+import { NewRequestPurchase, TitlePurchaseDTO } from "../../models/PurchaseDTO";
 import api from "../../service/api";
 
-export const handleCreateTopic = async (valuesTopic: any, setIdTopic: Function) => {
+export const handleCreateTopic = async (valuesTopic: TitlePurchaseDTO, setIdTopic: Function) => {
     try {
       Loading.circle();
       const { data } = await api.post(ENDPOINT_TOPICS.CREATE_TOPIC, valuesTopic);
@@ -22,7 +22,7 @@ export const handleCreateTopic = async (valuesTopic: any, setIdTopic: Function) 
     Loading.remove();
   }
 
- export const handleCreateList = async (values: any, id: number, setArrayItens: any, arrayItens: any, formik: Function) => {
+ export const handleCreateList = async (values: NewRequestPurchase, id: number, setArrayItens: Function, arrayItens: Array<NewRequestPurchase>, formik: Function) => {
 
       const formData = new FormData();
       formData.append("file", values.file);

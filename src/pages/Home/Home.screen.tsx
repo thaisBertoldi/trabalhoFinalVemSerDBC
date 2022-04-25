@@ -7,29 +7,19 @@ import moment from "moment";
 
 import { RootState } from "../../store";
 import { redirectAdmin, redirectToLogin } from "../../utils/utils";
-import { ContainerCard, TitleCard, ButtonCard, DivButtonsCard, CardItem } from "./Home.style";
+import { ContainerCard, TitleCard, ButtonCard, DivButtonsCard } from "./Home.style";
 
 import { ModalBuyer, ModalCotation } from "../../components"
 import { StatusEnum } from "../../enums/StatusEnum";
 import { getTopics } from "../../store/action/topicActions";
+import CardHome from "../../components/CardHome/CardHome.component";
+import { ModalDTO } from "../../models/ModalsDTO";
 
 //listas apenas do colaborador se for usuario tipo colaborador
 //lista geral com botao de aprovar ou reprovar pro gestor se tiver mais de duas cotacoes
 //lista geral com botao de aprovar ou reprovar pro financeiro se o gestor tiver aprovado
 //lista geral pro comprador com modal pra solicitar cotacao
 
-const exemplo = [
-  {
-    nome: 'TV',
-    valor: 'R$ 1.000,00',
-    data: '01/01/2020',
-  },
-  {
-    nome: 'TV',
-    valor: 'R$ 1.000,00',
-    data: '01/01/2020',
-  }
-]
 
 const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
 
@@ -39,13 +29,23 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
 
   const [list, setList] = useState<any>([]);
   
-  const [OpenModalAddCotation, setOpenModalAddCotation] = useState<any>({
+  const [OpenModalAddCotation, setOpenModalAddCotation] = useState<ModalDTO>({
     open: false,
-    id: null
+    id: 0
   });
 
-  const [OpenModalCotation, setOpenModalCotation] = useState<boolean>(false);
-  const [showItensTopic, setShowItensTopic] = useState<boolean>(false);
+  const [OpenModalCotation, setOpenModalCotation] = useState<ModalDTO>({
+    open: false,
+    id: 0
+  });
+
+  const [showItensTopic, setShowItensTopic] = useState<ModalDTO>({
+    open: false,
+    id: 0
+  }); 
+
+  console.log(showItensTopic);
+  
 
   useEffect(() => {
     redirectToLogin(navigate);
@@ -68,28 +68,17 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
               <p>Status: { StatusEnum[item.status]}</p>
             </TitleCard>
             <DivButtonsCard>
-              <ButtonCard onClick={ () => setShowItensTopic(!showItensTopic)}> Visualizar Itens do tópico </ButtonCard>
-              <ButtonCard onClick={ () => setOpenModalCotation(!OpenModalCotation) } > Visualizar cotações </ButtonCard>
+              <ButtonCard onClick={ () => setShowItensTopic({open: !showItensTopic.open, id: item.topicId})}> Visualizar Itens do tópico </ButtonCard>
+              <ButtonCard onClick={ () => setOpenModalCotation({open: true, id: item.topicId}) } > Visualizar cotações </ButtonCard>
               <ButtonCard onClick={ () => setOpenModalAddCotation({open: true, id: item.topicId}) }> Adicinar cotação </ButtonCard>
             </DivButtonsCard>
-            {
-              showItensTopic && (
-                exemplo.map((item, index) => (
-                  <CardItem key={index}>
-                    {/* <img src={Image} alt="imagem do iten" /> */}
-                    <p>{item.nome}</p>
-                    <p>{item.data}</p>
-                    <p>{item.valor}</p>
-                  </CardItem>
-                ))
-              )
-            }
+            { showItensTopic.open && showItensTopic.id === item.topicId && ( <CardHome id={item.topicId} /> ) } 
           </ContainerCard>
         ))
       }
       
-      { OpenModalAddCotation.open && ( <ModalBuyer id={OpenModalAddCotation.id} onClick={ () => setOpenModalAddCotation({open: false}) }/> ) }
-      { OpenModalCotation && ( <ModalCotation onClick={ () => setOpenModalCotation(!OpenModalCotation) } /> ) }
+      { OpenModalAddCotation.open && ( <ModalBuyer id={OpenModalAddCotation.id} onClick={ () => setOpenModalAddCotation({open: false})}/> )}
+      { OpenModalCotation.open && ( <ModalCotation id={OpenModalCotation.id} onClick={ () => setOpenModalCotation({open: false})}/> )}
     </Container>
   );
 };

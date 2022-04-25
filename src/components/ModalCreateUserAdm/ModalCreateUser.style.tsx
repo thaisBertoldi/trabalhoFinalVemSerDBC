@@ -18,9 +18,10 @@ export const ModalAdm = styled.div`
     margin-top: 20px;
     gap: 15px;
 
-    @media (max-width: 768px) {
+  }
+
+  @media (max-width: 768px) {
       width: 80%;
-    }
   }
 
   -webkit-animation: scale-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940);

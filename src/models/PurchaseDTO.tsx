@@ -4,15 +4,6 @@ export interface NewRequestPurchase {
   price: string,
   file: string,
 }
-
-export interface NewRequestPurchaseArray {
-  item: {
-    itemName: string;
-    description: string;
-    value: string;
-    file: string;
-  }[];
-}
 export interface PurchaseDTO {
   auth: {
     listName: string;
@@ -21,4 +12,8 @@ export interface PurchaseDTO {
     value: string;
     file: string;
   };
+}
+
+export interface TitlePurchaseDTO {
+  title: string
 }
