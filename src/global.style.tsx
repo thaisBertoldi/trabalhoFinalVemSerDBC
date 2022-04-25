@@ -165,6 +165,7 @@ export const LinkCustom = styled.div`
 
 export const DivErrorYup = styled.div`
   color: ${Theme.color.danger};
+  font-size: 10px;
 `;
 
 export const CenterCustom = styled.div`

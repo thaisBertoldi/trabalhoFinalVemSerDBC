@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Logo from "../../components/Logo/Logo";
-import Notiflix from "notiflix";
 import { connect, DispatchProp } from "react-redux";
 import {
   Btn,
@@ -12,6 +11,7 @@ import {
   ContainerGetInfo,
   ContainerPrincipal,
   ContainerTitle,
+  DivErrorYup,
   Input,
   LinkCustom,
   Paragraph,
@@ -23,16 +23,31 @@ import { handleLogin } from "../../store/action/authActions";
 import { Theme } from "../../theme";
 import { hasLogin } from "../../utils/utils";
 import { RootState } from "../../store";
-import { isLoggedDTO } from "../../models/UserDTO";
+import { isLoggedDTO, UsersAdmDTO } from "../../models/UserDTO";
+import { getAllUsers } from "../../store/action/adminActions";
 
 const Login = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState<boolean>(true);
+  const [hasUserName, setHasUserName] = useState<boolean>(true);
+  const [allUsers, setAllUsers] = useState<any>([]);
 
   useEffect(() => {
     hasLogin(navigate);
+    getAllUsers(setAllUsers);
   }, []);
+
+  const verificationUsername = (email: string) => {
+    const userFilter = allUsers.filter((user: UsersAdmDTO) => {
+      return user.email.match(email);
+    });
+    if (userFilter.length === 0) {
+      setHasUserName(false);
+    } else {
+      setHasUserName(true);
+    }
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -75,8 +90,17 @@ const Login = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
                 name="email"
                 type="text"
                 onChange={formik.handleChange}
+                onBlur={(event) => verificationUsername(event.target.value)}
                 value={formik.values.email}
               />
+              {formik.errors.email && formik.touched.email ? (
+                <DivErrorYup>{formik.errors.email}</DivErrorYup>
+              ) : null}
+              {!hasUserName && (
+                <DivErrorYup>
+                  Esse usuário não está cadastrado no sistema.
+                </DivErrorYup>
+              )}
               <div>
                 <Input
                   width="99%"
@@ -88,6 +112,9 @@ const Login = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
                   onChange={formik.handleChange}
                   value={formik.values.password}
                 />
+                {formik.errors.password && formik.touched.password ? (
+                  <DivErrorYup>{formik.errors.password}</DivErrorYup>
+                ) : null}
                 <DivEye>
                   {showPassword ? (
                     <FaEye onClick={() => setShowPassword(!showPassword)} />
@@ -105,8 +132,8 @@ const Login = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
 
               <Paragraph>
                 Não possui uma conta?{" "}
-                <LinkCustom >
-                  <Link to="/register">Registrar</Link>  
+                <LinkCustom>
+                  <Link to="/register">Registrar</Link>
                 </LinkCustom>
               </Paragraph>
             </DivInputsLogin>
