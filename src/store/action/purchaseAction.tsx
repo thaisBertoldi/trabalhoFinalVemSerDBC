@@ -22,23 +22,21 @@ export const handleCreateTopic = async (valuesTopic: TitlePurchaseDTO, setIdTopi
     Loading.remove();
   }
 
- export const handleCreateList = async (values: NewRequestPurchase, id: number, setArrayItens: Function, arrayItens: Array<NewRequestPurchase>, formik: Function) => {
+ export const handleCreateList = async (values: NewRequestPurchase, idTopic: number, setArrayItens: Function, arrayItens: Array<NewRequestPurchase>, formik: Function) => {
 
       const formData = new FormData();
       formData.append("file", values.file);
       formData.append("description", values.description);
-      formData.append("name", values.name);
+      formData.append("name", values.itemName);
       formData.append("price", values.price.replace('R$ ', '').replace('.', '').replace(',', '.'));
-      setArrayItens([...arrayItens, values])
-     
+      
       try {
         Loading.circle();
-        const { data } = await api.post(`${ENDPOINT_TOPICS.CREATE_ITEM_TOPIC}/${id}`, formData);
-        console.log("item" + data)
+        const { data } = await api.post(`${ENDPOINT_TOPICS.CREATE_ITEM_TOPIC}/${idTopic}`, formData);
+        setArrayItens([...arrayItens, data])
         Notiflix.Notify.success(
-          `Item ${values.name} adicionado com sucesso.`
+          `Item ${values.itemName} adicionado com sucesso.`
         );
-        console.log(data)
       } catch (error) {
         console.log(error);
         Notiflix.Notify.failure(
@@ -49,10 +47,10 @@ export const handleCreateTopic = async (valuesTopic: TitlePurchaseDTO, setIdTopi
     Loading.remove();
   }
 
-  export const handleFinallyTopic = async (id: number) => {
+  export const handleFinallyTopic = async (idItem: number) => {
     try {
       Loading.circle();
-      const { data } = await api.put(`${ENDPOINT_TOPICS.UPDATE_STATUS}/${id}`);
+      const { data } = await api.put(`${ENDPOINT_TOPICS.UPDATE_STATUS}/${idItem}`);
       console.log(data)
       Notiflix.Notify.success(
         `Tópico finalizado com sucesso.`
@@ -66,7 +64,7 @@ export const handleCreateTopic = async (valuesTopic: TitlePurchaseDTO, setIdTopi
     Loading.remove();
   }
 
-  export const handleDeleteItem = async (id: number) => {
+  export const handleDeleteItem = async (id: number, setArrayItens: Function, arrayItens: Array<NewRequestPurchase>) => {
       try {
         Loading.circle();
         const { data } = await api.delete(`${ENDPOINT_TOPICS.DELETE_ITEM}/${id}`);
@@ -74,6 +72,12 @@ export const handleCreateTopic = async (valuesTopic: TitlePurchaseDTO, setIdTopi
         Notiflix.Notify.success(
           `Item excluído.`
         );
+        const arrayItensFilter = arrayItens.filter(item => {
+          if(item.itemId !== id){
+            return item
+          }
+        })
+        setArrayItens(arrayItensFilter)
       } catch (error) {
         console.log(error);
         Notiflix.Notify.failure(

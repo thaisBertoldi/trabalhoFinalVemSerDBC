@@ -1,8 +1,9 @@
 export interface NewRequestPurchase {
-  name: string,
+  itemName: string,
   description: string,
   price: string,
   file: string,
+  itemId: number,
 }
 export interface PurchaseDTO {
   auth: {

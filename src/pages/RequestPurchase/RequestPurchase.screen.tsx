@@ -9,7 +9,12 @@ import {
 } from "../../global.style";
 import { NewRequestPurchase, PurchaseDTO } from "../../models/PurchaseDTO";
 import { RootState } from "../../store";
-import { handleCreateList, handleCreateTopic, handleDeleteItem, handleFinallyTopic } from "../../store/action/purchaseAction";
+import {
+  handleCreateList,
+  handleCreateTopic,
+  handleDeleteItem,
+  handleFinallyTopic,
+} from "../../store/action/purchaseAction";
 import { Theme } from "../../theme";
 import {
   ContainerRequest,
@@ -31,7 +36,9 @@ const RequestPurchase = ({
   const [arrayItens, setArrayItens] = useState<NewRequestPurchase[]>([]);
 
   const navigate = useNavigate();
-  const [idTopic, setIdTopic] = useState(0)
+  const [idTopic, setIdTopic] = useState(0);
+
+  console.log(arrayItens)
 
   useEffect(() => {
     redirectAdmin(navigate, user.profile);
@@ -43,21 +50,22 @@ const RequestPurchase = ({
     },
     onSubmit: (valuesTopic) => {
       // handleCreateTopic(valuesTopic, setIdTopic);
-      console.log(valuesTopic)
+      console.log(valuesTopic);
     },
   });
 
   const formik = useFormik({
     initialValues: {
-      name: "",
+      itemName: "",
       description: "",
       price: "",
       file: "",
+      itemId: 0,
     },
     onSubmit: (values, actions) => {
       handleFinallyTopic(idTopic);
       actions.resetForm();
-      formikTopic.resetForm()
+      formikTopic.resetForm();
     },
   });
   return (
@@ -67,8 +75,6 @@ const RequestPurchase = ({
       </CenterCustom>
       <ContainerRequest>
         <ContainerRequestForm>
-
-          
           <form onSubmit={formikTopic.handleSubmit}>
             <InputForm
               placeholder="Título da lista"
@@ -81,7 +87,6 @@ const RequestPurchase = ({
               value={formikTopic.values.title}
               onBlur={() => handleCreateTopic(formikTopic.values, setIdTopic)}
             />
-            {/* <button type="submit" >Criar tarefa</button> */}
           </form>
 
           <form onSubmit={formik.handleSubmit}>
@@ -89,16 +94,16 @@ const RequestPurchase = ({
               placeholder="Nome do item"
               width={"100%"}
               height={"40px"}
-              id="name"
-              name="name"
+              id="itemName"
+              name="itemName"
               type="text"
               onChange={formik.handleChange}
-              value={formik.values.name}
+              value={formik.values.itemName}
             />
 
             <TextAreaCustom
               placeholder="Descrição"
-              rows={10}
+              rows={5}
               id="description"
               name="description"
               onChange={formik.handleChange}
@@ -136,7 +141,15 @@ const RequestPurchase = ({
                 width={"300px"}
                 color={"#25292a"}
                 type="button"
-                onClick={() => handleCreateList(formik.values, idTopic, setArrayItens, arrayItens, formik.resetForm)}
+                onClick={() =>
+                  handleCreateList(
+                    formik.values,
+                    idTopic,
+                    setArrayItens,
+                    arrayItens,
+                    formik.resetForm
+                  )
+                }
               >
                 Adicionar
               </BtnForm>
@@ -148,13 +161,13 @@ const RequestPurchase = ({
         </ContainerRequestForm>
         {arrayItens.map((item, index) => (
           <DivItens key={index}>
-            <p>Nome: {item.name}</p>
+            <p>Nome: {item.itemName}</p>
             <p>Descrição: {item.description}</p>
+            <img src={item.file} alt="imagem do item"/>
             <p>Valor: R$ {item.price}</p>
-            {/* <button onClick={() => handleDeleteItem(index)}>
-              {" "}
-              <FaTrashAlt />{" "}
-            </button> */}
+            <p>Id: {item.itemId}</p>
+
+            <FaTrashAlt onClick={() => handleDeleteItem(item.itemId, setArrayItens, arrayItens)} />
           </DivItens>
         ))}
       </ContainerRequest>
