@@ -9,7 +9,7 @@ import {
 } from "../../global.style";
 import { NewRequestPurchase, PurchaseDTO } from "../../models/PurchaseDTO";
 import { RootState } from "../../store";
-import { handleCreateList } from "../../store/action/purchaseAction";
+import { handleCreateList, handleCreateTopic, handleFinallyTopic } from "../../store/action/purchaseAction";
 import { Theme } from "../../theme";
 import {
   ContainerRequest,
@@ -23,63 +23,40 @@ import { useNavigate } from "react-router-dom";
 import { isLoggedDTO } from "../../models/UserDTO";
 import { FaTrashAlt } from "react-icons/fa";
 //pagina de compra pro usuário tipo colaborador
-const RequestPurchase = ({ user, auth, dispatch }: isLoggedDTO & PurchaseDTO & DispatchProp) => {
-
+const RequestPurchase = ({
+  user,
+  auth,
+  dispatch,
+}: isLoggedDTO & PurchaseDTO & DispatchProp) => {
   const [arrayItens, setArrayItens] = useState<NewRequestPurchase[]>([]);
 
   const navigate = useNavigate();
-  
+  const [idTopic, setIdTopic] = useState(0)
+
   useEffect(() => {
     redirectAdmin(navigate, user.profile);
   }, [user]);
 
-  const addItenToList = () => {
-    console.log("teste");
-    const { itemName, description, value, file } = formik.values;
-    const newItem = {
-      itemName,
-      description,
-      value,
-      file,
-    };
-    formik.resetForm({
-      values: {
-        listName: formik.values.listName,
-        itemName: "",
-        description: "",
-        value: "",
-        file: "",
-      },
-    });
-    setArrayItens([...arrayItens, newItem]);
-  };
-
-  const handleDeleteItem = (index: number) => {
-    const newArray = arrayItens.filter((item, i) => i !== index);
-    setArrayItens(newArray);
-  }
-
-
+  const formikTopic = useFormik({
+    initialValues: {
+      title: "",
+    },
+    onSubmit: (valuesTopic) => {
+      handleCreateTopic(valuesTopic, setIdTopic);
+    },
+  });
 
   const formik = useFormik({
     initialValues: {
-      listName: "",
-      itemName: "",
+      name: "",
       description: "",
-      value: "",
+      price: "",
       file: "",
     },
     onSubmit: (values, actions) => {
-      handleCreateList(values, arrayItens);
-      actions.resetForm({
-        values: {
-          listName: "",
-          itemName: "",
-          description: "",
-          value: "",
-          file: "",
-        },
-      });
+      handleFinallyTopic(idTopic);
+      actions.resetForm();
+      formikTopic.resetForm()
     },
   });
   return (
@@ -88,28 +65,33 @@ const RequestPurchase = ({ user, auth, dispatch }: isLoggedDTO & PurchaseDTO & D
         <h3>Cadastrar compra</h3>
       </CenterCustom>
       <ContainerRequest>
-        <form onSubmit={formik.handleSubmit}>
-          <ContainerRequestForm>
+        <ContainerRequestForm>
+
+          
+          <form onSubmit={formikTopic.handleSubmit}>
             <InputForm
               placeholder="Título da lista"
               width={"100%"}
               height={"40px"}
-              id="listName"
-              name="listName"
+              id="title"
+              name="title"
               type="text"
-              onChange={formik.handleChange}
-              value={formik.values.listName}
+              onChange={formikTopic.handleChange}
+              value={formikTopic.values.title}
             />
+            <button type="submit" >Criar tarefa</button>
+          </form>
 
+          <form onSubmit={formik.handleSubmit}>
             <InputForm
               placeholder="Nome do item"
               width={"100%"}
               height={"40px"}
-              id="itemName"
-              name="itemName"
+              id="name"
+              name="name"
               type="text"
               onChange={formik.handleChange}
-              value={formik.values.itemName}
+              value={formik.values.name}
             />
 
             <TextAreaCustom
@@ -125,11 +107,11 @@ const RequestPurchase = ({ user, auth, dispatch }: isLoggedDTO & PurchaseDTO & D
               placeholder="Valor do item"
               width={"100%"}
               height={"40px"}
-              id="value"
-              name="value"
+              id="price"
+              name="price"
               type="text"
-              onChange={ (e) => maskMoney(e, formik.setFieldValue, "value") }
-              value={formik.values.value}
+              onChange={formik.handleChange}
+              value={formik.values.price}
             />
 
             <div>
@@ -146,36 +128,33 @@ const RequestPurchase = ({ user, auth, dispatch }: isLoggedDTO & PurchaseDTO & D
                 }
               />
             </div>
-            
+
             <CenterCustom>
               <BtnForm
                 width={"300px"}
-                color={'#25292a'}
+                color={"#25292a"}
                 type="button"
-                onClick={() => addItenToList()}
+                onClick={() => handleCreateList(formik.values, idTopic, setArrayItens, arrayItens, formik.resetForm)}
               >
                 Adicionar
               </BtnForm>
-              <BtnForm
-                width={"300px"}
-                color={'#25292a'}
-                type="submit"
-              >
+              <BtnForm width={"300px"} color={"#25292a"} type="submit">
                 Finalizar
               </BtnForm>
             </CenterCustom>
-          </ContainerRequestForm>
-        </form>
-        {
-          arrayItens.map( (item, index) => (
-            <DivItens>
-              <p>Nome: {item.itemName}</p>
-              <p>Descrição: {item.description}</p>
-              <p>Valor: R$ { item.value.replace('.', ',')}</p>
-              <button onClick={ () => handleDeleteItem(index) }> <FaTrashAlt /> </button>
-            </DivItens>
-          ))  
-        }
+          </form>
+        </ContainerRequestForm>
+        {arrayItens.map((item, index) => (
+          <DivItens>
+            <p>Nome: {item.name}</p>
+            <p>Descrição: {item.description}</p>
+            <p>Valor: R$ {item.price}</p>
+            {/* <button onClick={() => handleDeleteItem(index)}>
+              {" "}
+              <FaTrashAlt />{" "}
+            </button> */}
+          </DivItens>
+        ))}
       </ContainerRequest>
     </Container>
   );
