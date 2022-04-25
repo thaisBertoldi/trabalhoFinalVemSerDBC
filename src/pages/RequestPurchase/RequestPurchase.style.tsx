@@ -45,7 +45,8 @@ export const InputLabelDiv = styled.div`
 
 export const TextAreaCustom = styled.textarea`
   width: 100%;
-  height: 150px;
+  /* height: 150px; */
+  margin-top: 15px;
   padding: 12px 20px;
   box-sizing: border-box;
   border: 2px solid ${Theme.color.primary};
