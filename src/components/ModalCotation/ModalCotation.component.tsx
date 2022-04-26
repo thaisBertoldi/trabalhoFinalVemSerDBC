@@ -5,7 +5,7 @@ import { BtnClose, ContainerModal, Modal } from '../ModalBuyer/ModalBuyer.style'
 
 const ModalCotation = ({onClick, id}: any) => {
 
-  const [value, setValues] = useState<any>('');
+  const [value, setValues] = useState<any>([]);
 
   const getCotation = async (id: number) => {
     try {
@@ -26,7 +26,17 @@ const ModalCotation = ({onClick, id}: any) => {
     <ContainerModal>
       <Modal>
         <BtnClose onClick={onClick}> <AiFillCloseCircle /> </BtnClose>
-        <h1>ModalCotation</h1>
+        <h1>Cotações </h1>
+        <button> Reprovar todas as cotações </button>
+        {
+          value.map((item: any) => (
+            <div key={item.quotationId}>
+              <p> R$: {item.quotationPrice}</p>
+              <p> Status da cotação: {item.quotationStatus}</p>
+              <button> Aprovar </button>
+            </div>
+          ))
+        }
       </Modal>
     </ContainerModal>
   );

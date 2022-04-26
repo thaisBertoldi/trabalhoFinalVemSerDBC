@@ -14,12 +14,16 @@ const ModalBuyer = ({onClick, id}: any) => {
   const handleAddCotation = async (values: any) => {
     console.log(id);
     const finalValue = values.replace('R$ ', '').replace('.', '').replace(',', '.');
-    const obj =  {
-      id: id,
-      value: finalValue
+    const price = parseFloat(finalValue);
+
+    const options = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
     }
+
     try {
-      const {data} = await api.post(ENDPOINT_COTATION.CREATE_COTATION, obj);
+      const {data} = await api.post(`${ENDPOINT_COTATION.CREATE_COTATION}/${id}?preco=${price}`);
       console.log(data);
     } catch (error) {
       console.log(error);
