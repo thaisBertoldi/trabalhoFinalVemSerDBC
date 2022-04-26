@@ -23,17 +23,19 @@ const CardHome = ({ id }: any) => {
 
   return (
     <div>
-      {listItens.map((item: any, index: number) => (          
-        <CardItem key={index}>
+      {listItens.length > 0 ? (
+        <CardItem>
           <img
-            src={`data:image/jpeg;base64,${item.file}`}
-            alt="imagem do iten"
+            src={`data:image/jpeg;base64,${listItens[0].file}`}
+            alt="imagem do item"
           />
-          <p>{item.itemName.toUpperCase()}</p>
-          <p>{item.description}</p>
-          <p>{item.value}</p>
-        </CardItem>      
-      ))}
+          <p>{listItens[0].itemName.toUpperCase()}</p>
+          <p>{listItens[0].value}</p>
+          <p>{listItens[0].description}</p>
+        </CardItem>
+      ) : (
+        <h2>Não há itens cadastrados.</h2>
+      )}
     </div>
   );
 };

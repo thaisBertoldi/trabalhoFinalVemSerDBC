@@ -39,6 +39,7 @@ export const Modal = styled.div`
     }
   }
 `;
+
 export const CardItem = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);

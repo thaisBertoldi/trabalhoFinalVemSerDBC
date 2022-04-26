@@ -22,7 +22,12 @@ import {
   InfoDataPrice,
 } from "./Home.style";
 
-import { ModalBuyer, ModalCardItens, ModalCotation, Pagination } from "../../components";
+import {
+  ModalBuyer,
+  ModalCardItens,
+  ModalCotation,
+  Pagination,
+} from "../../components";
 import { ColorEnum, StatusEnum } from "../../enums/StatusEnum";
 import { getTopics } from "../../store/action/topicActions";
 import CardHome from "../../components/CardHome/CardHome.component";
@@ -56,7 +61,7 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   const [OpenModalItens, setOpenModalItens] = useState<ModalDTO>({
     open: false,
     id: 0,
-  })
+  });
 
   // const [showItensTopic, setShowItensTopic] = useState<ModalDTO>({
   //   open: false,
@@ -64,19 +69,19 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   // });
 
   const changePage = (index: number) => {
-    setPage(index)
-  }
+    setPage(index);
+  };
 
-  const handleUserSearch = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleUserSearch = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const value = event.target.value;
     try {
-      if(value.length >= 4) {
+      if (value.length >= 4) {
         // const {data} = await api.get('')
       }
-    } catch (error) {
-      
-    }
-  }
+    } catch (error) {}
+  };
 
   useEffect(() => {
     redirectToLogin(navigate);
@@ -84,12 +89,8 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   }, [user]);
 
   useEffect(() => {
-    getTopics(
-      setListTopics,
-      setAllPages,
-      page,
-    );
-  },[page, OpenModalCotation.open])
+    getTopics(setListTopics, setAllPages, page);
+  }, [page, OpenModalCotation.open]);
 
   return (
     <Container>
@@ -102,7 +103,7 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
           width={"50%"}
           height={"40px"}
           placeholder="Pesquisar"
-          onChange={ (e) => handleUserSearch(e)}
+          onChange={(e) => handleUserSearch(e)}
         ></InputForm>
         <IconSearch />
       </DivSearch>
@@ -115,8 +116,8 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
               <TopicName>
                 <MdSegment />
                 <h2>{item.title.toUpperCase()}</h2>
-                <p>Status: {StatusEnum[item.status]}</p>
               </TopicName>
+              <span>Status: {StatusEnum[item.status]}</span>
             </TitleCard>
             <InfoDataPrice>
               <p>
@@ -127,16 +128,6 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
               </p>
             </InfoDataPrice>
             <DivButtonsCard>
-              <ButtonCard
-                onClick={() =>
-                  setOpenModalItens({
-                    open: !OpenModalItens.open,
-                    id: item.topicId,
-                  })
-                }
-              >
-                <BiDetail /> Visualizar Itens do tópico{" "}
-              </ButtonCard>
               <ButtonCard
                 onClick={() =>
                   setOpenModalCotation({ open: true, id: item.topicId })
@@ -156,9 +147,25 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
             </DivButtonsCard>
 
             <CardHome id={item.topicId} />
+            
+            <DivButtonsCard>
+              <ButtonCard
+                onClick={() =>
+                  setOpenModalItens({
+                    open: !OpenModalItens.open,
+                    id: item.topicId,
+                  })
+                }
+              >
+                <BiDetail /> Visualizar todos os itens{" "}
+              </ButtonCard>
+            </DivButtonsCard>
 
             {OpenModalItens.open && (
-              <ModalCardItens id={OpenModalItens.id} onClick={() => setOpenModalItens({open: false})} />
+              <ModalCardItens
+                id={OpenModalItens.id}
+                onClick={() => setOpenModalItens({ open: false })}
+              />
             )}
             {OpenModalAddCotation.open && (
               <ModalBuyer

@@ -38,6 +38,7 @@ export const Modal = styled.div`
       width: 80%;
     }
   }
+
 `;
 
 export const ButtonCard = styled.button`

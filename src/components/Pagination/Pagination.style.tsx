@@ -17,7 +17,7 @@ export const ButtonCustom = styled.button<{ colorHover: string }>`
   display: flex;
   align-items: center;
 
-  :hover {
+  :hover :enabled {
     -moz-transform: scale(1.1);
     -webkit-transform: scale(1.1);
     transform: scale(1.1);

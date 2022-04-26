@@ -13,16 +13,24 @@ export const ContainerCard = styled.div`
   display: flex;
   flex-direction: column;
   width: 500px;
-  height: 700px;
+  max-height: 600px;
   background-color: #fff;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
+  border-radius: 15px;
   padding-bottom: 20px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0px 1px 31px 9px rgba(0, 0, 0, 0.46);
+  box-shadow: 0px 1px 31px 9px rgba(0, 0, 0, 0.46);
+
+  p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
 `;
 
-export const TitleCard = styled.div<{color: string}>`
-  background-color: ${props => props.color};
+export const TitleCard = styled.div<{ color: string }>`
+  background-color: ${(props) => props.color};
   padding: 10px;
   color: white;
   border-top-left-radius: 15px;
@@ -31,7 +39,6 @@ export const TitleCard = styled.div<{color: string}>`
   @media (max-width: 1170px) {
     grid-template-columns: repeat(2, 1fr);
   }
-
 `;
 
 export const DivButtonsCard = styled.div`
@@ -58,7 +65,7 @@ export const ButtonCard = styled.button`
 
   @media (max-width: 580px) {
     width: 150px;
-  } 
+  }
 `;
 
 export const DivSearch = styled.div`
@@ -77,7 +84,7 @@ export const TopicName = styled.div`
   h2 {
     font-size: 20px;
   }
-  p {
+  span {
     font-size: 15px;
   }
 `;
