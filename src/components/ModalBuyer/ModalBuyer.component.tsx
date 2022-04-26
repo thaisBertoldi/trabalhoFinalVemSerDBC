@@ -2,8 +2,8 @@ import { useFormik } from 'formik';
 import * as Yup from "yup";
 
 import { AiFillCloseCircle } from "react-icons/ai";
-import { ContainerModal, Modal, BtnClose } from './ModalBuyer.style';
-import { InputForm, Btn } from '../../global.style';
+import { ContainerModal, Modal, BtnClose, ButtonCard } from './ModalBuyer.style';
+import { InputForm } from '../../global.style';
 import { Theme } from "../../theme";
 import { maskMoney } from '../../utils/utils';
 import api from '../../service/api';
@@ -57,7 +57,7 @@ const ModalBuyer = ({onClick, id}: any) => {
             onChange={ (e) => maskMoney(e, formik.setFieldValue, "value") }
             value={formik.values.value}
           />
-          <Btn width='100%' color={Theme.color.primary}> Adicionar cotação </Btn>
+          <ButtonCard color={Theme.color.primary}> Adicionar cotação </ButtonCard>
         </form>
       </Modal>
     </ContainerModal>

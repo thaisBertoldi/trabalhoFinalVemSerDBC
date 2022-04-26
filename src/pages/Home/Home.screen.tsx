@@ -60,8 +60,6 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
     setPage(index)
 }
 
-  // console.log(showItensTopic);
-
   useEffect(() => {
     redirectToLogin(navigate);
     redirectAdmin(navigate, user.profile);
@@ -73,7 +71,7 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
       setAllPages,
       page,
     );
-  },[page])
+  },[page, OpenModalCotation.open])
 
   return (
     <Container>
@@ -149,14 +147,6 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
           onClick={() => setOpenModalCotation({ open: false })}
         />
       )}
-      {/* <ReactPaginate
-        breakLabel="..."
-        nextLabel="next >"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={allPages}
-        pageCount={pageCount}
-        previousLabel="< previous"
-      /> */}
       <Pagination page={page} onPageChange={changePage} allPages={allPages} />
     </Container>
   );
