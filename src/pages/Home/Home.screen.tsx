@@ -20,6 +20,7 @@ import {
   TopicName,
   ContainerAllInfo,
   InfoDataPrice,
+  DivStatus,
 } from "./Home.style";
 
 import {
@@ -112,12 +113,14 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
       <ContainerAllInfo>
         {listTopics?.content?.map((item: any) => (
           <ContainerCard key={item.topicId}>
-            <TitleCard color={ColorEnum[item.status]}>
+            <TitleCard>
               <TopicName>
                 <MdSegment />
                 <h2>{item.title.toUpperCase()}</h2>
               </TopicName>
-              <span>Status: {StatusEnum[item.status]}</span>
+              <DivStatus color={ColorEnum[item.status]}>
+                <span>Status: {StatusEnum[item.status]}</span>
+              </DivStatus>
             </TitleCard>
             <InfoDataPrice>
               <p>
@@ -147,7 +150,7 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
             </DivButtonsCard>
 
             <CardHome id={item.topicId} />
-            
+
             <DivButtonsCard>
               <ButtonCard
                 onClick={() =>

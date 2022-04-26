@@ -7,6 +7,7 @@ export const ContainerAllInfo = styled.div`
   align-items: center;
   justify-content: center;
   gap: 15px;
+  margin-bottom: 20px;
 `;
 
 export const ContainerCard = styled.div`
@@ -29,8 +30,8 @@ export const ContainerCard = styled.div`
   }
 `;
 
-export const TitleCard = styled.div<{ color: string }>`
-  background-color: ${(props) => props.color};
+export const TitleCard = styled.div`
+  background-color: ${Theme.color.primary};
   padding: 10px;
   color: white;
   border-top-left-radius: 15px;
@@ -46,19 +47,19 @@ export const DivButtonsCard = styled.div`
   display: flex;
   justify-content: center;
   margin: 20px 0;
-  gap: 15px;
+  gap: 1px;
 `;
 
 export const ButtonCard = styled.button`
-  width: 200px;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 5px;
   height: 40px;
   border: none;
-  border-radius: 5px;
-  background-color: #393e3f;
+
+  background-color: ${Theme.color.grayDark};
   color: #fff;
   font-size: 14px;
   cursor: pointer;
@@ -92,4 +93,10 @@ export const TopicName = styled.div`
 export const InfoDataPrice = styled.div`
   display: flex;
   justify-content: space-around;
+`;
+
+export const DivStatus = styled.div<{color: string}>`
+  display: flex;
+  justify-content: flex-end;
+  color: ${props => props.color}
 `;

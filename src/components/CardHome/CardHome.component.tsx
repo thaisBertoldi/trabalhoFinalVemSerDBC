@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ENDPOINT_TOPICS } from "../../constants";
 import api from "../../service/api";
-import { CardItem } from "./CardHome.style";
+import { CardItem, CardItemInfos, CardItemValueName } from "./CardHome.style";
 
 const CardHome = ({ id }: any) => {
   const [listItens, setListItens] = useState<any>([]);
@@ -29,12 +29,18 @@ const CardHome = ({ id }: any) => {
             src={`data:image/jpeg;base64,${listItens[0].file}`}
             alt="imagem do item"
           />
-          <p>{listItens[0].itemName.toUpperCase()}</p>
-          <p>{listItens[0].value}</p>
-          <p>{listItens[0].description}</p>
+          <CardItemInfos>
+            <CardItemValueName>
+              <p>{listItens[0].itemName.toUpperCase()}</p>
+              <h1>R$ {listItens[0].value}</h1>
+            </CardItemValueName>
+            <p>{listItens[0].description}</p>
+          </CardItemInfos>
         </CardItem>
       ) : (
-        <h2>Não há itens cadastrados.</h2>
+        <CardItem>
+          <h2>Não há itens cadastrados.</h2>
+        </CardItem>
       )}
     </div>
   );
