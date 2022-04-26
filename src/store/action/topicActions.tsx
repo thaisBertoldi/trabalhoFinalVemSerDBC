@@ -3,20 +3,15 @@ import { ENDPOINT_TOPICS } from "../../constants";
 import api from "../../service/api";
 
 export const getTopics = async (
-  setList: Function,
-  listTopics: any,
+  setListTopics: Function,
   setAllPages: Function,
-  allPages: number,
-  currentPage: number,
-  pageCount: number,
-  setpageCount: Function
+  page: number,
 ) => {
   try {
-    const { data } = await api.get(`${ENDPOINT_TOPICS.GET_ALL}=${currentPage}`);
-    console.log(`${ENDPOINT_TOPICS.GET_ALL}=${currentPage}`)
-    setpageCount(Math.ceil(data.totalElements / data.size));
+    const { data } = await api.get(`${ENDPOINT_TOPICS.GET_ALL}=${page}`);
+    console.log(`${ENDPOINT_TOPICS.GET_ALL}=${page}`)
     setAllPages(data.totalPages);
-    setList(data);
+    setListTopics(data);
   } catch (error) {
     console.log(error);
   }
