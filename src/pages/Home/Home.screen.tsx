@@ -25,6 +25,7 @@ import { getTopics } from "../../store/action/topicActions";
 import CardHome from "../../components/CardHome/CardHome.component";
 import { ModalDTO } from "../../models/ModalsDTO";
 import { IconSearch } from "../../global.style";
+import ReactPaginate from "react-paginate";
 
 //listas apenas do colaborador se for usuario tipo colaborador
 //lista geral com botao de aprovar ou reprovar pro gestor se tiver mais de duas cotacoes
@@ -36,7 +37,10 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   const hasUser: string | any = localStorage.getItem("token");
   const User = JSON.parse(hasUser);
 
-  const [list, setList] = useState<any>([]);
+  const [listTopics, setListTopics] = useState<any>([]);
+  const [allPages, setAllPages] = useState<number>(0)
+  const [pageCount, setpageCount] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0)
 
   const [OpenModalAddCotation, setOpenModalAddCotation] = useState<ModalDTO>({
     open: false,
@@ -53,12 +57,17 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
     id: 0,
   });
 
+  const handlePageClick = async (data: any) => {
+    setCurrentPage(data.selected)
+    getTopics(setListTopics, listTopics, setAllPages, allPages, currentPage, pageCount, setpageCount);
+  };
+
   console.log(showItensTopic);
 
   useEffect(() => {
     redirectToLogin(navigate);
     redirectAdmin(navigate, user.profile);
-    getTopics(setList);
+    getTopics(setListTopics, listTopics, setAllPages, allPages, currentPage, pageCount, setpageCount);
   }, [user]);
 
   return (
@@ -75,7 +84,7 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
         ></InputForm>
         <IconSearch />
       </DivSearch>
-      {list?.content?.map((item: any) => (
+      {listTopics?.content?.map((item: any) => (
         <ContainerCard key={item.topicId}>
           <TitleCard color={ColorEnum[item.status]}>
             <TopicName>
@@ -130,6 +139,14 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
           onClick={() => setOpenModalCotation({ open: false })}
         />
       )}
+      <ReactPaginate
+        breakLabel="..."
+        nextLabel="next >"
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={allPages}
+        pageCount={pageCount}
+        previousLabel="< previous"
+      />
     </Container>
   );
 };

@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { Theme } from "../../theme";
-import { FcInspection } from "react-icons/fc";
 
 export const ContainerCard = styled.div`
   width: 80%;

@@ -6,7 +6,7 @@ export const ENDPOINT_AUTH = {
 };
 
 export const ENDPOINT_TOPICS = {
-  GET_ALL: '/main-page/topic-by-status?page', // p/ mostrar todos os tópicos
+  GET_ALL: '/main-page/topics?page', // p/ mostrar todos os tópicos
   CREATE_TOPIC : '/contributor/create-topic', // p/ criar um tópico
   CREATE_ITEM_TOPIC: '/contributor/create-item', // p/ criar um item no tópico  
   UPDATE_STATUS: "/contributor/update-status", // p/ finalizar o tópico e ele fechar com o status aberto
