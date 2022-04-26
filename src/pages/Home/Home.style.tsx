@@ -77,7 +77,6 @@ export const TopicName = styled.div`
   h2 {
     font-size: 20px;
   }
-<<<<<<< HEAD
   p {
     font-size: 15px;
   }
@@ -87,6 +86,3 @@ export const InfoDataPrice = styled.div`
   display: flex;
   justify-content: space-around;
 `;
-=======
-`;
->>>>>>> 6b47dac0032f797882b5c415ba91e94f040138bf

@@ -22,7 +22,7 @@ import {
   InfoDataPrice,
 } from "./Home.style";
 
-import { ModalBuyer, ModalCotation, Pagination } from "../../components";
+import { ModalBuyer, ModalCardItens, ModalCotation, Pagination } from "../../components";
 import { ColorEnum, StatusEnum } from "../../enums/StatusEnum";
 import { getTopics } from "../../store/action/topicActions";
 import CardHome from "../../components/CardHome/CardHome.component";
@@ -53,10 +53,15 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
     id: 0,
   });
 
-  const [showItensTopic, setShowItensTopic] = useState<ModalDTO>({
+  const [OpenModalItens, setOpenModalItens] = useState<ModalDTO>({
     open: false,
     id: 0,
-  });
+  })
+
+  // const [showItensTopic, setShowItensTopic] = useState<ModalDTO>({
+  //   open: false,
+  //   id: 0,
+  // });
 
   const changePage = (index: number) => {
     setPage(index)
@@ -124,8 +129,8 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
             <DivButtonsCard>
               <ButtonCard
                 onClick={() =>
-                  setShowItensTopic({
-                    open: !showItensTopic.open,
+                  setOpenModalItens({
+                    open: !OpenModalItens.open,
                     id: item.topicId,
                   })
                 }
@@ -149,8 +154,12 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
                 </ButtonCard>
               )}
             </DivButtonsCard>
+
             <CardHome id={item.topicId} />
 
+            {OpenModalItens.open && (
+              <ModalCardItens id={OpenModalItens.id} onClick={() => setOpenModalItens({open: false})} />
+            )}
             {OpenModalAddCotation.open && (
               <ModalBuyer
                 id={OpenModalAddCotation.id}
