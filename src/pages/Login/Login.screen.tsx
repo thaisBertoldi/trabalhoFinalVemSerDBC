@@ -38,9 +38,10 @@ const Login = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
     getAllUsers(setAllUsers);
   }, []);
 
-  const verificationUsername = (email: string) => {
+  const verificationUsername = (username: string) => {
+    console.log(allUsers)
     const userFilter = allUsers.filter((user: UsersAdmDTO) => {
-      return user.email.match(email);
+      return user.username.match(username);
     });
     if (userFilter.length !== 0) {
       setHasUserName(false);
@@ -51,11 +52,11 @@ const Login = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
 
   const formik = useFormik({
     initialValues: {
-      email: "",
+      username: "",
       password: "",
     },
     validationSchema: Yup.object({
-      email: Yup.string()
+      username: Yup.string()
         .email("Este campo precisa ser preenchido com um email.")
         .required("Você precisa preencher esse campo"),
       password: Yup.string().required("Você precisa preencher esse campo"),
@@ -86,15 +87,15 @@ const Login = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
                 width="99%"
                 height="40px"
                 placeholder="Username"
-                id="email"
-                name="email"
+                id="username"
+                name="username"
                 type="text"
                 onChange={formik.handleChange}
                 onBlur={(event) => verificationUsername(event.target.value)}
-                value={formik.values.email}
+                value={formik.values.username}
               />
-              {formik.errors.email && formik.touched.email ? (
-                <DivErrorYup>{formik.errors.email}</DivErrorYup>
+              {formik.errors.username && formik.touched.username ? (
+                <DivErrorYup>{formik.errors.username}</DivErrorYup>
               ) : null}
               {!hasUserName && (
                 <DivErrorYup>

@@ -1,5 +1,5 @@
 export interface LoginDTO {
-  email: string;
+  username: string;
   password: string;
 }
 
@@ -26,6 +26,6 @@ export interface UsersAdmDTO {
   userId: number;
   fullName: string;
   groups: number;
-  email: string;
+  username: string;
   image?: string;
 }
