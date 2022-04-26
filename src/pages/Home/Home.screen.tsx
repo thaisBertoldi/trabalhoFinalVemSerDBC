@@ -25,7 +25,7 @@ import { getTopics } from "../../store/action/topicActions";
 import CardHome from "../../components/CardHome/CardHome.component";
 import { ModalDTO } from "../../models/ModalsDTO";
 import { IconSearch } from "../../global.style";
-import ReactPaginate from "react-paginate";
+import Pagination from "../../components/Pagination/Pagination";
 
 //listas apenas do colaborador se for usuario tipo colaborador
 //lista geral com botao de aprovar ou reprovar pro gestor se tiver mais de duas cotacoes
@@ -38,9 +38,8 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   const User = JSON.parse(hasUser);
 
   const [listTopics, setListTopics] = useState<any>([]);
-  const [allPages, setAllPages] = useState<number>(0)
-  const [pageCount, setpageCount] = useState(0);
-  const [currentPage, setCurrentPage] = useState(0)
+  const [allPages, setAllPages] = useState<number>(0);
+  const [page, setPage] = useState<number>(0)
 
   const [OpenModalAddCotation, setOpenModalAddCotation] = useState<ModalDTO>({
     open: false,
@@ -57,18 +56,24 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
     id: 0,
   });
 
-  const handlePageClick = async (data: any) => {
-    setCurrentPage(data.selected)
-    getTopics(setListTopics, listTopics, setAllPages, allPages, currentPage, pageCount, setpageCount);
-  };
+  const changePage = (index: number) => {
+    setPage(index)
+}
 
-  console.log(showItensTopic);
+  // console.log(showItensTopic);
 
   useEffect(() => {
     redirectToLogin(navigate);
     redirectAdmin(navigate, user.profile);
-    getTopics(setListTopics, listTopics, setAllPages, allPages, currentPage, pageCount, setpageCount);
   }, [user]);
+
+  useEffect(() => {
+    getTopics(
+      setListTopics,
+      setAllPages,
+      page,
+    );
+  },[page])
 
   return (
     <Container>
@@ -139,14 +144,15 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
           onClick={() => setOpenModalCotation({ open: false })}
         />
       )}
-      <ReactPaginate
+      {/* <ReactPaginate
         breakLabel="..."
         nextLabel="next >"
         onPageChange={handlePageClick}
         pageRangeDisplayed={allPages}
         pageCount={pageCount}
         previousLabel="< previous"
-      />
+      /> */}
+      <Pagination page={page} onPageChange={changePage} allPages={allPages} />
     </Container>
   );
 };
