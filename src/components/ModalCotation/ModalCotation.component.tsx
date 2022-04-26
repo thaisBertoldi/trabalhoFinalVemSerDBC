@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { connect } from 'react-redux';
+import { ENDPOINT_COTATION, ENDPOINT_FINANCIER, ENDPOINT_MANAGER } from '../../constants';
 import api from '../../service/api';
 import { RootState } from '../../store';
 import { BtnClose, ContainerModal, Modal } from '../ModalBuyer/ModalBuyer.style';
@@ -8,12 +9,10 @@ import { BtnClose, ContainerModal, Modal } from '../ModalBuyer/ModalBuyer.style'
 const ModalCotation = ({user, onClick, id}: any) => {
 
   const [value, setValues] = useState<any>([]);
-  console.log(user);
-  
 
   const getCotation = async (id: number) => {
     try {
-      const {data} = await api.get(`main-page/quotation/${id}`);
+      const {data} = await api.get(`${ENDPOINT_COTATION.MAIN_PAGE_QUOTATION}/${id}`);
       setValues(data);
       console.log(data);
     } catch (error) {
@@ -23,7 +22,7 @@ const ModalCotation = ({user, onClick, id}: any) => {
 
   const reproveAllCotations = async () => {
     try {
-      const {data} = await api.put(`/manager/reproveAllQuotations/${id}`);
+      const {data} = await api.put(`${ENDPOINT_MANAGER.REPROVE_ALL_QUOTATIONS}/${id}`);
     } catch (error) {
       console.log(error);
     } finally {
@@ -33,13 +32,22 @@ const ModalCotation = ({user, onClick, id}: any) => {
   
   const handleAproveCotation = async (idQuotation: number) => {
     try {
-      const {data} = await api.post(`/manager/aproveQuotation/${idQuotation}`);
+      const {data} = await api.post(`${ENDPOINT_MANAGER.APROVE_QUOTATION}/${idQuotation}`);
     } catch (error) {
       console.log(error);
     } finally {
       getCotation(id);
     }
   }
+
+  const handleAproveByFinancier = async (status: boolean) => {
+    try {
+      const { data } = await api.put(`${ENDPOINT_FINANCIER.UPDATE_STATUS}/${id}/${status}`);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  
   useEffect(() => {
     getCotation(id);
   }, [])
@@ -56,7 +64,12 @@ const ModalCotation = ({user, onClick, id}: any) => {
             <div key={item.quotationId}>
               <p> R$: {item.quotationPrice}</p>
               <p> Status da cotação: {item.quotationStatus}</p>
-              <button onClick={ () => handleAproveCotation(item.quotationId) }> Aprovar </button>
+              {
+                (user.profile === "MANAGER" || user.profile === "FINANCIER") && (
+                  <button onClick={ () => { user.profile === "MANAGER" ? handleAproveCotation(item.quotationId) : handleAproveByFinancier(true) }  }> Aprovar </button>
+                )
+              }
+              { user.profile === "FINANCIER" && (<button onClick={ () => handleAproveByFinancier(false) }> Reprovar </button>)}
             </div>
           ))
         }
