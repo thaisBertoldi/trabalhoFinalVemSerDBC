@@ -19,13 +19,12 @@ import {
   TopicName,
 } from "./Home.style";
 
-import { ModalBuyer, ModalCotation } from "../../components";
+import { ModalBuyer, ModalCotation, Pagination } from "../../components";
 import { ColorEnum, StatusEnum } from "../../enums/StatusEnum";
 import { getTopics } from "../../store/action/topicActions";
 import CardHome from "../../components/CardHome/CardHome.component";
 import { ModalDTO } from "../../models/ModalsDTO";
 import { IconSearch } from "../../global.style";
-import Pagination from "../../components/Pagination/Pagination";
 
 //listas apenas do colaborador se for usuario tipo colaborador
 //lista geral com botao de aprovar ou reprovar pro gestor se tiver mais de duas cotacoes
@@ -87,6 +86,7 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
         ></InputForm>
         <IconSearch />
       </DivSearch>
+      <Pagination page={page} onPageChange={changePage} allPages={allPages} />
       {listTopics?.content?.map((item: any) => (
         <ContainerCard key={item.topicId}>
           <TitleCard color={ColorEnum[item.status]}>
@@ -147,7 +147,6 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
           onClick={() => setOpenModalCotation({ open: false })}
         />
       )}
-      <Pagination page={page} onPageChange={changePage} allPages={allPages} />
     </Container>
   );
 };

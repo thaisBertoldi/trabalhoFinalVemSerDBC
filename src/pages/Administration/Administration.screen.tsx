@@ -2,8 +2,13 @@ import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import { connect, DispatchProp } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import ModalCreateUserAdm from "../../components/ModalCreateUserAdm/ModalCreateUserAdm.component";
-import { CenterCustom, Container, InputForm, IconSearch } from "../../global.style";
+import { ModalCreateUserAdm } from "../../components";
+import {
+  CenterCustom,
+  Container,
+  InputForm,
+  IconSearch,
+} from "../../global.style";
 import { isLoggedDTO, UsersAdmDTO } from "../../models/UserDTO";
 import { RootState } from "../../store";
 import {
@@ -82,90 +87,92 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
       </CenterCustom>
 
       <ContainerAdmin>
-        {isSearchUser ? 
-          userFind.map((user: UsersAdmDTO) => (
-            <CardUSerAdmin>
-              <DataUser>
-                <DivImage>
-                  <ImageUser
-                     src={`data:image/jpeg;base64,${user?.image ?? DefaultImage}`}
-                    alt="imagem de perfil"
-                  />
-                </DivImage>
+        {isSearchUser
+          ? userFind.map((user: UsersAdmDTO) => (
+              <CardUSerAdmin>
+                <DataUser>
+                  <DivImage>
+                    <ImageUser
+                      src={`data:image/jpeg;base64,${
+                        user?.image ?? DefaultImage
+                      }`}
+                      alt="imagem de perfil"
+                    />
+                  </DivImage>
 
-                <p>
-                  <strong>Usuário:</strong> {user.fullName}
-                </p>
-                <p>
-                  <strong>Perfil:</strong> {TypeUserEnum[user.groups]}
-                </p>
-              </DataUser>
-              <select name="type" onChange={formik.handleChange}>
-                <option value="COLLABORATOR">Colaborador</option>
-                <option value="ADMINISTRATOR">Administrador</option>
-                <option value="BUYER">Comprador</option>
-                <option value="MANEGER">Gestor</option>
-                <option value="FINANCIER">Financeiro</option>
-              </select>
-              <BtnAdm
-                width={"200px"}
-                background={"#C5C5C5"}
-                color={"#202124"}
-                type="submit"
+                  <p>
+                    <strong>Usuário:</strong> {user.fullName}
+                  </p>
+                  <p>
+                    <strong>Perfil:</strong> {TypeUserEnum[user.groups]}
+                  </p>
+                </DataUser>
+                <select name="type" onChange={formik.handleChange}>
+                  <option value="COLLABORATOR">Colaborador</option>
+                  <option value="ADMINISTRATOR">Administrador</option>
+                  <option value="BUYER">Comprador</option>
+                  <option value="MANEGER">Gestor</option>
+                  <option value="FINANCIER">Financeiro</option>
+                </select>
+                <BtnAdm
+                  width={"200px"}
+                  background={"#C5C5C5"}
+                  color={"#202124"}
+                  type="submit"
+                >
+                  Alterar perfil do usuário
+                </BtnAdm>
+              </CardUSerAdmin>
+            ))
+          : allUsers?.map((user: UsersAdmDTO) => (
+              <form
+                onSubmit={(event) =>
+                  handleProfile(
+                    setAllUsers,
+                    formik.resetForm,
+                    event,
+                    user.userId,
+                    formik.values.type
+                  )
+                }
+                key={user.userId}
               >
-                Alterar perfil do usuário
-              </BtnAdm>
-            </CardUSerAdmin>
-          )
-          )
-      :
-        allUsers?.map((user: UsersAdmDTO) => (
-          <form
-            onSubmit={(event) =>
-              handleProfile(
-                setAllUsers,
-                formik.resetForm,
-                event,
-                user.userId,
-                formik.values.type
-              )
-            }
-            key={user.userId}
-          >
-            <CardUSerAdmin>
-              <DataUser>
-                <DivImage>
-                  <ImageUser
-                    src={`data:image/jpeg;base64,${user?.image ?? DefaultImage}`}
-                    alt="imagem de perfil"
-                  />
-                </DivImage>
+                <CardUSerAdmin>
+                  <DataUser>
+                    <DivImage>
+                      <ImageUser
+                        src={`data:image/jpeg;base64,${
+                          user?.image ?? DefaultImage
+                        }`}
+                        alt="imagem de perfil"
+                      />
+                    </DivImage>
 
-                <p>
-                  <strong>Usuário:</strong> {user.fullName}
-                </p>
-                <p>
-                  <strong>Perfil:</strong> {TypeUserEnum[user.groups]}
-                </p>
-              </DataUser>
-              <select name="type" onChange={formik.handleChange}>
-                <option value="COLLABORATOR">Colaborador</option>
-                <option value="ADMINISTRATOR">Administrador</option>
-                <option value="BUYER">Comprador</option>
-                <option value="MANEGER">Gestor</option>
-                <option value="FINANCIER">Financeiro</option>
-              </select>
-              <BtnAdm
-                width={"200px"}
-                background={"#C5C5C5"}
-                color={"#202124"}
-                type="submit"
-              >
-                Alterar perfil do usuário
-              </BtnAdm>
-            </CardUSerAdmin>
-          </form>
-        ))}
+                    <p>
+                      <strong>Usuário:</strong> {user.fullName}
+                    </p>
+                    <p>
+                      <strong>Perfil:</strong> {TypeUserEnum[user.groups]}
+                    </p>
+                  </DataUser>
+                  <select name="type" onChange={formik.handleChange}>
+                    <option value="COLLABORATOR">Colaborador</option>
+                    <option value="ADMINISTRATOR">Administrador</option>
+                    <option value="BUYER">Comprador</option>
+                    <option value="MANEGER">Gestor</option>
+                    <option value="FINANCIER">Financeiro</option>
+                  </select>
+                  <BtnAdm
+                    width={"200px"}
+                    background={"#C5C5C5"}
+                    color={"#202124"}
+                    type="submit"
+                  >
+                    Alterar perfil do usuário
+                  </BtnAdm>
+                </CardUSerAdmin>
+              </form>
+            ))}
 
         {isAddUser && (
           <ModalCreateUserAdm onClick={() => setIsAddUser(false)} />
