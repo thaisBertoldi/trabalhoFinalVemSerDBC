@@ -118,7 +118,7 @@ export const DivUserMenu = styled.div`
 
 export const DropDown = styled.div`
   position: absolute;
-  margin-top: 70px;
+  margin-top: 6.2%;
   right: -1%;
   transform: translateX(-45%);
   @media (max-width: 1875px) {

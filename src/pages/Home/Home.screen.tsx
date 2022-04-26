@@ -59,10 +59,19 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   });
 
   const changePage = (index: number) => {
-    setPage(index);
-  };
+    setPage(index)
+  }
 
-  // console.log(showItensTopic);
+  const handleUserSearch = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    try {
+      if(value.length >= 4) {
+        // const {data} = await api.get('')
+      }
+    } catch (error) {
+      
+    }
+  }
 
   useEffect(() => {
     redirectToLogin(navigate);
@@ -70,8 +79,12 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   }, [user]);
 
   useEffect(() => {
-    getTopics(setListTopics, setAllPages, page);
-  }, [page]);
+    getTopics(
+      setListTopics,
+      setAllPages,
+      page,
+    );
+  },[page, OpenModalCotation.open])
 
   return (
     <Container>
@@ -84,7 +97,7 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
           width={"50%"}
           height={"40px"}
           placeholder="Pesquisar"
-          // onChange={(event) => handleUserSearch(event.target.value)}
+          onChange={ (e) => handleUserSearch(e)}
         ></InputForm>
         <IconSearch />
       </DivSearch>

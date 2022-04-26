@@ -40,6 +40,25 @@ export const Modal = styled.div`
   }
 `;
 
+export const ButtonCard = styled.button`
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  background-color: #393e3f;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+
+  @media (max-width: 580px) {
+    width: 150px;
+  } 
+`;
+
 export const BtnClose = styled.button`
   width: 25px;
   height: 25px;
