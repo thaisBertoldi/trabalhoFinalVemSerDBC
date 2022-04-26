@@ -118,13 +118,18 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
             >
               <BiDollarCircle /> Visualizar cotações{" "}
             </ButtonCard>
-            <ButtonCard
-              onClick={() =>
-                setOpenModalAddCotation({ open: true, id: item.topicId })
-              }
-            >
-              <BiAddToQueue /> Adicionar cotação{" "}
-            </ButtonCard>
+            {
+              user.profile === 'BUYER' && (
+                <ButtonCard
+                  onClick={() =>
+                    setOpenModalAddCotation({ open: true, id: item.topicId })
+                  }
+                >
+                <BiAddToQueue /> Adicionar cotação{" "}
+                </ButtonCard>
+              )
+            }
+            
           </DivButtonsCard>
           {showItensTopic.open && showItensTopic.id === item.topicId && (
             <CardHome id={item.topicId} />
