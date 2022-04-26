@@ -1,19 +1,20 @@
 import { useEffect, useState } from "react";
 import { connect, DispatchProp } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { CenterCustom, Container } from "../../global.style";
+import { CenterCustom, Container, InputForm } from "../../global.style";
 import { isLoggedDTO } from "../../models/UserDTO";
 import moment from "moment";
 
 import { RootState } from "../../store";
 import { redirectAdmin, redirectToLogin } from "../../utils/utils";
-import { ContainerCard, TitleCard, ButtonCard, DivButtonsCard } from "./Home.style";
+import { ContainerCard, TitleCard, ButtonCard, DivButtonsCard, DivSearch } from "./Home.style";
 
 import { ModalBuyer, ModalCotation } from "../../components"
 import { StatusEnum } from "../../enums/StatusEnum";
 import { getTopics } from "../../store/action/topicActions";
 import CardHome from "../../components/CardHome/CardHome.component";
 import { ModalDTO } from "../../models/ModalsDTO";
+import { IconSearch } from "../../global.style";
 
 //listas apenas do colaborador se for usuario tipo colaborador
 //lista geral com botao de aprovar ou reprovar pro gestor se tiver mais de duas cotacoes
@@ -58,6 +59,15 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
       <CenterCustom>
         <h1>Seja bem-vindo(a), {User?.fullName}</h1>
       </CenterCustom>
+      <DivSearch>
+        <InputForm
+          width={"50%"}
+          height={"40px"}
+          placeholder="Pesquisar"
+          // onChange={(event) => handleUserSearch(event.target.value)}
+        ></InputForm>
+        <IconSearch />
+      </DivSearch>
       {
         list?.content?.map((item: any) => (
           <ContainerCard key={item.topicId}>
