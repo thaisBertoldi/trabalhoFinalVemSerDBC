@@ -1,18 +1,19 @@
 const Pagination = ({ page, onPageChange, allPages }: any) => {
+
   return (
     <div>
       <nav>
         <ul>
           <li>
-            <button onClick={() => onPageChange(page - 1)}>
+            <button onClick={() => onPageChange(page - 1)} disabled={page <= 0}>
               Anterior
             </button>
           </li>
           <li>
-            <span>{parseInt(page)}</span>
+            <span>{parseInt(page + 1)}</span>
           </li>
           <li>
-            <button onClick={() => onPageChange(page + 1)}>
+            <button onClick={() => onPageChange(page + 1)} disabled={page >= allPages - 1}>
               Próxima
             </button>
           </li>
