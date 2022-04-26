@@ -6,7 +6,8 @@ import { isLoggedDTO } from "../../models/UserDTO";
 import moment from "moment";
 
 import { BiAddToQueue, BiDetail, BiDollarCircle } from "react-icons/bi";
-import { MdSegment } from "react-icons/md";
+import { MdSegment, MdDateRange } from "react-icons/md";
+import { GrMoney } from "react-icons/gr";
 
 import { RootState } from "../../store";
 import { redirectAdmin, redirectToLogin } from "../../utils/utils";
@@ -17,6 +18,8 @@ import {
   DivButtonsCard,
   DivSearch,
   TopicName,
+  ContainerAllInfo,
+  InfoDataPrice,
 } from "./Home.style";
 
 import { ModalBuyer, ModalCotation, Pagination } from "../../components";
@@ -38,7 +41,7 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
 
   const [listTopics, setListTopics] = useState<any>([]);
   const [allPages, setAllPages] = useState<number>(0);
-  const [page, setPage] = useState<number>(0)
+  const [page, setPage] = useState<number>(0);
 
   const [OpenModalAddCotation, setOpenModalAddCotation] = useState<ModalDTO>({
     open: false,
@@ -56,8 +59,8 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   });
 
   const changePage = (index: number) => {
-    setPage(index)
-}
+    setPage(index);
+  };
 
   // console.log(showItensTopic);
 
@@ -67,18 +70,15 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   }, [user]);
 
   useEffect(() => {
-    getTopics(
-      setListTopics,
-      setAllPages,
-      page,
-    );
-  },[page])
+    getTopics(setListTopics, setAllPages, page);
+  }, [page]);
 
   return (
     <Container>
       <CenterCustom>
         <h1>Seja bem-vindo(a), {User?.fullName}</h1>
       </CenterCustom>
+
       <DivSearch>
         <InputForm
           width={"50%"}
@@ -88,75 +88,71 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
         ></InputForm>
         <IconSearch />
       </DivSearch>
+
       <Pagination page={page} onPageChange={changePage} allPages={allPages} />
-      {listTopics?.content?.map((item: any) => (
-        <ContainerCard key={item.topicId}>
-          <TitleCard color={ColorEnum[item.status]}>
-            <TopicName>
-              <MdSegment />
-              <h2>{item.title.toUpperCase()}</h2>
-            </TopicName>
-            <p>Data: {moment(item.date).format("DD/MM/YYYY")}</p>
-            <p>Valor total: R$ {item.totalValue}</p>
-            <p>Status: {StatusEnum[item.status]}</p>
-          </TitleCard>
-          <DivButtonsCard>
-            <ButtonCard
-              onClick={() =>
-                setShowItensTopic({
-                  open: !showItensTopic.open,
-                  id: item.topicId,
-                })
-              }
-            >
-              <BiDetail /> Visualizar Itens do tópico{" "}
-            </ButtonCard>
-            <ButtonCard
-              onClick={() =>
-                setOpenModalCotation({ open: true, id: item.topicId })
-              }
-            >
-              <BiDollarCircle /> Visualizar cotações{" "}
-            </ButtonCard>
-            {
-              user.profile === 'BUYER' && (
+      <ContainerAllInfo>
+        {listTopics?.content?.map((item: any) => (
+          <ContainerCard key={item.topicId}>
+            <TitleCard color={ColorEnum[item.status]}>
+              <TopicName>
+                <MdSegment />
+                <h2>{item.title.toUpperCase()}</h2>
+                <p>Status: {StatusEnum[item.status]}</p>
+              </TopicName>
+            </TitleCard>
+            <InfoDataPrice>
+              <p>
+                <MdDateRange /> {moment(item.date).format("DD/MM/YYYY")}
+              </p>
+              <p>
+                <GrMoney /> R$ {item.totalValue}
+              </p>
+            </InfoDataPrice>
+            <DivButtonsCard>
+              <ButtonCard
+                onClick={() =>
+                  setShowItensTopic({
+                    open: !showItensTopic.open,
+                    id: item.topicId,
+                  })
+                }
+              >
+                <BiDetail /> Visualizar Itens do tópico{" "}
+              </ButtonCard>
+              <ButtonCard
+                onClick={() =>
+                  setOpenModalCotation({ open: true, id: item.topicId })
+                }
+              >
+                <BiDollarCircle /> Visualizar cotações{" "}
+              </ButtonCard>
+              {user.profile === "BUYER" && (
                 <ButtonCard
                   onClick={() =>
                     setOpenModalAddCotation({ open: true, id: item.topicId })
                   }
                 >
-                <BiAddToQueue /> Adicionar cotação{" "}
+                  <BiAddToQueue /> Adicionar cotação{" "}
                 </ButtonCard>
-              )
-            }
-            
-          </DivButtonsCard>
-          {showItensTopic.open && showItensTopic.id === item.topicId && (
+              )}
+            </DivButtonsCard>
             <CardHome id={item.topicId} />
-          )}
-        </ContainerCard>
-      ))}
 
-      {OpenModalAddCotation.open && (
-        <ModalBuyer
-          id={OpenModalAddCotation.id}
-          onClick={() => setOpenModalAddCotation({ open: false })}
-        />
-      )}
-      {OpenModalCotation.open && (
-        <ModalCotation
-          id={OpenModalCotation.id}
-          onClick={() => setOpenModalCotation({ open: false })}
-        />
-      )}
-      {/* <ReactPaginate
-        breakLabel="..."
-        nextLabel="next >"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={allPages}
-        pageCount={pageCount}
-        previousLabel="< previous"
-      /> */}
+            {OpenModalAddCotation.open && (
+              <ModalBuyer
+                id={OpenModalAddCotation.id}
+                onClick={() => setOpenModalAddCotation({ open: false })}
+              />
+            )}
+            {OpenModalCotation.open && (
+              <ModalCotation
+                id={OpenModalCotation.id}
+                onClick={() => setOpenModalCotation({ open: false })}
+              />
+            )}
+          </ContainerCard>
+        ))}
+      </ContainerAllInfo>
     </Container>
   );
 };

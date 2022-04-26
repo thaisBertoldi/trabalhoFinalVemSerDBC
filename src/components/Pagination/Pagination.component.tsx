@@ -1,7 +1,19 @@
+import { useEffect, useState } from "react";
 import { MdOutlineArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
 import { ButtonCustom, ContainerPagination } from "./Pagination.style";
 
 const Pagination = ({ page, onPageChange, allPages }: any) => {
+
+  const [numberPage, setNumberPage] = useState([])
+
+  const getNumberPage = () => {
+
+  }
+
+  useEffect(() => {
+    getNumberPage()
+  }, [])
+
   return (
     <ContainerPagination>
       <ButtonCustom onClick={() => onPageChange(page - 1)} disabled={page <= 0} colorHover={'#f1ce03'} >

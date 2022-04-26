@@ -1,10 +1,19 @@
 import styled from "styled-components";
 import { Theme } from "../../theme";
 
+export const ContainerAllInfo = styled.div`
+  display: grid;
+  grid-template-columns: auto auto auto;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+`;
+
 export const ContainerCard = styled.div`
-  width: 80%;
-  margin: 0 auto;
-  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  height: 700px;
   background-color: #fff;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
@@ -13,11 +22,8 @@ export const ContainerCard = styled.div`
 `;
 
 export const TitleCard = styled.div<{color: string}>`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  align-items: center;
   background-color: ${props => props.color};
-  padding: 20px;
+  padding: 10px;
   color: white;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
@@ -66,8 +72,17 @@ export const TopicName = styled.div`
   display: flex;
   align-items: center;
   font-size: 50px;
+  gap: 15px;
 
   h2 {
     font-size: 20px;
   }
+  p {
+    font-size: 15px;
+  }
+`;
+
+export const InfoDataPrice = styled.div`
+  display: flex;
+  justify-content: space-around;
 `;
