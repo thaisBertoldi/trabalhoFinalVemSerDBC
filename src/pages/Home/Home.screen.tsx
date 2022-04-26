@@ -16,7 +16,7 @@ import {
   ButtonCard,
   DivButtonsCard,
   DivSearch,
-  TopicName,
+  TopicName
 } from "./Home.style";
 
 import { ModalBuyer, ModalCotation, Pagination } from "../../components";
@@ -57,7 +57,18 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
 
   const changePage = (index: number) => {
     setPage(index)
-}
+  }
+
+  const handleUserSearch = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    try {
+      if(value.length >= 4) {
+        // const {data} = await api.get('')
+      }
+    } catch (error) {
+      
+    }
+  }
 
   useEffect(() => {
     redirectToLogin(navigate);
@@ -82,11 +93,11 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
           width={"50%"}
           height={"40px"}
           placeholder="Pesquisar"
-          // onChange={(event) => handleUserSearch(event.target.value)}
+          onChange={ (e) => handleUserSearch(e)}
         ></InputForm>
         <IconSearch />
       </DivSearch>
-      <Pagination page={page} onPageChange={changePage} allPages={allPages} />
+      <Pagination page={page} onPageChange={ (index: number) => setPage(index) } allPages={allPages} />
       {listTopics?.content?.map((item: any) => (
         <ContainerCard key={item.topicId}>
           <TitleCard color={ColorEnum[item.status]}>

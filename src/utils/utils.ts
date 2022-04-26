@@ -30,7 +30,7 @@ export const maskMoney = (e: React.ChangeEvent<HTMLInputElement>, formik: Functi
   formik(value, `R$ ${money}`);
 };
 
-export const imgConverter = (event: React.ChangeEvent, formik: Function, value: string) => {
+export const imgConverter = (event: React.ChangeEvent<HTMLInputElement>, formik: Function, value: string) => {
   const target = event.target as HTMLInputElement;
   const profileImage = target.files?.[0];
   return formik(value, profileImage);

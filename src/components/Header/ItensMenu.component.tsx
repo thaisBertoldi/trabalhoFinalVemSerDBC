@@ -6,7 +6,7 @@ const ItensMenu = ({auth}: any) => {
     <>
       { auth?.profile !== 'ADMINISTRATOR' && ( <Link to={"/"}>Home</Link> )} 
       { auth?.profile === 'ADMINISTRATOR' && ( <Link to={"/administration"}>Administrador</Link> ) } 
-      { auth?.profile !== 'ADMINISTRATOR' && ( <Link to={"/request-purchase"}>Solicitar compra</Link> )}
+      { auth?.profile === 'COLLABORATOR' && ( <Link to={"/request-purchase"}>Solicitar compra</Link> )}
     </>
   );
 }

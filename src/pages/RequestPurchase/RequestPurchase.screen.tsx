@@ -15,7 +15,6 @@ import {
   handleDeleteItem,
   handleFinallyTopic,
 } from "../../store/action/purchaseAction";
-import { Theme } from "../../theme";
 import {
   ContainerRequest,
   ContainerRequestForm,
@@ -23,25 +22,21 @@ import {
   TextAreaCustom,
 } from "./RequestPurchase.style";
 
-import { imgConverter, redirectAdmin, maskMoney } from "../../utils/utils";
+import { imgConverter, maskMoney } from "../../utils/utils";
 import { useNavigate } from "react-router-dom";
 import { isLoggedDTO } from "../../models/UserDTO";
 import { FaTrashAlt } from "react-icons/fa";
-//pagina de compra pro usuário tipo colaborador
-const RequestPurchase = ({
-  user,
-  auth,
-  dispatch,
-}: isLoggedDTO & PurchaseDTO & DispatchProp) => {
-  const [arrayItens, setArrayItens] = useState<NewRequestPurchase[]>([]);
+const RequestPurchase = ({user,auth,dispatch,}: isLoggedDTO & PurchaseDTO & DispatchProp) => {
 
-  const navigate = useNavigate();
+  const [arrayItens, setArrayItens] = useState<NewRequestPurchase[]>([]);
   const [idTopic, setIdTopic] = useState(0);
 
-  console.log(arrayItens)
+  const navigate = useNavigate();
 
   useEffect(() => {
-    redirectAdmin(navigate, user.profile);
+    if(user.profile !== "COLLABORATOR"){
+      navigate("/");
+    }
   }, [user]);
 
   const formikTopic = useFormik({
@@ -49,8 +44,7 @@ const RequestPurchase = ({
       title: "",
     },
     onSubmit: (valuesTopic) => {
-      // handleCreateTopic(valuesTopic, setIdTopic);
-      console.log(valuesTopic);
+      handleCreateTopic(valuesTopic, setIdTopic);
     },
   });
 
@@ -68,6 +62,7 @@ const RequestPurchase = ({
       formikTopic.resetForm();
     },
   });
+
   return (
     <Container>
       <CenterCustom>
@@ -85,8 +80,8 @@ const RequestPurchase = ({
               type="text"
               onChange={formikTopic.handleChange}
               value={formikTopic.values.title}
-              onBlur={() => handleCreateTopic(formikTopic.values, setIdTopic)}
             />
+            <button type="submit" > Criar tópico </button>
           </form>
 
           <form onSubmit={formik.handleSubmit}>
@@ -99,6 +94,7 @@ const RequestPurchase = ({
               type="text"
               onChange={formik.handleChange}
               value={formik.values.itemName}
+              disabled={idTopic === 0}
             />
 
             <TextAreaCustom
@@ -108,6 +104,7 @@ const RequestPurchase = ({
               name="description"
               onChange={formik.handleChange}
               value={formik.values.description}
+              disabled={idTopic === 0}
             />
 
             <InputForm
@@ -117,8 +114,9 @@ const RequestPurchase = ({
               id="price"
               name="price"
               type="text"
-              onChange={formik.handleChange}
+              onChange={ (e) => maskMoney(e, formik.setFieldValue, "price") }
               value={formik.values.price}
+              disabled={idTopic === 0}
             />
 
             <div>

@@ -21,7 +21,6 @@ import {
   ImageUser,
   ParagraphInfo,
 } from "./Administration.style";
-import imgPerfil from "../../images/foto-perfil.png";
 import { getAllUsers, handleProfile } from "../../store/action/adminActions";
 import { TypeUserEnum } from "../../enums/TypeUserEnum";
 import { DefaultImage } from "../../constants";
@@ -41,7 +40,7 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
     getAllUsers(setAllUsers);
   }, []);
 
-  const handleUserSearch = (value: string) => {
+  const handleUserSearch = async (value: string) => {
     const userFilter = allUsers.filter((user: UsersAdmDTO) => {
       return user.fullName.match(value);
     });
