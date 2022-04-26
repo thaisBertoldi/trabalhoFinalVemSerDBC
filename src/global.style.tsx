@@ -4,6 +4,7 @@ import image from "./images/background-div.jpg";
 
 export const Container = styled.div`
   width: 100%;
+  padding-top: 70px;
 `;
 
 export const ContainerPrincipal = styled.div`
@@ -11,10 +12,10 @@ export const ContainerPrincipal = styled.div`
   grid-template-columns: auto auto;
   background: url(${image}) no-repeat center;
   align-items: center;
-  justify-content: center;
-  gap: 10%;
+  justify-content: space-around;
   height: 100vh;
-
+  padding: 0 50px;
+  
   @media (max-width: 1190px) {
     display: flex;
     justify-content: center;
@@ -29,6 +30,7 @@ export const ContainerTitle = styled.div`
   align-items: center;
   justify-content: center;
   line-height: 5px;
+  
 
   @media (max-width: 1190px) {
     display: none;
@@ -38,6 +40,7 @@ export const ContainerTitle = styled.div`
 export const Title = styled.h1<{ size: string; spacing: string }>`
   font-size: ${(props) => props.size};
   letter-spacing: ${(props) => props.spacing};
+  
 `;
 
 export const ContainerGetInfo = styled.div`

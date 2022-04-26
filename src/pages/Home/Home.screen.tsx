@@ -70,7 +70,7 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
             <DivButtonsCard>
               <ButtonCard onClick={ () => setShowItensTopic({open: !showItensTopic.open, id: item.topicId})}> Visualizar Itens do tópico </ButtonCard>
               <ButtonCard onClick={ () => setOpenModalCotation({open: true, id: item.topicId}) } > Visualizar cotações </ButtonCard>
-              <ButtonCard onClick={ () => setOpenModalAddCotation({open: true, id: item.topicId}) }> Adicinar cotação </ButtonCard>
+              <ButtonCard onClick={ () => setOpenModalAddCotation({open: true, id: item.topicId}) }> Adicionar cotação </ButtonCard>
             </DivButtonsCard>
             { showItensTopic.open && showItensTopic.id === item.topicId && ( <CardHome id={item.topicId} /> ) } 
           </ContainerCard>

@@ -17,7 +17,7 @@ import {
   Paragraph,
   Title,
 } from "../../global.style";
-import { DivEye, DivInputsLogin, DivLogo } from "./Login.style";
+import { ContainerLogin, DivEye, DivInputsLogin, DivLogo } from "./Login.style";
 
 import { handleLogin } from "../../store/action/authActions";
 import { Theme } from "../../theme";
@@ -66,7 +66,7 @@ const Login = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   });
 
   return (
-    <Container>
+    <ContainerLogin>
       <ContainerPrincipal>
         <ContainerTitle>
           <Title size="50px" spacing="normal">
@@ -140,7 +140,7 @@ const Login = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
           </form>
         </ContainerGetInfo>
       </ContainerPrincipal>
-    </Container>
+    </ContainerLogin>
   );
 };
 

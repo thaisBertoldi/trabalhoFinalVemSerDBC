@@ -5,7 +5,8 @@ export const HeaderNav = styled.header`
   width: 100%;
   height: 70px;
   background-color: ${Theme.color.black};
-
+  position: fixed;
+  top: 0;
   display: flex;
   align-items: center;
   flex-direction: row-reverse;
@@ -117,7 +118,7 @@ export const DivUserMenu = styled.div`
 
 export const DropDown = styled.div`
   position: absolute;
-  top: 7.5%;
+  margin-top: 70px;
   right: -1%;
   transform: translateX(-45%);
   @media (max-width: 1875px) {

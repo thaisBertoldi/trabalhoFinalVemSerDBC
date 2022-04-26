@@ -8,6 +8,10 @@ export const DivLogo = styled.div`
   margin: ${Theme.margin} 0;
 `;
 
+export const ContainerLogin = styled.div`
+  width: 100%;
+`;
+
 export const DivInputsLogin = styled.div`
   display: flex;
   flex-direction: column;
