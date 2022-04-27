@@ -3,6 +3,7 @@ import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import { ENDPOINT_TOPICS } from "../../constants";
 import { NewRequestPurchase, TitlePurchaseDTO } from "../../models/PurchaseDTO";
 import api from "../../service/api";
+import { removeMaskMoney } from "../../utils/utils";
 
 export const handleCreateTopic = async (valuesTopic: TitlePurchaseDTO, setIdTopic: Function) => {
     try {
@@ -28,8 +29,8 @@ export const handleCreateTopic = async (valuesTopic: TitlePurchaseDTO, setIdTopi
       formData.append("file", values.file);
       formData.append("description", values.description);
       formData.append("name", values.itemName);
-      formData.append("price", values.price.replace('R$ ', '').replace('.', '').replace(',', '.'));
-      
+      formData.append("price", removeMaskMoney(values.price));
+
       try {
         Loading.circle();
         const { data } = await api.post(`${ENDPOINT_TOPICS.CREATE_ITEM_TOPIC}/${idTopic}`, formData);
