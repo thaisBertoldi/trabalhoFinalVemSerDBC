@@ -47,6 +47,7 @@ export const handleProfile = async (
   type: string,
   page: number,
   setAllPages: Function,
+  setUserSearch: Function,
 ) => {
   event.preventDefault();
   try {
@@ -58,6 +59,7 @@ export const handleProfile = async (
       `${ENDPOINT_ADMIN.ALTER_PROFILE}=${type}&idUser=${id}`
     );
     getAllUsers(setAllUsers, page, setAllPages);
+    setUserSearch('')
     Notiflix.Notify.success(`Perfil do usuário alterado com sucesso.`);
   } catch (error) {
     console.log(error);

@@ -36,20 +36,20 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   const [isSearchUser, setIsSearchUser] = useState<boolean>(false);
   const [userFind, setUserFind] = useState<Array<UsersAdmDTO>>([]);
   const [pageFind, setPageFind] = useState<number>(0);
-  const [userSearch, setUserSearch] = useState('')
+  const [userSearch, setUserSearch] = useState("");
 
   useEffect(() => {
     if (user?.profile !== "ADMINISTRATOR") {
       navigate("/");
     }
-    if(!isSearchUser){
+    if (!isSearchUser) {
       getAllUsers(setAllUsers, page, setallPagesPrincipal);
     }
   }, [page]);
 
   useEffect(() => {
-    handleUserSearch()
-  }, [userSearch, pageFind])
+    handleUserSearch();
+  }, [userSearch, pageFind]);
 
   const handleUserSearch = async () => {
     setIsSearchUser(true);
@@ -92,12 +92,28 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
       <ContainerAdmin>
         {isSearchUser
           ? userFind.map((user: UsersAdmDTO) => (
-              <CardAdm
-                imgUser={user?.image}
-                fullName={user?.fullName}
-                group={user?.groups}
-                formik={formik}
-              />
+              <form
+                onSubmit={(event) =>
+                  handleProfile(
+                    setAllUsers,
+                    formik.resetForm,
+                    event,
+                    user.userId,
+                    formik.values.type,
+                    page,
+                    setallPagesPrincipal, 
+                    setUserSearch
+                  )
+                }
+                key={user.userId}
+              >
+                <CardAdm
+                  imgUser={user?.image}
+                  fullName={user?.fullName}
+                  group={user?.groups}
+                  formik={formik}
+                />
+              </form>
             ))
           : allUsers?.map((user: UsersAdmDTO) => (
               <form
@@ -109,7 +125,8 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
                     user.userId,
                     formik.values.type,
                     page,
-                    setallPagesPrincipal
+                    setallPagesPrincipal,
+                    setUserSearch,
                   )
                 }
                 key={user.userId}
