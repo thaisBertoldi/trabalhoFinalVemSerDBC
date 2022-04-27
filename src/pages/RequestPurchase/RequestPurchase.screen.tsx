@@ -1,3 +1,4 @@
+import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import { connect, DispatchProp } from "react-redux";
@@ -6,6 +7,7 @@ import {
   Container,
   InputForm,
   CenterCustom,
+  DivErrorYup,
 } from "../../global.style";
 import { NewRequestPurchase, PurchaseDTO } from "../../models/PurchaseDTO";
 import { RootState } from "../../store";
@@ -26,15 +28,22 @@ import { imgConverter, maskMoney } from "../../utils/utils";
 import { useNavigate } from "react-router-dom";
 import { isLoggedDTO } from "../../models/UserDTO";
 import { FaTrashAlt } from "react-icons/fa";
-const RequestPurchase = ({user,auth,dispatch,}: isLoggedDTO & PurchaseDTO & DispatchProp) => {
 
+const SUPPORTED_FORMATS = ["image/jpg", "image/jpeg", "image/png"];
+const FILE_SIZE = [10485760];
+
+const RequestPurchase = ({
+  user,
+  auth,
+  dispatch,
+}: isLoggedDTO & PurchaseDTO & DispatchProp) => {
   const [arrayItens, setArrayItens] = useState<NewRequestPurchase[]>([]);
   const [idTopic, setIdTopic] = useState(0);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if(user.profile !== "COLLABORATOR"){
+    if (user.profile !== "COLLABORATOR") {
       navigate("/");
     }
   }, [user]);
@@ -43,6 +52,9 @@ const RequestPurchase = ({user,auth,dispatch,}: isLoggedDTO & PurchaseDTO & Disp
     initialValues: {
       title: "",
     },
+    validationSchema: Yup.object({
+      title: Yup.string().required("Você precisa preencher esse campo"),
+    }),
     onSubmit: (valuesTopic) => {
       handleCreateTopic(valuesTopic, setIdTopic);
     },
@@ -56,10 +68,31 @@ const RequestPurchase = ({user,auth,dispatch,}: isLoggedDTO & PurchaseDTO & Disp
       file: "",
       itemId: 0,
     },
-    onSubmit: (values, actions) => {
-      handleFinallyTopic(idTopic, navigate);
-      formikTopic.resetForm();
-      actions.resetForm();
+    validationSchema: Yup.object({
+      itemName: Yup.string().required("Você precisa preencher esse campo"),
+      description: Yup.string().required("Você precisa preencher esse campo"),
+      price: Yup.string().required("Você precisa preencher esse campo"),
+      file: Yup.mixed()
+        .required("Você precisa anexar um arquivo")
+        .test(
+          "fileSize",
+          "Este arquivo é muito grande",
+          (value) => value.size <= FILE_SIZE
+        )
+        .test("fileType", "Este tipo de arquivo não é suportado.", (value) =>
+          SUPPORTED_FORMATS.includes(value.type)
+        ),
+    }),
+    onSubmit: (values) => {
+      const size: any = values.file;
+      console.log(size.size);
+      handleCreateList(
+        values,
+        idTopic,
+        setArrayItens,
+        arrayItens,
+        formik.resetForm
+      );
     },
   });
 
@@ -81,7 +114,10 @@ const RequestPurchase = ({user,auth,dispatch,}: isLoggedDTO & PurchaseDTO & Disp
               onChange={formikTopic.handleChange}
               value={formikTopic.values.title}
             />
-            <button type="submit" > Criar tópico </button>
+            {formikTopic.errors.title && formikTopic.touched.title ? (
+              <DivErrorYup>{formikTopic.errors.title}</DivErrorYup>
+            ) : null}
+            <button type="submit"> Criar tópico </button>
           </form>
 
           <form onSubmit={formik.handleSubmit}>
@@ -96,6 +132,9 @@ const RequestPurchase = ({user,auth,dispatch,}: isLoggedDTO & PurchaseDTO & Disp
               value={formik.values.itemName}
               disabled={idTopic === 0}
             />
+            {formik.errors.itemName && formik.touched.itemName ? (
+              <DivErrorYup>{formik.errors.itemName}</DivErrorYup>
+            ) : null}
 
             <TextAreaCustom
               placeholder="Descrição"
@@ -106,6 +145,9 @@ const RequestPurchase = ({user,auth,dispatch,}: isLoggedDTO & PurchaseDTO & Disp
               value={formik.values.description}
               disabled={idTopic === 0}
             />
+            {formik.errors.description && formik.touched.description ? (
+              <DivErrorYup>{formik.errors.description}</DivErrorYup>
+            ) : null}
 
             <InputForm
               placeholder="Valor do item"
@@ -114,44 +156,49 @@ const RequestPurchase = ({user,auth,dispatch,}: isLoggedDTO & PurchaseDTO & Disp
               id="price"
               name="price"
               type="text"
-              onChange={ (e) => maskMoney(e, formik.setFieldValue, "price") }
+              onChange={(e) => maskMoney(e, formik.setFieldValue, "price")}
               value={formik.values.price}
               disabled={idTopic === 0}
             />
+            {formik.errors.price && formik.touched.price ? (
+              <DivErrorYup>{formik.errors.price}</DivErrorYup>
+            ) : null}
 
             <div>
-              <label htmlFor="profileImage">Envio de Imagem</label>
+              <label htmlFor="file">Envio de Imagem</label>
               <InputForm
                 placeholder="Arquivo"
                 width={"100%"}
                 height={"40px"}
-                id="profileImage"
-                name="profileImage"
+                id="file"
+                name="file"
                 type="file"
                 onChange={(event) =>
                   imgConverter(event, formik.setFieldValue, "file")
                 }
               />
+              {formik.errors.file && formik.touched.file ? (
+                <DivErrorYup>{formik.errors.file}</DivErrorYup>
+              ) : null}
             </div>
 
             <CenterCustom>
+              <BtnForm width={"300px"} color={"#25292a"} type="submit">
+                Adicionar
+              </BtnForm>
               <BtnForm
                 width={"300px"}
                 color={"#25292a"}
                 type="button"
                 onClick={() =>
-                  handleCreateList(
-                    formik.values,
+                  handleFinallyTopic(
                     idTopic,
-                    setArrayItens,
-                    arrayItens,
+                    navigate,
+                    formikTopic.resetForm,
                     formik.resetForm
                   )
                 }
               >
-                Adicionar
-              </BtnForm>
-              <BtnForm width={"300px"} color={"#25292a"} type="submit">
                 Finalizar
               </BtnForm>
             </CenterCustom>
@@ -159,12 +206,19 @@ const RequestPurchase = ({user,auth,dispatch,}: isLoggedDTO & PurchaseDTO & Disp
         </ContainerRequestForm>
         {arrayItens.map((item, index) => (
           <DivItens key={index}>
-            <img src={`data:image/jpeg;base64,${item.file}`} alt="imagem do item"/>
+            <img
+              src={`data:image/jpeg;base64,${item.file}`}
+              alt="imagem do item"
+            />
             <p>Nome: {item.itemName}</p>
             <p>Descrição: {item.description}</p>
             <p>Valor: R$ {item.price}</p>
             <p>Id: {item.itemId}</p>
-            <FaTrashAlt onClick={() => handleDeleteItem(item.itemId, setArrayItens, arrayItens)} />
+            <FaTrashAlt
+              onClick={() =>
+                handleDeleteItem(item.itemId, setArrayItens, arrayItens)
+              }
+            />
           </DivItens>
         ))}
       </ContainerRequest>
