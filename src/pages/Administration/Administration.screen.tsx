@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import { connect, DispatchProp } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { ModalCreateUserAdm } from "../../components";
+import { ModalCreateUserAdm, CardAdm } from "../../components";
 import {
   CenterCustom,
   Container,
@@ -13,17 +13,11 @@ import { isLoggedDTO, UsersAdmDTO } from "../../models/UserDTO";
 import { RootState } from "../../store";
 import {
   BtnAdm,
-  CardUSerAdmin,
   ContainerAdmin,
-  DataUser,
-  DivImage,
   DivSearch,
-  ImageUser,
   ParagraphInfo,
 } from "./Administration.style";
 import { getAllUsers, handleProfile } from "../../store/action/adminActions";
-import { TypeUserEnum } from "../../enums/TypeUserEnum";
-import { DefaultImage } from "../../constants";
 
 //tipá-los
 const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
@@ -88,40 +82,12 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
       <ContainerAdmin>
         {isSearchUser
           ? userFind.map((user: UsersAdmDTO) => (
-              <CardUSerAdmin>
-                <DataUser>
-                  <DivImage>
-                    <ImageUser
-                      src={`data:image/jpeg;base64,${
-                        user?.image ?? DefaultImage
-                      }`}
-                      alt="imagem de perfil"
-                    />
-                  </DivImage>
-
-                  <p>
-                    <strong>Usuário:</strong> {user.fullName}
-                  </p>
-                  <p>
-                    <strong>Perfil:</strong> {TypeUserEnum[user.groups]}
-                  </p>
-                </DataUser>
-                <select name="type" onChange={formik.handleChange}>
-                  <option value="COLLABORATOR">Colaborador</option>
-                  <option value="ADMINISTRATOR">Administrador</option>
-                  <option value="BUYER">Comprador</option>
-                  <option value="MANEGER">Gestor</option>
-                  <option value="FINANCIER">Financeiro</option>
-                </select>
-                <BtnAdm
-                  width={"200px"}
-                  background={"#C5C5C5"}
-                  color={"#202124"}
-                  type="submit"
-                >
-                  Alterar perfil do usuário
-                </BtnAdm>
-              </CardUSerAdmin>
+              <CardAdm 
+                imgUser={user?.image}
+                fullName={user?.fullName}
+                group={user?.groups}
+                formik={formik}
+              /> 
             ))
           : allUsers?.map((user: UsersAdmDTO) => (
               <form
@@ -136,40 +102,12 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
                 }
                 key={user.userId}
               >
-                <CardUSerAdmin>
-                  <DataUser>
-                    <DivImage>
-                      <ImageUser
-                        src={`data:image/jpeg;base64,${
-                          user?.image ?? DefaultImage
-                        }`}
-                        alt="imagem de perfil"
-                      />
-                    </DivImage>
-
-                    <p>
-                      <strong>Usuário:</strong> {user.fullName}
-                    </p>
-                    <p>
-                      <strong>Perfil:</strong> {TypeUserEnum[user.groups]}
-                    </p>
-                  </DataUser>
-                  <select name="type" onChange={formik.handleChange}>
-                    <option value="COLLABORATOR">Colaborador</option>
-                    <option value="ADMINISTRATOR">Administrador</option>
-                    <option value="BUYER">Comprador</option>
-                    <option value="MANEGER">Gestor</option>
-                    <option value="FINANCIER">Financeiro</option>
-                  </select>
-                  <BtnAdm
-                    width={"200px"}
-                    background={"#C5C5C5"}
-                    color={"#202124"}
-                    type="submit"
-                  >
-                    Alterar perfil do usuário
-                  </BtnAdm>
-                </CardUSerAdmin>
+                <CardAdm 
+                  imgUser={user?.image}
+                  fullName={user?.fullName}
+                  group={user?.groups}
+                  formik={formik}
+                />
               </form>
             ))}
 

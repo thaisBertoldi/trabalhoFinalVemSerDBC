@@ -20,6 +20,9 @@ export const handleProfile = async ( setAllUsers: Function, formik: Function, ev
   event.preventDefault();
   try {
     Loading.circle();
+    console.log(type);
+    console.log(id);
+    
     const { data } = await api.put(
       `${ENDPOINT_ADMIN.ALTER_PROFILE}=${type}&idUser=${id}`
     );
