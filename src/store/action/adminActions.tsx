@@ -6,14 +6,13 @@ import api from "../../service/api";
 export const getAllUsers = async (
   setAllUsers: Function,
   page: number,
-  setAllPages: Function,
+  setAllPagesPrincipal: Function,
 ) => {
+  
   try {
     Loading.circle();
     const { data } = await api.get(`${ENDPOINT_ADMIN.GET_ALL_USERS}=${page}`);
-    if (setAllPages) {
-      setAllPages(data.totalPages);
-    }
+    setAllPagesPrincipal(data.totalPages);
     setAllUsers(data.content);
     console.log(data.content);
   } catch (error) {
@@ -22,6 +21,24 @@ export const getAllUsers = async (
     Loading.remove();
   }
 };
+
+export const getUserSearch = async (
+  page: number,
+  setAllPagesSearch: Function,
+  nameSearch: string,
+  setUserFind: Function,
+) => {
+  
+  try {
+    const { data } = await api.get(`${ENDPOINT_ADMIN.GET_USER}fullname=${nameSearch}&page=${page}`);
+    setAllPagesSearch(data.totalPages);
+    setUserFind(data.content);
+    console.log(data.content);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const handleProfile = async (
   setAllUsers: Function,
   formik: Function,

@@ -16,6 +16,7 @@ export const ENDPOINT_TOPICS = {
 
 export const ENDPOINT_ADMIN = {
   GET_ALL_USERS: "/admin/adm-get-all-users?page", // p/ pegar todos os usuarios
+  GET_USER: "/admin/adm-get-all-users?", // p/ pegar usuario pesquisado dps do ? fullName=joao&page=0
   ALTER_PROFILE: "/admin/adm-set-group-user?groups", //p/ alterar o perfil do usuario
   GET_USER_BY_FULLNAME: "/admin/adm-get-all-users-by-full-name", //p pesquisar o usuario por nome
   CREATE_PROFILE: "/admin/adm-creat-user", // p/ criar o perfil pelo adm
