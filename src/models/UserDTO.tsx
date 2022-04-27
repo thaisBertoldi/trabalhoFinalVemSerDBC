@@ -3,6 +3,7 @@ export interface LoginDTO {
   password: string;
 }
 
+
 export interface isLoggedDTO {
   user: {
     username: string;

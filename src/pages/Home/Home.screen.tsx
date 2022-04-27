@@ -94,7 +94,7 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
               <CardTopicHome
                 item={item}
                 user={user}
-                setOpenMModalQuotation={setOpenModalQuotation}
+                setOpenModalQuotation={setOpenModalQuotation}
                 setOpenModalAddQuotation={setOpenModalAddQuotation}
                 setOpenModalItens={setOpenModalItens}
               />

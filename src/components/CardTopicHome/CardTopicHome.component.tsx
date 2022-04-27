@@ -12,8 +12,9 @@ import { BiAddToQueue, BiDetail, BiDollarCircle } from "react-icons/bi";
 import { MdSegment, MdDateRange } from "react-icons/md";
 import { GrMoney } from "react-icons/gr";
 import { ColorEnum, StatusEnum } from "../../enums/StatusEnum";
+import { TopicComponentDTO } from "../../models/TopicDTO";
 
-const CardTopicHome = ({item, setOpenModalQuotation, setOpenModalAddQuotation, user, setOpenModalItens}: any) =>  {
+const CardTopicHome = ({item, user, setOpenModalQuotation, setOpenModalAddQuotation,  setOpenModalItens}: TopicComponentDTO) =>  {
   return (
     <ContainerCard key={item.topicId}>
     <TitleCard>
