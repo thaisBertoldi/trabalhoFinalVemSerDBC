@@ -3,6 +3,7 @@ import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import { ENDPOINT_TOPICS } from "../../constants";
 import { NewRequestPurchase, TitlePurchaseDTO } from "../../models/PurchaseDTO";
 import api from "../../service/api";
+import { removeMaskMoney } from "../../utils/utils";
 
 export const handleCreateTopic = async (valuesTopic: TitlePurchaseDTO, setIdTopic: Function) => {
     try {
@@ -28,8 +29,8 @@ export const handleCreateTopic = async (valuesTopic: TitlePurchaseDTO, setIdTopi
       formData.append("file", values.file);
       formData.append("description", values.description);
       formData.append("name", values.itemName);
-      formData.append("price", values.price.replace('R$ ', '').replace('.', '').replace(',', '.'));
-      
+      formData.append("price", removeMaskMoney(values.price));
+
       try {
         Loading.circle();
         const { data } = await api.post(`${ENDPOINT_TOPICS.CREATE_ITEM_TOPIC}/${idTopic}`, formData);
@@ -43,11 +44,20 @@ export const handleCreateTopic = async (valuesTopic: TitlePurchaseDTO, setIdTopi
           `Sinto muito, mas nao foi possivel adicionar o item ao tópico. ${error}`
         );
       }
-      formik()
+      formik({
+        values: {
+          itemName: "",
+          description: "",
+          price: "",
+          file: values.file,
+          
+        },
+      })
+      
     Loading.remove();
   }
 
-  export const handleFinallyTopic = async (idItem: number) => {
+  export const handleFinallyTopic = async (idItem: number, navigate: Function) => {
     try {
       Loading.circle();
       const { data } = await api.put(`${ENDPOINT_TOPICS.UPDATE_STATUS}/${idItem}`);
@@ -55,6 +65,7 @@ export const handleCreateTopic = async (valuesTopic: TitlePurchaseDTO, setIdTopi
       Notiflix.Notify.success(
         `Tópico finalizado com sucesso.`
       );
+      navigate("/");
     } catch (error) {
       console.log(error);
       Notiflix.Notify.failure(

@@ -5,16 +5,16 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import { ContainerModal, Modal, BtnClose, ButtonCard } from './ModalBuyer.style';
 import { InputForm } from '../../global.style';
 import { Theme } from "../../theme";
-import { maskMoney } from '../../utils/utils';
+import { maskMoney, removeMaskMoney } from '../../utils/utils';
 import api from '../../service/api';
 import { ENDPOINT_COTATION } from '../../constants';
 
 const ModalBuyer = ({onClick, id}: any) => {
 
   const handleAddCotation = async (values: any) => {
-    console.log(id);
-    const finalValue = values.replace('R$ ', '').replace('.', '').replace(',', '.');
+    const finalValue = removeMaskMoney(values);
     const price = parseFloat(finalValue);
+    
 
     const options = {
       headers: {

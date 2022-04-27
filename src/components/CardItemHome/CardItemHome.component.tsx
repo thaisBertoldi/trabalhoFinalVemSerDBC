@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { ENDPOINT_TOPICS } from "../../constants";
 import api from "../../service/api";
-import { CardItem, CardItemInfos, CardItemValueName } from "./CardHome.style";
+import { CardItem, CardItemInfos, CardItemValueName } from "./CardItemHome.style";
 
-const CardHome = ({ id }: any) => {
+const CardItemHome = ({ id }: any) => {
   const [listItens, setListItens] = useState<any>([]);
 
   const getItensTopic = async (id: number) => {
@@ -46,4 +46,4 @@ const CardHome = ({ id }: any) => {
   );
 };
 
-export default CardHome;
+export default CardItemHome;
