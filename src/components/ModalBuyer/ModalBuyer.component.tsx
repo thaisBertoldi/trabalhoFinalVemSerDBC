@@ -8,6 +8,7 @@ import { Theme } from "../../theme";
 import { maskMoney, removeMaskMoney } from '../../utils/utils';
 import api from '../../service/api';
 import { ENDPOINT_COTATION } from '../../constants';
+import Notiflix, { Loading } from 'notiflix';
 
 const ModalBuyer = ({onClick, id}: any) => {
 
@@ -15,18 +16,26 @@ const ModalBuyer = ({onClick, id}: any) => {
     const finalValue = removeMaskMoney(values);
     const price = parseFloat(finalValue);
     
-
     const options = {
       headers: {
         'Content-Type': 'application/json'
       }
     }
 
+    Loading.circle();
     try {
       const {data} = await api.post(`${ENDPOINT_COTATION.CREATE_COTATION}/${id}?preco=${price}`);
-      console.log(data);
+      Notiflix.Notify.success(
+        `Cotação criada com sucesso.`
+      );
+      onClick()
     } catch (error) {
+      Notiflix.Notify.failure(
+        `Sinto muito, mas nao foi possivel adicionar a cotação`
+      );
       console.log(error);
+    } finally {
+      Loading.remove();
     }
   }
 
