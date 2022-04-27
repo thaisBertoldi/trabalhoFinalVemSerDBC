@@ -1,24 +1,19 @@
 import { useEffect, useState } from "react";
-import { ENDPOINT_TOPICS } from "../../constants";
-import api from "../../service/api";
-import { CardItem, CardItemInfos, CardItemValueName } from "./CardItemHome.style";
+import { getItensTopic } from "../../store/action/topicActions";
+import {
+  CardItem,
+  CardItemInfos,
+  CardItemValueName,
+  LoadingItem,
+} from "./CardItemHome.style";
+import loadingImg from '../../images/loading.gif'
 
 const CardItemHome = ({ id }: any) => {
   const [listItens, setListItens] = useState<any>([]);
-
-  const getItensTopic = async (id: number) => {
-    try {
-      const { data } = await api.get(
-        `${ENDPOINT_TOPICS.GET_ITEMS_TOPIC}/${id}`
-      );
-      setListItens(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getItensTopic(id);
+    getItensTopic(id, setListItens, setLoading);
   }, []);
 
   return (
@@ -38,9 +33,17 @@ const CardItemHome = ({ id }: any) => {
           </CardItemInfos>
         </CardItem>
       ) : (
-        <CardItem>
-          <h2>Não há itens cadastrados.</h2>
-        </CardItem>
+        <>
+          {loading ? (
+            <LoadingItem>
+              <img src={loadingImg} alt="carregando informações"/>
+            </LoadingItem>
+          ) : (
+            <CardItem>
+              <h2>Não há itens cadastrados.</h2>
+            </CardItem>
+          )}
+        </>
       )}
     </div>
   );

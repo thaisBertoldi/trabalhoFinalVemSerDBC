@@ -16,3 +16,16 @@ export const getTopics = async (
     console.log(error);
   }
 };
+
+export const getItensTopic = async (id: number, setListItens: Function, setLoading: Function) => {
+  try {
+    const { data } = await api.get(
+      `${ENDPOINT_TOPICS.GET_ITEMS_TOPIC}/${id}` 
+    );
+    setLoading(false)
+    setListItens(data);
+  } catch (error) {
+    setLoading(false)
+    console.log(error);
+  }
+};
