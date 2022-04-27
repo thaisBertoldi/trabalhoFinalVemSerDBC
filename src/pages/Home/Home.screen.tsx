@@ -12,7 +12,7 @@ import {
   CardTopicHome,
   ModalBuyer,
   ModalCardItens,
-  ModalCotation,
+  ModalQuotation,
   Pagination,
 } from "../../components";
 
@@ -41,7 +41,7 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
     id: 0,
   });
 
-  const [OpenModalCotation, setOpenModalCotation] = useState<ModalDTO>({
+  const [OpenModalQuotation, setOpenModalQuotation] = useState<ModalDTO>({
     open: false,
     id: 0,
   });
@@ -73,7 +73,7 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
 
   useEffect(() => {
     getTopics(setListTopics, setAllPages, page);
-  }, [page, OpenModalCotation.open]);
+  }, [page, OpenModalQuotation.open]);
 
   return (
     <Container>
@@ -96,7 +96,7 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
           <CardTopicHome
             item={item}
             user={user}
-            setOpenModalCotation={setOpenModalCotation}
+            setOpenMModalQuotation={setOpenModalQuotation}
             setOpenModalAddCotation={setOpenModalAddCotation}
             setOpenModalItens={setOpenModalItens}
           />
@@ -114,10 +114,10 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
             onClick={() => setOpenModalAddCotation({ open: false })}
           />
         )}
-        {OpenModalCotation.open && (
-          <ModalCotation
-            id={OpenModalCotation.id}
-            onClick={() => setOpenModalCotation({ open: false })}
+        {OpenModalQuotation.open && (
+          <ModalQuotation
+            id={OpenModalQuotation.id}
+            onClick={() => setOpenModalQuotation({ open: false })}
           />
         )}
       </ContainerAllInfo>

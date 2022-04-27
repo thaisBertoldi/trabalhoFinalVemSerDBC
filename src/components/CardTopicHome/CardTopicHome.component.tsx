@@ -13,7 +13,7 @@ import { MdSegment, MdDateRange } from "react-icons/md";
 import { GrMoney } from "react-icons/gr";
 import { ColorEnum, StatusEnum } from "../../enums/StatusEnum";
 
-const CardTopicHome = ({item, setOpenModalCotation, setOpenModalAddCotation, user, setOpenModalItens}: any) =>  {
+const CardTopicHome = ({item, setOpenModalQuotation, setOpenModalAddCotation, user, setOpenModalItens}: any) =>  {
   return (
     <ContainerCard key={item.topicId}>
     <TitleCard>
@@ -35,7 +35,7 @@ const CardTopicHome = ({item, setOpenModalCotation, setOpenModalAddCotation, use
     </InfoDataPrice>
     <DivButtonsCard>
       <ButtonCard
-        onClick={ () => setOpenModalCotation({ open: true, id: item.topicId }) }>
+        onClick={ () => setOpenModalQuotation({ open: true, id: item.topicId }) }>
         <BiDollarCircle /> Visualizar cotações{" "}
       </ButtonCard>
       { 

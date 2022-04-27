@@ -6,9 +6,9 @@ import { StatusEnum } from '../../enums/StatusEnum';
 import api from '../../service/api';
 import { RootState } from '../../store';
 import { BtnClose, ContainerModal, Modal } from '../ModalBuyer/ModalBuyer.style';
-import { TopModal, DivQuotations, DivButtons, BtnModalQuotation } from './ModalCotation.style';
+import { TopModal, DivQuotations, DivButtons, BtnModalQuotation } from './ModalQuotation.style';
 
-const ModalCotation = ({user, onClick, id}: any) => {
+const ModalQuotation = ({user, onClick, id}: any) => {
 
   const [value, setValues] = useState<any>([]);
 
@@ -93,4 +93,4 @@ const mapStateToProps = (state: RootState) => ({
   user: state.authReducer,
 });
 
-export default connect(mapStateToProps)(ModalCotation);
+export default connect(mapStateToProps)(ModalQuotation);
