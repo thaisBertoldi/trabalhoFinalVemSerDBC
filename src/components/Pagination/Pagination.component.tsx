@@ -4,14 +4,8 @@ import { ButtonCustom, ContainerPagination } from "./Pagination.style";
 
 const Pagination = ({ page, onPageChange, allPages }: any) => {
 
-  const [numberPage, setNumberPage] = useState([])
-
-  const getNumberPage = () => {
-
-  }
-
   useEffect(() => {
-    getNumberPage()
+    
   }, [])
 
   return (
