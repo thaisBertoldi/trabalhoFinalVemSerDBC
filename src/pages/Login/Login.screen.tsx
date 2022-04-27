@@ -32,23 +32,24 @@ const Login = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   const [showPassword, setShowPassword] = useState<boolean>(true);
   const [hasUserName, setHasUserName] = useState<boolean>(true);
   const [allUsers, setAllUsers] = useState<Array<UsersAdmDTO>>([]);
+  // const [page, setPage] = useState<number>(0);
 
   useEffect(() => {
     hasLogin(navigate);
-    getAllUsers(setAllUsers);
+    // getAllUsers(setAllUsers, page);
   }, []);
 
-  const verificationUsername = (username: string) => {
-    console.log(allUsers)
-    const userFilter = allUsers.filter((user: UsersAdmDTO) => {
-      return user.username.match(username);
-    });
-    if (userFilter.length !== 0) {
-      setHasUserName(false);
-    } else {
-      setHasUserName(true);
-    }
-  };
+  // const verificationUsername = (username: string) => {
+  //   console.log(allUsers)
+  //   const userFilter = allUsers.filter((user: UsersAdmDTO) => {
+  //     return user.username.match(username);
+  //   });
+  //   if (userFilter.length !== 0) {
+  //     setHasUserName(false);
+  //   } else {
+  //     setHasUserName(true);
+  //   }
+  // };
 
   const formik = useFormik({
     initialValues: {
@@ -91,7 +92,7 @@ const Login = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
                 name="username"
                 type="text"
                 onChange={formik.handleChange}
-                onBlur={(event) => verificationUsername(event.target.value)}
+                // onBlur={(event) => verificationUsername(event.target.value)}
                 value={formik.values.username}
               />
               {formik.errors.username && formik.touched.username ? (

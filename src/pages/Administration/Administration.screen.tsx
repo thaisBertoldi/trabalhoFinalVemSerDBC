@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import { connect, DispatchProp } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { ModalCreateUserAdm, CardAdm } from "../../components";
+import { ModalCreateUserAdm, CardAdm, Pagination } from "../../components";
 import {
   CenterCustom,
   Container,
@@ -26,13 +26,15 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   const [isSearchUser, setIsSearchUser] = useState<boolean>(false);
   const [userFind, setUserFind] = useState<Array<UsersAdmDTO>>([]);
   const [isAddUser, setIsAddUser] = useState(false);
+  const [page, setPage] = useState<number>(0);
+  const [allPages, setAllPages] = useState<number>(0);
 
   useEffect(() => {
     if (user?.profile !== "ADMINISTRATOR") {
       navigate("/");
     }
-    getAllUsers(setAllUsers);
-  }, []);
+    getAllUsers(setAllUsers, page, setAllPages);
+  }, [page]);
 
   const handleUserSearch = async (value: string) => {
     const userFilter = allUsers.filter((user: UsersAdmDTO) => {
@@ -97,7 +99,9 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
                     formik.resetForm,
                     event,
                     user.userId,
-                    formik.values.type
+                    formik.values.type,
+                    page,
+                    setAllPages,
                   )
                 }
                 key={user.userId}
@@ -114,6 +118,7 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
         {isAddUser && (
           <ModalCreateUserAdm onClick={() => setIsAddUser(false)} />
         )}
+        <Pagination page={page} onPageChange={ (index: number) => setPage(index)} allPages={allPages} />
       </ContainerAdmin>
     </Container>
   );
