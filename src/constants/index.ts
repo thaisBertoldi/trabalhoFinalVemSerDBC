@@ -27,9 +27,9 @@ export const ENDPOINT_STATUS = {
   STATUS_MANAGER_REPROVE: "/Manager/reproveAllQuotations", //p/ gestor reprovar o status do quotation
 };
 
-export const ENDPOINT_COTATION = {
+export const ENDPOINT_QUOTATION = {
   MAIN_PAGE_QUOTATION: "/main-page/quotation", // p/ mostrar todas as cotações
-  CREATE_COTATION: "/buyer/create", // p/ o comprador criar a cotação
+  CREATE_QUOTATION: "/buyer/create", // p/ o comprador criar a cotação
 };
 
 export const ENDPOINT_MANAGER = {

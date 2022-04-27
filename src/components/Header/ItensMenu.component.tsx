@@ -1,18 +1,20 @@
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { isLoggedDTO } from "../../models/UserDTO";
+import { RootState } from "../../store";
 
-const ItensMenu = ({auth}: any) => {
+const ItensMenu = ({user}: isLoggedDTO) => {
   return (
     <>
-      { auth?.profile !== 'ADMINISTRATOR' && ( <Link to={"/"}>Home</Link> )} 
-      { auth?.profile === 'ADMINISTRATOR' && ( <Link to={"/administration"}>Administrador</Link> ) } 
-      { auth?.profile === 'COLLABORATOR' && ( <Link to={"/request-purchase"}>Solicitar compra</Link> )}
+      { user?.profile !== 'ADMINISTRATOR' && ( <Link to={"/"}>Home</Link> )} 
+      { user?.profile === 'ADMINISTRATOR' && ( <Link to={"/administration"}>Administrador</Link> ) } 
+      { user?.profile === 'COLLABORATOR' && ( <Link to={"/request-purchase"}>Solicitar compra</Link> )}
     </>
   );
 }
 
-const mapStateToProps = (state: any) => ({
-  auth: state.authReducer,
+const mapStateToProps = (state: RootState) => ({
+  user: state.authReducer,
 });
 
 export default connect(mapStateToProps)(ItensMenu);

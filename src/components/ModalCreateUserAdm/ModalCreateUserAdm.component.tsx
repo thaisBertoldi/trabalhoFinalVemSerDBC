@@ -17,11 +17,12 @@ import api from "../../service/api";
 import { ENDPOINT_ADMIN } from "../../constants";
 import { DivClose, DivEyeAdm, ModalAdm } from "./ModalCreateUser.style";
 import { useState } from "react";
+import { UserAdmRegisterDTO } from "../../models/UserDTO";
 
 function ModalCreateUserAdm({ onClick }: any) {
   const [showPassword, setShowPassword] = useState<boolean>(true);
 
-  const register = async (values: any) => {
+  const register = async (values: UserAdmRegisterDTO) => {
     const dataUserCreate = new FormData();
     dataUserCreate.append("file", values.profileImage);
     dataUserCreate.append("email", values.username);

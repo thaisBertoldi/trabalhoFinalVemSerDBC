@@ -12,7 +12,7 @@ import {
   CardTopicHome,
   ModalBuyer,
   ModalCardItens,
-  ModalCotation,
+  ModalQuotation,
   Pagination,
 } from "../../components";
 
@@ -20,28 +20,24 @@ import { getTopics } from "../../store/action/topicActions";
 import { ModalDTO } from "../../models/ModalsDTO";
 import { IconSearch } from "../../global.style";
 import api from "../../service/api";
-
-//listas apenas do colaborador se for usuario tipo colaborador
-//lista geral com botao de aprovar ou reprovar pro gestor se tiver mais de duas cotacoes
-//lista geral com botao de aprovar ou reprovar pro financeiro se o gestor tiver aprovado
-//lista geral pro comprador com modal pra solicitar cotacao
+import { TopicDTO } from "../../models/TopicDTO";
 
 const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   const navigate = useNavigate();
   const hasUser: string | any = localStorage.getItem("token");
   const User = JSON.parse(hasUser);
 
-  const [listTopics, setListTopics] = useState<any>([]);
-  const [listSearched, setListSearched] = useState<any>([]);
+  const [listTopics, setListTopics] = useState<Array<TopicDTO>>([]);
+  const [listSearched, setListSearched] = useState<Array<TopicDTO>>([]);
   const [allPages, setAllPages] = useState<number>(0);
   const [page, setPage] = useState<number>(0);
 
-  const [OpenModalAddCotation, setOpenModalAddCotation] = useState<ModalDTO>({
+  const [OpenModalAddQuotation, setOpenModalAddQuotation] = useState<ModalDTO>({
     open: false,
     id: 0,
   });
 
-  const [OpenModalCotation, setOpenModalCotation] = useState<ModalDTO>({
+  const [OpenModalQuotation, setOpenModalQuotation] = useState<ModalDTO>({
     open: false,
     id: 0,
   });
@@ -73,7 +69,7 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
 
   useEffect(() => {
     getTopics(setListTopics, setAllPages, page);
-  }, [page, OpenModalCotation.open]);
+  }, [page, OpenModalQuotation.open]);
 
   return (
     <Container>
@@ -92,15 +88,21 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
       </DivSearch>
 
       <ContainerAllInfo>
-        {listTopics?.content?.map((item: any) => (
-          <CardTopicHome
-            item={item}
-            setOpenModalCotation={setOpenModalCotation}
-            setOpenModalAddCotation={setOpenModalAddCotation}
-            user={user}
-            setOpenModalItens={setOpenModalItens}
-          />
-        ))}
+        {
+          listTopics.length > 0 ? (
+            listTopics?.map((item: TopicDTO) => (
+              <CardTopicHome
+                item={item}
+                user={user}
+                setOpenModalQuotation={setOpenModalQuotation}
+                setOpenModalAddQuotation={setOpenModalAddQuotation}
+                setOpenModalItens={setOpenModalItens}
+              />
+            ))
+          ) : (
+            <h1>Nenhum tópico encontrado</h1>
+          )
+        }
 
         {OpenModalItens.open && (
           <ModalCardItens
@@ -108,25 +110,25 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
             onClick={() => setOpenModalItens({ open: false })}
           />
         )}
-        {OpenModalAddCotation.open && (
+        {OpenModalAddQuotation.open && (
           <ModalBuyer
-            id={OpenModalAddCotation.id}
-            onClick={() => setOpenModalAddCotation({ open: false })}
+            id={OpenModalAddQuotation.id}
+            onClick={() => setOpenModalAddQuotation({ open: false })}
           />
         )}
-        {OpenModalCotation.open && (
-          <ModalCotation
-            id={OpenModalCotation.id}
-            onClick={() => setOpenModalCotation({ open: false })}
+        {OpenModalQuotation.open && (
+          <ModalQuotation
+            id={OpenModalQuotation.id}
+            onClick={() => setOpenModalQuotation({ open: false })}
           />
         )}
       </ContainerAllInfo>
       <CenterCustom>
-        <Pagination
-          page={page}
-          onPageChange={(index: number) => setPage(index)}
-          allPages={allPages}
-        />
+        {
+          listTopics?.length > 0 && (
+            <Pagination page={page} onPageChange={(index: number) => setPage(index)} allPages={allPages}/>
+          )
+        }
       </CenterCustom>
     </Container>
   );

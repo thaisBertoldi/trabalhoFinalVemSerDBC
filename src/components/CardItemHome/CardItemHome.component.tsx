@@ -7,8 +7,9 @@ import {
   LoadingItem,
 } from "./CardItemHome.style";
 import loadingImg from '../../images/loading.gif'
+import { CardItemHomeProps } from "../../models/TopicDTO";
 
-const CardItemHome = ({ id }: any) => {
+const CardItemHome = ({ id }: CardItemHomeProps) => {
   const [listItens, setListItens] = useState<any>([]);
   const [loading, setLoading] = useState(true);
 
@@ -26,8 +27,8 @@ const CardItemHome = ({ id }: any) => {
           />
           <CardItemInfos>
             <CardItemValueName>
-              <p>{listItens[0].itemName.toUpperCase()}</p>
-              <h1>R$ {listItens[0].value}</h1>
+              <p>Nome: {listItens[0].itemName.toUpperCase()}</p>
+              <p>R$ {listItens[0].value}</p>
             </CardItemValueName>
             <p>{listItens[0].description}</p>
           </CardItemInfos>

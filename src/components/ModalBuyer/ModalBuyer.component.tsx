@@ -7,24 +7,18 @@ import { InputForm } from '../../global.style';
 import { Theme } from "../../theme";
 import { maskMoney, removeMaskMoney } from '../../utils/utils';
 import api from '../../service/api';
-import { ENDPOINT_COTATION } from '../../constants';
+import { ENDPOINT_QUOTATION } from '../../constants';
 import Notiflix, { Loading } from 'notiflix';
+import { ModalComponentDTO } from '../../models/ModalsDTO';
+const ModalBuyer = ({onClick, id}: ModalComponentDTO) => {
 
-const ModalBuyer = ({onClick, id}: any) => {
-
-  const handleAddCotation = async (values: any) => {
+  const handleAddQuotation = async (values: string) => {
     const finalValue = removeMaskMoney(values);
     const price = parseFloat(finalValue);
-    
-    const options = {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }
-
+  
     Loading.circle();
     try {
-      const {data} = await api.post(`${ENDPOINT_COTATION.CREATE_COTATION}/${id}?preco=${price}`);
+      const {data} = await api.post(`${ENDPOINT_QUOTATION.CREATE_QUOTATION}/${id}?preco=${price}`);
       Notiflix.Notify.success(
         `Cotação criada com sucesso.`
       );
@@ -47,7 +41,7 @@ const ModalBuyer = ({onClick, id}: any) => {
       value: Yup.string()
     }),
     onSubmit: (values) => {
-      handleAddCotation(values.value);
+      handleAddQuotation(values.value);
     },
   });
 

@@ -11,7 +11,7 @@ export const getTopics = async (
     const { data } = await api.get(`${ENDPOINT_TOPICS.GET_ALL}=${page}`);
     console.log(`${ENDPOINT_TOPICS.GET_ALL}=${page}`)
     setAllPages(data.totalPages);
-    setListTopics(data);
+    setListTopics(data.content);
   } catch (error) {
     console.log(error);
   }

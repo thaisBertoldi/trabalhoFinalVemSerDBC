@@ -1,17 +1,18 @@
-import { connect } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { connect, DispatchProp } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { UlNav, DropDown, DivArrow, DivLinksMenu, ParagraphNameUser, DivUserMenu, MenuHamburguer } from "./Header.style";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { handleLogout } from "../../store/action/authActions";
 
-import ImgDefault from "../../images/foto-perfil.png";
 import { useState } from "react";
 import Hamburguer from "./Hamburguer.component";
 import { MdMenu } from "react-icons/md";
 import ItensMenu from "./ItensMenu.component";
 import { DefaultImage } from "../../constants";
+import { RootState } from "../../store";
+import { isLoggedDTO } from "../../models/UserDTO";
 
-const Menu = ({ auth, dispatch }: any) => {
+const Menu = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   const navigate = useNavigate();
 
   const [open, setOpen] = useState<boolean>(false);
@@ -56,8 +57,8 @@ const Menu = ({ auth, dispatch }: any) => {
   );
 };
 
-const mapStateToProps = (state: any) => ({
-  auth: state.auth,
+const mapStateToProps = (state: RootState) => ({
+  user: state.authReducer,
 });
 
 export default connect(mapStateToProps)(Menu);
