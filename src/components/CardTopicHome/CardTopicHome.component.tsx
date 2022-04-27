@@ -13,7 +13,7 @@ import { MdSegment, MdDateRange } from "react-icons/md";
 import { GrMoney } from "react-icons/gr";
 import { ColorEnum, StatusEnum } from "../../enums/StatusEnum";
 
-const CardTopicHome = ({item, setOpenModalQuotation, setOpenModalAddCotation, user, setOpenModalItens}: any) =>  {
+const CardTopicHome = ({item, setOpenModalQuotation, setOpenModalAddQuotation, user, setOpenModalItens}: any) =>  {
   return (
     <ContainerCard key={item.topicId}>
     <TitleCard>
@@ -41,7 +41,7 @@ const CardTopicHome = ({item, setOpenModalQuotation, setOpenModalAddCotation, us
       { 
         user.profile === "BUYER" && (
           <ButtonCard
-            onClick={ () => setOpenModalAddCotation({ open: true, id: item.topicId }) }>
+            onClick={ () => setOpenModalAddQuotation({ open: true, id: item.topicId }) }>
             <BiAddToQueue /> Adicionar cotação{" "}
           </ButtonCard>
         )

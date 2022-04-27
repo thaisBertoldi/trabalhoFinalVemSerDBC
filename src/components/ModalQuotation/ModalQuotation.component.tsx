@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { connect } from 'react-redux';
-import { ENDPOINT_COTATION, ENDPOINT_FINANCIER, ENDPOINT_MANAGER } from '../../constants';
+import { ENDPOINT_QUOTATION, ENDPOINT_FINANCIER, ENDPOINT_MANAGER } from '../../constants';
 import { StatusEnum } from '../../enums/StatusEnum';
 import api from '../../service/api';
 import { RootState } from '../../store';
@@ -12,9 +12,9 @@ const ModalQuotation = ({user, onClick, id}: any) => {
 
   const [value, setValues] = useState<any>([]);
 
-  const getCotation = async (id: number) => {
+  const getQuotation = async (id: number) => {
     try {
-      const {data} = await api.get(`${ENDPOINT_COTATION.MAIN_PAGE_QUOTATION}/${id}`);
+      const {data} = await api.get(`${ENDPOINT_QUOTATION.MAIN_PAGE_QUOTATION}/${id}`);
       setValues(data);
       console.log(data);
     } catch (error) {
@@ -22,23 +22,23 @@ const ModalQuotation = ({user, onClick, id}: any) => {
     }
   }
 
-  const reproveAllCotations = async () => {
+  const reproveAllQuotations = async () => {
     try {
       const {data} = await api.put(`${ENDPOINT_MANAGER.REPROVE_ALL_QUOTATIONS}/${id}`);
     } catch (error) {
       console.log(error);
     } finally {
-      getCotation(id);
+      getQuotation(id);
     }
   }
   
-  const handleAproveCotation = async (idQuotation: number) => {
+  const handleAproveQuotation = async (idQuotation: number) => {
     try {
       const {data} = await api.post(`${ENDPOINT_MANAGER.APROVE_QUOTATION}/${idQuotation}`);
     } catch (error) {
       console.log(error);
     } finally {
-      getCotation(id);
+      getQuotation(id);
     }
   }
 
@@ -51,7 +51,7 @@ const ModalQuotation = ({user, onClick, id}: any) => {
   }
   
   useEffect(() => {
-    getCotation(id);
+    getQuotation(id);
   }, [])
   
 
@@ -61,7 +61,7 @@ const ModalQuotation = ({user, onClick, id}: any) => {
         <BtnClose onClick={onClick}> <AiFillCloseCircle /> </BtnClose>
         <TopModal>
           <h1>Cotações </h1>
-          {(user.profile === "MANAGER" && value.length > 0 ) && (<BtnModalQuotation color={'#f44336'} onClick={ () => reproveAllCotations()} > Reprovar todas as cotações </BtnModalQuotation>)}
+          {(user.profile === "MANAGER" && value.length > 0 ) && (<BtnModalQuotation color={'#f44336'} onClick={ () => reproveAllQuotations()} > Reprovar todas as cotações </BtnModalQuotation>)}
         </TopModal>
         
           {
@@ -73,7 +73,7 @@ const ModalQuotation = ({user, onClick, id}: any) => {
                   <DivButtons>
                     {
                       (user.profile === "MANAGER" || user.profile === "FINANCIER") && (
-                        <BtnModalQuotation color={'#04a96d'} onClick={ () => { user.profile === "MANAGER" ? handleAproveCotation(item.quotationId) : handleAproveByFinancier(true) }  }> Aprovar </BtnModalQuotation>
+                        <BtnModalQuotation color={'#04a96d'} onClick={ () => { user.profile === "MANAGER" ? handleAproveQuotation(item.quotationId) : handleAproveByFinancier(true) }  }> Aprovar </BtnModalQuotation>
                       )
                     }
                     { user.profile === "FINANCIER" && (<BtnModalQuotation color={'#f44336'} onClick={ () => handleAproveByFinancier(false) }> Reprovar </BtnModalQuotation>)}

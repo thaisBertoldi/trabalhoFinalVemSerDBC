@@ -21,11 +21,6 @@ import { ModalDTO } from "../../models/ModalsDTO";
 import { IconSearch } from "../../global.style";
 import api from "../../service/api";
 
-//listas apenas do colaborador se for usuario tipo colaborador
-//lista geral com botao de aprovar ou reprovar pro gestor se tiver mais de duas cotacoes
-//lista geral com botao de aprovar ou reprovar pro financeiro se o gestor tiver aprovado
-//lista geral pro comprador com modal pra solicitar cotacao
-
 const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   const navigate = useNavigate();
   const hasUser: string | any = localStorage.getItem("token");
@@ -36,7 +31,7 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   const [allPages, setAllPages] = useState<number>(0);
   const [page, setPage] = useState<number>(0);
 
-  const [OpenModalAddCotation, setOpenModalAddCotation] = useState<ModalDTO>({
+  const [OpenModalAddQuotation, setOpenModalAddQuotation] = useState<ModalDTO>({
     open: false,
     id: 0,
   });
@@ -92,15 +87,21 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
       </DivSearch>
 
       <ContainerAllInfo>
-        {listTopics?.content?.map((item: any) => (
-          <CardTopicHome
-            item={item}
-            user={user}
-            setOpenMModalQuotation={setOpenModalQuotation}
-            setOpenModalAddCotation={setOpenModalAddCotation}
-            setOpenModalItens={setOpenModalItens}
-          />
-        ))}
+        {
+          listTopics?.content?.length > 0 ? (
+            listTopics?.content?.map((item: any) => (
+              <CardTopicHome
+                item={item}
+                user={user}
+                setOpenMModalQuotation={setOpenModalQuotation}
+                setOpenModalAddQuotation={setOpenModalAddQuotation}
+                setOpenModalItens={setOpenModalItens}
+              />
+            ))
+          ) : (
+            <h1>Nenhum tópico encontrado</h1>
+          )
+        }
 
         {OpenModalItens.open && (
           <ModalCardItens
@@ -108,10 +109,10 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
             onClick={() => setOpenModalItens({ open: false })}
           />
         )}
-        {OpenModalAddCotation.open && (
+        {OpenModalAddQuotation.open && (
           <ModalBuyer
-            id={OpenModalAddCotation.id}
-            onClick={() => setOpenModalAddCotation({ open: false })}
+            id={OpenModalAddQuotation.id}
+            onClick={() => setOpenModalAddQuotation({ open: false })}
           />
         )}
         {OpenModalQuotation.open && (
@@ -122,11 +123,11 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
         )}
       </ContainerAllInfo>
       <CenterCustom>
-        <Pagination
-          page={page}
-          onPageChange={(index: number) => setPage(index)}
-          allPages={allPages}
-        />
+        {
+          listTopics?.content?.length > 0 && (
+            <Pagination page={page} onPageChange={(index: number) => setPage(index)} allPages={allPages}/>
+          )
+        }
       </CenterCustom>
     </Container>
   );
