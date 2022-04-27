@@ -118,8 +118,8 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
         {isAddUser && (
           <ModalCreateUserAdm onClick={() => setIsAddUser(false)} />
         )}
-        <Pagination page={page} onPageChange={ (index: number) => setPage(index)} allPages={allPages} />
       </ContainerAdmin>
+        <Pagination page={page} onPageChange={ (index: number) => setPage(index)} allPages={allPages} />
     </Container>
   );
 };

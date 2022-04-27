@@ -6,10 +6,7 @@ import { isLoggedDTO } from "../../models/UserDTO";
 
 import { RootState } from "../../store";
 import { redirectAdmin, redirectToLogin } from "../../utils/utils";
-import {
-  DivSearch,
-  ContainerAllInfo,
-} from "./Home.style";
+import { DivSearch, ContainerAllInfo } from "./Home.style";
 
 import {
   CardTopicHome,
@@ -59,7 +56,9 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   const handleUserSearch = async () => {
     try {
       setPage(0);
-      const {data} = await api.get(`/main-page/topic-by-titulo/${inputSearch}?page=${page}`);
+      const { data } = await api.get(
+        `/main-page/topic-by-titulo/${inputSearch}?page=${page}`
+      );
       setListSearched(data);
       setIsSearch(true);
     } catch (error) {
@@ -89,24 +88,46 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
           placeholder="Pesquisar"
           onChange={(e) => setInputSearch(e.target.value)}
         ></InputForm>
-        <IconSearch onClick={ () => handleUserSearch() }/>
+        <IconSearch onClick={() => handleUserSearch()} />
       </DivSearch>
 
       <ContainerAllInfo>
-        {
-          listTopics?.content?.map((item: any) => (
-            <CardTopicHome item={item} setOpenModalCotation={setOpenModalCotation} setOpenModalAddCotation={setOpenModalAddCotation} user={user} setOpenModalItens={setOpenModalItens}/>
-          ))
-        }
+        {listTopics?.content?.map((item: any) => (
+          <CardTopicHome
+            item={item}
+            setOpenModalCotation={setOpenModalCotation}
+            setOpenModalAddCotation={setOpenModalAddCotation}
+            user={user}
+            setOpenModalItens={setOpenModalItens}
+          />
+        ))}
 
-        <CenterCustom>
-          <Pagination page={page} onPageChange={ (index: number) => setPage(index)} allPages={allPages} />
-        </CenterCustom>
-
-        {OpenModalItens.open && ( <ModalCardItens id={OpenModalItens.id} onClick={() => setOpenModalItens({ open: false })} /> )}
-        {OpenModalAddCotation.open && ( <ModalBuyer id={OpenModalAddCotation.id} onClick={() => setOpenModalAddCotation({ open: false })} /> )}
-        {OpenModalCotation.open && ( <ModalCotation id={OpenModalCotation.id} onClick={() => setOpenModalCotation({ open: false })} /> )}
+        {OpenModalItens.open && (
+          <ModalCardItens
+            id={OpenModalItens.id}
+            onClick={() => setOpenModalItens({ open: false })}
+          />
+        )}
+        {OpenModalAddCotation.open && (
+          <ModalBuyer
+            id={OpenModalAddCotation.id}
+            onClick={() => setOpenModalAddCotation({ open: false })}
+          />
+        )}
+        {OpenModalCotation.open && (
+          <ModalCotation
+            id={OpenModalCotation.id}
+            onClick={() => setOpenModalCotation({ open: false })}
+          />
+        )}
       </ContainerAllInfo>
+      <CenterCustom>
+        <Pagination
+          page={page}
+          onPageChange={(index: number) => setPage(index)}
+          allPages={allPages}
+        />
+      </CenterCustom>
     </Container>
   );
 };

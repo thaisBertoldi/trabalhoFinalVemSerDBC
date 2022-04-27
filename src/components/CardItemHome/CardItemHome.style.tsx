@@ -7,7 +7,6 @@ export const CardItem = styled.div`
   height: 200px;
   padding: 10px;
   gap: 15px;
-  border-bottom: 1px solid #eee;
   align-items: center;
 
   img {

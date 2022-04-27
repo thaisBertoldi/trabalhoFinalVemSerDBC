@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ENDPOINT_TOPICS } from "../../constants";
 import api from "../../service/api";
 import {
@@ -10,12 +10,7 @@ import {
 import { AiFillCloseCircle } from "react-icons/ai";
 import { ItensInTopicDTO } from "../../models/ModalsDTO";
 
-type Event = {
-  id: number | undefined,
-  onClick: () => void;
-};
-
-const ModalCardItens = ({ id, onClick }: Event) => {
+const ModalCardItens = ({ id, onClick }: any) => {
   const [ItensInTopic, setItensInTopic] = useState<Array<ItensInTopicDTO>>([]);
 
   const getItensTopic = async (id: number | undefined) => {
@@ -29,8 +24,6 @@ const ModalCardItens = ({ id, onClick }: Event) => {
     }
   };
 
-  console.log(ItensInTopic);
-
   useEffect(() => {
     getItensTopic(id);
   }, []);
@@ -38,7 +31,7 @@ const ModalCardItens = ({ id, onClick }: Event) => {
   return (
     <ContainerModal>
       <Modal>
-        <BtnClose onClick={() => onClick}>
+        <BtnClose onClick={onClick}>
           {" "}
           <AiFillCloseCircle />{" "}
         </BtnClose>

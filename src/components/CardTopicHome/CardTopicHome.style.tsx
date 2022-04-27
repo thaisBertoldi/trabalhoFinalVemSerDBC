@@ -11,7 +11,7 @@ export const ContainerCard = styled.div`
   border-radius: 15px;
   padding-bottom: 20px;
   -webkit-box-shadow: 0px 1px 31px 9px rgba(0, 0, 0, 0.46);
-  box-shadow: 0px 1px 31px 9px rgba(0, 0, 0, 0.46);
+  box-shadow: 0px 1px 31px 9px rgba(105, 105, 105, 0.46);
 
   p {
     overflow: hidden;

@@ -2,13 +2,11 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Notiflix from "notiflix";
 import { AiFillCloseCircle } from "react-icons/ai";
-import { ContainerModal, Modal } from "../ModalBuyer/ModalBuyer.style";
-import { DivEye, DivInputsLogin } from "../../pages/Login/Login.style";
+import { ContainerModal } from "../ModalBuyer/ModalBuyer.style";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import {
   Btn,
   DivErrorYup,
-  Input,
   InputForm,
   SelectCustom,
 } from "../../global.style";
