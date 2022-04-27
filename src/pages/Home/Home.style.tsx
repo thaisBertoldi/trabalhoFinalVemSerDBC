@@ -16,3 +16,8 @@ export const DivSearch = styled.div`
   justify-content: center;
   margin: ${Theme.margin};
 `;
+
+
+
+
+

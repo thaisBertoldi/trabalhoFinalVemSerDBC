@@ -8,7 +8,7 @@ export const ModalAdm = styled.div`
   flex-direction: column;
   background-color: #fff;
   border-radius: 5px;
-  padding: 20px;
+  padding: 25px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 
   form {
@@ -17,7 +17,7 @@ export const ModalAdm = styled.div`
     display: flex;
     flex-direction: column;
     margin-top: 20px;
-    gap: 15px;
+    gap: 25px;
   }
 
   -webkit-animation: scale-in 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -30,19 +30,75 @@ export const DivClose = styled.div`
   justify-content: end;
   font-size: 30px;
   color: red;
+  cursor: pointer;
 `;
 
 export const DivEyeAdm = styled.div`
   font-size: 25px;
   position: absolute;
-  /* right: 560px;
-  top: 405px; */
-  right: 31%;
-  top: 48.5%;
+  right: 30.5%;
+  top: 47.5%;
   color: ${Theme.color.black};
 
   @media (max-width: 668px) {
-    right: 31%;
-    top: 49.7%;
+    right: 30.5%;
+    top: 48.5%;
+  }
+`;
+
+export const InputCreateUserAdm = styled.input`
+  width: 100%;
+  height: 30px;
+  border: none;
+  border-bottom: 1px solid ${Theme.color.grayDark};
+  background: none;
+  color: ${Theme.color.black};
+  font-size: ${Theme.fontSize};
+
+  ::placeholder {
+    @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+    font-family: "Poppins", sans-serif;
+  }
+
+  :focus {
+    outline: none;
+  }
+`;
+
+export const SelectCreateUserAdm = styled.select`
+  width: 100%;
+  height: 30px;
+  @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+  font-family: "Poppins", sans-serif;
+  border: none;
+  border-bottom: 1px solid ${Theme.color.grayDark};
+  background: none;
+  color: ${Theme.color.black};
+  font-size: ${Theme.fontSize};
+
+  :focus {
+    outline: none;
+  }
+`;
+
+export const DivInputFile = styled.div`
+  width: 185px;
+  height: 40px;
+  position: relative;
+  overflow: hidden;
+  background: ${Theme.color.grayDark};
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  span {
+    display: block;
+    position: absolute;
+    color: ${Theme.color.white};
+  }
+  input {
+    opacity: 0;
+    font-size: 100px;
   }
 `;

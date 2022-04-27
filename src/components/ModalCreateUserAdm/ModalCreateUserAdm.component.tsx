@@ -4,18 +4,20 @@ import Notiflix from "notiflix";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { ContainerModal } from "../ModalBuyer/ModalBuyer.style";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import {
-  Btn,
-  DivErrorYup,
-  InputForm,
-  SelectCustom,
-} from "../../global.style";
+import { Btn, DivErrorYup, InputForm, SelectCustom } from "../../global.style";
 import PasswordStrengthBar from "react-password-strength-bar";
 import { Theme } from "../../theme";
 import { imgConverter } from "../../utils/utils";
 import api from "../../service/api";
 import { ENDPOINT_ADMIN } from "../../constants";
-import { DivClose, DivEyeAdm, ModalAdm } from "./ModalCreateUser.style";
+import {
+  DivClose,
+  DivEyeAdm,
+  DivInputFile,
+  InputCreateUserAdm,
+  ModalAdm,
+  SelectCreateUserAdm,
+} from "./ModalCreateUser.style";
 import { useState } from "react";
 import { UserAdmRegisterDTO } from "../../models/UserDTO";
 
@@ -99,7 +101,7 @@ const ModalCreateUserAdm = ({ onClick }: any) => {
         </DivClose>
         <h4>Por favor, preencha o formulário: </h4>
         <form onSubmit={formik.handleSubmit}>
-          <InputForm
+          <InputCreateUserAdm
             width={"100%"}
             height={"40px"}
             placeholder="Nome Completo"
@@ -113,7 +115,7 @@ const ModalCreateUserAdm = ({ onClick }: any) => {
           {formik.errors.fullName && formik.touched.fullName ? (
             <DivErrorYup>{formik.errors.fullName}</DivErrorYup>
           ) : null}
-          <InputForm
+          <InputCreateUserAdm
             width={"100%"}
             height={"40px"}
             placeholder="E-mail"
@@ -128,7 +130,7 @@ const ModalCreateUserAdm = ({ onClick }: any) => {
             <DivErrorYup>{formik.errors.username}</DivErrorYup>
           ) : null}
           <div>
-            <InputForm
+            <InputCreateUserAdm
               width={"100%"}
               height={"40px"}
               placeholder="Password"
@@ -143,12 +145,12 @@ const ModalCreateUserAdm = ({ onClick }: any) => {
               <DivErrorYup>{formik.errors.password}</DivErrorYup>
             ) : null}
             <DivEyeAdm>
-                {showPassword ? (
-                  <FaEye onClick={() => setShowPassword(!showPassword)} />
-                ) : (
-                  <FaEyeSlash onClick={() => setShowPassword(!showPassword)} />
-                )}
-              </DivEyeAdm>
+              {showPassword ? (
+                <FaEye onClick={() => setShowPassword(!showPassword)} />
+              ) : (
+                <FaEyeSlash onClick={() => setShowPassword(!showPassword)} />
+              )}
+            </DivEyeAdm>
           </div>
 
           {formik.values.password.length > 0 && (
@@ -166,7 +168,7 @@ const ModalCreateUserAdm = ({ onClick }: any) => {
             />
           )}
 
-          <InputForm
+          <InputCreateUserAdm
             width={"100%"}
             height={"40px"}
             placeholder="Confirm Password"
@@ -181,34 +183,32 @@ const ModalCreateUserAdm = ({ onClick }: any) => {
             <DivErrorYup>As senhas estão diferentes.</DivErrorYup>
           ) : null}
 
-          <SelectCustom
-            width={"100%"}
-            height={"40px"}
-            name="groups"
-            onChange={formik.handleChange}
-          >
+          <SelectCreateUserAdm name="groups" onChange={formik.handleChange}>
             <option value="vazio">Escolha uma opção</option>
             <option value="COLLABORATOR">Colaborador</option>
             <option value="ADMINISTRATOR">Administrador</option>
             <option value="BUYER">Comprador</option>
             <option value="MANEGER">Gestor</option>
             <option value="FINANCIER">Financeiro</option>
-          </SelectCustom>
+          </SelectCreateUserAdm>
           {formik.errors.groups && formik.touched.groups ? (
             <DivErrorYup>{formik.errors.groups}</DivErrorYup>
           ) : null}
 
-          <InputForm
-            width={"100%"}
-            height={"40px"}
-            id="profileImage"
-            name="profileImage"
-            type="file"
-            accept="image/*"
-            onChange={(event) =>
-              imgConverter(event, formik.setFieldValue, "profileImage")
-            }
-          />
+          <DivInputFile>
+            <span>Escolha um arquivo</span>
+            <input
+              width={"100%"}
+              height={"40px"}
+              id="profileImage"
+              name="profileImage"
+              type="file"
+              accept="image/*"
+              onChange={(event) =>
+                imgConverter(event, formik.setFieldValue, "profileImage")
+              }
+            />
+          </DivInputFile>
 
           <Btn width="100%" type="submit" color={Theme.color.primary}>
             Submit
@@ -217,6 +217,6 @@ const ModalCreateUserAdm = ({ onClick }: any) => {
       </ModalAdm>
     </ContainerModal>
   );
-}
+};
 
 export default ModalCreateUserAdm;
