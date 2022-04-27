@@ -63,16 +63,6 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
     open: false,
     id: 0,
   });
-
-  // const [showItensTopic, setShowItensTopic] = useState<ModalDTO>({
-  //   open: false,
-  //   id: 0,
-  // });
-
-  const changePage = (index: number) => {
-    setPage(index);
-  };
-
   const handleUserSearch = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -109,81 +99,56 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
         <IconSearch />
       </DivSearch>
 
-      <Pagination page={page} onPageChange={changePage} allPages={allPages} />
+      <Pagination page={page} onPageChange={ (index: number) => setPage(index)} allPages={allPages} />
       <ContainerAllInfo>
-        {listTopics?.content?.map((item: any) => (
-          <ContainerCard key={item.topicId}>
-            <TitleCard>
-              <TopicName>
-                <MdSegment />
-                <h2>{item.title.toUpperCase()}</h2>
-              </TopicName>
-              <DivStatus color={ColorEnum[item.status]}>
-                <span>Status: {StatusEnum[item.status]}</span>
-              </DivStatus>
-            </TitleCard>
-            <InfoDataPrice>
-              <p>
-                <MdDateRange /> {moment(item.date).format("DD/MM/YYYY")}
-              </p>
-              <p>
-                <GrMoney /> R$ {item.totalValue}
-              </p>
-            </InfoDataPrice>
-            <DivButtonsCard>
-              <ButtonCard
-                onClick={() =>
-                  setOpenModalCotation({ open: true, id: item.topicId })
-                }
-              >
-                <BiDollarCircle /> Visualizar cotações{" "}
-              </ButtonCard>
-              {user.profile === "BUYER" && (
+        {
+          listTopics?.content?.map((item: any) => (
+            <ContainerCard key={item.topicId}>
+              <TitleCard>
+                <TopicName>
+                  <MdSegment />
+                  <h2>{item.title.toUpperCase()}</h2>
+                </TopicName>
+                <DivStatus color={ColorEnum[item.status]}>
+                  <span>Status: {StatusEnum[item.status]}</span>
+                </DivStatus>
+              </TitleCard>
+              <InfoDataPrice>
+                <p>
+                  <MdDateRange /> {moment(item.date).format("DD/MM/YYYY")}
+                </p>
+                <p>
+                  <GrMoney /> R$ {item.totalValue}
+                </p>
+              </InfoDataPrice>
+              <DivButtonsCard>
                 <ButtonCard
-                  onClick={() =>
-                    setOpenModalAddCotation({ open: true, id: item.topicId })
-                  }
-                >
-                  <BiAddToQueue /> Adicionar cotação{" "}
+                  onClick={ () => setOpenModalCotation({ open: true, id: item.topicId }) }>
+                  <BiDollarCircle /> Visualizar cotações{" "}
                 </ButtonCard>
-              )}
-            </DivButtonsCard>
+                {user.profile === "BUYER" && (
+                  <ButtonCard
+                    onClick={ () => setOpenModalAddCotation({ open: true, id: item.topicId }) }>
+                    <BiAddToQueue /> Adicionar cotação{" "}
+                  </ButtonCard>
+                )}
+              </DivButtonsCard>
 
-            <CardHome id={item.topicId} />
+              <CardHome id={item.topicId} />
 
-            <DivButtonsCard>
-              <ButtonCard
-                onClick={() =>
-                  setOpenModalItens({
-                    open: !OpenModalItens.open,
-                    id: item.topicId,
-                  })
-                }
-              >
-                <BiDetail /> Visualizar todos os itens{" "}
-              </ButtonCard>
-            </DivButtonsCard>
+              <DivButtonsCard>
+                <ButtonCard
+                  onClick={ () => setOpenModalItens({ open: true, id: item.topicId,}) }>
+                  <BiDetail /> Visualizar todos os itens{" "}
+                </ButtonCard>
+              </DivButtonsCard>
+            </ContainerCard>
+          ))
+        }
 
-            {OpenModalItens.open && (
-              <ModalCardItens
-                id={OpenModalItens.id}
-                onClick={() => setOpenModalItens({ open: false })}
-              />
-            )}
-            {OpenModalAddCotation.open && (
-              <ModalBuyer
-                id={OpenModalAddCotation.id}
-                onClick={() => setOpenModalAddCotation({ open: false })}
-              />
-            )}
-            {OpenModalCotation.open && (
-              <ModalCotation
-                id={OpenModalCotation.id}
-                onClick={() => setOpenModalCotation({ open: false })}
-              />
-            )}
-          </ContainerCard>
-        ))}
+        {OpenModalItens.open && ( <ModalCardItens id={OpenModalItens.id} onClick={() => setOpenModalItens({ open: false })} /> )}
+        {OpenModalAddCotation.open && ( <ModalBuyer id={OpenModalAddCotation.id} onClick={() => setOpenModalAddCotation({ open: false })} /> )}
+        {OpenModalCotation.open && ( <ModalCotation id={OpenModalCotation.id} onClick={() => setOpenModalCotation({ open: false })} /> )}
       </ContainerAllInfo>
     </Container>
   );
