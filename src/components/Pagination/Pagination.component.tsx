@@ -1,12 +1,8 @@
-import { useEffect, useState } from "react";
 import { MdOutlineArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
+import { PaginationDTO } from "../../models/PaginationDTO";
 import { ButtonCustom, ContainerPagination } from "./Pagination.style";
 
-const Pagination = ({ page, onPageChange, allPages }: any) => {
-
-  useEffect(() => {
-    
-  }, [])
+const Pagination = ({ page, onPageChange, allPages }: PaginationDTO) => {
 
   return (
     <ContainerPagination>
@@ -14,7 +10,7 @@ const Pagination = ({ page, onPageChange, allPages }: any) => {
         <MdOutlineArrowBackIosNew /> Anterior
       </ButtonCustom>
 
-      <span>Página {parseInt(page + 1)}</span>
+      <span>Página {parseInt((page) + 1)}</span>
 
       <ButtonCustom
         onClick={() => onPageChange(page + 1)}

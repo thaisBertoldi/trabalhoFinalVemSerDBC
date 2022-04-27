@@ -3,19 +3,20 @@ import { AiFillCloseCircle } from 'react-icons/ai';
 import { connect } from 'react-redux';
 import { ENDPOINT_QUOTATION, ENDPOINT_FINANCIER, ENDPOINT_MANAGER } from '../../constants';
 import { StatusEnum } from '../../enums/StatusEnum';
+import { ModalQuotationDTO, ModalQuotationValuesDTO } from '../../models/ModalsDTO';
 import api from '../../service/api';
 import { RootState } from '../../store';
 import { BtnClose, ContainerModal, Modal } from '../ModalBuyer/ModalBuyer.style';
 import { TopModal, DivQuotations, DivButtons, BtnModalQuotation } from './ModalQuotation.style';
 
-const ModalQuotation = ({user, onClick, id}: any) => {
+const ModalQuotation = ({user, onClick, id}: ModalQuotationDTO) => {
 
-  const [value, setValues] = useState<any>([]);
+  const [valuesQuotation, setValuesQuotation] = useState<Array<ModalQuotationValuesDTO>>([]);
 
-  const getQuotation = async (id: number) => {
+  const getQuotation = async (id: number | undefined) => {
     try {
       const {data} = await api.get(`${ENDPOINT_QUOTATION.MAIN_PAGE_QUOTATION}/${id}`);
-      setValues(data);
+      setValuesQuotation(data);
       console.log(data);
     } catch (error) {
       console.log(error);
@@ -61,12 +62,12 @@ const ModalQuotation = ({user, onClick, id}: any) => {
         <BtnClose onClick={onClick}> <AiFillCloseCircle /> </BtnClose>
         <TopModal>
           <h1>Cotações </h1>
-          {(user.profile === "MANAGER" && value.length > 0 ) && (<BtnModalQuotation color={'#f44336'} onClick={ () => reproveAllQuotations()} > Reprovar todas as cotações </BtnModalQuotation>)}
+          {(user.profile === "MANAGER" && valuesQuotation.length > 0 ) && (<BtnModalQuotation color={'#f44336'} onClick={ () => reproveAllQuotations()} > Reprovar todas as cotações </BtnModalQuotation>)}
         </TopModal>
         
           {
-            value.length > 0 ? (
-              value.map((item: any) => (
+            valuesQuotation.length > 0 ? (
+              valuesQuotation.map((item: ModalQuotationValuesDTO) => (
                 <DivQuotations key={item.quotationId}>
                   <p> Status da cotação: {StatusEnum[item.quotationStatus]}</p>
                   <p> R$: {item.quotationPrice}</p>
