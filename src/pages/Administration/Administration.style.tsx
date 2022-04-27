@@ -85,6 +85,20 @@ export const BtnAdm = styled.button<{
 `;
 
 export const ParagraphInfo = styled.p`
+  visibility: hidden;
+  position: absolute;
+  z-index: 1;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  :hover {
+    visibility: visible;
+  }
+
   @media (max-width: 1000px) {
     display: none;
   }
