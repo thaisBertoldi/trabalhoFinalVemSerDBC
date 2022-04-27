@@ -57,9 +57,9 @@ const RequestPurchase = ({user,auth,dispatch,}: isLoggedDTO & PurchaseDTO & Disp
       itemId: 0,
     },
     onSubmit: (values, actions) => {
-      handleFinallyTopic(idTopic);
-      actions.resetForm();
+      handleFinallyTopic(idTopic, navigate);
       formikTopic.resetForm();
+      actions.resetForm();
     },
   });
 
@@ -159,12 +159,11 @@ const RequestPurchase = ({user,auth,dispatch,}: isLoggedDTO & PurchaseDTO & Disp
         </ContainerRequestForm>
         {arrayItens.map((item, index) => (
           <DivItens key={index}>
+            <img src={`data:image/jpeg;base64,${item.file}`} alt="imagem do item"/>
             <p>Nome: {item.itemName}</p>
             <p>Descrição: {item.description}</p>
-            <img src={item.file} alt="imagem do item"/>
             <p>Valor: R$ {item.price}</p>
             <p>Id: {item.itemId}</p>
-
             <FaTrashAlt onClick={() => handleDeleteItem(item.itemId, setArrayItens, arrayItens)} />
           </DivItens>
         ))}

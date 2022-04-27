@@ -44,11 +44,20 @@ export const handleCreateTopic = async (valuesTopic: TitlePurchaseDTO, setIdTopi
           `Sinto muito, mas nao foi possivel adicionar o item ao tópico. ${error}`
         );
       }
-      formik()
+      formik({
+        values: {
+          itemName: "",
+          description: "",
+          price: "",
+          file: values.file,
+          
+        },
+      })
+      
     Loading.remove();
   }
 
-  export const handleFinallyTopic = async (idItem: number) => {
+  export const handleFinallyTopic = async (idItem: number, navigate: Function) => {
     try {
       Loading.circle();
       const { data } = await api.put(`${ENDPOINT_TOPICS.UPDATE_STATUS}/${idItem}`);
@@ -56,6 +65,7 @@ export const handleCreateTopic = async (valuesTopic: TitlePurchaseDTO, setIdTopi
       Notiflix.Notify.success(
         `Tópico finalizado com sucesso.`
       );
+      navigate("/");
     } catch (error) {
       console.log(error);
       Notiflix.Notify.failure(

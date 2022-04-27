@@ -24,6 +24,7 @@ import {
 } from "./Home.style";
 
 import {
+  CardItemHome,
   ModalBuyer,
   ModalCardItens,
   ModalCotation,
@@ -31,9 +32,9 @@ import {
 } from "../../components";
 import { ColorEnum, StatusEnum } from "../../enums/StatusEnum";
 import { getTopics } from "../../store/action/topicActions";
-import CardHome from "../../components/CardHome/CardHome.component";
 import { ModalDTO } from "../../models/ModalsDTO";
 import { IconSearch } from "../../global.style";
+import api from "../../service/api";
 
 //listas apenas do colaborador se for usuario tipo colaborador
 //lista geral com botao de aprovar ou reprovar pro gestor se tiver mais de duas cotacoes
@@ -46,6 +47,7 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   const User = JSON.parse(hasUser);
 
   const [listTopics, setListTopics] = useState<any>([]);
+  const [listSearched, setListSearched] = useState<any>([]);
   const [allPages, setAllPages] = useState<number>(0);
   const [page, setPage] = useState<number>(0);
 
@@ -63,15 +65,18 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
     open: false,
     id: 0,
   });
-  const handleUserSearch = async (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const value = event.target.value;
+
+  const [inputSearch, setInputSearch] = useState<string>("");
+  const [isSearch, setIsSearch] = useState<boolean>(false);
+  const handleUserSearch = async () => {
     try {
-      if (value.length >= 4) {
-        // const {data} = await api.get('')
-      }
-    } catch (error) {}
+      setPage(0);
+      const {data} = await api.get(`/main-page/topic-by-titulo/${inputSearch}?page=${page}`);
+      setListSearched(data);
+      setIsSearch(true);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -94,12 +99,11 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
           width={"50%"}
           height={"40px"}
           placeholder="Pesquisar"
-          onChange={(e) => handleUserSearch(e)}
+          onChange={(e) => setInputSearch(e.target.value)}
         ></InputForm>
-        <IconSearch />
+        <IconSearch onClick={ () => handleUserSearch() }/>
       </DivSearch>
 
-      <Pagination page={page} onPageChange={ (index: number) => setPage(index)} allPages={allPages} />
       <ContainerAllInfo>
         {
           listTopics?.content?.map((item: any) => (
@@ -126,15 +130,17 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
                   onClick={ () => setOpenModalCotation({ open: true, id: item.topicId }) }>
                   <BiDollarCircle /> Visualizar cotações{" "}
                 </ButtonCard>
-                {user.profile === "BUYER" && (
-                  <ButtonCard
-                    onClick={ () => setOpenModalAddCotation({ open: true, id: item.topicId }) }>
-                    <BiAddToQueue /> Adicionar cotação{" "}
-                  </ButtonCard>
-                )}
+                { 
+                  user.profile === "BUYER" && (
+                    <ButtonCard
+                      onClick={ () => setOpenModalAddCotation({ open: true, id: item.topicId }) }>
+                      <BiAddToQueue /> Adicionar cotação{" "}
+                    </ButtonCard>
+                  )
+                }
               </DivButtonsCard>
 
-              <CardHome id={item.topicId} />
+              <CardItemHome id={item.topicId} />
 
               <DivButtonsCard>
                 <ButtonCard
@@ -145,6 +151,10 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
             </ContainerCard>
           ))
         }
+
+        <CenterCustom>
+          <Pagination page={page} onPageChange={ (index: number) => setPage(index)} allPages={allPages} />
+        </CenterCustom>
 
         {OpenModalItens.open && ( <ModalCardItens id={OpenModalItens.id} onClick={() => setOpenModalItens({ open: false })} /> )}
         {OpenModalAddCotation.open && ( <ModalBuyer id={OpenModalAddCotation.id} onClick={() => setOpenModalAddCotation({ open: false })} /> )}
