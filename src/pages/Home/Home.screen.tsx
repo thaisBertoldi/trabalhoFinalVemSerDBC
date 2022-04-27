@@ -3,34 +3,22 @@ import { connect, DispatchProp } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { CenterCustom, Container, InputForm } from "../../global.style";
 import { isLoggedDTO } from "../../models/UserDTO";
-import moment from "moment";
-
-import { BiAddToQueue, BiDetail, BiDollarCircle } from "react-icons/bi";
-import { MdSegment, MdDateRange } from "react-icons/md";
-import { GrMoney } from "react-icons/gr";
 
 import { RootState } from "../../store";
 import { redirectAdmin, redirectToLogin } from "../../utils/utils";
 import {
-  ContainerCard,
-  TitleCard,
-  ButtonCard,
-  DivButtonsCard,
   DivSearch,
-  TopicName,
   ContainerAllInfo,
-  InfoDataPrice,
-  DivStatus,
 } from "./Home.style";
 
 import {
-  CardItemHome,
+  CardTopicHome,
   ModalBuyer,
   ModalCardItens,
   ModalCotation,
   Pagination,
 } from "../../components";
-import { ColorEnum, StatusEnum } from "../../enums/StatusEnum";
+
 import { getTopics } from "../../store/action/topicActions";
 import { ModalDTO } from "../../models/ModalsDTO";
 import { IconSearch } from "../../global.style";
@@ -107,48 +95,7 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
       <ContainerAllInfo>
         {
           listTopics?.content?.map((item: any) => (
-            <ContainerCard key={item.topicId}>
-              <TitleCard>
-                <TopicName>
-                  <MdSegment />
-                  <h2>{item.title.toUpperCase()}</h2>
-                </TopicName>
-                <DivStatus color={ColorEnum[item.status]}>
-                  <span>Status: {StatusEnum[item.status]}</span>
-                </DivStatus>
-              </TitleCard>
-              <InfoDataPrice>
-                <p>
-                  <MdDateRange /> {moment(item.date).format("DD/MM/YYYY")}
-                </p>
-                <p>
-                  <GrMoney /> R$ {item.totalValue}
-                </p>
-              </InfoDataPrice>
-              <DivButtonsCard>
-                <ButtonCard
-                  onClick={ () => setOpenModalCotation({ open: true, id: item.topicId }) }>
-                  <BiDollarCircle /> Visualizar cotações{" "}
-                </ButtonCard>
-                { 
-                  user.profile === "BUYER" && (
-                    <ButtonCard
-                      onClick={ () => setOpenModalAddCotation({ open: true, id: item.topicId }) }>
-                      <BiAddToQueue /> Adicionar cotação{" "}
-                    </ButtonCard>
-                  )
-                }
-              </DivButtonsCard>
-
-              <CardItemHome id={item.topicId} />
-
-              <DivButtonsCard>
-                <ButtonCard
-                  onClick={ () => setOpenModalItens({ open: true, id: item.topicId,}) }>
-                  <BiDetail /> Visualizar todos os itens{" "}
-                </ButtonCard>
-              </DivButtonsCard>
-            </ContainerCard>
+            <CardTopicHome item={item} setOpenModalCotation={setOpenModalCotation} setOpenModalAddCotation={setOpenModalAddCotation} user={user} setOpenModalItens={setOpenModalItens}/>
           ))
         }
 
