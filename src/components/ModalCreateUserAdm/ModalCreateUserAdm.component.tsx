@@ -19,7 +19,7 @@ import { DivClose, DivEyeAdm, ModalAdm } from "./ModalCreateUser.style";
 import { useState } from "react";
 import { UserAdmRegisterDTO } from "../../models/UserDTO";
 
-function ModalCreateUserAdm({ onClick }: any) {
+const ModalCreateUserAdm = ({ onClick }: any) => {
   const [showPassword, setShowPassword] = useState<boolean>(true);
 
   const register = async (values: UserAdmRegisterDTO) => {

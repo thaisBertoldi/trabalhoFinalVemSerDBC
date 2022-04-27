@@ -1,7 +1,7 @@
 import logoImg from '../../images/logo-vemser.png'
 import { Img } from './Logo.style'
 
-function Logo() {
+const Logo = () => {
   return (
     <Img src={logoImg} alt="Logo VemSer DBC"/>
   )
