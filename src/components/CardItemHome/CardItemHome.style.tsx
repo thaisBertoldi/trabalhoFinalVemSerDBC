@@ -2,12 +2,10 @@ import styled from "styled-components";
 
 export const CardItem = styled.div`
   display: flex;
-  flex-direction: row;
-  width: 100%;
-  height: 200px;
+  width: 97%;
   padding: 10px;
   gap: 15px;
-  align-items: center;
+  margin: 50px 0;
 
   img {
     width: 100px;
@@ -16,12 +14,22 @@ export const CardItem = styled.div`
 `;
 
 export const CardItemInfos = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
 `;
 
 export const CardItemValueName = styled.div`
+  width: 90%;
   display: flex;
-  gap: 15px;
+  justify-content: space-between;
   align-items: center;
+`;
+
+export const DescP = styled.p`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 `;

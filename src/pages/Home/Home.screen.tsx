@@ -95,9 +95,9 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
         {listTopics?.content?.map((item: any) => (
           <CardTopicHome
             item={item}
+            user={user}
             setOpenModalCotation={setOpenModalCotation}
             setOpenModalAddCotation={setOpenModalAddCotation}
-            user={user}
             setOpenModalItens={setOpenModalItens}
           />
         ))}

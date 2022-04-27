@@ -32,20 +32,21 @@ const ModalCardItens = ({ id, onClick }: any) => {
     <ContainerModal>
       <Modal>
         <BtnClose onClick={onClick}>
-          {" "}
-          <AiFillCloseCircle />{" "}
+          <AiFillCloseCircle />
         </BtnClose>
-        {ItensInTopic.map((item: ItensInTopicDTO, index: number) => (
-          <CardItem key={index}>
-            <img
-              src={`data:image/jpeg;base64,${item.file}`}
-              alt="imagem do iten"
-            />
-            <p>{item.itemName.toUpperCase()}</p>
-            <p>{item.description}</p>
-            <p>{item.value}</p>
-          </CardItem>
-        ))}
+        {
+          ItensInTopic.map((item: ItensInTopicDTO, index: number) => (
+            <CardItem key={index}>
+              <img
+                src={`data:image/jpeg;base64,${item.file}`}
+                alt="imagem do iten"
+              />
+              <p>Nome: {item.itemName.toUpperCase()}</p>
+              <p>R$ {item.value}</p>
+              <p>{item.description}</p>
+            </CardItem>
+          ))
+        }
       </Modal>
     </ContainerModal>
   );
