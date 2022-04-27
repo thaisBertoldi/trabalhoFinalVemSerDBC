@@ -7,8 +7,9 @@ import {
   LoadingItem,
 } from "./CardItemHome.style";
 import loadingImg from '../../images/loading.gif'
+import { CardItemHomeProps } from "../../models/TopicDTO";
 
-const CardItemHome = ({ id }: any) => {
+const CardItemHome = ({ id }: CardItemHomeProps) => {
   const [listItens, setListItens] = useState<any>([]);
   const [loading, setLoading] = useState(true);
 

@@ -15,3 +15,7 @@ export interface TopicComponentDTO {
   setOpenModalAddQuotation: Function
   setOpenModalItens: Function
 }
+
+export interface CardItemHomeProps {
+  id: number;
+}

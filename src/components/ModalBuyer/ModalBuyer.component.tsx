@@ -9,10 +9,10 @@ import { maskMoney, removeMaskMoney } from '../../utils/utils';
 import api from '../../service/api';
 import { ENDPOINT_QUOTATION } from '../../constants';
 import Notiflix, { Loading } from 'notiflix';
+import { ModalComponentDTO } from '../../models/ModalsDTO';
+const ModalBuyer = ({onClick, id}: ModalComponentDTO) => {
 
-const ModalBuyer = ({onClick, id}: any) => {
-
-  const handleAddQuotation = async (values: any) => {
+  const handleAddQuotation = async (values: string) => {
     const finalValue = removeMaskMoney(values);
     const price = parseFloat(finalValue);
   

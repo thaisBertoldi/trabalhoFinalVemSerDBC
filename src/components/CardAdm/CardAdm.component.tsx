@@ -1,5 +1,6 @@
 import { DefaultImage } from "../../constants";
 import { TypeUserEnum } from "../../enums/TypeUserEnum";
+import { CardAdmDTO } from "../../models/CardAdmDTO";
 import {
   BtnAdm,
   CardUSerAdmin,
@@ -8,7 +9,7 @@ import {
   ImageUser,
 } from "./CardAdm.style";
 
-const CardAdm = ({imgUser, fullName, group, formik}: any) => {
+const CardAdm = ({imgUser, fullName, group, formik}: CardAdmDTO) => {
 
   return (
     <div>

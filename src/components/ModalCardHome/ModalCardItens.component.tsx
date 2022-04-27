@@ -8,9 +8,9 @@ import {
   BtnClose,
 } from "./ModalCardItens.style";
 import { AiFillCloseCircle } from "react-icons/ai";
-import { ItensInTopicDTO } from "../../models/ModalsDTO";
+import { ItensInTopicDTO, ModalComponentDTO } from "../../models/ModalsDTO";
 
-const ModalCardItens = ({ id, onClick }: any) => {
+const ModalCardItens = ({ id, onClick }: ModalComponentDTO) => {
   const [ItensInTopic, setItensInTopic] = useState<Array<ItensInTopicDTO>>([]);
 
   const getItensTopic = async (id: number | undefined) => {
