@@ -11,7 +11,7 @@ const Pagination = ({ page, onPageChange, allPages }: any) => {
   return (
     <ContainerPagination>
       <ButtonCustom onClick={() => onPageChange(page - 1)} disabled={page <= 0} colorHover={'#f1ce03'} >
-        <MdOutlineArrowBackIosNew />
+        <MdOutlineArrowBackIosNew /> Anterior
       </ButtonCustom>
 
       <span>Página {parseInt(page + 1)}</span>
@@ -21,7 +21,7 @@ const Pagination = ({ page, onPageChange, allPages }: any) => {
         disabled={page >= allPages - 1}
         colorHover={'#009100'}
       >
-        <MdArrowForwardIos />
+        Próxima <MdArrowForwardIos />
       </ButtonCustom>
     </ContainerPagination>
   );

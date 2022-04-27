@@ -116,12 +116,13 @@ export const InputForm = styled.input`
 export const Btn = styled.button<{ width: string }>`
   width: ${(props) => props.width};
   height: 42px;
-  background: rgb(0, 113, 191);
+  background: ${props => props.color};
+  /* background: rgb(0, 113, 191);
   background: radial-gradient(
     circle,
     rgba(0, 113, 191, 1) 20%,
     rgba(2, 50, 85, 1) 100%
-  );
+  ); */
   border-radius: 4px;
   outline: none;
   border: none;

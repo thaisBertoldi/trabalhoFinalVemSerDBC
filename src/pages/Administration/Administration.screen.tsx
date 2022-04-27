@@ -17,35 +17,43 @@ import {
   DivSearch,
   ParagraphInfo,
 } from "./Administration.style";
-import { getAllUsers, handleProfile } from "../../store/action/adminActions";
+import {
+  getAllUsers,
+  getUserSearch,
+  handleProfile,
+} from "../../store/action/adminActions";
 
 //tipá-los
 const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   const navigate = useNavigate();
   const [allUsers, setAllUsers] = useState<Array<UsersAdmDTO>>([]);
+  const [isAddUser, setIsAddUser] = useState(false);
+
+  const [page, setPage] = useState<number>(0);
+  const [allPagesPrincipal, setallPagesPrincipal] = useState<number>(0);
+  const [allPagesSearch, setAllPagesSearch] = useState<number>(0);
+
   const [isSearchUser, setIsSearchUser] = useState<boolean>(false);
   const [userFind, setUserFind] = useState<Array<UsersAdmDTO>>([]);
-  const [isAddUser, setIsAddUser] = useState(false);
-  const [page, setPage] = useState<number>(0);
-  const [allPages, setAllPages] = useState<number>(0);
+  const [pageFind, setPageFind] = useState<number>(0);
+  const [userSearch, setUserSearch] = useState("");
 
   useEffect(() => {
     if (user?.profile !== "ADMINISTRATOR") {
       navigate("/");
     }
-    getAllUsers(setAllUsers, page, setAllPages);
+    if (!isSearchUser) {
+      getAllUsers(setAllUsers, page, setallPagesPrincipal);
+    }
   }, [page]);
 
-  const handleUserSearch = async (value: string) => {
-    const userFilter = allUsers.filter((user: UsersAdmDTO) => {
-      return user.fullName.match(value);
-    });
-    if (userFilter.length !== 0) {
-      setUserFind(userFilter);
-      setIsSearchUser(true);
-    } else {
-      setIsSearchUser(false);
-    }
+  useEffect(() => {
+    handleUserSearch();
+  }, [userSearch, pageFind]);
+
+  const handleUserSearch = async () => {
+    setIsSearchUser(true);
+    getUserSearch(pageFind, setAllPagesSearch, userSearch, setUserFind);
   };
 
   const formik = useFormik({
@@ -73,7 +81,7 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
           width={"50%"}
           height={"40px"}
           placeholder="Pesquisar"
-          onChange={(event) => handleUserSearch(event.target.value)}
+          onChange={(event) => setUserSearch(event.target.value)}
         ></InputForm>
         <IconSearch />
       </DivSearch>
@@ -84,12 +92,28 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
       <ContainerAdmin>
         {isSearchUser
           ? userFind.map((user: UsersAdmDTO) => (
-              <CardAdm 
-                imgUser={user?.image}
-                fullName={user?.fullName}
-                group={user?.groups}
-                formik={formik}
-              /> 
+              <form
+                onSubmit={(event) =>
+                  handleProfile(
+                    setAllUsers,
+                    formik.resetForm,
+                    event,
+                    user.userId,
+                    formik.values.type,
+                    page,
+                    setallPagesPrincipal, 
+                    setUserSearch
+                  )
+                }
+                key={user.userId}
+              >
+                <CardAdm
+                  imgUser={user?.image}
+                  fullName={user?.fullName}
+                  group={user?.groups}
+                  formik={formik}
+                />
+              </form>
             ))
           : allUsers?.map((user: UsersAdmDTO) => (
               <form
@@ -101,12 +125,13 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
                     user.userId,
                     formik.values.type,
                     page,
-                    setAllPages,
+                    setallPagesPrincipal,
+                    setUserSearch,
                   )
                 }
                 key={user.userId}
               >
-                <CardAdm 
+                <CardAdm
                   imgUser={user?.image}
                   fullName={user?.fullName}
                   group={user?.groups}
@@ -119,7 +144,19 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
           <ModalCreateUserAdm onClick={() => setIsAddUser(false)} />
         )}
       </ContainerAdmin>
-        <Pagination page={page} onPageChange={ (index: number) => setPage(index)} allPages={allPages} />
+      {!isSearchUser ? (
+        <Pagination
+          page={page}
+          onPageChange={(index: number) => setPage(index)}
+          allPages={allPagesPrincipal}
+        />
+      ) : (
+        <Pagination
+          page={pageFind}
+          onPageChange={(index: number) => setPageFind(index)}
+          allPages={allPagesSearch}
+        />
+      )}
     </Container>
   );
 };

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Theme } from "../../theme";
 
 export const CardUSerAdmin = styled.div`
   display: flex;
@@ -56,6 +57,8 @@ export const BtnAdm = styled.button<{
   font-size: 14px;
 
   :hover {
+    background: ${Theme.color.grayDark};
+    color: ${Theme.color.white};
     box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
       0 17px 50px 0 rgba(0, 0, 0, 0.19);
   }
