@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const CardItem = styled.div`
   display: flex;
   flex-direction: row;
-  width: 100%;
+  width: 95%;
   height: 200px;
   padding: 10px;
   gap: 15px;
@@ -12,6 +12,7 @@ export const CardItem = styled.div`
     width: 100px;
     height: 100px;
   }
+
   p {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -22,13 +23,14 @@ export const CardItem = styled.div`
 `;
 
 export const CardItemInfos = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
 `;
 
 export const CardItemValueName = styled.div`
   display: flex;
-  gap: 15px;
+  justify-content: space-between;
   align-items: center;
 `;
 

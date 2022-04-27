@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { connect } from 'react-redux';
 import { ENDPOINT_COTATION, ENDPOINT_FINANCIER, ENDPOINT_MANAGER } from '../../constants';
+import { StatusEnum } from '../../enums/StatusEnum';
 import api from '../../service/api';
 import { RootState } from '../../store';
 import { BtnClose, ContainerModal, Modal } from '../ModalBuyer/ModalBuyer.style';
+import { TopModal, DivQuotations, DivButtons, BtnModalQuotation } from './ModalCotation.style';
 
 const ModalCotation = ({user, onClick, id}: any) => {
 
@@ -57,22 +59,31 @@ const ModalCotation = ({user, onClick, id}: any) => {
     <ContainerModal>
       <Modal>
         <BtnClose onClick={onClick}> <AiFillCloseCircle /> </BtnClose>
-        <h1>Cotações </h1>
-        {user.profile === "MANAGER" && (<button onClick={ () => reproveAllCotations()} > Reprovar todas as cotações </button>)}
-        {
-          value.map((item: any) => (
-            <div key={item.quotationId}>
-              <p> R$: {item.quotationPrice}</p>
-              <p> Status da cotação: {item.quotationStatus}</p>
-              {
-                (user.profile === "MANAGER" || user.profile === "FINANCIER") && (
-                  <button onClick={ () => { user.profile === "MANAGER" ? handleAproveCotation(item.quotationId) : handleAproveByFinancier(true) }  }> Aprovar </button>
-                )
-              }
-              { user.profile === "FINANCIER" && (<button onClick={ () => handleAproveByFinancier(false) }> Reprovar </button>)}
-            </div>
-          ))
-        }
+        <TopModal>
+          <h1>Cotações </h1>
+          {(user.profile === "MANAGER" && value.length > 0 ) && (<BtnModalQuotation color={'#f44336'} onClick={ () => reproveAllCotations()} > Reprovar todas as cotações </BtnModalQuotation>)}
+        </TopModal>
+        
+          {
+            value.length > 0 ? (
+              value.map((item: any) => (
+                <DivQuotations key={item.quotationId}>
+                  <p> Status da cotação: {StatusEnum[item.quotationStatus]}</p>
+                  <p> R$: {item.quotationPrice}</p>
+                  <DivButtons>
+                    {
+                      (user.profile === "MANAGER" || user.profile === "FINANCIER") && (
+                        <BtnModalQuotation color={'#04a96d'} onClick={ () => { user.profile === "MANAGER" ? handleAproveCotation(item.quotationId) : handleAproveByFinancier(true) }  }> Aprovar </BtnModalQuotation>
+                      )
+                    }
+                    { user.profile === "FINANCIER" && (<BtnModalQuotation color={'#f44336'} onClick={ () => handleAproveByFinancier(false) }> Reprovar </BtnModalQuotation>)}
+                  </DivButtons>
+                </DivQuotations>
+              ))
+            ) : (
+              <p> Não há cotações para exibir </p>
+            )
+          }
       </Modal>
     </ContainerModal>
   );

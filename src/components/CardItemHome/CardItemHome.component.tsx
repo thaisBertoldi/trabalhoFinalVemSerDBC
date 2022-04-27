@@ -26,8 +26,8 @@ const CardItemHome = ({ id }: any) => {
           />
           <CardItemInfos>
             <CardItemValueName>
-              <p>{listItens[0].itemName.toUpperCase()}</p>
-              <h1>R$ {listItens[0].value}</h1>
+              <p>Nome: {listItens[0].itemName.toUpperCase()}</p>
+              <p>R$ {listItens[0].value}</p>
             </CardItemValueName>
             <p>{listItens[0].description}</p>
           </CardItemInfos>
