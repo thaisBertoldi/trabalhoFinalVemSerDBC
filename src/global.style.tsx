@@ -155,7 +155,7 @@ export const Paragraph = styled.p`
 export const LinkCustom = styled.div`
   list-style: none;
   text-decoration: none;
-  background: radial-gradient(circle, #15bea2 20%, #156fbe 100%);
+  background: radial-gradient(circle, #6dd1ff 20%, #1c91f7 100%);
   color: black;
   background-clip: text;
   -webkit-background-clip: text;

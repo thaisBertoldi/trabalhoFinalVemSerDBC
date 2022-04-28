@@ -4,7 +4,8 @@ import {
   CardItem,
   CardItemInfos,
   CardItemValueName,
-  Desc
+  Desc,
+  SpanMoreItens,
 } from "./CardItemHome.style";
 import loadingImg from '../../images/loading.gif'
 import { CardItemHomeProps } from "../../models/TopicDTO";
@@ -22,6 +23,7 @@ const CardItemHome = ({ id }: CardItemHomeProps) => {
   return (
     <div>
       {listItens.length > 0 ? (
+        <>
         <CardItem>
           <img
             src={`data:image;base64,${listItens[0].file}`}
@@ -35,6 +37,12 @@ const CardItemHome = ({ id }: CardItemHomeProps) => {
             <Desc>{listItens[0].description}</Desc>
           </CardItemInfos>
         </CardItem>
+        {listItens.length > 1 ? (
+          <SpanMoreItens>E mais {listItens.length - 1}</SpanMoreItens>
+        ) : (
+          <SpanMoreItens></SpanMoreItens>
+        )}
+        </>
       ) : (
         <>
           {loading ? (
@@ -42,9 +50,12 @@ const CardItemHome = ({ id }: CardItemHomeProps) => {
               <img src={loadingImg} alt="carregando informações"/>
             </LoadingItem>
           ) : (
+            <>
             <CardItem>
               <h2>Não há itens cadastrados.</h2>
             </CardItem>
+              <SpanMoreItens></SpanMoreItens>
+              </>
           )}
         </>
       )}

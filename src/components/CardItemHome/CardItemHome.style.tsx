@@ -33,3 +33,10 @@ export const CardItemValueName = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
+
+export const SpanMoreItens = styled.span`
+  margin: 0;
+  padding: 10px;
+  font-size: 15px;
+  opacity: 0.7;
+`;
