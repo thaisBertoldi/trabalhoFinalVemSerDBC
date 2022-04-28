@@ -17,7 +17,7 @@ const CardAdm = ({imgUser, fullName, group, formik}: CardAdmDTO) => {
         <DataUser>
           <DivImage>
             <ImageUser
-              src={`data:image/jpeg;base64,${ imgUser ?? DefaultImage}`}
+              src={`data:image;base64,${ imgUser ?? DefaultImage}`}
               alt="imagem de perfil"
             />
           </DivImage>

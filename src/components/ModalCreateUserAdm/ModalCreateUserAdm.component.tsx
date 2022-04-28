@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import Notiflix from "notiflix";
+import Notiflix, { Loading } from "notiflix";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { ContainerModal } from "../ModalBuyer/ModalBuyer.style";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -25,6 +25,7 @@ const ModalCreateUserAdm = ({ onClick }: ModalComponentDTO) => {
   const [showPassword, setShowPassword] = useState<boolean>(true);
 
   const register = async (values: UserAdmRegisterDTO) => {
+    Loading.circle();
     const dataUserCreate = new FormData();
     dataUserCreate.append("file", values.profileImage);
     dataUserCreate.append("email", values.username);
@@ -46,6 +47,8 @@ const ModalCreateUserAdm = ({ onClick }: ModalComponentDTO) => {
         Notiflix.Notify.failure(
           `Sinto muito, mas nao foi possivel acessar a api. ${error}`
         );
+      } finally {
+        Loading.remove();
       }
     } else {
       console.log("A senha deve ser igual a confirmação");

@@ -27,6 +27,7 @@ import { TYPE_USERS } from "../../constants";
 //tipá-los
 const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>(true);
   const [allUsers, setAllUsers] = useState<Array<UsersAdmDTO>>([]);
   const [isAddUser, setIsAddUser] = useState(false);
 
@@ -44,7 +45,7 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
       navigate("/");
     }
     if (!isSearchUser) {
-      getAllUsers(setAllUsers, page, setallPagesPrincipal);
+      getAllUsers(setAllUsers, page, setallPagesPrincipal, setLoading);
     }
   }, [page]);
 
@@ -64,6 +65,7 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
     onSubmit: (values) => {},
   });
 
+  if(loading) return ( <div>Loading...</div> )
   return (
     <Container>
       <CenterCustom>
@@ -105,7 +107,8 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
                       formik.values.type,
                       page,
                       setallPagesPrincipal, 
-                      setUserSearch
+                      setUserSearch,
+                      setLoading
                     )
                   }
                   key={user.userId}
@@ -135,6 +138,7 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
                       page,
                       setallPagesPrincipal,
                       setUserSearch,
+                      setLoading
                     )
                   }
                   key={user.userId}
