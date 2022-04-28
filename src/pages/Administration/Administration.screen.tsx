@@ -22,6 +22,7 @@ import {
   getUserSearch,
   handleProfile,
 } from "../../store/action/adminActions";
+import { TYPE_USERS } from "../../constants";
 
 //tipá-los
 const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
@@ -39,7 +40,7 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   const [userSearch, setUserSearch] = useState("");
 
   useEffect(() => {
-    if (user?.profile !== "ADMINISTRATOR") {
+    if (user?.profile !== TYPE_USERS.ADMIN) {
       navigate("/");
     }
     if (!isSearchUser) {
