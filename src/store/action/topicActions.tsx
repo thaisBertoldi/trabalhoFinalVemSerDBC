@@ -24,10 +24,10 @@ export const getItensTopic = async (id: number, setListItens: Function, setLoadi
     const { data } = await api.get(
       `${ENDPOINT_TOPICS.GET_ITEMS_TOPIC}/${id}` 
     );
-    setLoading(false)
+    setLoading(false);
     setListItens(data);
   } catch (error) {
-    setLoading(false)
+    setLoading(false);
     console.log(error);
   }
 };

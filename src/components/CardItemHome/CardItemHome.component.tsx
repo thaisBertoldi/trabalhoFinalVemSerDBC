@@ -5,6 +5,7 @@ import {
   CardItemInfos,
   CardItemValueName,
   LoadingItem,
+  Desc
 } from "./CardItemHome.style";
 import loadingImg from '../../images/loading.gif'
 import { CardItemHomeProps } from "../../models/TopicDTO";
@@ -31,7 +32,7 @@ const CardItemHome = ({ id }: CardItemHomeProps) => {
               <p>Nome: {listItens[0].itemName.toUpperCase()}</p>
               <p>R$ {listItens[0].value}</p>
             </CardItemValueName>
-            <p>{listItens[0].description}</p>
+            <Desc>{listItens[0].description}</Desc>
           </CardItemInfos>
         </CardItem>
       ) : (

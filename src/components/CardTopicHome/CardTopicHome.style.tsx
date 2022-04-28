@@ -5,7 +5,7 @@ import { Theme } from "../../theme";
 export const ContainerCard = styled.div`
   display: flex;
   flex-direction: column;
-  width: 500px;
+  width: 400px;
   max-height: 600px;
   background-color: #fff;
   border-radius: 15px;
