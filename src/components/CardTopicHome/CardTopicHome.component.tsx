@@ -17,47 +17,47 @@ import { TopicComponentDTO } from "../../models/TopicDTO";
 const CardTopicHome = ({item, user, setOpenModalQuotation, setOpenModalAddQuotation,  setOpenModalItens}: TopicComponentDTO) =>  {
   return (
     <ContainerCard key={item.topicId}>
-    <TitleCard>
-      <TopicName>
-        <MdSegment />
-        <h2>{item.title.toUpperCase()}</h2>
-      </TopicName>
-      <DivStatus color={ColorEnum[item.status]}>
-        <span>Status: {StatusEnum[item.status]}</span>
-      </DivStatus>
-    </TitleCard>
-    <InfoDataPrice>
-      <p>
-        <MdDateRange /> {moment(item.date).format("DD/MM/YYYY")}
-      </p>
-      <p>
-        <GrMoney /> R$ {item.totalValue}
-      </p>
-    </InfoDataPrice>
-    <DivButtonsCard>
-      <ButtonCard
-        onClick={ () => setOpenModalQuotation({ open: true, id: item.topicId }) }>
-        <BiDollarCircle /> Visualizar cotações{" "}
-      </ButtonCard>
-      { 
-        user.profile === "BUYER" && (
-          <ButtonCard
-            onClick={ () => setOpenModalAddQuotation({ open: true, id: item.topicId }) }>
-            <BiAddToQueue /> Adicionar cotação{" "}
-          </ButtonCard>
-        )
-      }
-    </DivButtonsCard>
+      <TitleCard>
+        <TopicName>
+          <MdSegment />
+          <h2>{item.title.toUpperCase()}</h2>
+        </TopicName>
+        <DivStatus color={ColorEnum[item.status]}>
+          <span>Status: {StatusEnum[item.status]}</span>
+        </DivStatus>
+      </TitleCard>
+      <InfoDataPrice>
+        <p>
+          <MdDateRange /> {moment(item.date).format("DD/MM/YYYY")}
+        </p>
+        <p>
+          <GrMoney /> R$ {item.totalValue}
+        </p>
+      </InfoDataPrice>
+      <DivButtonsCard>
+        <ButtonCard
+          onClick={ () => setOpenModalQuotation({ open: true, id: item.topicId }) }>
+          <BiDollarCircle /> Visualizar cotações{" "}
+        </ButtonCard>
+        { 
+          user.profile === "BUYER" && (
+            <ButtonCard
+              onClick={ () => setOpenModalAddQuotation({ open: true, id: item.topicId }) }>
+              <BiAddToQueue /> Adicionar cotação{" "}
+            </ButtonCard>
+          )
+        }
+      </DivButtonsCard>
 
-    <CardItemHome id={item.topicId} />
+      <CardItemHome id={item.topicId} />
 
-    <DivButtonsCard>
-      <ButtonCard
-        onClick={ () => setOpenModalItens({ open: true, id: item.topicId,}) }>
-        <BiDetail /> Visualizar todos os itens{" "}
-      </ButtonCard>
-    </DivButtonsCard>
-  </ContainerCard>
+      <DivButtonsCard>
+        <ButtonCard
+          onClick={ () => setOpenModalItens({ open: true, id: item.topicId,}) }>
+          <BiDetail /> Visualizar todos os itens{" "}
+        </ButtonCard>
+      </DivButtonsCard>
+    </ContainerCard>
   )
 }
 

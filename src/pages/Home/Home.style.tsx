@@ -8,6 +8,10 @@ export const ContainerAllInfo = styled.div`
   justify-content: center;
   gap: 15px;
   margin-bottom: 20px;
+  
+  @media (max-width: 1575px) {
+    grid-template-columns: auto;
+  }
 `;
 
 export const DivSearch = styled.div`

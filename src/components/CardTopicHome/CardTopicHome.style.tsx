@@ -20,6 +20,10 @@ export const ContainerCard = styled.div`
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
   }
+
+  @media (max-width: 1620px) {
+    
+  }
 `;
 
 export const TitleCard = styled.div`
