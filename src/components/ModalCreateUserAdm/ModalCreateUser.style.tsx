@@ -11,6 +11,9 @@ export const ModalAdm = styled.div`
   padding: 25px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 
+  @media (max-width: 1024px) {
+    width: 60%;
+  }
   form {
     width: 100%;
     margin: 0 auto;
@@ -40,9 +43,9 @@ export const DivEyeAdm = styled.div`
   top: 47.1%;
   color: ${Theme.color.black};
 
-  @media (max-width: 668px) {
-    right: 30.5%;
-    top: 48.1%;
+  @media (max-width: 1024px) {
+    right: 21%;
+    top: 47.1%; 
   }
 `;
 
