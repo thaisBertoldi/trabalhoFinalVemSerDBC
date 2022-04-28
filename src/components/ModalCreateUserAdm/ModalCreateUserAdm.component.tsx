@@ -4,7 +4,12 @@ import Notiflix from "notiflix";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { ContainerModal } from "../ModalBuyer/ModalBuyer.style";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Btn, DivErrorYup, DivStrengthBar, DivInputFile } from "../../global.style";
+import {
+  Btn,
+  DivErrorYup,
+  DivStrengthBar,
+  DivInputFile,
+} from "../../global.style";
 import PasswordStrengthBar from "react-password-strength-bar";
 import { Theme } from "../../theme";
 import { imgConverter } from "../../utils/utils";
@@ -20,6 +25,7 @@ import {
 import { useState } from "react";
 import { UserAdmRegisterDTO } from "../../models/UserDTO";
 import { ModalComponentDTO } from "../../models/ModalsDTO";
+import { SUPPORTED_FORMATS, FILE_SIZE } from "../../constants";
 
 const ModalCreateUserAdm = ({ onClick }: ModalComponentDTO) => {
   const [showPassword, setShowPassword] = useState<boolean>(true);
@@ -31,24 +37,20 @@ const ModalCreateUserAdm = ({ onClick }: ModalComponentDTO) => {
     dataUserCreate.append("fullName", values.fullName);
     dataUserCreate.append("password", values.password);
     dataUserCreate.append("groups", values.groups);
-    if (values.password === values.confirmPassword) {
-      try {
-        const { data } = await api.post(
-          ENDPOINT_ADMIN.CREATE_PROFILE,
-          dataUserCreate
-        );
-        Notiflix.Notify.success(`Usuário cadastrado com sucesso.`);
-        onClick();
-      } catch (error) {
-        console.log(
-          "Erro ao tentar cadastrar usuario pelo perfil administrador" + error
-        );
-        Notiflix.Notify.failure(
-          `Sinto muito, mas nao foi possivel acessar a api. ${error}`
-        );
-      }
-    } else {
-      console.log("A senha deve ser igual a confirmação");
+    try {
+      const { data } = await api.post(
+        ENDPOINT_ADMIN.CREATE_PROFILE,
+        dataUserCreate
+      );
+      Notiflix.Notify.success(`Usuário cadastrado com sucesso.`);
+      onClick();
+    } catch (error) {
+      console.log(
+        "Erro ao tentar cadastrar usuario pelo perfil administrador" + error
+      );
+      Notiflix.Notify.failure(
+        `Sinto muito, mas nao foi possivel acessar a api. ${error}`
+      );
     }
   };
 
@@ -74,16 +76,29 @@ const ModalCreateUserAdm = ({ onClick }: ModalComponentDTO) => {
         .email("Este campo precisa ser preenchido com um email.")
         .required("Você precisa preencher esse campo"),
       password: Yup.string()
-        .required('Você precisa preencher esse campo')
+        .required("Você precisa preencher esse campo")
         .min(8, "Sua senha precisa conter pelo menos 8 caracteres")
         .max(30, "Sua senha deve conter no máximo 30 caracteres")
         .matches(/^(?=.*\d)/, "Sua senha precisa conter um número")
         .matches(/^(?=.*[a-z])/, "Sua senha precisa conter uma letra minúscula")
         .matches(/^(?=.*[A-Z])/, "Sua senha precisa conter uma letra maiúscula")
-        .matches(/^(?=.*[$*&@#])/, "Sua senha precisa conter um caractere especial."),
+        .matches(
+          /^(?=.*[$*&@#])/,
+          "Sua senha precisa conter um caractere especial."
+        ),
       confirmPassword: Yup.string().when("password", (password, field) =>
         password ? field.required().oneOf([Yup.ref("password")]) : field
       ),
+      profileImage: Yup.mixed()
+        .required("Você precisa anexar um arquivo")
+        .test(
+          "fileSize",
+          "Este arquivo é muito grande",
+          (value) => value.size <= FILE_SIZE
+        )
+        .test("fileType", "Este tipo de arquivo não é suportado.", (value) =>
+          SUPPORTED_FORMATS.includes(value.type)
+        ),
       groups: Yup.string().matches(
         /[^opcao]/,
         "Por favor, escolha uma das opções."
@@ -113,11 +128,12 @@ const ModalCreateUserAdm = ({ onClick }: ModalComponentDTO) => {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.fullName}
-          /> 
+          />
           {formik.errors.fullName && formik.touched.fullName ? (
             <DivErrorYup>{formik.errors.fullName}</DivErrorYup>
-          ) : 
-          <DivErrorYup></DivErrorYup>}
+          ) : (
+            <DivErrorYup></DivErrorYup>
+          )}
 
           <InputCreateUserAdm
             width={"100%"}
@@ -132,7 +148,9 @@ const ModalCreateUserAdm = ({ onClick }: ModalComponentDTO) => {
           />
           {formik.errors.username && formik.touched.username ? (
             <DivErrorYup>{formik.errors.username}</DivErrorYup>
-          ) : <DivErrorYup></DivErrorYup>}
+          ) : (
+            <DivErrorYup></DivErrorYup>
+          )}
           <div>
             <InputCreateUserAdm
               width={"100%"}
@@ -149,20 +167,20 @@ const ModalCreateUserAdm = ({ onClick }: ModalComponentDTO) => {
               <DivErrorYup>{formik.errors.password}</DivErrorYup>
             ) : (
               <DivStrengthBar>
-              {formik.values.password.length > 0 && (
-                <PasswordStrengthBar
-                  password={formik.values.password}
-                  barColors={[
-                    "#B83E26",
-                    "#FFB829",
-                    "#009200",
-                    "#009200",
-                    "#009200",
-                    "#009200",
-                  ]}
-                  minLength={8}
-                />
-              )}
+                {formik.values.password.length > 0 && (
+                  <PasswordStrengthBar
+                    password={formik.values.password}
+                    barColors={[
+                      "#B83E26",
+                      "#FFB829",
+                      "#009200",
+                      "#009200",
+                      "#009200",
+                      "#009200",
+                    ]}
+                    minLength={8}
+                  />
+                )}
               </DivStrengthBar>
             )}
             <DivEyeAdm>
@@ -172,7 +190,7 @@ const ModalCreateUserAdm = ({ onClick }: ModalComponentDTO) => {
                 <FaEyeSlash onClick={() => setShowPassword(!showPassword)} />
               )}
             </DivEyeAdm>
-          </div> 
+          </div>
 
           <InputCreateUserAdm
             width={"100%"}
@@ -187,7 +205,9 @@ const ModalCreateUserAdm = ({ onClick }: ModalComponentDTO) => {
           />
           {formik.errors.confirmPassword && formik.touched.confirmPassword ? (
             <DivErrorYup>As senhas estão diferentes.</DivErrorYup>
-          ) : <DivErrorYup></DivErrorYup>}
+          ) : (
+            <DivErrorYup></DivErrorYup>
+          )}
 
           <SelectCreateUserAdm name="groups" onChange={formik.handleChange}>
             <option value="opcao">Escolha uma opção</option>
@@ -199,7 +219,9 @@ const ModalCreateUserAdm = ({ onClick }: ModalComponentDTO) => {
           </SelectCreateUserAdm>
           {formik.errors.groups && formik.touched.groups ? (
             <DivErrorYup>{formik.errors.groups}</DivErrorYup>
-          ) : <DivErrorYup></DivErrorYup>}
+          ) : (
+            <DivErrorYup></DivErrorYup>
+          )}
 
           <DivInputFile>
             <span>Escolha um arquivo</span>
@@ -215,6 +237,9 @@ const ModalCreateUserAdm = ({ onClick }: ModalComponentDTO) => {
               }
             />
           </DivInputFile>
+          {formik.errors.profileImage && formik.touched.profileImage ? (
+            <DivErrorYup>{formik.errors.profileImage}</DivErrorYup>
+          ) : null}
 
           <Btn width="100%" type="submit" color={Theme.color.primary}>
             Submit
