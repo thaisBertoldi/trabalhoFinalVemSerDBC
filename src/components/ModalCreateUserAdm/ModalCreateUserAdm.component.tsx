@@ -38,6 +38,7 @@ const ModalCreateUserAdm = ({ onClick }: ModalComponentDTO) => {
           dataUserCreate
         );
         Notiflix.Notify.success(`Usuário cadastrado com sucesso.`);
+        onClick();
       } catch (error) {
         console.log(
           "Erro ao tentar cadastrar usuario pelo perfil administrador" + error

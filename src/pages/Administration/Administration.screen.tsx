@@ -90,72 +90,88 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
       </CenterCustom>
 
       <ContainerAdmin>
-        {isSearchUser
-          ? userFind.map((user: UsersAdmDTO) => (
-              <form
-                onSubmit={(event) =>
-                  handleProfile(
-                    setAllUsers,
-                    formik.resetForm,
-                    event,
-                    user.userId,
-                    formik.values.type,
-                    page,
-                    setallPagesPrincipal, 
-                    setUserSearch
-                  )
-                }
-                key={user.userId}
-              >
-                <CardAdm
-                  imgUser={user?.image}
-                  fullName={user?.fullName}
-                  group={user?.groups}
-                  formik={formik}
-                />
-              </form>
-            ))
-          : allUsers?.map((user: UsersAdmDTO) => (
-              <form
-                onSubmit={(event) =>
-                  handleProfile(
-                    setAllUsers,
-                    formik.resetForm,
-                    event,
-                    user.userId,
-                    formik.values.type,
-                    page,
-                    setallPagesPrincipal,
-                    setUserSearch,
-                  )
-                }
-                key={user.userId}
-              >
-                <CardAdm
-                  imgUser={user?.image}
-                  fullName={user?.fullName}
-                  group={user?.groups}
-                  formik={formik}
-                />
-              </form>
-            ))}
+        {
+          isSearchUser ? (
+            userFind?.length > 0 ? (
+              userFind.map((user: UsersAdmDTO) => (
+                <form
+                  onSubmit={(event) =>
+                    handleProfile(
+                      setAllUsers,
+                      formik.resetForm,
+                      event,
+                      user.userId,
+                      formik.values.type,
+                      page,
+                      setallPagesPrincipal, 
+                      setUserSearch
+                    )
+                  }
+                  key={user.userId}
+                >
+                  <CardAdm
+                    imgUser={user?.image}
+                    fullName={user?.fullName}
+                    group={user?.groups}
+                    formik={formik}
+                  />
+                </form>
+              ))
+            ) : (
+              <h1>Nenhum Usuário encontrado</h1>
+            )
+          ) : (
+            allUsers?.length > 0 ? (
+              allUsers?.map((user: UsersAdmDTO) => (
+                <form
+                  onSubmit={(event) =>
+                    handleProfile(
+                      setAllUsers,
+                      formik.resetForm,
+                      event,
+                      user.userId,
+                      formik.values.type,
+                      page,
+                      setallPagesPrincipal,
+                      setUserSearch,
+                    )
+                  }
+                  key={user.userId}
+                >
+                  <CardAdm
+                    imgUser={user?.image}
+                    fullName={user?.fullName}
+                    group={user?.groups}
+                    formik={formik}
+                  />
+                </form>
+              ))
+            ) : (
+              <h1>Nenhum Usuário encontrado</h1>
+            )
+          )
+        }
 
         {isAddUser && (
           <ModalCreateUserAdm onClick={() => setIsAddUser(false)} />
         )}
       </ContainerAdmin>
       {!isSearchUser ? (
-        <Pagination
-          page={page}
-          onPageChange={(index: number) => setPage(index)}
-          allPages={allPagesPrincipal}
-        />
+        allUsers?.length > 0 && (
+          <Pagination
+            page={page}
+            onPageChange={(index: number) => setPage(index)}
+            allPages={allPagesPrincipal}
+          />
+        )
       ) : (
-        <Pagination
-          page={pageFind}
-          onPageChange={(index: number) => setPageFind(index)}
-          allPages={allPagesSearch}
-        />
+          userFind?.length > 0 && (
+          <Pagination
+            page={pageFind}
+            onPageChange={(index: number) => setPageFind(index)}
+            allPages={allPagesSearch}
+          />
+        )
       )}
     </Container>
   );
