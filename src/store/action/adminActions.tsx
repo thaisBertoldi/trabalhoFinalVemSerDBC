@@ -50,6 +50,7 @@ export const handleProfile = async (
   setUserSearch: Function,
 ) => {
   event.preventDefault();
+  console.log(page, "pagina que veio no handleProfile")
   try {
     Loading.circle();
     console.log(type);
