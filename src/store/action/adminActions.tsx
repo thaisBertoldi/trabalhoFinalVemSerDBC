@@ -14,7 +14,6 @@ export const getAllUsers = async (
     const { data } = await api.get(`${ENDPOINT_ADMIN.GET_ALL_USERS}=${page}`);
     setAllPagesPrincipal(data.totalPages);
     setAllUsers(data.content);
-    console.log(data.content);
   } catch (error) {
     console.log(error);
   } finally {
@@ -49,8 +48,6 @@ export const handleProfile = async (
   setAllPages: Function,
   setUserSearch: Function,
 ) => {
-  event.preventDefault();
-  console.log(page, "pagina que veio no handleProfile")
   try {
     Loading.circle();
     console.log(type);
@@ -59,8 +56,6 @@ export const handleProfile = async (
     const { data } = await api.put(
       `${ENDPOINT_ADMIN.ALTER_PROFILE}=${type}&idUser=${id}`
     );
-    getAllUsers(setAllUsers, page, setAllPages);
-    setUserSearch('')
     Notiflix.Notify.success(`Perfil do usuário alterado com sucesso.`);
   } catch (error) {
     console.log(error);
@@ -68,6 +63,8 @@ export const handleProfile = async (
       `Sinto muito, mas nao foi possivel alterar o perfil desse usuário. ${error}`
     );
   } finally {
+    getAllUsers(setAllUsers, page, setAllPages);
+    setUserSearch('');
     Loading.remove();
   }
   formik();

@@ -1,3 +1,4 @@
+import { BsTrash } from "react-icons/bs";
 import styled from "styled-components";
 import { Theme } from "../../theme";
 
@@ -41,8 +42,13 @@ export const TitleCard = styled.div`
 export const TopicName = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   font-size: 50px;
   gap: 15px;
+
+  div {
+    display: flex;
+  }
 
   h2 {
     font-size: 20px;
@@ -84,8 +90,9 @@ export const ButtonCard = styled.button`
   color: #fff;
   font-size: 14px;
   cursor: pointer;
+`;
 
-  @media (max-width: 580px) {
-    width: 150px;
-  }
+export const DeleteTopic = styled(BsTrash)`
+  font-size: 24px;
+  cursor: pointer;
 `;

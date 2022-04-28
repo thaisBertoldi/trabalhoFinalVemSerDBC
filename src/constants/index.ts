@@ -19,8 +19,9 @@ export const ENDPOINT_TOPICS = {
   CREATE_TOPIC : '/contributor/create-topic', // p/ criar um tópico
   CREATE_ITEM_TOPIC: '/contributor/create-item', // p/ criar um item no tópico  
   UPDATE_STATUS: "/contributor/update-status", // p/ finalizar o tópico e ele fechar com o status aberto
+  GET_ITEMS_TOPIC: '/main-page/items',
   DELETE_ITEM: "/contributor/delete", // p/ deletar o item antes de encerrar o tópico
-  GET_ITEMS_TOPIC: '/main-page/items'
+  DELETE_TOPIC: "/contributor/delete-topic"
 }
 
 export const ENDPOINT_ADMIN = {
