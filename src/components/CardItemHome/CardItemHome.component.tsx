@@ -38,7 +38,7 @@ const CardItemHome = ({ id }: CardItemHomeProps) => {
           </CardItemInfos>
         </CardItem>
         {listItens.length > 1 ? (
-          <SpanMoreItens>E mais {listItens.length - 1}</SpanMoreItens>
+          <SpanMoreItens>Quantidade de itens restantes: {listItens.length - 1}</SpanMoreItens>
         ) : (
           <SpanMoreItens></SpanMoreItens>
         )}
