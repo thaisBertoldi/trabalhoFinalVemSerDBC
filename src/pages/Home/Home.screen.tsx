@@ -30,6 +30,7 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   const [listTopics, setListTopics] = useState<Array<TopicDTO>>([]);
   const [listSearched, setListSearched] = useState<Array<TopicDTO>>([]);
   const [allPages, setAllPages] = useState<number>(0);
+  const [allPagesSearch, setAllPagesSearch] = useState<number>(0);
   const [page, setPage] = useState<number>(0);
 
   const [OpenModalAddQuotation, setOpenModalAddQuotation] = useState<ModalDTO>({
@@ -47,15 +48,17 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
     id: 0,
   });
 
+  const [pageSearch, setPageSeach] = useState<number>(0);
   const [inputSearch, setInputSearch] = useState<string>("");
   const [isSearch, setIsSearch] = useState<boolean>(false);
   const handleUserSearch = async () => {
     try {
       setPage(0);
       const { data } = await api.get(
-        `/main-page/topic-by-titulo/${inputSearch}?page=${page}`
+        `/main-page/topics?page=${pageSearch}&title=${inputSearch}`
       );
-      setListSearched(data);
+      setListSearched(data.content);
+      setAllPagesSearch(data.totalPages);
       setIsSearch(true);
     } catch (error) {
       console.log(error);
@@ -67,8 +70,12 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
     redirectAdmin(navigate, user.profile);
   }, [user]);
 
+  useEffect( () => {
+    handleUserSearch()
+  },[inputSearch, pageSearch]);
+
   useEffect(() => {
-    getTopics(setListTopics, setAllPages, page);
+    getTopics(setListTopics, setAllPages, page, setIsSearch);
   }, [page, OpenModalQuotation.open]);
 
   return (
@@ -88,21 +95,38 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
       </DivSearch>
 
       <ContainerAllInfo>
+
         {
-          listTopics.length > 0 ? (
-            listTopics?.map((item: TopicDTO) => (
-              <CardTopicHome
-                item={item}
-                user={user}
-                setOpenModalQuotation={setOpenModalQuotation}
-                setOpenModalAddQuotation={setOpenModalAddQuotation}
-                setOpenModalItens={setOpenModalItens}
-              />
-            ))
+          !isSearch ? (
+            listTopics.length > 0 ? (
+              listTopics?.map((item: TopicDTO) => (
+                <CardTopicHome
+                  item={item}
+                  user={user}
+                  setOpenModalQuotation={setOpenModalQuotation}
+                  setOpenModalAddQuotation={setOpenModalAddQuotation}
+                  setOpenModalItens={setOpenModalItens}
+                />
+              ))
+            ) : (
+              <h1>Nenhum tópico encontrado</h1>
+            )
           ) : (
-            <h1>Nenhum tópico encontrado</h1>
-          )
-        }
+            listSearched?.length > 0 ? (
+              listSearched?.map((item: TopicDTO) => (
+                <CardTopicHome
+                  item={item}
+                  user={user}
+                  setOpenModalQuotation={setOpenModalQuotation}
+                  setOpenModalAddQuotation={setOpenModalAddQuotation}
+                  setOpenModalItens={setOpenModalItens}
+                />
+              ))
+            ) : (
+              <h1>Nenhum tópico encontrado</h1>
+              )
+            )
+          }
 
         {OpenModalItens.open && (
           <ModalCardItens
@@ -125,8 +149,14 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
       </ContainerAllInfo>
       <CenterCustom>
         {
-          listTopics?.length > 0 && (
-            <Pagination page={page} onPageChange={(index: number) => setPage(index)} allPages={allPages}/>
+          !isSearch ? (
+            listTopics?.length > 0 && (
+              <Pagination page={page} onPageChange={(index: number) => setPage(index)} allPages={allPages}/>
+            )
+          ) : (
+            listSearched?.length > 0 && (
+              <Pagination page={pageSearch} onPageChange={(index: number) => setPageSeach(index)} allPages={allPagesSearch}/>
+            )
           )
         }
       </CenterCustom>

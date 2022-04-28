@@ -6,10 +6,12 @@ export const getTopics = async (
   setListTopics: Function,
   setAllPages: Function,
   page: number,
+  setIsSearch: Function
 ) => {
   try {
     const { data } = await api.get(`${ENDPOINT_TOPICS.GET_ALL}=${page}`);
     console.log(`${ENDPOINT_TOPICS.GET_ALL}=${page}`)
+    setIsSearch(false);
     setAllPages(data.totalPages);
     setListTopics(data.content);
   } catch (error) {
