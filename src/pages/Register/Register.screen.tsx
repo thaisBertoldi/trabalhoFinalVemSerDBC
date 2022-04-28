@@ -17,7 +17,7 @@ import {
   ContainerPrincipal,
 } from "../../global.style";
 import { DivEye, DivInputsLogin, DivLogo } from "../Login/Login.style";
-import { DivLabelFile } from './Register.style';
+import { DivLabelFile } from "./Register.style";
 
 import { isLoggedDTO, RegisterDTO } from "../../models/UserDTO";
 import { handleRegister } from "../../store/action/authActions";
@@ -62,11 +62,15 @@ const Register = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
         .email("Este campo precisa ser preenchido com um email.")
         .required("Você precisa preencher esse campo"),
       password: Yup.string()
-        .min(8, "Sua senha deve conter pelo menos 8 caracteres")
-        .max(30, "Sua senha deve ter no máximo 30 caracteres")
+        .required("Você precisa preencher esse campo")
+        .min(8, "Sua senha precisa conter pelo menos 8 caracteres")
+        .max(30, "Sua senha deve conter no máximo 30 caracteres")
+        .matches(/^(?=.*\d)/, "Sua senha precisa conter um número")
+        .matches(/^(?=.*[a-z])/, "Sua senha precisa conter uma letra minúscula")
+        .matches(/^(?=.*[A-Z])/, "Sua senha precisa conter uma letra maiúscula")
         .matches(
-          /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]/,
-          "Sua senha precisa conter pelo menos um caractere especial, uma letra maiúscula, uma letra minúscula e um número."
+          /^(?=.*[$*&@#])/,
+          "Sua senha precisa conter um caractere especial."
         ),
       confirmPassword: Yup.string().when("password", (password, field) =>
         password ? field.required().oneOf([Yup.ref("password")]) : field
@@ -184,7 +188,9 @@ const Register = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
                 name="profileImage"
                 type="file"
                 accept="image/*"
-                onChange={(event) => imgConverter(event, formik.setFieldValue, 'profileImage')}
+                onChange={(event) =>
+                  imgConverter(event, formik.setFieldValue, "profileImage")
+                }
               />
             </DivLabelFile>
 

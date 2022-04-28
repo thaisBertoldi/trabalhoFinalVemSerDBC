@@ -170,7 +170,7 @@ export const LinkCustom = styled.div`
 
 export const DivErrorYup = styled.div`
   color: ${Theme.color.danger};
-  font-size: 10px;
+  font-size: 15px;
 `;
 
 export const CenterCustom = styled.div`
@@ -198,7 +198,6 @@ export const SelectCustom = styled.select<{ width: string; height: string }>`
   box-sizing: border-box;
 `;
 
-
 export const IconSearch = styled(FaSearch)`
   position: absolute;
   left: 73%;
@@ -213,4 +212,8 @@ export const IconSearch = styled(FaSearch)`
   @media (max-width: 400px) {
     display: none;
   }
+`;
+
+export const DivStrengthBar = styled.div`
+  height: 10px;
 `;
