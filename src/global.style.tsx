@@ -137,6 +137,10 @@ export const BtnForm = styled.button<{ width: string }>`
   border: none;
   color: ${Theme.color.white};
   margin-top: 5px;
+
+  :disabled {
+    background: gray;
+  }
 `;
 
 export const Paragraph = styled.p`
