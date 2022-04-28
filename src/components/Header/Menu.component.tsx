@@ -48,8 +48,7 @@ const Menu = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
       {open && (
         <DropDown>
           <button onClick={() => handleLogout(dispatch, navigate)}>
-            {" "}
-            Logout{" "}
+            Logout
           </button>
         </DropDown>
       )}

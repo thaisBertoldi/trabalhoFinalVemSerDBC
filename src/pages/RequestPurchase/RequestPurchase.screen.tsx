@@ -108,31 +108,34 @@ const RequestPurchase = ({
       </CenterCustom>
       <ContainerRequest>
         <ContainerRequestForm>
-          <form onSubmit={formikTopic.handleSubmit}>
-            <InputForm
-              placeholder="Título da lista"
-              width={"100%"}
-              height={"40px"}
-              id="title"
-              name="title"
-              type="text"
-              onChange={formikTopic.handleChange}
-              value={formikTopic.values.title}
-            />
-            {formikTopic.errors.title && formikTopic.touched.title ? (
-              <DivErrorYup>{formikTopic.errors.title}</DivErrorYup>
-            ) : null}
-            {!isTopicCreate && (
-              <BtnForm
-                type="submit"
-                width={"180px"}
-                color={Theme.color.grayDark}
-              >
-                {" "}
-                Criar tópico{" "}
-              </BtnForm>
-            )}
+          {
+            !isTopicCreate && (
+              <form onSubmit={formikTopic.handleSubmit}>
+                <InputForm
+                  placeholder="Título da lista"
+                  width={"100%"}
+                  height={"40px"}
+                  id="title"
+                  name="title"
+                  type="text"
+                  onChange={formikTopic.handleChange}
+                  value={formikTopic.values.title}
+                />
+                {formikTopic.errors.title && formikTopic.touched.title ? (
+                  <DivErrorYup>{formikTopic.errors.title}</DivErrorYup>
+                ) : null}
+                
+                <BtnForm
+                  type="submit"
+                  width={"180px"}
+                  color={Theme.color.grayDark}
+                >
+                  Criar tópico
+                </BtnForm>
           </form>
+            )
+          }
+          
 
           {isTopicCreate && (
             <form onSubmit={formik.handleSubmit}>
@@ -238,7 +241,6 @@ const RequestPurchase = ({
                 <tbody key={index}>
                   <tr>
                     <TdCustom>
-                      {" "}
                       <img
                         src={`data:image;base64,${item.file}`}
                         alt="imagem do item"
@@ -248,7 +250,6 @@ const RequestPurchase = ({
                     <TdCustom>{item.description}</TdCustom>
                     <TdCustom>R$ {item.value}</TdCustom>
                     <td>
-                      {" "}
                       <FaTrashAlt
                         onClick={() =>
                           handleDeleteItem(

@@ -133,7 +133,7 @@ const Login = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
               </Btn>
 
               <Paragraph>
-                Não possui uma conta?{" "}
+                Não possui uma conta?
                 <LinkCustom>
                   <Link to="/register">Registrar</Link>
                 </LinkCustom>

@@ -70,13 +70,13 @@ const CardTopicHome = ({item, user, setOpenModalQuotation, setOpenModalAddQuotat
       <DivButtonsCard>
         <ButtonCard
           onClick={ () => setOpenModalQuotation({ open: true, id: item.topicId }) }>
-          <BiDollarCircle /> Visualizar cotações{" "}
+          <BiDollarCircle /> Visualizar cotações
         </ButtonCard>
         { 
           user.profile === TYPE_USERS.BUYER && (
             <ButtonCard
               onClick={ () => setOpenModalAddQuotation({ open: true, id: item.topicId }) }>
-              <BiAddToQueue /> Adicionar cotação{" "}
+              <BiAddToQueue /> Adicionar cotação
             </ButtonCard>
           )
         }
@@ -87,7 +87,7 @@ const CardTopicHome = ({item, user, setOpenModalQuotation, setOpenModalAddQuotat
       <DivButtonsCard>
         <ButtonCard
           onClick={ () => setOpenModalItens({ open: true, id: item.topicId,}) }>
-          <BiDetail /> Visualizar todos os itens{" "}
+          <BiDetail /> Visualizar todos os itens
         </ButtonCard>
       </DivButtonsCard>
     </ContainerCard>
