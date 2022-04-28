@@ -27,7 +27,7 @@ export interface UserAdmRegisterDTO {
   username: string,
   password: string,
   confirmPassword: string,
-  profileImage?: any,
+  profileImage?:  any,
   groups: string,
 }
 

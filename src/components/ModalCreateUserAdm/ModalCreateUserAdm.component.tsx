@@ -20,8 +20,9 @@ import {
 } from "./ModalCreateUser.style";
 import { useState } from "react";
 import { UserAdmRegisterDTO } from "../../models/UserDTO";
+import { ModalComponentDTO } from "../../models/ModalsDTO";
 
-const ModalCreateUserAdm = ({ onClick }: any) => {
+const ModalCreateUserAdm = ({ onClick }: ModalComponentDTO) => {
   const [showPassword, setShowPassword] = useState<boolean>(true);
 
   const register = async (values: UserAdmRegisterDTO) => {

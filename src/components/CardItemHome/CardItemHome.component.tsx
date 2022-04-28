@@ -8,9 +8,10 @@ import {
 } from "./CardItemHome.style";
 import loadingImg from '../../images/loading.gif'
 import { CardItemHomeProps } from "../../models/TopicDTO";
+import { ItensInTopicDTO } from "../../models/ModalsDTO";
 
 const CardItemHome = ({ id }: CardItemHomeProps) => {
-  const [listItens, setListItens] = useState<any>([]);
+  const [listItens, setListItens] = useState<Array<ItensInTopicDTO>>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
