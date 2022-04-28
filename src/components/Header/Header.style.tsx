@@ -118,12 +118,9 @@ export const DivUserMenu = styled.div`
 
 export const DropDown = styled.div`
   position: absolute;
-  margin-top: 6.2%;
-  right: -1%;
-  transform: translateX(-45%);
-  @media (max-width: 1875px) {
-    top: 8%;
-  }
+  bottom: -65%;
+  right: 1.5%;
+
 `;
 
 export const ParagraphNameUser = styled.p`
