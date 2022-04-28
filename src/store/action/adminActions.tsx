@@ -7,7 +7,6 @@ export const getAllUsers = async (
   setAllUsers: Function,
   page: number,
   setAllPagesPrincipal: Function,
-  setLoading: Function
 ) => {
   
   try {
@@ -19,7 +18,6 @@ export const getAllUsers = async (
   } catch (error) {
     console.log(error);
   } finally {
-    setLoading(false);
     Loading.remove();
   }
 };
@@ -50,7 +48,6 @@ export const handleProfile = async (
   page: number,
   setAllPages: Function,
   setUserSearch: Function,
-  setLoading: Function,
 ) => {
   event.preventDefault();
   try {
@@ -61,7 +58,7 @@ export const handleProfile = async (
     const { data } = await api.put(
       `${ENDPOINT_ADMIN.ALTER_PROFILE}=${type}&idUser=${id}`
     );
-    getAllUsers(setAllUsers, page, setAllPages, setLoading);
+    getAllUsers(setAllUsers, page, setAllPages);
     setUserSearch('')
     Notiflix.Notify.success(`Perfil do usuário alterado com sucesso.`);
   } catch (error) {

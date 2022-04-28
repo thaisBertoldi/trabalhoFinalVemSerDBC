@@ -22,7 +22,10 @@ import {
   ContainerRequest,
   ContainerRequestForm,
   DivItens,
+  TdCustom,
   TextAreaCustom,
+  ThCustom,
+  THeadCustom,
 } from "./RequestPurchase.style";
 import { Theme } from "../../theme";
 
@@ -30,7 +33,7 @@ import { imgConverter, maskMoney } from "../../utils/utils";
 import { useNavigate } from "react-router-dom";
 import { isLoggedDTO } from "../../models/UserDTO";
 import { FaTrashAlt } from "react-icons/fa";
-import {SUPPORTED_FORMATS, FILE_SIZE, TYPE_USERS} from '../../constants'
+import { SUPPORTED_FORMATS, FILE_SIZE, TYPE_USERS } from "../../constants";
 
 const RequestPurchase = ({
   user,
@@ -65,14 +68,14 @@ const RequestPurchase = ({
     initialValues: {
       itemName: "",
       description: "",
-      price: "",
+      value: "",
       file: "",
       itemId: 0,
     },
     validationSchema: Yup.object({
       itemName: Yup.string().required("Você precisa preencher esse campo"),
       description: Yup.string().required("Você precisa preencher esse campo"),
-      price: Yup.string().required("Você precisa preencher esse campo"),
+      value: Yup.string().required("Você precisa preencher esse campo"),
       file: Yup.mixed()
         .required("Você precisa anexar um arquivo")
         .test(
@@ -96,6 +99,7 @@ const RequestPurchase = ({
       );
     },
   });
+  console.log(arrayItens)
 
   return (
     <Container>
@@ -125,6 +129,7 @@ const RequestPurchase = ({
           </form>
 
           {isTopicCreate && (
+            
             <form onSubmit={formik.handleSubmit}>
               <InputForm
                 placeholder="Nome do item"
@@ -158,15 +163,15 @@ const RequestPurchase = ({
                 placeholder="Valor do item"
                 width={"100%"}
                 height={"40px"}
-                id="price"
-                name="price"
+                id="value"
+                name="value"
                 type="text"
-                onChange={(e) => maskMoney(e, formik.setFieldValue, "price")}
-                value={formik.values.price}
+                onChange={(e) => maskMoney(e, formik.setFieldValue, "value")}
+                value={formik.values.value}
                 disabled={idTopic === 0}
               />
-              {formik.errors.price && formik.touched.price ? (
-                <DivErrorYup>{formik.errors.price}</DivErrorYup>
+              {formik.errors.value && formik.touched.value ? (
+                <DivErrorYup>{formik.errors.value}</DivErrorYup>
               ) : null}
 
               <DivInputFile>
@@ -190,17 +195,19 @@ const RequestPurchase = ({
                 <BtnForm width={"300px"} color={"#25292a"} type="submit">
                   Adicionar
                 </BtnForm>
+
                 <BtnForm
                   width={"300px"}
                   color={"#25292a"}
                   type="button"
+                  disabled={arrayItens.length <= 0}
                   onClick={() =>
                     handleFinallyTopic(
                       idTopic,
                       navigate,
                       formikTopic.resetForm,
                       formik.resetForm,
-                      setIsTopicCreate,
+                      setIsTopicCreate
                     )
                   }
                 >
@@ -210,23 +217,45 @@ const RequestPurchase = ({
             </form>
           )}
         </ContainerRequestForm>
-        {arrayItens.map((item, index) => (
-          <DivItens key={index}>
-            <img
-              src={`data:image/jpeg;base64,${item.file}`}
-              alt="imagem do item"
-            />
-            <p>Nome: {item.itemName}</p>
-            <p>Descrição: {item.description}</p>
-            <p>Valor: R$ {item.price}</p>
-            <p>Id: {item.itemId}</p>
-            <FaTrashAlt
-              onClick={() =>
-                handleDeleteItem(item.itemId, setArrayItens, arrayItens)
-              }
-            />
-          </DivItens>
-        ))}
+
+        {arrayItens.length > 0 && (
+        <DivItens>
+          <table>
+            <THeadCustom>
+              <tr>
+                <ThCustom scope="col">Imagem</ThCustom>
+                <ThCustom scope="col">Nome</ThCustom>
+                <ThCustom scope="col">Descricao</ThCustom>
+                <ThCustom scope="col">Valor</ThCustom>
+              </tr>
+            </THeadCustom>
+            {arrayItens.map((item, index) => (
+              <tbody key={index}>
+                <tr>
+                  <TdCustom>
+                    {" "}
+                    <img
+                      src={`data:image/jpeg;base64,${item.file}`}
+                      alt="imagem do item"
+                    />
+                  </TdCustom>
+                  <TdCustom>{item.itemName}</TdCustom>
+                  <TdCustom>{item.description}</TdCustom>
+                  <TdCustom>R$ {item.value}</TdCustom>
+                  <td>
+                    {" "}
+                    <FaTrashAlt
+                      onClick={() =>
+                        handleDeleteItem(item.itemId, setArrayItens, arrayItens)
+                      }
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            ))}
+          </table>
+        </DivItens>
+        )}
       </ContainerRequest>
     </Container>
   );

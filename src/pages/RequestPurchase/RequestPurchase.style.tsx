@@ -3,7 +3,7 @@ import { Theme } from "../../theme";
 
 export const ContainerRequest = styled.div`
   width: 100%;
-  
+
   margin-top: 30px;
 `;
 
@@ -37,7 +37,6 @@ export const ContainerRequestForm = styled.div`
     transition: .5s;
     border: 1px solid #333;
   } */
-
 `;
 
 export const InputLabelDiv = styled.div`
@@ -58,13 +57,12 @@ export const TextAreaCustom = styled.textarea`
 
 export const DivItens = styled.div`
   width: 60%;
-
   display: flex;
-  justify-content: space-between;
-  
+  align-items: center;
+
   background-color: #fff;
   border-radius: 5px;
-  padding: 0 20px;
+  padding: 20px;
   margin: 0 auto;
   margin-top: 20px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -75,4 +73,23 @@ export const DivItens = styled.div`
     background: transparent;
     font-size: 25px;
   }
+`;
+
+export const THeadCustom = styled.thead`
+  background-color: ${Theme.color.grayDark};
+  color: ${Theme.color.white};
+`;
+
+export const ThCustom = styled.th`
+  border: 2px solid gray;
+  background-clip: padding-box;
+`;
+
+export const TdCustom = styled.td`
+  border: 1px solid gray;
+  padding: 5px;
+  max-width: 25%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background-color: #d8d8d85c;
 `;

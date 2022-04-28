@@ -38,7 +38,7 @@ export const handleCreateList = async (
     formData.append("file", values.file);
     formData.append("description", values.description);
     formData.append("name", values.itemName);
-    formData.append("price", removeMaskMoney(values.price));
+    formData.append("price", removeMaskMoney(values.value));
 
     try {
       Loading.circle();
@@ -60,7 +60,7 @@ export const handleCreateList = async (
       values: {
         itemName: "",
         description: "",
-        price: "",
+        value: "",
         file: values.file,
       },
     });
