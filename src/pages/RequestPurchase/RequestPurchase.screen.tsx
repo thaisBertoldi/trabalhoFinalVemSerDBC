@@ -8,6 +8,7 @@ import {
   InputForm,
   CenterCustom,
   DivErrorYup,
+  DivInputFile,
 } from "../../global.style";
 import { NewRequestPurchase, PurchaseDTO } from "../../models/PurchaseDTO";
 import { RootState } from "../../store";
@@ -23,14 +24,13 @@ import {
   DivItens,
   TextAreaCustom,
 } from "./RequestPurchase.style";
+import { Theme } from "../../theme";
 
 import { imgConverter, maskMoney } from "../../utils/utils";
 import { useNavigate } from "react-router-dom";
 import { isLoggedDTO } from "../../models/UserDTO";
 import { FaTrashAlt } from "react-icons/fa";
-
-const SUPPORTED_FORMATS = ["image/jpg", "image/jpeg", "image/png"];
-const FILE_SIZE = [10485760];
+import {SUPPORTED_FORMATS, FILE_SIZE} from '../../constants'
 
 const RequestPurchase = ({
   user,
@@ -39,6 +39,7 @@ const RequestPurchase = ({
 }: isLoggedDTO & PurchaseDTO & DispatchProp) => {
   const [arrayItens, setArrayItens] = useState<NewRequestPurchase[]>([]);
   const [idTopic, setIdTopic] = useState(0);
+  const [isTopicCreate, setIsTopicCreate] = useState(false);
 
   const navigate = useNavigate();
 
@@ -56,7 +57,7 @@ const RequestPurchase = ({
       title: Yup.string().required("Você precisa preencher esse campo"),
     }),
     onSubmit: (valuesTopic) => {
-      handleCreateTopic(valuesTopic, setIdTopic);
+      handleCreateTopic(valuesTopic, setIdTopic, setIsTopicCreate);
     },
   });
 
@@ -117,92 +118,97 @@ const RequestPurchase = ({
             {formikTopic.errors.title && formikTopic.touched.title ? (
               <DivErrorYup>{formikTopic.errors.title}</DivErrorYup>
             ) : null}
-            <button type="submit"> Criar tópico </button>
+            <BtnForm type="submit" width={"180px"} color={Theme.color.grayDark}>
+              {" "}
+              Criar tópico{" "}
+            </BtnForm>
           </form>
 
-          <form onSubmit={formik.handleSubmit}>
-            <InputForm
-              placeholder="Nome do item"
-              width={"100%"}
-              height={"40px"}
-              id="itemName"
-              name="itemName"
-              type="text"
-              onChange={formik.handleChange}
-              value={formik.values.itemName}
-              disabled={idTopic === 0}
-            />
-            {formik.errors.itemName && formik.touched.itemName ? (
-              <DivErrorYup>{formik.errors.itemName}</DivErrorYup>
-            ) : null}
-
-            <TextAreaCustom
-              placeholder="Descrição"
-              rows={5}
-              id="description"
-              name="description"
-              onChange={formik.handleChange}
-              value={formik.values.description}
-              disabled={idTopic === 0}
-            />
-            {formik.errors.description && formik.touched.description ? (
-              <DivErrorYup>{formik.errors.description}</DivErrorYup>
-            ) : null}
-
-            <InputForm
-              placeholder="Valor do item"
-              width={"100%"}
-              height={"40px"}
-              id="price"
-              name="price"
-              type="text"
-              onChange={(e) => maskMoney(e, formik.setFieldValue, "price")}
-              value={formik.values.price}
-              disabled={idTopic === 0}
-            />
-            {formik.errors.price && formik.touched.price ? (
-              <DivErrorYup>{formik.errors.price}</DivErrorYup>
-            ) : null}
-
-            <div>
-              <label htmlFor="file">Envio de Imagem</label>
+          {isTopicCreate && (
+            <form onSubmit={formik.handleSubmit}>
               <InputForm
-                placeholder="Arquivo"
+                placeholder="Nome do item"
                 width={"100%"}
                 height={"40px"}
-                id="file"
-                name="file"
-                type="file"
-                onChange={(event) =>
-                  imgConverter(event, formik.setFieldValue, "file")
-                }
+                id="itemName"
+                name="itemName"
+                type="text"
+                onChange={formik.handleChange}
+                value={formik.values.itemName}
+                disabled={idTopic === 0}
               />
+              {formik.errors.itemName && formik.touched.itemName ? (
+                <DivErrorYup>{formik.errors.itemName}</DivErrorYup>
+              ) : null}
+
+              <TextAreaCustom
+                placeholder="Descrição"
+                rows={5}
+                id="description"
+                name="description"
+                onChange={formik.handleChange}
+                value={formik.values.description}
+                disabled={idTopic === 0}
+              />
+              {formik.errors.description && formik.touched.description ? (
+                <DivErrorYup>{formik.errors.description}</DivErrorYup>
+              ) : null}
+
+              <InputForm
+                placeholder="Valor do item"
+                width={"100%"}
+                height={"40px"}
+                id="price"
+                name="price"
+                type="text"
+                onChange={(e) => maskMoney(e, formik.setFieldValue, "price")}
+                value={formik.values.price}
+                disabled={idTopic === 0}
+              />
+              {formik.errors.price && formik.touched.price ? (
+                <DivErrorYup>{formik.errors.price}</DivErrorYup>
+              ) : null}
+
+              <DivInputFile>
+                <span>Escolha um arquivo</span>
+                <input
+                  width={"100%"}
+                  height={"40px"}
+                  id="file"
+                  name="file"
+                  type="file"
+                  onChange={(event) =>
+                    imgConverter(event, formik.setFieldValue, "file")
+                  }
+                />
+              </DivInputFile>
               {formik.errors.file && formik.touched.file ? (
                 <DivErrorYup>{formik.errors.file}</DivErrorYup>
               ) : null}
-            </div>
 
-            <CenterCustom>
-              <BtnForm width={"300px"} color={"#25292a"} type="submit">
-                Adicionar
-              </BtnForm>
-              <BtnForm
-                width={"300px"}
-                color={"#25292a"}
-                type="button"
-                onClick={() =>
-                  handleFinallyTopic(
-                    idTopic,
-                    navigate,
-                    formikTopic.resetForm,
-                    formik.resetForm
-                  )
-                }
-              >
-                Finalizar
-              </BtnForm>
-            </CenterCustom>
-          </form>
+              <CenterCustom>
+                <BtnForm width={"300px"} color={"#25292a"} type="submit">
+                  Adicionar
+                </BtnForm>
+                <BtnForm
+                  width={"300px"}
+                  color={"#25292a"}
+                  type="button"
+                  onClick={() =>
+                    handleFinallyTopic(
+                      idTopic,
+                      navigate,
+                      formikTopic.resetForm,
+                      formik.resetForm,
+                      setIsTopicCreate,
+                    )
+                  }
+                >
+                  Finalizar
+                </BtnForm>
+              </CenterCustom>
+            </form>
+          )}
         </ContainerRequestForm>
         {arrayItens.map((item, index) => (
           <DivItens key={index}>

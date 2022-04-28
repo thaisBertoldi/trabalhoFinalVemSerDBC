@@ -16,7 +16,7 @@ export const ContainerPrincipal = styled.div`
   justify-content: space-around;
   height: 100vh;
   padding: 0 50px;
-  
+
   @media (max-width: 1190px) {
     display: flex;
     justify-content: center;
@@ -31,7 +31,6 @@ export const ContainerTitle = styled.div`
   align-items: center;
   justify-content: center;
   line-height: 5px;
-  
 
   @media (max-width: 1190px) {
     display: none;
@@ -41,7 +40,6 @@ export const ContainerTitle = styled.div`
 export const Title = styled.h1<{ size: string; spacing: string }>`
   font-size: ${(props) => props.size};
   letter-spacing: ${(props) => props.spacing};
-  
 `;
 
 export const ContainerGetInfo = styled.div`
@@ -116,7 +114,7 @@ export const InputForm = styled.input`
 export const Btn = styled.button<{ width: string }>`
   width: ${(props) => props.width};
   height: 42px;
-  background: ${props => props.color};
+  background: ${(props) => props.color};
   /* background: rgb(0, 113, 191);
   background: radial-gradient(
     circle,
@@ -138,6 +136,7 @@ export const BtnForm = styled.button<{ width: string }>`
   outline: none;
   border: none;
   color: ${Theme.color.white};
+  margin-top: 5px;
 `;
 
 export const Paragraph = styled.p`
@@ -152,11 +151,7 @@ export const Paragraph = styled.p`
 export const LinkCustom = styled.div`
   list-style: none;
   text-decoration: none;
-  background: radial-gradient(
-    circle,
-    rgba(0, 113, 191, 1) 20%,
-    rgba(2, 50, 85, 1) 100%
-  );
+  background: radial-gradient(circle, #15bea2 20%, #156fbe 100%);
   color: black;
   background-clip: text;
   -webkit-background-clip: text;
@@ -222,4 +217,27 @@ export const IconSearch = styled(FaSearch)`
 
 export const DivStrengthBar = styled.div`
   height: 10px;
+`;
+
+export const DivInputFile = styled.div`
+  width: 185px;
+  height: 40px;
+  position: relative;
+  overflow: hidden;
+  background: ${Theme.color.grayDark};
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
+
+  span {
+    display: block;
+    position: absolute;
+    color: ${Theme.color.white};
+  }
+  input {
+    opacity: 0;
+    font-size: 300px;
+  }
 `;

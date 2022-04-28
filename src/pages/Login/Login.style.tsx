@@ -16,7 +16,7 @@ export const DivInputsLogin = styled.div`
   display: flex;
   flex-direction: column;
   margin: ${Theme.margin};
-  gap: 30px;
+  gap: 15px;
 `;
 
 export const DivEye = styled.div`

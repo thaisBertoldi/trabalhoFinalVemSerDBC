@@ -15,6 +15,7 @@ import {
   ContainerTitle,
   ContainerGetInfo,
   ContainerPrincipal,
+  DivInputFile,
 } from "../../global.style";
 import { DivEye, DivInputsLogin, DivLogo } from "../Login/Login.style";
 import { DivLabelFile } from "./Register.style";
@@ -23,8 +24,12 @@ import { isLoggedDTO, RegisterDTO } from "../../models/UserDTO";
 import { handleRegister } from "../../store/action/authActions";
 import { hasLogin, imgConverter } from "../../utils/utils";
 import { RootState } from "../../store";
+import {SUPPORTED_FORMATS, FILE_SIZE} from '../../constants'
 
 const Register = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
+
+  
+
   const [showPassword, setShowPassword] = useState<boolean>(true);
 
   const navigate = useNavigate();
@@ -75,6 +80,16 @@ const Register = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
       confirmPassword: Yup.string().when("password", (password, field) =>
         password ? field.required().oneOf([Yup.ref("password")]) : field
       ),
+      profileImage: Yup.mixed()
+        .required("Você precisa anexar um arquivo")
+        .test(
+          "fileSize",
+          "Este arquivo é muito grande",
+          (value) => value.size <= FILE_SIZE
+        )
+        .test("fileType", "Este tipo de arquivo não é suportado.", (value) =>
+          SUPPORTED_FORMATS.includes(value.type)
+        ),
     }),
     onSubmit: (values) => {
       register(values);
@@ -110,7 +125,8 @@ const Register = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
             />
             {formik.errors.fullName && formik.touched.fullName ? (
               <DivErrorYup>{formik.errors.fullName}</DivErrorYup>
-            ) : null}
+            ) : <DivErrorYup></DivErrorYup>}
+
             <Input
               width="99%"
               height="40px"
@@ -124,7 +140,7 @@ const Register = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
             />
             {formik.errors.username && formik.touched.username ? (
               <DivErrorYup>{formik.errors.username}</DivErrorYup>
-            ) : null}
+            ) : <DivErrorYup></DivErrorYup>}
             <div>
               <Input
                 width="99%"
@@ -139,7 +155,7 @@ const Register = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
               />
               {formik.errors.password && formik.touched.password ? (
                 <DivErrorYup>{formik.errors.password}</DivErrorYup>
-              ) : null}
+              ) : <DivErrorYup></DivErrorYup>}
               <DivEye>
                 {showPassword ? (
                   <FaEye onClick={() => setShowPassword(!showPassword)} />
@@ -177,13 +193,13 @@ const Register = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
             />
             {formik.errors.confirmPassword && formik.touched.confirmPassword ? (
               <DivErrorYup>As senhas estão diferentes.</DivErrorYup>
-            ) : null}
+            ) : <DivErrorYup></DivErrorYup>}
 
-            <DivLabelFile>
-              <label htmlFor="profileImage">ENVIO DE ARQUIVO</label>
-              <Input
-                width="99%"
-                height="40px"
+            <DivInputFile>
+              <span>Escolha um arquivo</span>
+              <input
+                width={"100%"}
+                height={"40px"}
                 id="profileImage"
                 name="profileImage"
                 type="file"
@@ -192,7 +208,11 @@ const Register = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
                   imgConverter(event, formik.setFieldValue, "profileImage")
                 }
               />
-            </DivLabelFile>
+            </DivInputFile>
+            {formik.errors.profileImage && formik.touched.profileImage ? (
+                <DivErrorYup>{formik.errors.profileImage}</DivErrorYup>
+              ) : <DivErrorYup></DivErrorYup>}
+
 
             <Btn width="100%" type="submit" color={Theme.color.primary}>
               Submit

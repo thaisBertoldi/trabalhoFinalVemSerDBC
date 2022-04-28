@@ -18,7 +18,7 @@ export const ContainerRequestForm = styled.div`
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 
-  input[type="file"] {
+  /* input[type="file"] {
     display: none;
   }
 
@@ -36,7 +36,7 @@ export const ContainerRequestForm = styled.div`
     cursor: pointer;
     transition: .5s;
     border: 1px solid #333;
-  }
+  } */
 
 `;
 

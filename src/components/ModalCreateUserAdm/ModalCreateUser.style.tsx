@@ -81,24 +81,4 @@ export const SelectCreateUserAdm = styled.select`
   }
 `;
 
-export const DivInputFile = styled.div`
-  width: 185px;
-  height: 40px;
-  position: relative;
-  overflow: hidden;
-  background: ${Theme.color.grayDark};
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
-  span {
-    display: block;
-    position: absolute;
-    color: ${Theme.color.white};
-  }
-  input {
-    opacity: 0;
-    font-size: 100px;
-  }
-`;

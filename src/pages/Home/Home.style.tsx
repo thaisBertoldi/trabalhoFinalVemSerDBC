@@ -25,7 +25,11 @@ export const DivSearch = styled.div`
   margin: ${Theme.margin};
 `;
 
-
+export const DivDescriptionTopic = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 
 

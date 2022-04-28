@@ -7,13 +7,15 @@ import { removeMaskMoney } from "../../utils/utils";
 
 export const handleCreateTopic = async (
   valuesTopic: TitlePurchaseDTO,
-  setIdTopic: Function
+  setIdTopic: Function,
+  setIsTopicCreate: Function,
 ) => {
   try {
     Loading.circle();
     const { data } = await api.post(ENDPOINT_TOPICS.CREATE_TOPIC, valuesTopic);
     setIdTopic(data);
     Notiflix.Notify.success(`Tópico ${valuesTopic.title} criado com sucesso.`);
+    setIsTopicCreate(true)
   } catch (error) {
     console.log(error);
     Loading.remove();
@@ -71,7 +73,8 @@ export const handleFinallyTopic = async (
   idItem: number,
   navigate: Function,
   formikTopicReset: Function, 
-  formikReset: Function
+  formikReset: Function,
+  setIsTopicCreate: Function
 ) => {
   try {
     Loading.circle();
@@ -83,6 +86,7 @@ export const handleFinallyTopic = async (
     navigate("/");
     formikReset()
     formikTopicReset()
+    setIsTopicCreate(false)
   } catch (error) {
     console.log(error);
     Notiflix.Notify.failure(

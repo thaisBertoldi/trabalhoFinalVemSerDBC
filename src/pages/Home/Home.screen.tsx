@@ -6,7 +6,7 @@ import { isLoggedDTO } from "../../models/UserDTO";
 
 import { RootState } from "../../store";
 import { redirectAdmin, redirectToLogin } from "../../utils/utils";
-import { DivSearch, ContainerAllInfo } from "./Home.style";
+import { DivSearch, ContainerAllInfo, DivDescriptionTopic } from "./Home.style";
 
 import {
   CardTopicHome,
@@ -32,6 +32,7 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   const [allPages, setAllPages] = useState<number>(0);
   const [allPagesSearch, setAllPagesSearch] = useState<number>(0);
   const [page, setPage] = useState<number>(0);
+  const [descriptionTopic, setDescriptionTopic] = useState("Todos os tópicos");
 
   const [OpenModalAddQuotation, setOpenModalAddQuotation] = useState<ModalDTO>({
     open: false,
@@ -51,6 +52,7 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   const [pageSearch, setPageSeach] = useState<number>(0);
   const [inputSearch, setInputSearch] = useState<string>("");
   const [isSearch, setIsSearch] = useState<boolean>(false);
+
   const handleUserSearch = async () => {
     try {
       setPage(0);
@@ -65,14 +67,27 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
     }
   };
 
+  const getDescriptionTopic = () => {
+    if (user.profile === "COLLABORATOR") {
+      setDescriptionTopic("Seus tópicos");
+    }
+    if (user.profile === "MANAGER" || user.profile === "FINANCIER") {
+      setDescriptionTopic("Tópicos a aprovar");
+    }
+    if(user.profile === "USER") {
+      setDescriptionTopic("Aguarde o administrador registrar seu perfil de usuário.")
+    }
+  };
+
   useEffect(() => {
     redirectToLogin(navigate);
     redirectAdmin(navigate, user.profile);
+    getDescriptionTopic();
   }, [user]);
 
-  useEffect( () => {
-    handleUserSearch()
-  },[inputSearch, pageSearch]);
+  useEffect(() => {
+    handleUserSearch();
+  }, [inputSearch, pageSearch]);
 
   useEffect(() => {
     getTopics(setListTopics, setAllPages, page, setIsSearch);
@@ -81,7 +96,9 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   return (
     <Container>
       <CenterCustom>
-        <Title size="24px" spacing="2">Seja bem-vindo(a), {User?.fullName}</Title>
+        <Title size="24px" spacing="2">
+          Seja bem-vindo(a), {User?.fullName}
+        </Title>
       </CenterCustom>
 
       <DivSearch>
@@ -93,40 +110,37 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
         ></InputForm>
         <IconSearch onClick={() => handleUserSearch()} />
       </DivSearch>
-
+      <DivDescriptionTopic>
+        <h3>{descriptionTopic}</h3>
+      </DivDescriptionTopic>
       <ContainerAllInfo>
-
-        {
-          !isSearch ? (
-            listTopics.length > 0 ? (
-              listTopics?.map((item: TopicDTO) => (
-                <CardTopicHome
-                  item={item}
-                  user={user}
-                  setOpenModalQuotation={setOpenModalQuotation}
-                  setOpenModalAddQuotation={setOpenModalAddQuotation}
-                  setOpenModalItens={setOpenModalItens}
-                />
-              ))
-            ) : (
-              <h1>Nenhum tópico encontrado</h1>
-            )
+        {!isSearch ? (
+          listTopics.length > 0 ? (
+            listTopics?.map((item: TopicDTO) => (
+              <CardTopicHome
+                item={item}
+                user={user}
+                setOpenModalQuotation={setOpenModalQuotation}
+                setOpenModalAddQuotation={setOpenModalAddQuotation}
+                setOpenModalItens={setOpenModalItens}
+              />
+            ))
           ) : (
-            listSearched?.length > 0 ? (
-              listSearched?.map((item: TopicDTO) => (
-                <CardTopicHome
-                  item={item}
-                  user={user}
-                  setOpenModalQuotation={setOpenModalQuotation}
-                  setOpenModalAddQuotation={setOpenModalAddQuotation}
-                  setOpenModalItens={setOpenModalItens}
-                />
-              ))
-            ) : (
-              <h1>Nenhum tópico encontrado</h1>
-              )
-            )
-          }
+            <h1>Nenhum tópico encontrado</h1>
+          )
+        ) : listSearched?.length > 0 ? (
+          listSearched?.map((item: TopicDTO) => (
+            <CardTopicHome
+              item={item}
+              user={user}
+              setOpenModalQuotation={setOpenModalQuotation}
+              setOpenModalAddQuotation={setOpenModalAddQuotation}
+              setOpenModalItens={setOpenModalItens}
+            />
+          ))
+        ) : (
+          <h1>Nenhum tópico encontrado</h1>
+        )}
 
         {OpenModalItens.open && (
           <ModalCardItens
@@ -148,17 +162,21 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
         )}
       </ContainerAllInfo>
       <CenterCustom>
-        {
-          !isSearch ? (
-            listTopics?.length > 0 && (
-              <Pagination page={page} onPageChange={(index: number) => setPage(index)} allPages={allPages}/>
+        {!isSearch
+          ? listTopics?.length > 0 && (
+              <Pagination
+                page={page}
+                onPageChange={(index: number) => setPage(index)}
+                allPages={allPages}
+              />
             )
-          ) : (
-            listSearched?.length > 0 && (
-              <Pagination page={pageSearch} onPageChange={(index: number) => setPageSeach(index)} allPages={allPagesSearch}/>
-            )
-          )
-        }
+          : listSearched?.length > 0 && (
+              <Pagination
+                page={pageSearch}
+                onPageChange={(index: number) => setPageSeach(index)}
+                allPages={allPagesSearch}
+              />
+            )}
       </CenterCustom>
     </Container>
   );

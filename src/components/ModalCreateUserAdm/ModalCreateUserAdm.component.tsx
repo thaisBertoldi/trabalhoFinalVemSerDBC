@@ -4,7 +4,7 @@ import Notiflix from "notiflix";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { ContainerModal } from "../ModalBuyer/ModalBuyer.style";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Btn, DivErrorYup, DivStrengthBar, InputForm, SelectCustom } from "../../global.style";
+import { Btn, DivErrorYup, DivStrengthBar, DivInputFile } from "../../global.style";
 import PasswordStrengthBar from "react-password-strength-bar";
 import { Theme } from "../../theme";
 import { imgConverter } from "../../utils/utils";
@@ -13,7 +13,6 @@ import { ENDPOINT_ADMIN } from "../../constants";
 import {
   DivClose,
   DivEyeAdm,
-  DivInputFile,
   InputCreateUserAdm,
   ModalAdm,
   SelectCreateUserAdm,
@@ -59,7 +58,7 @@ const ModalCreateUserAdm = ({ onClick }: ModalComponentDTO) => {
       password: "",
       confirmPassword: "",
       profileImage: null,
-      groups: "vazio",
+      groups: "opcao",
     },
     validationSchema: Yup.object({
       fullName: Yup.string()
@@ -85,7 +84,7 @@ const ModalCreateUserAdm = ({ onClick }: ModalComponentDTO) => {
         password ? field.required().oneOf([Yup.ref("password")]) : field
       ),
       groups: Yup.string().matches(
-        /[^vazio]/gi,
+        /[^opcao]/,
         "Por favor, escolha uma das opções."
       ),
     }),
@@ -190,11 +189,11 @@ const ModalCreateUserAdm = ({ onClick }: ModalComponentDTO) => {
           ) : <DivErrorYup></DivErrorYup>}
 
           <SelectCreateUserAdm name="groups" onChange={formik.handleChange}>
-            <option value="vazio">Escolha uma opção</option>
+            <option value="opcao">Escolha uma opção</option>
             <option value="COLLABORATOR">Colaborador</option>
             <option value="ADMINISTRATOR">Administrador</option>
             <option value="BUYER">Comprador</option>
-            <option value="MANEGER">Gestor</option>
+            <option value="MANAGER">Gestor</option>
             <option value="FINANCIER">Financeiro</option>
           </SelectCreateUserAdm>
           {formik.errors.groups && formik.touched.groups ? (
