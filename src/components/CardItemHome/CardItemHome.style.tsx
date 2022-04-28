@@ -33,12 +33,3 @@ export const CardItemValueName = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
-
-export const LoadingItem = styled.div`
-  display: flex;
-  width: 100%;
-  height: 200px;
-  padding: 10px;
-  align-items: center;
-  justify-content: center;
-`;

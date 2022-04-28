@@ -99,7 +99,7 @@ const RequestPurchase = ({
       );
     },
   });
-  console.log(arrayItens)
+  console.log(arrayItens);
 
   return (
     <Container>
@@ -122,14 +122,19 @@ const RequestPurchase = ({
             {formikTopic.errors.title && formikTopic.touched.title ? (
               <DivErrorYup>{formikTopic.errors.title}</DivErrorYup>
             ) : null}
-            <BtnForm type="submit" width={"180px"} color={Theme.color.grayDark}>
-              {" "}
-              Criar tópico{" "}
-            </BtnForm>
+            {!isTopicCreate && (
+              <BtnForm
+                type="submit"
+                width={"180px"}
+                color={Theme.color.grayDark}
+              >
+                {" "}
+                Criar tópico{" "}
+              </BtnForm>
+            )}
           </form>
 
           {isTopicCreate && (
-            
             <form onSubmit={formik.handleSubmit}>
               <InputForm
                 placeholder="Nome do item"
@@ -219,40 +224,46 @@ const RequestPurchase = ({
         </ContainerRequestForm>
 
         {arrayItens.length > 0 && (
-        <DivItens>
-          <table>
-            <THeadCustom>
-              <tr>
-                <ThCustom scope="col">Imagem</ThCustom>
-                <ThCustom scope="col">Nome</ThCustom>
-                <ThCustom scope="col">Descricao</ThCustom>
-                <ThCustom scope="col">Valor</ThCustom>
-              </tr>
-            </THeadCustom>
-            {arrayItens.map((item, index) => (
-              <tbody key={index}>
+          <DivItens>
+            <table>
+              <THeadCustom>
                 <tr>
-                  <TdCustom>
-                    <img
-                      src={`data:image/jpeg;base64,${item.file}`}
-                      alt="imagem do item"
-                    />
-                  </TdCustom>
-                  <TdCustom>{item.itemName}</TdCustom>
-                  <TdCustom>{item.description}</TdCustom>
-                  <TdCustom>R$ {item.value}</TdCustom>
-                  <td>
-                    <FaTrashAlt
-                      onClick={() =>
-                        handleDeleteItem(item.itemId, setArrayItens, arrayItens)
-                      }
-                    />
-                  </td>
+                  <ThCustom scope="col">Imagem</ThCustom>
+                  <ThCustom scope="col">Nome</ThCustom>
+                  <ThCustom scope="col">Descricao</ThCustom>
+                  <ThCustom scope="col">Valor</ThCustom>
                 </tr>
-              </tbody>
-            ))}
-          </table>
-        </DivItens>
+              </THeadCustom>
+              {arrayItens.map((item, index) => (
+                <tbody key={index}>
+                  <tr>
+                    <TdCustom>
+                      {" "}
+                      <img
+                        src={`data:image;base64,${item.file}`}
+                        alt="imagem do item"
+                      />
+                    </TdCustom>
+                    <TdCustom>{item.itemName}</TdCustom>
+                    <TdCustom>{item.description}</TdCustom>
+                    <TdCustom>R$ {item.value}</TdCustom>
+                    <td>
+                      {" "}
+                      <FaTrashAlt
+                        onClick={() =>
+                          handleDeleteItem(
+                            item.itemId,
+                            setArrayItens,
+                            arrayItens
+                          )
+                        }
+                      />
+                    </td>
+                  </tr>
+                </tbody>
+              ))}
+            </table>
+          </DivItens>
         )}
       </ContainerRequest>
     </Container>

@@ -4,12 +4,12 @@ import {
   CardItem,
   CardItemInfos,
   CardItemValueName,
-  LoadingItem,
   Desc
 } from "./CardItemHome.style";
 import loadingImg from '../../images/loading.gif'
 import { CardItemHomeProps } from "../../models/TopicDTO";
 import { ItensInTopicDTO } from "../../models/ModalsDTO";
+import { LoadingItem } from "../../global.style";
 
 const CardItemHome = ({ id }: CardItemHomeProps) => {
   const [listItens, setListItens] = useState<Array<ItensInTopicDTO>>([]);
@@ -24,7 +24,7 @@ const CardItemHome = ({ id }: CardItemHomeProps) => {
       {listItens.length > 0 ? (
         <CardItem>
           <img
-            src={`data:image/jpeg;base64,${listItens[0].file}`}
+            src={`data:image;base64,${listItens[0].file}`}
             alt="imagem do item"
           />
           <CardItemInfos>
