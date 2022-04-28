@@ -203,12 +203,18 @@ export const IconSearch = styled(FaSearch)`
   left: 73%;
   opacity: 0.5;
 
-  @media (max-width: 1000px) {
+  @media (max-width: 1480px) {
     left: 72%;
   }
-  @media (max-width: 600px) {
-    left: 71%;
+
+  @media (max-width: 890px) {
+    left: 70%;
   }
+
+  @media (max-width: 540px) {
+    left: 69%;
+  }
+
   @media (max-width: 400px) {
     display: none;
   }

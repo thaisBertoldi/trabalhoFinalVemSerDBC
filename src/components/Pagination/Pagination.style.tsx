@@ -5,7 +5,7 @@ export const ContainerPagination = styled.div`
   justify-content: center;
   align-items: center;
   gap: 15px;
-  font-size: 20px;
+  font-size: 16px;
   margin: 15px;
   @import url("https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300&display=swap");
   font-family: "Merriweather Sans", sans-serif;
@@ -13,7 +13,7 @@ export const ContainerPagination = styled.div`
 
 export const ButtonCustom = styled.button<{ colorHover: string }>`
   border: none;
-  font-size: 40px;
+  font-size: 30px;
   display: flex;
   align-items: center;
   background-color: #E9E9E9;
