@@ -97,9 +97,9 @@ const ModalCreateUserAdm = ({ onClick }: ModalComponentDTO) => {
         .test(
           "fileSize",
           "Este arquivo é muito grande",
-          (value) => value.size <= FILE_SIZE
+          (value) => value === null || value.size <= FILE_SIZE
         )
-        .test("fileType", "Este tipo de arquivo não é suportado.", (value) =>
+        .test("fileType", "Este tipo de arquivo não é suportado.", (value) => value === null ||
           SUPPORTED_FORMATS.includes(value.type)
         ),
       groups: Yup.string().matches(

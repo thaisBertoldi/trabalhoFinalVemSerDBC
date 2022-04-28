@@ -28,8 +28,6 @@ import {SUPPORTED_FORMATS, FILE_SIZE} from '../../constants'
 
 const Register = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
 
-  
-
   const [showPassword, setShowPassword] = useState<boolean>(true);
 
   const navigate = useNavigate();
@@ -85,9 +83,9 @@ const Register = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
         .test(
           "fileSize",
           "Este arquivo é muito grande",
-          (value) => value.size <= FILE_SIZE
+          value => value === null || value.size <= FILE_SIZE
         )
-        .test("fileType", "Este tipo de arquivo não é suportado.", (value) =>
+        .test("fileType", "Este tipo de arquivo não é suportado.", value => value === null ||
           SUPPORTED_FORMATS.includes(value.type)
         ),
     }),

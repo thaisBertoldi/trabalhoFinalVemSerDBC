@@ -30,4 +30,11 @@ export const DivEye = styled.div`
     margin-left: 86%;
     margin-top: -11%;
   }
+  @media (max-width: 468px) {
+    margin-left: 82%;
+    margin-top: -13%;
+  }
+  @media (max-width: 380px) {
+    visibility: hidden;
+  }
 `;
