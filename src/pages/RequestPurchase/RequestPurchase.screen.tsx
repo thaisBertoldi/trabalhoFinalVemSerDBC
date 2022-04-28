@@ -30,6 +30,7 @@ import {
 import { Theme } from "../../theme";
 
 import { imgConverter, maskMoney } from "../../utils/utils";
+import { mySchemaPurchase } from "../../utils/yupValidations";
 import { useNavigate } from "react-router-dom";
 import { isLoggedDTO } from "../../models/UserDTO";
 import { FaTrashAlt } from "react-icons/fa";
@@ -72,24 +73,8 @@ const RequestPurchase = ({
       file: "",
       itemId: 0,
     },
-    validationSchema: Yup.object({
-      itemName: Yup.string().required("Você precisa preencher esse campo"),
-      description: Yup.string().required("Você precisa preencher esse campo"),
-      value: Yup.string().required("Você precisa preencher esse campo"),
-      file: Yup.mixed()
-        .required("Você precisa anexar um arquivo")
-        .test(
-          "fileSize",
-          "Este arquivo é muito grande",
-          (value) => value === null || value.size <= FILE_SIZE
-        )
-        .test("fileType", "Este tipo de arquivo não é suportado.", (value) => value === null ||
-          SUPPORTED_FORMATS.includes(value.type)
-        ),
-    }),
+    validationSchema: mySchemaPurchase,
     onSubmit: (values) => {
-      const size: any = values.file;
-      console.log(size.size);
       handleCreateList(
         values,
         idTopic,
@@ -99,7 +84,6 @@ const RequestPurchase = ({
       );
     },
   });
-  console.log(arrayItens);
 
   return (
     <Container>

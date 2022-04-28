@@ -20,19 +20,17 @@ export const DivInputsLogin = styled.div`
 `;
 
 export const DivEye = styled.div`
-  font-size: 25px;
+  /* font-size: 25px; */
   position: absolute;
-  margin-left: 88%;
-  margin-top: -8.5%;
+  right: 30px;
+  bottom: 40%;
   color: ${Theme.color.white};
 
   @media (max-width: 700px) {
-    margin-left: 86%;
-    margin-top: -11%;
+    bottom: 41%;
   }
-  @media (max-width: 468px) {
-    margin-left: 82%;
-    margin-top: -13%;
+  @media (max-width: 480px) {
+    bottom: 43%;
   }
   @media (max-width: 380px) {
     visibility: hidden;

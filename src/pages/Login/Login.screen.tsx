@@ -22,6 +22,7 @@ import { ContainerLogin, DivEye, DivInputsLogin, DivLogo } from "./Login.style";
 import { handleLogin } from "../../store/action/authActions";
 import { Theme } from "../../theme";
 import { hasLogin } from "../../utils/utils";
+import { mySchemaLogin } from "../../utils/yupValidations";
 import { RootState } from "../../store";
 import { isLoggedDTO, UsersAdmDTO } from "../../models/UserDTO";
 import { getAllUsers } from "../../store/action/adminActions";
@@ -56,12 +57,7 @@ const Login = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
       username: "",
       password: "",
     },
-    validationSchema: Yup.object({
-      username: Yup.string()
-        .email("Este campo precisa ser preenchido com um email.")
-        .required("Você precisa preencher esse campo"),
-      password: Yup.string().required("Você precisa preencher esse campo"),
-    }),
+    validationSchema: mySchemaLogin,
     onSubmit: (values) => {
       handleLogin(values, dispatch, navigate);
     },

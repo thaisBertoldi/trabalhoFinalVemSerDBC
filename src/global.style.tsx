@@ -169,7 +169,7 @@ export const LinkCustom = styled.div`
 
 export const DivErrorYup = styled.div`
   color: ${Theme.color.danger};
-  font-size: 15px;
+  font-size: 12px;
 `;
 
 export const CenterCustom = styled.div`

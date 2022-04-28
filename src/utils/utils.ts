@@ -1,28 +1,34 @@
 import { isLoggedDTO } from "../models/UserDTO";
+import * as Yup from "yup";
+import { SUPPORTED_FORMATS, FILE_SIZE } from "../constants";
 
 export const hasLogin = (navigate: Function) => {
-  const hasToken: isLoggedDTO | any = localStorage.getItem('token');
+  const hasToken: isLoggedDTO | any = localStorage.getItem("token");
   const User = JSON.parse(hasToken);
-  if(User?.token) {
-    navigate('/');
+  if (User?.token) {
+    navigate("/");
   }
-}
+};
 
 export const redirectToLogin = (navigate: Function) => {
-  const hasToken: isLoggedDTO | any = localStorage.getItem('token');
+  const hasToken: isLoggedDTO | any = localStorage.getItem("token");
   const User = JSON.parse(hasToken);
-  if(!User?.token) {
-    navigate('/login');
+  if (!User?.token) {
+    navigate("/login");
   }
-}
+};
 
 export const redirectAdmin = (navigate: Function, profile: string) => {
-  if(profile === 'ADMINISTRATOR' ) {
-    navigate('/administration')
+  if (profile === "ADMINISTRATOR") {
+    navigate("/administration");
   }
-}
+};
 
-export const maskMoney = (e: React.ChangeEvent<HTMLInputElement>, formik: Function, value: string) => {
+export const maskMoney = (
+  e: React.ChangeEvent<HTMLInputElement>,
+  formik: Function,
+  value: string
+) => {
   let money = e.target.value;
   money = money.replace(/\D/g, "");
   money = money.replace(/(\d)(\d{2})$/, "$1,$2");
@@ -31,11 +37,84 @@ export const maskMoney = (e: React.ChangeEvent<HTMLInputElement>, formik: Functi
 };
 
 export const removeMaskMoney = (value: string) => {
-  return value.replace('R$ ', '').replace('.', '').replace(',', '.');
-}
+  return value.replace("R$ ", "").replace(".", "").replace(",", ".");
+};
 
-export const imgConverter = (event: React.ChangeEvent<HTMLInputElement>, formik: Function, value: string) => {
+export const imgConverter = (
+  event: React.ChangeEvent<HTMLInputElement>,
+  formik: Function,
+  value: string
+) => {
   const target = event.target as HTMLInputElement;
   const profileImage = target.files?.[0];
   return formik(value, profileImage);
 };
+
+export const mySchemaRegister = Yup.object().shape({
+  fullName: Yup.string()
+    .min(2, "Este é um nome muito curto.")
+    .max(50, "Esse é mesmo o seu nome ou você deitou no teclado?")
+    .matches(
+      /[^0-9$*&@#]/gi,
+      "Você precisa preencher esse campo apenas com letras"
+    )
+    .required("Você precisa preencher esse campo"),
+  username: Yup.string()
+    .email("Este campo precisa ser preenchido com um email.")
+    .required("Você precisa preencher esse campo"),
+  password: Yup.string()
+    .required("Você precisa preencher esse campo")
+    .min(8, "Sua senha precisa conter pelo menos 8 caracteres")
+    .max(30, "Sua senha deve conter no máximo 30 caracteres")
+    .matches(/^(?=.*\d)/, "Sua senha precisa conter um número")
+    .matches(/^(?=.*[a-z])/, "Sua senha precisa conter uma letra minúscula")
+    .matches(/^(?=.*[A-Z])/, "Sua senha precisa conter uma letra maiúscula")
+    .matches(
+      /^(?=.*[$*&@#])/,
+      "Sua senha precisa conter um caractere especial."
+    ),
+  confirmPassword: Yup.string().when("password", (password, field) =>
+    password ? field.required().oneOf([Yup.ref("password")]) : field
+  ),
+  profileImage: Yup.mixed()
+    .required("Você precisa anexar um arquivo")
+    .test(
+      "fileSize",
+      "Este arquivo é muito grande",
+      (value) => value === null || value.size <= FILE_SIZE
+    )
+    .test(
+      "fileType",
+      "Este tipo de arquivo não é suportado.",
+      (value) => value === null || SUPPORTED_FORMATS.includes(value.type)
+    ),
+  groups: Yup.string().matches(
+    /[^opcao]/,
+    "Por favor, escolha uma das opções."
+  ),
+});
+
+export const mySchemaLogin = Yup.object().shape({
+  username: Yup.string()
+    .email("Este campo precisa ser preenchido com um email.")
+    .required("Você precisa preencher esse campo"),
+  password: Yup.string().required("Você precisa preencher esse campo"),
+});
+
+export const mySchemaPurchase = Yup.object().shape({
+  itemName: Yup.string().required("Você precisa preencher esse campo"),
+  description: Yup.string().required("Você precisa preencher esse campo"),
+  value: Yup.string().required("Você precisa preencher esse campo"),
+  file: Yup.mixed()
+    .required("Você precisa anexar um arquivo")
+    .test(
+      "fileSize",
+      "Este arquivo é muito grande",
+      (value) => value === null || value.size <= FILE_SIZE
+    )
+    .test(
+      "fileType",
+      "Este tipo de arquivo não é suportado.",
+      (value) => value === null || SUPPORTED_FORMATS.includes(value.type)
+    ),
+});

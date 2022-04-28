@@ -38,7 +38,7 @@ const CardItemHome = ({ id }: CardItemHomeProps) => {
           </CardItemInfos>
         </CardItem>
         {listItens.length > 1 ? (
-          <SpanMoreItens>Quantidade de itens restantes: {listItens.length - 1}</SpanMoreItens>
+          <SpanMoreItens>E mais {listItens.length - 1}</SpanMoreItens>
         ) : (
           <SpanMoreItens></SpanMoreItens>
         )}
@@ -48,6 +48,7 @@ const CardItemHome = ({ id }: CardItemHomeProps) => {
           {loading ? (
             <LoadingItem>
               <img src={loadingImg} alt="carregando informações"/>
+              <SpanMoreItens></SpanMoreItens>
             </LoadingItem>
           ) : (
             <>
