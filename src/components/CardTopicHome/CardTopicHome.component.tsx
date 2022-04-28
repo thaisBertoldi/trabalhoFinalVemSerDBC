@@ -13,6 +13,7 @@ import { MdSegment, MdDateRange } from "react-icons/md";
 import { GrMoney } from "react-icons/gr";
 import { ColorEnum, StatusEnum } from "../../enums/StatusEnum";
 import { TopicComponentDTO } from "../../models/TopicDTO";
+import { TYPE_USERS } from "../../constants";
 
 const CardTopicHome = ({item, user, setOpenModalQuotation, setOpenModalAddQuotation,  setOpenModalItens}: TopicComponentDTO) =>  {
   return (
@@ -40,7 +41,7 @@ const CardTopicHome = ({item, user, setOpenModalQuotation, setOpenModalAddQuotat
           <BiDollarCircle /> Visualizar cotações{" "}
         </ButtonCard>
         { 
-          user.profile === "BUYER" && (
+          user.profile === TYPE_USERS.BUYER && (
             <ButtonCard
               onClick={ () => setOpenModalAddQuotation({ open: true, id: item.topicId }) }>
               <BiAddToQueue /> Adicionar cotação{" "}

@@ -30,7 +30,7 @@ import { imgConverter, maskMoney } from "../../utils/utils";
 import { useNavigate } from "react-router-dom";
 import { isLoggedDTO } from "../../models/UserDTO";
 import { FaTrashAlt } from "react-icons/fa";
-import {SUPPORTED_FORMATS, FILE_SIZE} from '../../constants'
+import {SUPPORTED_FORMATS, FILE_SIZE, TYPE_USERS} from '../../constants'
 
 const RequestPurchase = ({
   user,
@@ -44,7 +44,7 @@ const RequestPurchase = ({
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user.profile !== "COLLABORATOR") {
+    if (user.profile !== TYPE_USERS.COLAB) {
       navigate("/");
     }
   }, [user]);

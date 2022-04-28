@@ -21,6 +21,7 @@ import { ModalDTO } from "../../models/ModalsDTO";
 import { IconSearch } from "../../global.style";
 import api from "../../service/api";
 import { TopicDTO } from "../../models/TopicDTO";
+import { ENDPOINT_TOPICS, TYPE_USERS } from "../../constants";
 
 const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   const navigate = useNavigate();
@@ -57,7 +58,7 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
     try {
       setPage(0);
       const { data } = await api.get(
-        `/main-page/topics?page=${pageSearch}&title=${inputSearch}`
+        `${ENDPOINT_TOPICS.GET_ALL}=${pageSearch}&title=${inputSearch}`
       );
       setListSearched(data.content);
       setAllPagesSearch(data.totalPages);
@@ -68,13 +69,13 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   };
 
   const getDescriptionTopic = () => {
-    if (user.profile === "COLLABORATOR") {
+    if (user.profile === TYPE_USERS.COLAB) {
       setDescriptionTopic("Seus tópicos");
     }
-    if (user.profile === "MANAGER" || user.profile === "FINANCIER") {
+    if (user.profile === TYPE_USERS.MANAGER || user.profile === TYPE_USERS.FINANCIER) {
       setDescriptionTopic("Tópicos a aprovar");
     }
-    if(user.profile === "USER") {
+    if(user.profile === TYPE_USERS.USER) {
       setDescriptionTopic("Aguarde o administrador registrar seu perfil de usuário.")
     }
   };
