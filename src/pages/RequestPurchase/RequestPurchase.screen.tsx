@@ -233,7 +233,6 @@ const RequestPurchase = ({
               <tbody key={index}>
                 <tr>
                   <TdCustom>
-                    {" "}
                     <img
                       src={`data:image/jpeg;base64,${item.file}`}
                       alt="imagem do item"
@@ -243,7 +242,6 @@ const RequestPurchase = ({
                   <TdCustom>{item.description}</TdCustom>
                   <TdCustom>R$ {item.value}</TdCustom>
                   <td>
-                    {" "}
                     <FaTrashAlt
                       onClick={() =>
                         handleDeleteItem(item.itemId, setArrayItens, arrayItens)
