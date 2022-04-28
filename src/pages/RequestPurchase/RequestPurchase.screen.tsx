@@ -22,10 +22,8 @@ import {
   ContainerRequest,
   ContainerRequestForm,
   DivItens,
-  TdCustom,
+  DivTopItens,
   TextAreaCustom,
-  ThCustom,
-  THeadCustom,
 } from "./RequestPurchase.style";
 import { Theme } from "../../theme";
 
@@ -210,46 +208,29 @@ const RequestPurchase = ({
           )}
         </ContainerRequestForm>
 
-        {arrayItens.length > 0 && (
+        {
+          arrayItens.length > 0 && (
           <DivItens>
-            <table>
-              <THeadCustom>
-                <tr>
-                  <ThCustom scope="col">Imagem</ThCustom>
-                  <ThCustom scope="col">Nome</ThCustom>
-                  <ThCustom scope="col">Descricao</ThCustom>
-                  <ThCustom scope="col">Valor</ThCustom>
-                </tr>
-              </THeadCustom>
-              {arrayItens.map((item, index) => (
-                <tbody key={index}>
-                  <tr>
-                    <TdCustom>
-                      <img
-                        src={`data:image;base64,${item.file}`}
-                        alt="imagem do item"
-                      />
-                    </TdCustom>
-                    <TdCustom>{item.itemName}</TdCustom>
-                    <TdCustom>{item.description}</TdCustom>
-                    <TdCustom>R$ {item.value}</TdCustom>
-                    <td>
-                      <FaTrashAlt
-                        onClick={() =>
-                          handleDeleteItem(
-                            item.itemId,
-                            setArrayItens,
-                            arrayItens
-                          )
-                        }
-                      />
-                    </td>
-                  </tr>
-                </tbody>
-              ))}
-            </table>
+            <DivTopItens>
+              <span> Imagem </span>
+              <span> Nome </span>
+              <span> Valor </span>
+              <span> Ações </span>
+            </DivTopItens>
+            {
+              arrayItens.map((item, index) => (
+                <DivTopItens key={index}>
+                  <img src={`data:image;base64,${item.file}`} alt="item" />
+                  <p>{item.itemName}</p>
+                  
+                  <p>R$ {item.value}</p>
+                  <FaTrashAlt onClick={() => handleDeleteItem(item.itemId, setArrayItens, arrayItens)} />
+                </DivTopItens>
+              ))
+            }
           </DivItens>
-        )}
+          )
+        } 
       </ContainerRequest>
     </Container>
   );

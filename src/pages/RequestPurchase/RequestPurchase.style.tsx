@@ -58,6 +58,7 @@ export const TextAreaCustom = styled.textarea`
 export const DivItens = styled.div`
   width: 60%;
   display: flex;
+  flex-direction: column;
   align-items: center;
 
   background-color: #fff;
@@ -75,21 +76,26 @@ export const DivItens = styled.div`
   }
 `;
 
-export const THeadCustom = styled.thead`
-  background-color: ${Theme.color.grayDark};
-  color: ${Theme.color.white};
-`;
+export const DivTopItens = styled.div`
+  width: 100%;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 18% 60% repeat(2, 10%);
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e6e6e6;
 
-export const ThCustom = styled.th`
-  border: 2px solid gray;
-  background-clip: padding-box;
-`;
+  img, p {
+    margin-top: 20px;
+  }
 
-export const TdCustom = styled.td`
-  border: 1px solid gray;
-  padding: 5px;
-  max-width: 25%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  background-color: #d8d8d85c;
+  @media (max-width: 1020px) {
+    grid-template-columns: 22% 50% repeat(2, 10%);
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 50% 30% 20%;
+    img, span:first-child {
+      display: none;
+    }
+  }
 `;
