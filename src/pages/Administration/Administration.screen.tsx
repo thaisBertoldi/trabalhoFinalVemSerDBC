@@ -134,7 +134,7 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
                       formik.values.type,
                       page,
                       setallPagesPrincipal,
-                      setUserSearch,
+                      setUserSearch
                     )
                   }
                   key={user.userId}
