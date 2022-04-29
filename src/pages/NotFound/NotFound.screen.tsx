@@ -27,7 +27,7 @@ const NotFound = () => {
       <ContainerNotFound>
         <img src={notFound} alt="página não encontrada" />
         <MessageH2>
-          Retorne para a <Link to="/"><Btn width={'200px'} color={'#588104'}>página principal</Btn></Link> ou aguarde para
+          Retorne para a <Link to={hasUser.profile === 'ADMINISTRATOR' ? "/administration" : "/"}><Btn width={'200px'} color={'#588104'}>página principal</Btn></Link> ou aguarde para
           ser redirecionado
         </MessageH2>
       </ContainerNotFound>
