@@ -149,10 +149,9 @@ export const Paragraph = styled.p`
   font-size: ${Theme.fontSize};
   color: ${Theme.color.white};
   text-align: center;
-`;
 
-export const LinkCustom = styled.div`
-  list-style: none;
+  a {
+    list-style: none;
   text-decoration: none;
   background: radial-gradient(circle, #6dd1ff 20%, #1c91f7 100%);
   color: black;
@@ -160,7 +159,6 @@ export const LinkCustom = styled.div`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
-  a {
     list-style: none;
     text-decoration: none;
   }

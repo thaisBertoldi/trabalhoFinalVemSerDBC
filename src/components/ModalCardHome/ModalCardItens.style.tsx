@@ -33,8 +33,8 @@ export const Modal = styled.div`
 
 export const CardItem = styled.div`
   display: grid;
-  gap: 10px;
   grid-template-columns: auto auto auto auto;
+  gap: 10px;
   padding: 10px;
   border-bottom: 1px solid #eee;
   align-items: center;
@@ -49,6 +49,10 @@ export const CardItem = styled.div`
   }
   :nth-child(even) {
     background-color:#E8E8E8;
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: auto;
   }
 `;
 export const BtnClose = styled.button`

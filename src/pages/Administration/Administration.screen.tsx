@@ -64,8 +64,6 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
     onSubmit: (values) => {},
   });
 
-  console.log(allUsers);
-
   return (
     <Container>
       <CenterCustom>

@@ -11,7 +11,6 @@ import {
   ContainerTitle,
   DivErrorYup,
   Input,
-  LinkCustom,
   Paragraph,
   Title,
 } from "../../global.style";
@@ -109,13 +108,9 @@ const Login = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
               <Btn width="100%" type="submit" color={Theme.color.primary}>
                 Submit
               </Btn>
-
-              <Paragraph>
-                Não possui uma conta?
-                <LinkCustom>
-                  <Link to="/register">Registrar</Link>
-                </LinkCustom>
-              </Paragraph>
+              
+              <Paragraph> Não possui uma conta? <Link to="/register">Registrar</Link> </Paragraph>
+              
             </DivInputsLogin>
           </form>
         </ContainerGetInfo>
