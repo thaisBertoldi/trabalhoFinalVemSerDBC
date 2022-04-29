@@ -94,18 +94,14 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
       );
     }
   };
-
-  //Teste para vercel
-  useEffect( () => {
+  useEffect(() => {
     const hasToken:string | any = localStorage.getItem('token');
     const User = JSON.parse(hasToken);
     if(User?.token) {
       setLogin(dispatch, User)
     }
-  },[user] )
-  //Teste para vercel
 
-  useEffect(() => {
+
     redirectToLogin(navigate);
     redirectAdmin(navigate, user.profile);
     getDescriptionTopic();
