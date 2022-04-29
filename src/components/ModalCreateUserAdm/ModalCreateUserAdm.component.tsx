@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import Notiflix, { Loading } from "notiflix";
 import { AiFillCloseCircle } from "react-icons/ai";
-import { ContainerModal } from "../ModalBuyer/ModalBuyer.style";
+import { ContainerModal } from "../globalStyleComponents.style";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import {
   Btn,

@@ -12,7 +12,6 @@ export const handleLogin = async (values: LoginDTO, dispatch: AppDispatch, navig
     setLogin(dispatch, data);
     navigate('/');
   } catch (error: any) {
-    console.log(error.response.data)
     Notiflix.Notify.failure(
       `Sinto muito, mas nao foi possivel acessar a api. ${error.response.data.message}`
     );

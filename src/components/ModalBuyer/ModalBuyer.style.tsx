@@ -1,18 +1,5 @@
 import styled from 'styled-components';
 
-export const ContainerModal = styled.div`
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  position: fixed;
-  left: 0;
-  bottom: 0;
-`;
 
 export const Modal = styled.div`
   width: 40%;
@@ -58,21 +45,4 @@ export const ButtonCard = styled.button`
   @media (max-width: 580px) {
     width: 150px;
   } 
-`;
-
-export const BtnClose = styled.button`
-  width: 25px;
-  height: 25px;
-  margin-left: 95%;
-  
-  font-size: 25px;
-
-  background-color: transparent;
-  outline: none;
-  border: none;
-  cursor: pointer;
-  
-  @media (max-width: 840px) {
-    margin-left: 90%;
-  }
 `;

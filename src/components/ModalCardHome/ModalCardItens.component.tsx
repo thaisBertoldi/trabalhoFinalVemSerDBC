@@ -3,10 +3,8 @@ import { ENDPOINT_TOPICS } from "../../constants";
 import api from "../../service/api";
 import {
   CardItem,
-  ContainerModal,
-  Modal,
-  BtnClose,
 } from "./ModalCardItens.style";
+import { ContainerModal, BtnClose, Modal } from '../globalStyleComponents.style';
 import { AiFillCloseCircle } from "react-icons/ai";
 import { ItensInTopicDTO, ModalComponentDTO } from "../../models/ModalsDTO";
 

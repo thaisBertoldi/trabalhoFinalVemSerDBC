@@ -2,7 +2,6 @@ import { BsTrash } from "react-icons/bs";
 import styled from "styled-components";
 import { Theme } from "../../theme";
 
-
 export const ContainerCard = styled.div`
   display: flex;
   flex-direction: column;

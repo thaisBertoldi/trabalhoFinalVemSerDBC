@@ -18,13 +18,13 @@ import { RootState } from "../../store";
 import {
   BtnClose,
   ContainerModal,
-} from "../ModalBuyer/ModalBuyer.style";
+  Modal
+} from "../globalStyleComponents.style"
 import {
   TopModal,
   DivQuotations,
   DivButtons,
   BtnModalQuotation,
-  Modal
 } from "./ModalQuotation.style";
 
 const ModalQuotation = ({ user, onClick, id }: ModalQuotationDTO) => {

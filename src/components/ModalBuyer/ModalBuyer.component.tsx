@@ -2,7 +2,8 @@ import { useFormik } from 'formik';
 import * as Yup from "yup";
 
 import { AiFillCloseCircle } from "react-icons/ai";
-import { ContainerModal, Modal, BtnClose, ButtonCard } from './ModalBuyer.style';
+import { Modal, ButtonCard } from './ModalBuyer.style';
+import { ContainerModal, BtnClose } from '../globalStyleComponents.style';
 import { InputForm } from '../../global.style';
 import { Theme } from "../../theme";
 import { maskMoney, removeMaskMoney } from '../../utils/utils';
