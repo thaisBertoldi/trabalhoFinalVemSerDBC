@@ -1,4 +1,3 @@
-import * as Yup from "yup";
 import PasswordStrengthBar from "react-password-strength-bar";
 import { useFormik } from "formik";
 import React, { useState, useEffect } from "react";
@@ -18,7 +17,6 @@ import {
   DivInputFile,
 } from "../../global.style";
 import { DivEye, DivInputsLogin, DivLogo } from "../Login/Login.style";
-import { DivLabelFile } from "./Register.style";
 
 import { isLoggedDTO, RegisterDTO } from "../../models/UserDTO";
 import { handleRegister } from "../../store/action/authActions";

@@ -1,5 +1,4 @@
 import { useFormik } from "formik";
-import * as Yup from "yup";
 import Notiflix, { Loading } from "notiflix";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { ContainerModal } from "../ModalBuyer/ModalBuyer.style";

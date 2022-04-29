@@ -1,4 +1,3 @@
-import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,7 +6,6 @@ import Logo from "../../components/Logo/Logo";
 import { connect, DispatchProp } from "react-redux";
 import {
   Btn,
-  Container,
   ContainerGetInfo,
   ContainerPrincipal,
   ContainerTitle,
@@ -25,7 +23,6 @@ import { hasLogin } from "../../utils/utils";
 import { mySchemaLogin } from "../../utils/yupValidations";
 import { RootState } from "../../store";
 import { isLoggedDTO, UsersAdmDTO } from "../../models/UserDTO";
-import { getAllUsers } from "../../store/action/adminActions";
 
 const Login = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   const navigate = useNavigate();
@@ -33,24 +30,10 @@ const Login = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   const [showPassword, setShowPassword] = useState<boolean>(true);
   const [hasUserName, setHasUserName] = useState<boolean>(true);
   const [allUsers, setAllUsers] = useState<Array<UsersAdmDTO>>([]);
-  // const [page, setPage] = useState<number>(0);
 
   useEffect(() => {
     hasLogin(navigate);
-    // getAllUsers(setAllUsers, page);
   }, []);
-
-  // const verificationUsername = (username: string) => {
-  //   console.log(allUsers)
-  //   const userFilter = allUsers.filter((user: UsersAdmDTO) => {
-  //     return user.username.match(username);
-  //   });
-  //   if (userFilter.length !== 0) {
-  //     setHasUserName(false);
-  //   } else {
-  //     setHasUserName(true);
-  //   }
-  // };
 
   const formik = useFormik({
     initialValues: {
@@ -88,7 +71,6 @@ const Login = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
                 name="username"
                 type="text"
                 onChange={formik.handleChange}
-                // onBlur={(event) => verificationUsername(event.target.value)}
                 value={formik.values.username}
               />
               {formik.errors.username && formik.touched.username ? (

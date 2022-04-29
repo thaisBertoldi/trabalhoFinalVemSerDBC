@@ -35,9 +35,6 @@ export const CardItemValueName = styled.div`
   p {
     margin: 0;
   }
-  /* justify-content: space-between;
-  align-items: center;
-  max-width: 80%; */
 `;
 
 export const SpanMoreItens = styled.span`

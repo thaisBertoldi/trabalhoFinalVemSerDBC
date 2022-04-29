@@ -19,7 +19,7 @@ const NotFound = () => {
       } else {
         navigate("/")
       }
-    }, 10000);
+    }, 3000);
   }, []);
 
   return (

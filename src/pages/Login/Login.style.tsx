@@ -20,7 +20,6 @@ export const DivInputsLogin = styled.div`
 `;
 
 export const DivEye = styled.div`
-  /* font-size: 25px; */
   position: absolute;
   right: 30px;
   bottom: 40%;

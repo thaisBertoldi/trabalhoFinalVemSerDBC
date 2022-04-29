@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { connect, DispatchProp } from 'react-redux';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { setLogin } from "./store/action/authActions";
 
-import { Header, Footer } from './components';
+import { Header } from './components';
 import { Login, Register, Home, RequestPurchase, Administration, NotFound } from './pages';
 import { isLoggedDTO } from './models/UserDTO';
 import { RootState } from './store';
@@ -30,7 +30,6 @@ const Routers = ({user, dispatch}: isLoggedDTO & DispatchProp) => {
           <Route path='/request-purchase' element={<RequestPurchase />} />
           <Route path='/administration' element={<Administration />} />
         </Routes>
-      {/* <Footer /> */}
     </BrowserRouter>
   );
 };

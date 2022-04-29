@@ -1,6 +1,5 @@
 import { isLoggedDTO } from "../models/UserDTO";
 
-
 export const hasLogin = (navigate: Function) => {
   const hasToken: isLoggedDTO | any = localStorage.getItem("token");
   const User = JSON.parse(hasToken);

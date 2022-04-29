@@ -17,26 +17,6 @@ export const ContainerRequestForm = styled.div`
   background-color: #fff;
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-
-  /* input[type="file"] {
-    display: none;
-  }
-
-  label {
-    padding: 20px 10px;
-    margin-top: 20px;
-    width: 200px;
-    background: #333;
-    color:#FFF;
-    text-transform: uppercase;
-    display: block;
-    margin-top: 10OPX;
-    font-family: Arial, Helvetica, sans-serif;
-    text-align: center;
-    cursor: pointer;
-    transition: .5s;
-    border: 1px solid #333;
-  } */
 `;
 
 export const InputLabelDiv = styled.div`
@@ -45,7 +25,6 @@ export const InputLabelDiv = styled.div`
 
 export const TextAreaCustom = styled.textarea`
   width: 100%;
-  /* height: 150px; */
   margin-top: 15px;
   padding: 12px 20px;
   box-sizing: border-box;

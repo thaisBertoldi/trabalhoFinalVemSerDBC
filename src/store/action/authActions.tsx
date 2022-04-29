@@ -11,9 +11,10 @@ export const handleLogin = async (values: LoginDTO, dispatch: AppDispatch, navig
     const {data} = await api.post(ENDPOINT_AUTH.LOGIN, values);
     setLogin(dispatch, data);
     navigate('/');
-  } catch (error) {
+  } catch (error: any) {
+    console.log(error.response.data.message)
     Notiflix.Notify.failure(
-      `Sinto muito, mas nao foi possivel acessar a api. ${error}`
+      `Sinto muito, mas nao foi possivel acessar a api. ${error.response.data.message}`
     );
   } finally {
     Loading.remove();
