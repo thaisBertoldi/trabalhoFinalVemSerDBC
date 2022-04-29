@@ -120,7 +120,7 @@ const ModalQuotation = ({ user, onClick, id }: ModalQuotationDTO) => {
               <p> R$: {item.quotationPrice}</p>
               <DivButtons>
                 {
-                    valuesQuotation.length <= 2 && user.profile === TYPE_USERS.MANAGER ? (
+                    valuesQuotation.length < 2 && user.profile === TYPE_USERS.MANAGER ? (
                       <span>Ainda não há cotações suficientes.</span>
                     ) : (
                       <>
