@@ -1,3 +1,4 @@
+import Notiflix from "notiflix";
 import { isLoggedDTO } from "../models/UserDTO";
 
 export const hasLogin = (navigate: Function) => {
@@ -45,6 +46,12 @@ export const imgConverter = (
 ) => {
   const target = event.target as HTMLInputElement;
   const profileImage = target.files?.[0];
+  console.log(profileImage);
+  if(profileImage) {
+    Notiflix.Notify.success(`Imagem enviada ${profileImage?.name}`);
+  } else {
+    Notiflix.Notify.warning(`Imagem não recebida`);
+  }
   return formik(value, profileImage);
 };
 
