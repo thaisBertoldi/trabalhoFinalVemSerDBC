@@ -183,7 +183,7 @@ const ModalCreateUserAdm = ({ onClick }: ModalComponentDTO) => {
           )}
 
           <DivInputFile>
-            <span>Escolha um arquivo</span>
+            <span>Escolha uma imagem</span>
             <input
               width={"100%"}
               height={"40px"}

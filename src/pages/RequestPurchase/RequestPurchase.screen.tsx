@@ -105,7 +105,7 @@ const RequestPurchase = ({
                 />
                 {formikTopic.errors.title && formikTopic.touched.title ? (
                   <DivErrorYup>{formikTopic.errors.title}</DivErrorYup>
-                ) : null}
+                ) :  <DivErrorYup></DivErrorYup>}
                 
                 <BtnForm
                   type="submit"
@@ -135,7 +135,7 @@ const RequestPurchase = ({
               />
               {formik.errors.itemName && formik.touched.itemName ? (
                 <DivErrorYup>{formik.errors.itemName}</DivErrorYup>
-              ) : null}
+              ) :  <DivErrorYup></DivErrorYup>}
 
               <TextAreaCustom
                 placeholder="Descrição"
@@ -149,7 +149,7 @@ const RequestPurchase = ({
               />
               {formik.errors.description && formik.touched.description ? (
                 <DivErrorYup>{formik.errors.description}</DivErrorYup>
-              ) : null}
+              ) :  <DivErrorYup></DivErrorYup>}
 
               <InputForm
                 placeholder="Valor do item"
@@ -165,10 +165,10 @@ const RequestPurchase = ({
               />
               {formik.errors.value && formik.touched.value ? (
                 <DivErrorYup>{formik.errors.value}</DivErrorYup>
-              ) : null}
+              ) :  <DivErrorYup></DivErrorYup>}
 
               <DivInputFile>
-                <span>Escolha um arquivo</span>
+                <span>Escolha uma imagem</span>
                 <input
                   width={"100%"}
                   height={"40px"}
@@ -182,7 +182,7 @@ const RequestPurchase = ({
               </DivInputFile>
               {formik.errors.file && formik.touched.file ? (
                 <DivErrorYup>{formik.errors.file}</DivErrorYup>
-              ) : null}
+              ) :  <DivErrorYup></DivErrorYup>}
 
               <CenterCustom>
                 <BtnForm width={"300px"} color={"#25292a"} type="submit">

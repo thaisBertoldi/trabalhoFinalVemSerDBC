@@ -157,7 +157,7 @@ const Register = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
             ) : <DivErrorYup></DivErrorYup>}
 
             <DivInputFile>
-              <span>Escolha um arquivo</span>
+              <span>Escolha uma imagem</span>
               <input
                 width={"100%"}
                 height={"40px"}
