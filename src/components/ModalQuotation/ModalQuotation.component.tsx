@@ -18,13 +18,13 @@ import { RootState } from "../../store";
 import {
   BtnClose,
   ContainerModal,
-  Modal,
 } from "../ModalBuyer/ModalBuyer.style";
 import {
   TopModal,
   DivQuotations,
   DivButtons,
   BtnModalQuotation,
+  Modal
 } from "./ModalQuotation.style";
 
 const ModalQuotation = ({ user, onClick, id }: ModalQuotationDTO) => {
@@ -100,8 +100,7 @@ const ModalQuotation = ({ user, onClick, id }: ModalQuotationDTO) => {
     <ContainerModal>
       <Modal>
         <BtnClose onClick={onClick}>
-          {" "}
-          <AiFillCloseCircle />{" "}
+          <AiFillCloseCircle />
         </BtnClose>
         <TopModal>
           <h1>Cotações </h1>
@@ -110,8 +109,7 @@ const ModalQuotation = ({ user, onClick, id }: ModalQuotationDTO) => {
               color={"#f44336"}
               onClick={() => reproveAllQuotations()}
             >
-              {" "}
-              Reprovar todas as cotações{" "}
+              Reprovar todas as cotações
             </BtnModalQuotation>
           )}
         </TopModal>
@@ -119,38 +117,35 @@ const ModalQuotation = ({ user, onClick, id }: ModalQuotationDTO) => {
         {valuesQuotation.length > 0 ? (
           valuesQuotation.map((item: ModalQuotationValuesDTO) => (
             <DivQuotations key={item.quotationId}>
-              <p> Status da cotação: {StatusEnum[item.quotationStatus]}</p>
+              <p> Status: {StatusEnum[item.quotationStatus]}</p>
               <p> R$: {item.quotationPrice}</p>
               <DivButtons>
-                {valuesQuotation.length >= 2 ? (
-                  <>
-                    {(user.profile === TYPE_USERS.MANAGER ||
-                      user.profile === TYPE_USERS.FINANCIER) && (
-                      <BtnModalQuotation
-                        color={"#04a96d"}
-                        onClick={() => {
-                          user.profile === TYPE_USERS.MANAGER
-                            ? handleAproveQuotation(item.quotationId)
-                            : handleAproveByFinancier(true);
-                        }}
-                      >
-                        {" "}
-                        Aprovar{" "}
-                      </BtnModalQuotation>
-                    )}
-                    {user.profile === TYPE_USERS.FINANCIER && (
-                      <BtnModalQuotation
-                        color={"#f44336"}
-                        onClick={() => handleAproveByFinancier(false)}
-                      >
-                        {" "}
-                        Reprovar{" "}
-                      </BtnModalQuotation>
-                    )}
-                  </>
-                ) : (
-                  <span>Ainda não há cotações suficientes.</span>
-                )}
+                {
+                    valuesQuotation.length <= 2 && user.profile === TYPE_USERS.MANAGER ? (
+                      <span>Ainda não há cotações suficientes.</span>
+                    ) : (
+                      <>
+                      {
+                        (user.profile === TYPE_USERS.MANAGER ||
+                        user.profile === TYPE_USERS.FINANCIER) && (
+                        <BtnModalQuotation
+                          color={"#04a96d"}
+                          onClick={() => { user.profile === TYPE_USERS.MANAGER ? handleAproveQuotation(item.quotationId): handleAproveByFinancier(true)}}
+                        >
+                          Aprovar
+                        </BtnModalQuotation>
+                      )}
+                      {user.profile === TYPE_USERS.FINANCIER && (
+                        <BtnModalQuotation
+                          color={"#f44336"}
+                          onClick={() => handleAproveByFinancier(false)}
+                        >
+                          Reprovar
+                        </BtnModalQuotation>
+                      )}
+                    </>
+                    )
+                }
               </DivButtons>
             </DivQuotations>
           ))

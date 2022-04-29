@@ -25,6 +25,10 @@ export const Modal = styled.div`
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   
   overflow-y: scroll;
+
+  @media (max-width: 1024px) {
+    width: 90%;
+  }
 `;
 
 export const CardItem = styled.div`

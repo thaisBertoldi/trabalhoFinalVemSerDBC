@@ -12,6 +12,29 @@ export const DivQuotations = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+
+  @media (max-width: 768px) {
+    p {
+      font-size: 12px;
+    }
+  }
+`;
+
+export const Modal = styled.div`
+  width: 70%;
+  max-height: 80%;
+  margin: 0 auto;
+  
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  
+  overflow-y: scroll;
+
+  @media (max-width: 1024px) {
+    width: 90%;
+  }
 `;
 
 export const DivButtons = styled.div`

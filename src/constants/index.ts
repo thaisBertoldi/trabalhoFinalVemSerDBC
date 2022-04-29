@@ -10,37 +10,37 @@ export const TYPE_USERS = {
 }
 
 export const ENDPOINT_AUTH = {
-  LOGIN: "/auth/login", // p/login
-  SING: "/auth/sign-up", // p/ registrar
+  LOGIN: "/auth/login", 
+  SING: "/auth/sign-up",
 };
 
 export const ENDPOINT_TOPICS = {
-  GET_ALL: '/main-page/topics?page', // p/ mostrar todos os tópicos
-  CREATE_TOPIC : '/contributor/create-topic', // p/ criar um tópico
-  CREATE_ITEM_TOPIC: '/contributor/create-item', // p/ criar um item no tópico  
-  UPDATE_STATUS: "/contributor/update-status", // p/ finalizar o tópico e ele fechar com o status aberto
+  GET_ALL: '/main-page/topics?page',
+  CREATE_TOPIC : '/contributor/create-topic',
+  CREATE_ITEM_TOPIC: '/contributor/create-item',
+  UPDATE_STATUS: "/contributor/update-status",
   GET_ITEMS_TOPIC: '/main-page/items',
-  DELETE_ITEM: "/contributor/delete", // p/ deletar o item antes de encerrar o tópico
+  DELETE_ITEM: "/contributor/delete",
   DELETE_TOPIC: "/contributor/delete-topic"
 }
 
 export const ENDPOINT_ADMIN = {
-  GET_ALL_USERS: "/admin/adm-get-all-users?page", // p/ pegar todos os usuarios
-  GET_USER: "/admin/adm-get-all-users?", // p/ pegar usuario pesquisado dps do ? fullName=joao&page=0
-  ALTER_PROFILE: "/admin/adm-set-group-user?groups", //p/ alterar o perfil do usuario
-  GET_USER_BY_FULLNAME: "/admin/adm-get-all-users-by-full-name", //p pesquisar o usuario por nome
-  CREATE_PROFILE: "/admin/adm-creat-user", // p/ criar o perfil pelo adm
+  GET_ALL_USERS: "/admin/adm-get-all-users?page",
+  GET_USER: "/admin/adm-get-all-users?",
+  ALTER_PROFILE: "/admin/adm-set-group-user?groups",
+  GET_USER_BY_FULLNAME: "/admin/adm-get-all-users-by-full-name",
+  CREATE_PROFILE: "/admin/adm-creat-user",
 };
 
 export const ENDPOINT_STATUS = {
-  STATUS_FINANCIER: "/financier/update-status", // p/ financeiro aprovar ou reprovar o status do quotation
-  STATUS_MANAGER_APROVE: "/Manager/aproveQuotation", // p/ gestor aprovar o status do quotation
-  STATUS_MANAGER_REPROVE: "/Manager/reproveAllQuotations", //p/ gestor reprovar o status do quotation
+  STATUS_FINANCIER: "/financier/update-status",
+  STATUS_MANAGER_APROVE: "/Manager/aproveQuotation",
+  STATUS_MANAGER_REPROVE: "/Manager/reproveAllQuotations",
 };
 
 export const ENDPOINT_QUOTATION = {
-  MAIN_PAGE_QUOTATION: "/main-page/quotation", // p/ mostrar todas as cotações
-  CREATE_QUOTATION: "/buyer/create", // p/ o comprador criar a cotação
+  MAIN_PAGE_QUOTATION: "/main-page/quotation",
+  CREATE_QUOTATION: "/buyer/create",
 };
 
 export const ENDPOINT_MANAGER = {
