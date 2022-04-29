@@ -91,6 +91,13 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
     }
   };
   useEffect(() => {
+
+    //Teste Vercel
+    if(User?.token) {
+      api.defaults.headers.common['Authorization'] = User?.token;
+    }
+    //Teste Vercel
+
     redirectToLogin(navigate);
     redirectAdmin(navigate, user.profile);
     getDescriptionTopic();
