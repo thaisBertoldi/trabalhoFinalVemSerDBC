@@ -16,6 +16,7 @@ export const DivQuotations = styled.div`
 
 export const DivButtons = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 export const BtnModalQuotation = styled.button`
