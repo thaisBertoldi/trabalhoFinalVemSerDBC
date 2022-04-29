@@ -7,11 +7,22 @@ export const ContainerAll = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
+  @media (max-width: 890px) {
+    width: 90%;
+  }
 `;
 
 export const ContainerNotFound = styled.div`
   display: grid;
   grid-template-columns: 700px 200px;
+
+  @media (max-width: 890px) {
+    grid-template-columns: auto;
+    img {
+      width: 90%;
+    }
+  }
 `;
 
 export const MessageH2 = styled.h2`

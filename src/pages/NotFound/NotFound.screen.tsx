@@ -10,10 +10,10 @@ const NotFound = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setTimeout(() => {
-      redirectToLogin(navigate); 
-      hasLogin(navigate)
-    }, 3000);
+    // setTimeout(() => {
+    //   redirectToLogin(navigate); 
+    //   hasLogin(navigate)
+    // }, 3000);
   }, []);
 
   return (
