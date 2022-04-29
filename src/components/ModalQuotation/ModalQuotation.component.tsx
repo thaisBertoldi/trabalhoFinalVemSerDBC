@@ -1,3 +1,4 @@
+import Notiflix from 'notiflix';
 import { useEffect, useState } from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { connect } from 'react-redux';
@@ -26,8 +27,10 @@ const ModalQuotation = ({user, onClick, id}: ModalQuotationDTO) => {
   const reproveAllQuotations = async () => {
     try {
       const {data} = await api.put(`${ENDPOINT_MANAGER.REPROVE_ALL_QUOTATIONS}/${id}`);
+      Notiflix.Notify.success(`Tópico reprovado.`)
     } catch (error) {
       console.log(error);
+      Notiflix.Notify.failure(`Sinto muito, mas nao foi possível reprovar esse tópico. ${error}`)
     } finally {
       getQuotation(id);
     }
@@ -36,8 +39,10 @@ const ModalQuotation = ({user, onClick, id}: ModalQuotationDTO) => {
   const handleAproveQuotation = async (idQuotation: number) => {
     try {
       const {data} = await api.post(`${ENDPOINT_MANAGER.APROVE_QUOTATION}/${idQuotation}`);
+      Notiflix.Notify.success(`Cotação aprovada.`)
     } catch (error) {
       console.log(error);
+      Notiflix.Notify.failure(`Sinto muito, mas nao foi possível aprovar essa cotação. ${error}`)
     } finally {
       getQuotation(id);
     }
@@ -46,8 +51,10 @@ const ModalQuotation = ({user, onClick, id}: ModalQuotationDTO) => {
   const handleAproveByFinancier = async (status: boolean) => {
     try {
       const { data } = await api.put(`${ENDPOINT_FINANCIER.UPDATE_STATUS}/${id}/${status}`);
+      Notiflix.Notify.success(`Cotação aprovada.`)
     } catch (error) {
       console.log(error);
+      Notiflix.Notify.failure(`Sinto muito, mas nao foi possível aprovar essa cotação. ${error}`)
     }
   }
   

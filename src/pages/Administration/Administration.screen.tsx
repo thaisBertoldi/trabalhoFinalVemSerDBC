@@ -8,6 +8,7 @@ import {
   Container,
   InputForm,
   IconSearch,
+  TitleNotFoundInfo,
 } from "../../global.style";
 import { isLoggedDTO, UsersAdmDTO } from "../../models/UserDTO";
 import { RootState } from "../../store";
@@ -91,89 +92,87 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
       </CenterCustom>
 
       <ContainerAdmin>
-        {
-          isSearchUser ? (
-            userFind?.length > 0 ? (
-              userFind.map((user: UsersAdmDTO) => (
-                <form
-                  onSubmit={(event) =>
-                    handleProfile(
-                      setAllUsers,
-                      formik.resetForm,
-                      event,
-                      user.userId,
-                      formik.values.type,
-                      page,
-                      setallPagesPrincipal, 
-                      setUserSearch
-                    )
-                  }
-                  key={user.userId}
-                >
-                  <CardAdm
-                    imgUser={user?.image}
-                    fullName={user?.fullName}
-                    group={user?.groups}
-                    formik={formik}
-                  />
-                </form>
-              ))
-            ) : (
-              <h1>Nenhum Usuário encontrado</h1>
-            )
+        {isSearchUser ? (
+          userFind?.length > 0 ? (
+            userFind.map((user: UsersAdmDTO) => (
+              <form
+                onSubmit={(event) =>
+                  handleProfile(
+                    setAllUsers,
+                    formik.resetForm,
+                    event,
+                    user.userId,
+                    formik.values.type,
+                    page,
+                    setallPagesPrincipal,
+                    setUserSearch
+                  )
+                }
+                key={user.userId}
+              >
+                <CardAdm
+                  imgUser={user?.image}
+                  fullName={user?.fullName}
+                  group={user?.groups}
+                  formik={formik}
+                />
+              </form>
+            ))
           ) : (
-            allUsers?.length > 0 ? (
-              allUsers?.map((user: UsersAdmDTO) => (
-                <form
-                  onSubmit={(event) =>
-                    handleProfile(
-                      setAllUsers,
-                      formik.resetForm,
-                      event,
-                      user.userId,
-                      formik.values.type,
-                      page,
-                      setallPagesPrincipal,
-                      setUserSearch
-                    )
-                  }
-                  key={user.userId}
-                >
-                  <CardAdm
-                    imgUser={user?.image}
-                    fullName={user?.fullName}
-                    group={user?.groups}
-                    formik={formik}
-                  />
-                </form>
-              ))
-            ) : (
-              <h1>Nenhum Usuário encontrado</h1>
-            )
+            <CenterCustom>
+              <TitleNotFoundInfo>Nenhum tópico encontrado</TitleNotFoundInfo>
+            </CenterCustom>
           )
-        }
+        ) : allUsers?.length > 0 ? (
+          allUsers?.map((user: UsersAdmDTO) => (
+            <form
+              onSubmit={(event) =>
+                handleProfile(
+                  setAllUsers,
+                  formik.resetForm,
+                  event,
+                  user.userId,
+                  formik.values.type,
+                  page,
+                  setallPagesPrincipal,
+                  setUserSearch
+                )
+              }
+              key={user.userId}
+            >
+              <CardAdm
+                imgUser={user?.image}
+                fullName={user?.fullName}
+                group={user?.groups}
+                formik={formik}
+              />
+            </form>
+          ))
+        ) : (
+          <CenterCustom>
+            <TitleNotFoundInfo>Nenhum tópico encontrado</TitleNotFoundInfo>
+          </CenterCustom>
+        )}
 
         {isAddUser && (
           <ModalCreateUserAdm onClick={() => setIsAddUser(false)} />
         )}
       </ContainerAdmin>
-      {!isSearchUser ? (
-        allUsers?.length > 0 && (
-          <Pagination
-            page={page}
-            onPageChange={(index: number) => setPage(index)}
-            allPages={allPagesPrincipal}
-          />
-        )
-      ) : (
-          userFind?.length > 0 && (
-          <Pagination
-            page={pageFind}
-            onPageChange={(index: number) => setPageFind(index)}
-            allPages={allPagesSearch}
-          />
-        )
-      )}
+      {!isSearchUser
+        ? allUsers?.length > 0 && (
+            <Pagination
+              page={page}
+              onPageChange={(index: number) => setPage(index)}
+              allPages={allPagesPrincipal}
+            />
+          )
+        : userFind?.length > 0 && (
+            <Pagination
+              page={pageFind}
+              onPageChange={(index: number) => setPageFind(index)}
+              allPages={allPagesSearch}
+            />
+          )}
     </Container>
   );
 };

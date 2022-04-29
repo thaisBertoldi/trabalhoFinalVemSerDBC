@@ -42,6 +42,11 @@ export const Title = styled.h1<{ size: string; spacing: string }>`
   letter-spacing: ${(props) => props.spacing};
 `;
 
+export const TitleNotFoundInfo = styled.h1`
+  opacity: 0.5;
+  padding-left: 50px;
+`;
+
 export const ContainerGetInfo = styled.div`
   width: 600px;
   height: 700px;

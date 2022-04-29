@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
 import { connect, DispatchProp } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { CenterCustom, Container, InputForm, Title } from "../../global.style";
+import {
+  CenterCustom,
+  Container,
+  InputForm,
+  Title,
+  TitleNotFoundInfo,
+} from "../../global.style";
 import { isLoggedDTO } from "../../models/UserDTO";
 
 import { RootState } from "../../store";
@@ -72,11 +78,16 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
     if (user.profile === TYPE_USERS.COLAB) {
       setDescriptionTopic("Seus tópicos");
     }
-    if (user.profile === TYPE_USERS.MANAGER || user.profile === TYPE_USERS.FINANCIER) {
+    if (
+      user.profile === TYPE_USERS.MANAGER ||
+      user.profile === TYPE_USERS.FINANCIER
+    ) {
       setDescriptionTopic("Tópicos a aprovar");
     }
-    if(user.profile === TYPE_USERS.USER) {
-      setDescriptionTopic("Aguarde o administrador registrar seu perfil de usuário.")
+    if (user.profile === TYPE_USERS.USER) {
+      setDescriptionTopic(
+        "Aguarde o administrador registrar seu perfil de usuário."
+      );
     }
   };
 
@@ -127,7 +138,9 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
               />
             ))
           ) : (
-            <h1>Nenhum tópico encontrado</h1>
+            <CenterCustom>
+              <TitleNotFoundInfo>Nenhum tópico encontrado</TitleNotFoundInfo>
+            </CenterCustom>
           )
         ) : listSearched?.length > 0 ? (
           listSearched?.map((item: TopicDTO) => (
@@ -140,7 +153,9 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
             />
           ))
         ) : (
-          <h1>Nenhum tópico encontrado</h1>
+          <CenterCustom>
+            <TitleNotFoundInfo>Nenhum tópico encontrado</TitleNotFoundInfo>
+          </CenterCustom>
         )}
 
         {OpenModalItens.open && (
