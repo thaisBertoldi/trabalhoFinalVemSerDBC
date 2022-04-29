@@ -160,14 +160,14 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
         )}
       </ContainerAdmin>
       {!isSearchUser
-        ? allUsers?.length && (
+        ? allUsers?.length > 0 && (
             <Pagination
               page={page}
               onPageChange={(index: number) => setPage(index)}
               allPages={allPagesPrincipal}
             />
           )
-        : userFind?.length && (
+        : userFind?.length > 0 && (
             <Pagination
               page={pageFind}
               onPageChange={(index: number) => setPageFind(index)}
