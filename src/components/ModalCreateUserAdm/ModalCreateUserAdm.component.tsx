@@ -127,7 +127,7 @@ const ModalCreateUserAdm = ({ onClick }: ModalComponentDTO) => {
               <DivErrorYup>{formik.errors.password}</DivErrorYup>
             ) : (
               <DivStrengthBar>
-                {formik.values.password.length > 0 && (
+                {formik.values.password.length && (
                   <PasswordStrengthBar
                     password={formik.values.password}
                     barColors={[

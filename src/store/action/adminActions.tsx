@@ -7,6 +7,7 @@ export const getAllUsers = async (
   setAllUsers: Function,
   page: number,
   setAllPagesPrincipal: Function,
+  setIsSearchUser: Function
 ) => {
   
   try {
@@ -17,6 +18,7 @@ export const getAllUsers = async (
   } catch (error) {
     console.log(error);
   } finally {
+    setIsSearchUser(false);
     Loading.remove();
   }
 };
@@ -46,10 +48,11 @@ export const handleProfile = async (
   page: number,
   setAllPages: Function,
   setUserSearch: Function,
+  setIsSearchUser: Function
 ) => {
   try {
+    event.preventDefault();
     Loading.circle();
-
     const { data } = await api.put(
       `${ENDPOINT_ADMIN.ALTER_PROFILE}=${type}&idUser=${id}`
     );
@@ -59,7 +62,8 @@ export const handleProfile = async (
       `Sinto muito, mas nao foi possivel alterar o perfil desse usuário. ${error}`
     );
   } finally {
-    getAllUsers(setAllUsers, page, setAllPages);
+    getAllUsers(setAllUsers, page, setAllPages, setIsSearchUser);
+    setIsSearchUser(false);
     setUserSearch('');
     Loading.remove();
   }

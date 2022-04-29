@@ -12,13 +12,8 @@ export const ModalAdm = styled.div`
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 
   @media (max-width: 1024px) {
-    width: 70%;
+    width: 60%;
   }
-
-  @media (max-width: 400) {
-    margin-top: 10px;
-  }
-
   form {
     width: 100%;
     margin: 0 auto;
