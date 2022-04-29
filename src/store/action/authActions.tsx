@@ -36,9 +36,9 @@ export const handleRegister = async (values: RegisterDTO, dispatch: AppDispatch,
       `Usuário cadastrado com sucesso.`
     );
     navigate('/login');
-  } catch (error) {
+  } catch (error: any) {
     Notiflix.Notify.failure(
-      `Sinto muito, mas nao foi possivel acessar a api. ${error}`
+      `Sinto muito, mas nao foi possivel acessar a api. ${error.response.message}`
     );
   } finally {
     Loading.remove();

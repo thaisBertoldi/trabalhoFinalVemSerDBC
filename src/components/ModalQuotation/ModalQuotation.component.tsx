@@ -38,8 +38,8 @@ const ModalQuotation = ({ user, onClick, id }: ModalQuotationDTO) => {
         `${ENDPOINT_QUOTATION.MAIN_PAGE_QUOTATION}/${id}`
       );
       setValuesQuotation(data);
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      console.log(error.response.message);
     }
   };
 
@@ -49,9 +49,9 @@ const ModalQuotation = ({ user, onClick, id }: ModalQuotationDTO) => {
         `${ENDPOINT_MANAGER.REPROVE_ALL_QUOTATIONS}/${id}`
       );
       Notiflix.Notify.success(`Tópico reprovado.`);
-    } catch (error) {
+    } catch (error: any) {
       Notiflix.Notify.failure(
-        `Sinto muito, mas nao foi possível reprovar esse tópico. ${error}`
+        `Sinto muito, mas nao foi possível reprovar esse tópico. ${error.response.message}`
       );
     } finally {
       onClick();
@@ -65,10 +65,10 @@ const ModalQuotation = ({ user, onClick, id }: ModalQuotationDTO) => {
         `${ENDPOINT_MANAGER.APROVE_QUOTATION}/${idQuotation}`
       );
       Notiflix.Notify.success(`Cotação aprovada.`);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
       Notiflix.Notify.failure(
-        `Sinto muito, mas nao foi possível aprovar essa cotação. ${error}`
+        `Sinto muito, mas nao foi possível aprovar essa cotação. ${error.response.message}`
       );
     } finally {
       onClick();
@@ -82,9 +82,9 @@ const ModalQuotation = ({ user, onClick, id }: ModalQuotationDTO) => {
         `${ENDPOINT_FINANCIER.UPDATE_STATUS}/${id}/${status}`
       );
       Notiflix.Notify.success(`Cotação aprovada.`);
-    } catch (error) {
+    } catch (error: any) {
       Notiflix.Notify.failure(
-        `Sinto muito, mas nao foi possível aprovar essa cotação. ${error}`
+        `Sinto muito, mas nao foi possível aprovar essa cotação. ${error.response.message}`
       );
     } finally {
       onClick();
