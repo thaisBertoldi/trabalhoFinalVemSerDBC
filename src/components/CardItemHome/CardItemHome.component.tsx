@@ -32,7 +32,7 @@ const CardItemHome = ({ id }: CardItemHomeProps) => {
           <CardItemInfos>
             <CardItemValueName>
               <p>Nome: {listItens[0].itemName.toUpperCase()}</p>
-              <p>R$ {listItens[0].value}</p>
+              <strong><p>R$ {listItens[0].value}</p></strong>
             </CardItemValueName>
             <Desc>{listItens[0].description}</Desc>
           </CardItemInfos>

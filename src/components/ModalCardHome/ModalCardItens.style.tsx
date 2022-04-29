@@ -33,7 +33,8 @@ export const Modal = styled.div`
 
 export const CardItem = styled.div`
   display: grid;
-  grid-template-columns: 200px 200px 200px auto;
+  gap: 10px;
+  grid-template-columns: auto auto auto auto;
   padding: 10px;
   border-bottom: 1px solid #eee;
   align-items: center;

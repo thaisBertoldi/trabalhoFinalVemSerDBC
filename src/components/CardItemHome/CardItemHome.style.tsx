@@ -19,6 +19,7 @@ export const Desc = styled.p`
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  width: 80%;
   -webkit-box-orient: vertical;
 `;
 
@@ -30,8 +31,13 @@ export const CardItemInfos = styled.div`
 
 export const CardItemValueName = styled.div`
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  p {
+    margin: 0;
+  }
+  /* justify-content: space-between;
   align-items: center;
+  max-width: 80%; */
 `;
 
 export const SpanMoreItens = styled.span`

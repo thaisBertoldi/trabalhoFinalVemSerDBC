@@ -143,10 +143,11 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
             </CenterCustom>
           )
         ) : listSearched?.length > 0 ? (
-          listSearched?.map((item: TopicDTO) => (
+          listSearched?.map((item: TopicDTO, index) => (
             <CardTopicHome
               item={item}
               user={user}
+              key={index}
               setOpenModalQuotation={setOpenModalQuotation}
               setOpenModalAddQuotation={setOpenModalAddQuotation}
               setOpenModalItens={setOpenModalItens}
