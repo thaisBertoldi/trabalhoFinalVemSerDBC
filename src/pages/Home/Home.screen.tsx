@@ -29,6 +29,10 @@ import api from "../../service/api";
 import { TopicDTO } from "../../models/TopicDTO";
 import { ENDPOINT_TOPICS, TYPE_USERS } from "../../constants";
 
+//Teste para vercel
+import { setLogin } from "../../store/action/authActions";
+//Teste para vercel
+
 const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   const navigate = useNavigate();
   const hasUser: string | any = localStorage.getItem("token");
@@ -90,6 +94,16 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
       );
     }
   };
+
+  //Teste para vercel
+  useEffect( () => {
+    const hasToken:string | any = localStorage.getItem('token');
+    const User = JSON.parse(hasToken);
+    if(User?.token) {
+      setLogin(dispatch, User)
+    }
+  },[user] )
+  //Teste para vercel
 
   useEffect(() => {
     redirectToLogin(navigate);
