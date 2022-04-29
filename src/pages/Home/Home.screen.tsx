@@ -127,7 +127,7 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
       </DivDescriptionTopic>
       <ContainerAllInfo>
         {!isSearch ? (
-          listTopics.length > 0 ? (
+          listTopics.length ? (
             listTopics?.map((item: TopicDTO) => (
               <CardTopicHome
                 item={item}
@@ -142,7 +142,7 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
               <TitleNotFoundInfo>Nenhum tópico encontrado</TitleNotFoundInfo>
             </CenterCustom>
           )
-        ) : listSearched?.length > 0 ? (
+        ) : listSearched?.length ? (
           listSearched?.map((item: TopicDTO, index) => (
             <CardTopicHome
               item={item}
@@ -180,14 +180,14 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
       </ContainerAllInfo>
       <CenterCustom>
         {!isSearch
-          ? listTopics?.length > 0 && (
+          ? listTopics?.length && (
               <Pagination
                 page={page}
                 onPageChange={(index: number) => setPage(index)}
                 allPages={allPages}
               />
             )
-          : listSearched?.length > 0 && (
+          : listSearched?.length && (
               <Pagination
                 page={pageSearch}
                 onPageChange={(index: number) => setPageSeach(index)}

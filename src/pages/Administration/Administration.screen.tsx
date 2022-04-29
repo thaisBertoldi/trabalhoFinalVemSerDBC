@@ -25,7 +25,6 @@ import {
 } from "../../store/action/adminActions";
 import { TYPE_USERS } from "../../constants";
 
-//tipá-los
 const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   const navigate = useNavigate();
   const [allUsers, setAllUsers] = useState<Array<UsersAdmDTO>>([]);
@@ -45,7 +44,7 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
       navigate("/");
     }
     if (!isSearchUser) {
-      getAllUsers(setAllUsers, page, setallPagesPrincipal);
+      getAllUsers(setAllUsers, page, setallPagesPrincipal, setIsSearchUser);
     }
   }, [page]);
 
@@ -64,6 +63,8 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
     },
     onSubmit: (values) => {},
   });
+
+  console.log(allUsers);
 
   return (
     <Container>
@@ -93,7 +94,7 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
 
       <ContainerAdmin>
         {isSearchUser ? (
-          userFind?.length > 0 ? (
+          userFind?.length ? (
             userFind.map((user: UsersAdmDTO) => (
               <form
                 onSubmit={(event) =>
@@ -105,7 +106,8 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
                     formik.values.type,
                     page,
                     setallPagesPrincipal,
-                    setUserSearch
+                    setUserSearch,
+                    setIsSearchUser
                   )
                 }
                 key={user.userId}
@@ -120,10 +122,10 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
             ))
           ) : (
             <CenterCustom>
-              <TitleNotFoundInfo>Nenhum tópico encontrado</TitleNotFoundInfo>
+              <TitleNotFoundInfo>Nenhum Usuário encontrado</TitleNotFoundInfo>
             </CenterCustom>
           )
-        ) : allUsers?.length > 0 ? (
+        ) : allUsers?.length ? (
           allUsers?.map((user: UsersAdmDTO) => (
             <form
               onSubmit={(event) =>
@@ -135,7 +137,8 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
                   formik.values.type,
                   page,
                   setallPagesPrincipal,
-                  setUserSearch
+                  setUserSearch,
+                  setIsSearchUser
                 )
               }
               key={user.userId}
@@ -150,7 +153,7 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
           ))
         ) : (
           <CenterCustom>
-            <TitleNotFoundInfo>Nenhum tópico encontrado</TitleNotFoundInfo>
+            <TitleNotFoundInfo>Nenhum Usuário encontrado</TitleNotFoundInfo>
           </CenterCustom>
         )}
 
@@ -159,14 +162,14 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
         )}
       </ContainerAdmin>
       {!isSearchUser
-        ? allUsers?.length > 0 && (
+        ? allUsers?.length && (
             <Pagination
               page={page}
               onPageChange={(index: number) => setPage(index)}
               allPages={allPagesPrincipal}
             />
           )
-        : userFind?.length > 0 && (
+        : userFind?.length && (
             <Pagination
               page={pageFind}
               onPageChange={(index: number) => setPageFind(index)}

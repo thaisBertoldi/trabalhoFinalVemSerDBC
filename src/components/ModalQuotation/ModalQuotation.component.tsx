@@ -114,7 +114,7 @@ const ModalQuotation = ({ user, onClick, id }: ModalQuotationDTO) => {
           )}
         </TopModal>
 
-        {valuesQuotation.length > 0 ? (
+        {valuesQuotation.length ? (
           valuesQuotation.map((item: ModalQuotationValuesDTO) => (
             <DivQuotations key={item.quotationId}>
               <p> Status: {StatusEnum[item.quotationStatus]}</p>

@@ -22,7 +22,7 @@ const CardItemHome = ({ id }: CardItemHomeProps) => {
 
   return (
     <div>
-      {listItens.length > 0 ? (
+      {listItens.length ? (
         <>
         <CardItem>
           <img
