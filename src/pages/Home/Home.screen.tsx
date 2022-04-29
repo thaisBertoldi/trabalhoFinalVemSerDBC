@@ -128,10 +128,11 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
       <ContainerAllInfo>
         {!isSearch ? (
           listTopics.length ? (
-            listTopics?.map((item: TopicDTO) => (
+            listTopics?.map((item: TopicDTO, index) => (
               <CardTopicHome
                 item={item}
                 user={user}
+                key={index}
                 setOpenModalQuotation={setOpenModalQuotation}
                 setOpenModalAddQuotation={setOpenModalAddQuotation}
                 setOpenModalItens={setOpenModalItens}
