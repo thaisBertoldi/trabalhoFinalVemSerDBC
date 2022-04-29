@@ -181,14 +181,14 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
       </ContainerAllInfo>
       <CenterCustom>
         {!isSearch
-          ? listTopics?.length && (
+          ? listTopics?.length > 0 && (
               <Pagination
                 page={page}
                 onPageChange={(index: number) => setPage(index)}
                 allPages={allPages}
               />
             )
-          : listSearched?.length && (
+          : listSearched?.length > 0 && (
               <Pagination
                 page={pageSearch}
                 onPageChange={(index: number) => setPageSeach(index)}
