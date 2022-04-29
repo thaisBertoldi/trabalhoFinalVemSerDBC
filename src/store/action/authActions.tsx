@@ -12,7 +12,7 @@ export const handleLogin = async (values: LoginDTO, dispatch: AppDispatch, navig
     setLogin(dispatch, data);
     navigate('/');
   } catch (error: any) {
-    console.log(error.response.data.message)
+    console.log(error.response.data)
     Notiflix.Notify.failure(
       `Sinto muito, mas nao foi possivel acessar a api. ${error.response.data.message}`
     );
@@ -38,7 +38,7 @@ export const handleRegister = async (values: RegisterDTO, dispatch: AppDispatch,
     navigate('/login');
   } catch (error: any) {
     Notiflix.Notify.failure(
-      `Sinto muito, mas nao foi possivel acessar a api. ${error.response.message}`
+      `Sinto muito, mas nao foi possivel acessar a api. ${error.response.data.message}`
     );
   } finally {
     Loading.remove();

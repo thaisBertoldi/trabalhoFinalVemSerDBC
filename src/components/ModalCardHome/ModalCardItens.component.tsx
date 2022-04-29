@@ -20,7 +20,7 @@ const ModalCardItens = ({ id, onClick }: ModalComponentDTO) => {
       );
       setItensInTopic(data);
     } catch (error: any) {
-      console.log(error.response.message);
+      console.log(error.response.data.message);
     }
   };
 
