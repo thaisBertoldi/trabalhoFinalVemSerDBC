@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { setLogin } from "./store/action/authActions";
 
 import { Header, Footer } from './components';
-import { Login, Register, Home, RequestPurchase, Administration } from './pages';
+import { Login, Register, Home, RequestPurchase, Administration, NotFound } from './pages';
 import { isLoggedDTO } from './models/UserDTO';
 import { RootState } from './store';
 
@@ -23,6 +23,7 @@ const Routers = ({user, dispatch}: isLoggedDTO & DispatchProp) => {
     <BrowserRouter>
       <Header />
         <Routes>
+          <Route path='*' element={<NotFound />} />
           <Route path='/' element={<Home />} />
           <Route path='/login' element={ <Login /> }/>
           <Route path='/register' element={ <Register /> }/>
