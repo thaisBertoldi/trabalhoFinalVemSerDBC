@@ -3,12 +3,10 @@ import styled from "styled-components";
 export const ContainerAll = styled.div`
   display: flex;
   width: 100%;
-  height: 70vh;
+  height: 100vh;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-color: white;
-  margin: 100px 0;
 `;
 
 export const ContainerNotFound = styled.div`

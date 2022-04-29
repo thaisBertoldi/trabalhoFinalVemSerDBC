@@ -8,11 +8,17 @@ import { redirectToLogin } from "../../utils/utils";
 
 const NotFound = () => {
   const navigate = useNavigate();
+  const hasUser: string | any = localStorage.getItem("token");
+  const User = JSON.parse(hasUser);
 
   useEffect(() => {
     redirectToLogin(navigate);
     setTimeout(() => {
-      navigate("/")
+      if(hasUser.profile === 'ADMINISTRATOR') {
+        navigate("/administration")
+      } else {
+        navigate("/")
+      }
     }, 10000);
   }, []);
 
