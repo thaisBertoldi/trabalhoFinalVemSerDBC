@@ -212,7 +212,7 @@ const RequestPurchase = ({
         </ContainerRequestForm>
 
         {
-          arrayItens.length && (
+          arrayItens.length > 0 && (
           <DivItens>
             <DivTopItens>
               <span> Imagem </span>
