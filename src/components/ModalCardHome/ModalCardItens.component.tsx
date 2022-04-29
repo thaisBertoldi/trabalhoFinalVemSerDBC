@@ -19,8 +19,8 @@ const ModalCardItens = ({ id, onClick }: ModalComponentDTO) => {
         `${ENDPOINT_TOPICS.GET_ITEMS_TOPIC}/${id}`
       );
       setItensInTopic(data);
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      console.log(error.response.message);
     }
   };
 
