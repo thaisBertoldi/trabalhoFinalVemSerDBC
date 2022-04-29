@@ -32,7 +32,6 @@ export const getUserSearch = async (
     const { data } = await api.get(`${ENDPOINT_ADMIN.GET_USER}fullname=${nameSearch}&page=${page}`);
     setAllPagesSearch(data.totalPages);
     setUserFind(data.content);
-    console.log(data.content);
   } catch (error) {
     console.log(error);
   }
@@ -50,15 +49,12 @@ export const handleProfile = async (
 ) => {
   try {
     Loading.circle();
-    console.log(type);
-    console.log(id);
 
     const { data } = await api.put(
       `${ENDPOINT_ADMIN.ALTER_PROFILE}=${type}&idUser=${id}`
     );
     Notiflix.Notify.success(`Perfil do usuário alterado com sucesso.`);
   } catch (error) {
-    console.log(error);
     Notiflix.Notify.failure(
       `Sinto muito, mas nao foi possivel alterar o perfil desse usuário. ${error}`
     );

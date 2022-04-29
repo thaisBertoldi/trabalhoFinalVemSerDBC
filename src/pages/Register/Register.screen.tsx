@@ -25,6 +25,7 @@ import { handleRegister } from "../../store/action/authActions";
 import { hasLogin, imgConverter } from "../../utils/utils";
 import { RootState } from "../../store";
 import { mySchemaRegister } from "../../utils/yupValidations";
+import Notiflix from "notiflix";
 
 const Register = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
 
@@ -36,7 +37,7 @@ const Register = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
     if (values.password === values.confirmPassword) {
       handleRegister(values, dispatch, navigate);
     } else {
-      console.log("A senha deve ser igual a confirmação");
+      Notiflix.Notify.warning('A senha deve ser igual a confirmação');
     }
   };
 

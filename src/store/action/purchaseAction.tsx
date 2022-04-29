@@ -17,13 +17,12 @@ export const handleCreateTopic = async (
     Notiflix.Notify.success(`Tópico ${valuesTopic.title} criado com sucesso.`);
     setIsTopicCreate(true)
   } catch (error) {
-    console.log(error);
-    Loading.remove();
     Notiflix.Notify.failure(
       `Sinto muito, mas nao foi possivel criar o tópico. ${error}`
     );
+  } finally {
+    Loading.remove();
   }
-  Loading.remove();
 };
 
 export const handleCreateList = async (
@@ -51,7 +50,6 @@ export const handleCreateList = async (
         `Item ${values.itemName} adicionado com sucesso.`
       );
     } catch (error) {
-      console.log(error);
       Notiflix.Notify.failure(
         `Sinto muito, mas nao foi possivel adicionar o item ao tópico. ${error}`
       );
@@ -81,19 +79,18 @@ export const handleFinallyTopic = async (
     const { data } = await api.put(
       `${ENDPOINT_TOPICS.UPDATE_STATUS}/${idItem}`
     );
-    console.log(data);
     Notiflix.Notify.success(`Tópico finalizado com sucesso.`);
     navigate("/");
     formikReset()
     formikTopicReset()
     setIsTopicCreate(false)
   } catch (error) {
-    console.log(error);
     Notiflix.Notify.failure(
       `Sinto muito, mas nao foi possivel finalizar o tópico. ${error}`
     );
+  } finally {
+    Loading.remove();
   }
-  Loading.remove();
 };
 
 export const handleDeleteItem = async (
@@ -104,7 +101,6 @@ export const handleDeleteItem = async (
   try {
     Loading.circle();
     const { data } = await api.delete(`${ENDPOINT_TOPICS.DELETE_ITEM}/${id}`);
-    console.log(data);
     Notiflix.Notify.success(`Item excluído.`);
     const arrayItensFilter = arrayItens.filter((item) => {
       if (item.itemId !== id) {
@@ -113,10 +109,10 @@ export const handleDeleteItem = async (
     });
     setArrayItens(arrayItensFilter);
   } catch (error) {
-    console.log(error);
     Notiflix.Notify.failure(
       `Sinto muito, mas nao foi possivel excluir esse item. ${error}`
     );
+  } finally {
+    Loading.remove();
   }
-  Loading.remove();
 };

@@ -46,9 +46,6 @@ const ModalCreateUserAdm = ({ onClick }: ModalComponentDTO) => {
       Notiflix.Notify.success(`Usuário cadastrado com sucesso.`);
       onClick();
     } catch (error) {
-      console.log(
-        "Erro ao tentar cadastrar usuario pelo perfil administrador" + error
-      );
       Notiflix.Notify.failure(
         `Sinto muito, mas nao foi possivel acessar a api. ${error}`
       );

@@ -22,7 +22,6 @@ import api from "../../service/api";
 const CardTopicHome = ({item, user, setOpenModalQuotation, setOpenModalAddQuotation,  setOpenModalItens}: TopicComponentDTO) =>  {
 
   const handleDeleteTopic = () => {
-    console.log(`${item.topicId}`)
     Confirm.show(
       'Deletar Tópico',
       'Você tem certeza que deseja deletar este tópico?',

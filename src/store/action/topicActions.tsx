@@ -28,7 +28,7 @@ export const getItensTopic = async (id: number, setListItens: Function, setLoadi
     setLoading(false);
     setListItens(data);
   } catch (error) {
-    setLoading(false);
     console.log(error);
+    setLoading(false);
   }
 };

@@ -9,14 +9,12 @@ export const handleLogin = async (values: LoginDTO, dispatch: AppDispatch, navig
   try {    
     Loading.circle();
     const {data} = await api.post(ENDPOINT_AUTH.LOGIN, values);
-    console.log(data);
     setLogin(dispatch, data);
     navigate('/');
   } catch (error) {
     Notiflix.Notify.failure(
       `Sinto muito, mas nao foi possivel acessar a api. ${error}`
     );
-    console.log(error);
   } finally {
     Loading.remove();
   }
@@ -41,7 +39,6 @@ export const handleRegister = async (values: RegisterDTO, dispatch: AppDispatch,
     Notiflix.Notify.failure(
       `Sinto muito, mas nao foi possivel acessar a api. ${error}`
     );
-    console.log(error);
   } finally {
     Loading.remove();
   }
