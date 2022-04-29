@@ -12,8 +12,13 @@ export const ModalAdm = styled.div`
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 
   @media (max-width: 1024px) {
-    width: 60%;
+    width: 70%;
   }
+
+  @media (max-width: 400) {
+    margin-top: 10px;
+  }
+
   form {
     width: 100%;
     margin: 0 auto;
@@ -40,12 +45,12 @@ export const DivEyeAdm = styled.div`
   font-size: 25px;
   position: absolute;
   right: 30.5%;
-  top: 47.1%;
+  top: 45%;
   color: ${Theme.color.black};
 
   @media (max-width: 1024px) {
-    right: 21%;
-    top: 47.1%; 
+    right: 20%;
+    top: 45%; 
   }
 `;
 

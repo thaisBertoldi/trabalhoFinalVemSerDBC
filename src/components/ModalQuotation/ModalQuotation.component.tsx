@@ -38,7 +38,6 @@ const ModalQuotation = ({ user, onClick, id }: ModalQuotationDTO) => {
         `${ENDPOINT_QUOTATION.MAIN_PAGE_QUOTATION}/${id}`
       );
       setValuesQuotation(data);
-      console.log(data);
     } catch (error) {
       console.log(error);
     }

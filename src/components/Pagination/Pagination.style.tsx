@@ -15,6 +15,11 @@ export const ContainerPagination = styled.div`
     font-family: "Poppins", sans-serif;
     font-size: 20px;
   }
+  @media (max-width: 400px) {
+    span {
+      display: none;
+    }
+  }
 `;
 
 export const ButtonCustom = styled.button<{ colorHover: string }>`
