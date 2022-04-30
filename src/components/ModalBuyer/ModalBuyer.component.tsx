@@ -24,9 +24,9 @@ const ModalBuyer = ({onClick, id}: ModalComponentDTO) => {
         `Cotação criada com sucesso.`
       );
       onClick()
-    } catch (error: any) {
+    } catch (error) {
       Notiflix.Notify.failure(
-        `Sinto muito, mas nao foi possivel adicionar a cotação. ${error.response.data.message}`
+        `Sinto muito, mas nao foi possivel adicionar a cotação.`
       );
     } finally {
       Loading.remove();

@@ -22,7 +22,7 @@ export const DivInputsLogin = styled.div`
 export const DivEye = styled.div`
   position: absolute;
   right: 30px;
-  bottom: 40%;
+  bottom: 40.5%;
   color: ${Theme.color.white};
 
   @media (max-width: 700px) {

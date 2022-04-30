@@ -57,8 +57,8 @@ export const handleProfile = async (
       `${ENDPOINT_ADMIN.ALTER_PROFILE}=${type}&idUser=${id}`
     );
     Notiflix.Notify.success(`Perfil do usuário alterado com sucesso.`);
-  } catch (error: any) {
-    Notiflix.Notify.failure(`Sinto muito, mas nao foi possivel alterar o perfil desse usuário. ${error.response.data.message}`);
+  } catch (error) {
+    Notiflix.Notify.failure(`Sinto muito, mas nao foi possivel alterar o perfil desse usuário.`);
   } finally {
     getAllUsers(setAllUsers, page, setAllPages, setIsSearchUser);
     setIsSearchUser(false);
