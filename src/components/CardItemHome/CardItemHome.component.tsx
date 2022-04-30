@@ -9,12 +9,9 @@ import {
   CardItemValueName,
 } from "./CardItemHome.style";
 import { LoadingItem } from "../../global.style";
-<<<<<<< HEAD
 import { ItensInTopicDTO } from "../../models/ModalsDTO";
 import { CardItemHomeProps } from "../../models/TopicDTO";
-=======
 import { maskMoneyHTML } from "../../utils/utils";
->>>>>>> 3b1981c1a5c17d2191912e2d46ffdb68c85bc18e
 
 const CardItemHome = ({ id }: CardItemHomeProps) => {
   const [listItens, setListItens] = useState<Array<ItensInTopicDTO>>([]);
