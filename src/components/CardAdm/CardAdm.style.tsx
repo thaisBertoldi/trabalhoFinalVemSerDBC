@@ -11,6 +11,16 @@ export const CardUSerAdmin = styled.div`
   gap: 15px;
   justify-content: center;
   background-color: white;
+  -moz-transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  :hover {
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    -webkit-box-shadow: 0px 1px 31px 9px rgba(0, 0, 0, 0.46);
+  box-shadow: 0px 1px 31px 9px rgba(105, 105, 105, 0.46);
+  }
   select {
     width: 60%;
     padding: 5px;
