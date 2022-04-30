@@ -2,9 +2,8 @@ import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import notFound from "../../images/notFound.png";
 import notFoundGif from "../../images/notFound.gif"
-import { ContainerAll, ContainerNotFound, MessageH2 } from "./NotFound.style";
 import { Btn } from "../../global.style";
-import { hasLogin, redirectToLogin } from "../../utils/utils";
+import { ContainerAll, ContainerNotFound, MessageH2 } from "./NotFound.style";
 
 const NotFound = () => {
   const navigate = useNavigate();

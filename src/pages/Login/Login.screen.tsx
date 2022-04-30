@@ -2,26 +2,25 @@ import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import Logo from "../../components/Logo/Logo";
 import { connect, DispatchProp } from "react-redux";
-import {
-  Btn,
-  ContainerGetInfo,
-  ContainerPrincipal,
-  ContainerTitle,
-  DivErrorYup,
-  Input,
-  Paragraph,
-  Title,
-} from "../../global.style";
+import Logo from "../../components/Logo/Logo";
 import { ContainerLogin, DivEye, DivInputsLogin, DivLogo } from "./Login.style";
-
 import { handleLogin } from "../../store/action/authActions";
 import { Theme } from "../../theme";
 import { hasLogin } from "../../utils/utils";
 import { mySchemaLogin } from "../../utils/yupValidations";
 import { RootState } from "../../store";
 import { isLoggedDTO, UsersAdmDTO } from "../../models/UserDTO";
+import {
+  Btn,
+  Input,
+  Title,
+  Paragraph,
+  DivErrorYup,
+  ContainerTitle,
+  ContainerGetInfo,
+  ContainerPrincipal,
+} from "../../global.style";
 
 const Login = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   const navigate = useNavigate();

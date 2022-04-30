@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
+import loadingImg from '../../images/loading.gif'
 import { getItensTopic } from "../../store/action/topicActions";
 import {
+  Desc,
   CardItem,
+  SpanMoreItens,
   CardItemInfos,
   CardItemValueName,
-  Desc,
-  SpanMoreItens,
 } from "./CardItemHome.style";
-import loadingImg from '../../images/loading.gif'
-import { CardItemHomeProps } from "../../models/TopicDTO";
-import { ItensInTopicDTO } from "../../models/ModalsDTO";
 import { LoadingItem } from "../../global.style";
+import { ItensInTopicDTO } from "../../models/ModalsDTO";
+import { CardItemHomeProps } from "../../models/TopicDTO";
 
 const CardItemHome = ({ id }: CardItemHomeProps) => {
   const [listItens, setListItens] = useState<Array<ItensInTopicDTO>>([]);

@@ -1,5 +1,5 @@
-import { HeaderNav } from './Header.style';
 import Menu from './Menu.component';
+import { HeaderNav } from './Header.style';
 
 const Header = () => {
 

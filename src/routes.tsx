@@ -1,13 +1,18 @@
 import { useEffect } from 'react';
 import { connect, DispatchProp } from 'react-redux';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
-import { setLogin } from "./store/action/authActions";
-
 import { Header } from './components';
-import { Login, Register, Home, RequestPurchase, Administration, NotFound } from './pages';
-import { isLoggedDTO } from './models/UserDTO';
 import { RootState } from './store';
+import { setLogin } from "./store/action/authActions";
+import { isLoggedDTO } from './models/UserDTO';
+import { 
+  Home, 
+  Login, 
+  Register, 
+  NotFound, 
+  Administration, 
+  RequestPurchase, 
+} from './pages';
 
 const Routers = ({user, dispatch}: isLoggedDTO & DispatchProp) => {
 

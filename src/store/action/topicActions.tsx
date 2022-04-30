@@ -1,6 +1,5 @@
-import { useState } from "react";
-import { ENDPOINT_TOPICS } from "../../constants";
 import api from "../../service/api";
+import { ENDPOINT_TOPICS } from "../../constants";
 
 export const getTopics = async (
   setListTopics: Function,

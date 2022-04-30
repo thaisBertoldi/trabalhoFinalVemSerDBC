@@ -1,9 +1,9 @@
 import Notiflix from "notiflix";
 import { Loading } from "notiflix/build/notiflix-loading-aio";
-import { ENDPOINT_TOPICS } from "../../constants";
-import { NewRequestPurchase, TitlePurchaseDTO } from "../../models/PurchaseDTO";
 import api from "../../service/api";
 import { removeMaskMoney } from "../../utils/utils";
+import { ENDPOINT_TOPICS } from "../../constants";
+import { NewRequestPurchase, TitlePurchaseDTO } from "../../models/PurchaseDTO";
 
 export const handleCreateTopic = async (
   valuesTopic: TitlePurchaseDTO,

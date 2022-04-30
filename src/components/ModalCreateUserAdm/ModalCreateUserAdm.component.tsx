@@ -1,28 +1,29 @@
-import { useFormik } from "formik";
+import PasswordStrengthBar from "react-password-strength-bar";
 import Notiflix, { Loading } from "notiflix";
+import { useState } from "react";
+import { useFormik } from "formik";
 import { AiFillCloseCircle } from "react-icons/ai";
-import { ContainerModal } from "../globalStyleComponents.style";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+
+import api from "../../service/api";
+import { Theme } from "../../theme";
+import { imgConverter } from "../../utils/utils";
+import { ENDPOINT_ADMIN } from "../../constants";
+import { ContainerModal } from "../globalStyleComponents.style";
+import { mySchemaRegister } from "../../utils/yupValidations";
 import {
   Btn,
   DivErrorYup,
-  DivStrengthBar,
   DivInputFile,
+  DivStrengthBar,
 } from "../../global.style";
-import PasswordStrengthBar from "react-password-strength-bar";
-import { Theme } from "../../theme";
-import { imgConverter } from "../../utils/utils";
-import { mySchemaRegister } from "../../utils/yupValidations";
-import api from "../../service/api";
-import { ENDPOINT_ADMIN } from "../../constants";
 import {
+  ModalAdm,
   DivClose,
   DivEyeAdm,
   InputCreateUserAdm,
-  ModalAdm,
   SelectCreateUserAdm,
 } from "./ModalCreateUser.style";
-import { useState } from "react";
 import { UserAdmRegisterDTO } from "../../models/UserDTO";
 import { ModalComponentDTO } from "../../models/ModalsDTO";
 

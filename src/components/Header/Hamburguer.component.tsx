@@ -1,6 +1,5 @@
-import { Link } from "react-router-dom";
-import { HamburguerDiv } from "./Header.style";
 import ItensMenu from "./ItensMenu.component";
+import { HamburguerDiv } from "./Header.style";
 
 const Hamburguer = () => {
   return (

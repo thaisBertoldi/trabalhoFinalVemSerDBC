@@ -2,37 +2,36 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import { connect, DispatchProp } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { FaTrashAlt } from "react-icons/fa";
+import { Theme } from "../../theme";
+import { RootState } from "../../store";
+import { imgConverter, maskMoney } from "../../utils/utils";
+import { mySchemaPurchase } from "../../utils/yupValidations";
+import { isLoggedDTO } from "../../models/UserDTO";
+import { TYPE_USERS } from "../../constants";
+import { NewRequestPurchase, PurchaseDTO } from "../../models/PurchaseDTO";
 import {
   BtnForm,
   Container,
   InputForm,
-  CenterCustom,
   DivErrorYup,
   DivInputFile,
+  CenterCustom,
 } from "../../global.style";
-import { NewRequestPurchase, PurchaseDTO } from "../../models/PurchaseDTO";
-import { RootState } from "../../store";
 import {
+  handleDeleteItem,
   handleCreateList,
   handleCreateTopic,
-  handleDeleteItem,
   handleFinallyTopic,
 } from "../../store/action/purchaseAction";
 import {
-  ContainerRequest,
-  ContainerRequestForm,
   DivItens,
   DivTopItens,
   TextAreaCustom,
+  ContainerRequest,
+  ContainerRequestForm,
 } from "./RequestPurchase.style";
-import { Theme } from "../../theme";
-
-import { imgConverter, maskMoney } from "../../utils/utils";
-import { mySchemaPurchase } from "../../utils/yupValidations";
-import { useNavigate } from "react-router-dom";
-import { isLoggedDTO } from "../../models/UserDTO";
-import { FaTrashAlt } from "react-icons/fa";
-import { SUPPORTED_FORMATS, FILE_SIZE, TYPE_USERS } from "../../constants";
 
 const RequestPurchase = ({
   user,

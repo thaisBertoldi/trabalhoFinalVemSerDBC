@@ -1,29 +1,28 @@
+import Notiflix from "notiflix";
 import PasswordStrengthBar from "react-password-strength-bar";
 import { useFormik } from "formik";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { connect, DispatchProp } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Logo from "../../components/Logo/Logo";
 import { Theme } from "../../theme";
-import {
-  Btn,
-  Input,
-  Title,
-  DivErrorYup,
-  ContainerTitle,
-  ContainerGetInfo,
-  ContainerPrincipal,
-  DivInputFile,
-} from "../../global.style";
 import { DivEye, DivInputsLogin, DivLogo } from "../Login/Login.style";
-
 import { isLoggedDTO, RegisterDTO } from "../../models/UserDTO";
 import { handleRegister } from "../../store/action/authActions";
 import { hasLogin, imgConverter } from "../../utils/utils";
 import { RootState } from "../../store";
 import { mySchemaRegister } from "../../utils/yupValidations";
-import Notiflix from "notiflix";
+import {
+  Btn,
+  Input,
+  Title,
+  DivErrorYup,
+  DivInputFile,
+  ContainerTitle,
+  ContainerGetInfo,
+  ContainerPrincipal,
+} from "../../global.style";
 
 const Register = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
 

@@ -7,7 +7,7 @@ export const TYPE_USERS = {
   BUYER: "BUYER",
   MANAGER: "MANAGER",
   FINANCIER: "FINANCIER"
-}
+};
 
 export const ENDPOINT_AUTH = {
   LOGIN: "/auth/login", 
@@ -22,7 +22,7 @@ export const ENDPOINT_TOPICS = {
   GET_ITEMS_TOPIC: '/main-page/items',
   DELETE_ITEM: "/contributor/delete",
   DELETE_TOPIC: "/contributor/delete-topic"
-}
+};
 
 export const ENDPOINT_ADMIN = {
   GET_ALL_USERS: "/admin/adm-get-all-users?page",
@@ -46,11 +46,11 @@ export const ENDPOINT_QUOTATION = {
 export const ENDPOINT_MANAGER = {
   APROVE_QUOTATION: "/manager/aproveQuotation",
   REPROVE_ALL_QUOTATIONS: "/manager/reproveAllQuotations"
-}
+};
 
 export const ENDPOINT_FINANCIER = {
   UPDATE_STATUS: "/financier/update-status",
-}
+};
 
 export const SUPPORTED_FORMATS = ["image/jpg", "image/jpeg", "image/png"];
 

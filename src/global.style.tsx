@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { Theme } from "./theme";
-import image from "./images/background-div.jpg";
 import { FaSearch } from "react-icons/fa";
+import image from "./images/background-div.jpg";
+import { Theme } from "./theme";
 
 export const Container = styled.div`
   width: 100%;

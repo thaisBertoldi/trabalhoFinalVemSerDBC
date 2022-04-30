@@ -1,13 +1,20 @@
+import { useState } from "react";
 import { connect, DispatchProp } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { UlNav, DropDown, DivArrow, DivLinksMenu, ParagraphNameUser, DivUserMenu, MenuHamburguer } from "./Header.style";
-import { IoMdArrowDropdown } from "react-icons/io";
-import { handleLogout } from "../../store/action/authActions";
-
-import { useState } from "react";
-import Hamburguer from "./Hamburguer.component";
 import { MdMenu } from "react-icons/md";
+import { IoMdArrowDropdown } from "react-icons/io";
+import {
+  UlNav,
+  DivArrow,
+  DropDown,
+  DivUserMenu,
+  DivLinksMenu,
+  MenuHamburguer,
+  ParagraphNameUser,
+} from "./Header.style";
+import Hamburguer from "./Hamburguer.component";
 import ItensMenu from "./ItensMenu.component";
+import { handleLogout } from "../../store/action/authActions";
 import { DefaultImage } from "../../constants";
 import { RootState } from "../../store";
 import { isLoggedDTO } from "../../models/UserDTO";
@@ -26,7 +33,7 @@ const Menu = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
       <MenuHamburguer>
         <MdMenu onClick={() => setOpenHamburguer(!openHamburguer)} />
       </MenuHamburguer>
-      { openHamburguer && ( <Hamburguer /> ) }  
+      {openHamburguer && <Hamburguer />}
 
       <DivLinksMenu>
         <ItensMenu />
@@ -35,7 +42,7 @@ const Menu = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
       <DivUserMenu>
         <ParagraphNameUser> {User?.fullName} </ParagraphNameUser>
         <figure onClick={() => setOpen(!open)}>
-          <img 
+          <img
             src={`data:image/jpeg;base64,${User?.profileImage ?? DefaultImage}`}
             alt="Foto do usuário"
           />
@@ -44,7 +51,7 @@ const Menu = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
           </DivArrow>
         </figure>
       </DivUserMenu>
-      
+
       {open && (
         <DropDown>
           <button onClick={() => handleLogout(dispatch, navigate)}>

@@ -1,16 +1,16 @@
-import { useFormik } from 'formik';
 import * as Yup from "yup";
-
+import { useFormik } from 'formik';
+import Notiflix, { Loading } from 'notiflix';
 import { AiFillCloseCircle } from "react-icons/ai";
+import api from '../../service/api';
 import { Modal, ButtonCard } from './ModalBuyer.style';
 import { ContainerModal, BtnClose } from '../globalStyleComponents.style';
 import { InputForm } from '../../global.style';
 import { Theme } from "../../theme";
 import { maskMoney, removeMaskMoney } from '../../utils/utils';
-import api from '../../service/api';
 import { ENDPOINT_QUOTATION } from '../../constants';
-import Notiflix, { Loading } from 'notiflix';
 import { ModalComponentDTO } from '../../models/ModalsDTO';
+
 const ModalBuyer = ({onClick, id}: ModalComponentDTO) => {
 
   const handleAddQuotation = async (values: string) => {

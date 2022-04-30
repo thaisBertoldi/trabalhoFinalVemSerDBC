@@ -3,27 +3,27 @@ import { useEffect, useState } from "react";
 import { connect, DispatchProp } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ModalCreateUserAdm, CardAdm, Pagination } from "../../components";
+import { isLoggedDTO, UsersAdmDTO } from "../../models/UserDTO";
+import { RootState } from "../../store";
+import { TYPE_USERS } from "../../constants";
 import {
-  CenterCustom,
   Container,
   InputForm,
   IconSearch,
+  CenterCustom,
   TitleNotFoundInfo,
 } from "../../global.style";
-import { isLoggedDTO, UsersAdmDTO } from "../../models/UserDTO";
-import { RootState } from "../../store";
 import {
   BtnAdm,
-  ContainerAdmin,
   DivSearch,
   ParagraphInfo,
+  ContainerAdmin,
 } from "./Administration.style";
 import {
   getAllUsers,
   getUserSearch,
   handleProfile,
 } from "../../store/action/adminActions";
-import { TYPE_USERS } from "../../constants";
 
 const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   const navigate = useNavigate();

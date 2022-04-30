@@ -1,6 +1,16 @@
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { connect, DispatchProp } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import api from "../../service/api";
+import { DivSearch, ContainerAllInfo, DivDescriptionTopic } from "./Home.style";
+import { isLoggedDTO } from "../../models/UserDTO";
+import { RootState } from "../../store";
+import { redirectAdmin, redirectToLogin } from "../../utils/utils";
+import { getTopics } from "../../store/action/topicActions";
+import { ModalDTO } from "../../models/ModalsDTO";
+import { IconSearch } from "../../global.style";
+import { TopicDTO } from "../../models/TopicDTO";
+import { ENDPOINT_TOPICS, TYPE_USERS } from "../../constants";
 import {
   CenterCustom,
   Container,
@@ -8,26 +18,13 @@ import {
   Title,
   TitleNotFoundInfo,
 } from "../../global.style";
-import { isLoggedDTO } from "../../models/UserDTO";
-
-import { RootState } from "../../store";
-import { redirectAdmin, redirectToLogin } from "../../utils/utils";
-import { DivSearch, ContainerAllInfo, DivDescriptionTopic } from "./Home.style";
-
 import {
-  CardTopicHome,
   ModalBuyer,
+  Pagination,
+  CardTopicHome,
   ModalCardItens,
   ModalQuotation,
-  Pagination,
 } from "../../components";
-
-import { getTopics } from "../../store/action/topicActions";
-import { ModalDTO } from "../../models/ModalsDTO";
-import { IconSearch } from "../../global.style";
-import api from "../../service/api";
-import { TopicDTO } from "../../models/TopicDTO";
-import { ENDPOINT_TOPICS, TYPE_USERS } from "../../constants";
 
 const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   const navigate = useNavigate();

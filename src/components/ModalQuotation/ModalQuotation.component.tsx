@@ -2,28 +2,28 @@ import Notiflix from "notiflix";
 import { useEffect, useState } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { connect } from "react-redux";
+import api from "../../service/api";
+import { StatusEnum } from "../../enums/StatusEnum";
 import {
+  TYPE_USERS,
+  ENDPOINT_MANAGER,
   ENDPOINT_QUOTATION,
   ENDPOINT_FINANCIER,
-  ENDPOINT_MANAGER,
-  TYPE_USERS,
 } from "../../constants";
-import { StatusEnum } from "../../enums/StatusEnum";
 import {
   ModalQuotationDTO,
   ModalQuotationValuesDTO,
 } from "../../models/ModalsDTO";
-import api from "../../service/api";
 import { RootState } from "../../store";
 import {
+  Modal,
   BtnClose,
   ContainerModal,
-  Modal
 } from "../globalStyleComponents.style"
 import {
   TopModal,
-  DivQuotations,
   DivButtons,
+  DivQuotations,
   BtnModalQuotation,
 } from "./ModalQuotation.style";
 

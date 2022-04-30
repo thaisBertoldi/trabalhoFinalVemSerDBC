@@ -1,6 +1,6 @@
-import api from '../../service/api';
 import Notiflix from "notiflix";
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
+import api from '../../service/api';
 import { LoginDTO, RegisterDTO, isLoggedDTO } from "../../models/UserDTO";
 import { AppDispatch } from '..';
 import { ENDPOINT_AUTH } from '../../constants';

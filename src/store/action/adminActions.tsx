@@ -1,7 +1,7 @@
 import Notiflix from "notiflix";
+import api from "../../service/api";
 import { Loading } from "notiflix/build/notiflix-loading-aio";
 import { ENDPOINT_ADMIN } from "../../constants";
-import api from "../../service/api";
 
 export const getAllUsers = async (
   setAllUsers: Function,
