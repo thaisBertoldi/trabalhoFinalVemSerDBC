@@ -33,11 +33,7 @@ import {
   ContainerRequest,
   ContainerRequestForm,
 } from "./RequestPurchase.style";
-const RequestPurchase = ({
-  user,
-  auth,
-  dispatch,
-}: isLoggedDTO & PurchaseDTO & DispatchProp) => {
+const RequestPurchase = ({user, auth, dispatch}: isLoggedDTO & PurchaseDTO & DispatchProp) => {
   const [arrayItens, setArrayItens] = useState<NewRequestPurchase[]>([]);
   const [idTopic, setIdTopic] = useState(0);
   const [isTopicCreate, setIsTopicCreate] = useState(false);
@@ -113,11 +109,10 @@ const RequestPurchase = ({
                 >
                   Criar tópico
                 </BtnForm>
-          </form>
+              </form>
             )
           }
           
-
           {isTopicCreate && (
             <form onSubmit={formik.handleSubmit}>
               <InputForm
@@ -194,15 +189,7 @@ const RequestPurchase = ({
                   color={"#25292a"}
                   type="button"
                   disabled={arrayItens.length <= 0}
-                  onClick={() =>
-                    handleFinallyTopic(
-                      idTopic,
-                      navigate,
-                      formikTopic.resetForm,
-                      formik.resetForm,
-                      setIsTopicCreate
-                    )
-                  }
+                  onClick={() => handleFinallyTopic(idTopic, navigate, formikTopic.resetForm, formik.resetForm, setIsTopicCreate)}
                 >
                   Finalizar
                 </BtnForm>
@@ -225,7 +212,6 @@ const RequestPurchase = ({
                 <DivTopItens key={index}>
                   <img src={`data:image;base64,${item.file}`} alt="item" />
                   <p>{item.itemName}</p>
-                  
                   <p>{maskMoneyHTML(item.value)}</p>
                   <FaTrashAlt onClick={() => handleDeleteItem(item.itemId, setArrayItens, arrayItens)} />
                 </DivTopItens>

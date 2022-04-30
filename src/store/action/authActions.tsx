@@ -12,9 +12,7 @@ export const handleLogin = async (values: LoginDTO, dispatch: AppDispatch, navig
     setLogin(dispatch, data);
     navigate('/');
   } catch (error: any) {
-    Notiflix.Notify.failure(
-      `Sinto muito, mas nao foi possivel acessar a api. ${error.response.data.message}`
-    );
+    Notiflix.Notify.failure(`Sinto muito, mas nao foi possivel acessar a api. ${error.response.data.message}`);
   } finally {
     Loading.remove();
   }
@@ -26,19 +24,14 @@ export const handleRegister = async (values: RegisterDTO, dispatch: AppDispatch,
   formData.append('username', values.username);
   formData.append('fullName', values.fullName);
   formData.append('password', values.password);
-
   try {
     Loading.circle();
     const {data} = await api.post(ENDPOINT_AUTH.SING, formData);
     setLogin(dispatch, data);
-    Notiflix.Notify.success(
-      `Usuário cadastrado com sucesso.`
-    );
+    Notiflix.Notify.success(`Usuário cadastrado com sucesso.`);
     navigate('/login');
   } catch (error: any) {
-    Notiflix.Notify.failure(
-      `Sinto muito, mas nao foi possivel acessar a api. ${error.response.data.message}`
-    );
+    Notiflix.Notify.failure(`Sinto muito, mas nao foi possivel acessar a api. ${error.response.data.message}`);
   } finally {
     Loading.remove();
   }

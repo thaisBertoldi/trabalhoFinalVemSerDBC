@@ -17,9 +17,7 @@ export const handleCreateTopic = async (
     Notiflix.Notify.success(`Tópico ${valuesTopic.title} criado com sucesso.`);
     setIsTopicCreate(true)
   } catch (error: any) {
-    Notiflix.Notify.failure(
-      `Sinto muito, mas nao foi possivel criar o tópico. ${error.response.data.message}`
-    );
+    Notiflix.Notify.failure(`Sinto muito, mas nao foi possivel criar o tópico. ${error.response.data.message}`);
   } finally {
     Loading.remove();
   }
@@ -33,27 +31,19 @@ export const handleCreateList = async (
   formik: Function,
 ) => {
 
-    const formData = new FormData();
-    formData.append("file", values.file);
-    formData.append("description", values.description);
-    formData.append("name", values.itemName);
-    formData.append("price", removeMaskMoney(values.value));
-
-    try {
-      Loading.circle();
-      const { data } = await api.post(
-        `${ENDPOINT_TOPICS.CREATE_ITEM_TOPIC}/${idTopic}`,
-        formData
-      );
-      setArrayItens([...arrayItens, data]);
-      Notiflix.Notify.success(
-        `Item ${values.itemName} adicionado com sucesso.`
-      );
-    } catch (error: any) {
-      Notiflix.Notify.failure(
-        `Sinto muito, mas nao foi possivel adicionar o item ao tópico. ${error.response.data.message}`
-      );
-    }
+  const formData = new FormData();
+  formData.append("file", values.file);
+  formData.append("description", values.description);
+  formData.append("name", values.itemName);
+  formData.append("price", removeMaskMoney(values.value));
+  try {
+    Loading.circle();
+    const { data } = await api.post(`${ENDPOINT_TOPICS.CREATE_ITEM_TOPIC}/${idTopic}`,formData);
+    setArrayItens([...arrayItens, data]);
+    Notiflix.Notify.success(`Item ${values.itemName} adicionado com sucesso.`);
+  } catch (error: any) {
+    Notiflix.Notify.failure(`Sinto muito, mas nao foi possivel adicionar o item ao tópico. ${error.response.data.message}`);
+  } finally {
     formik({
       values: {
         itemName: "",
@@ -62,9 +52,8 @@ export const handleCreateList = async (
         file: values.file,
       },
     });
-  
-
-  Loading.remove();
+    Loading.remove();
+  }
 };
 
 export const handleFinallyTopic = async (
@@ -109,9 +98,7 @@ export const handleDeleteItem = async (
     });
     setArrayItens(arrayItensFilter);
   } catch (error: any) {
-    Notiflix.Notify.failure(
-      `Sinto muito, mas nao foi possivel excluir esse item. ${error.response.data.message}`
-    );
+    Notiflix.Notify.failure(`Sinto muito, mas nao foi possivel excluir esse item. ${error.response.data.message}`);
   } finally {
     Loading.remove();
   }

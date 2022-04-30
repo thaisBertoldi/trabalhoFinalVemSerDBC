@@ -29,9 +29,7 @@ import {
 } from "./ModalQuotation.style";
 
 const ModalQuotation = ({ user, onClick, id }: ModalQuotationDTO) => {
-  const [valuesQuotation, setValuesQuotation] = useState<
-    Array<ModalQuotationValuesDTO>
-  >([]);
+  const [valuesQuotation, setValuesQuotation] = useState<Array<ModalQuotationValuesDTO>>([]);
 
   const getQuotation = async (id: number | undefined) => {
     try {
@@ -121,30 +119,33 @@ const ModalQuotation = ({ user, onClick, id }: ModalQuotationDTO) => {
               <p> {maskMoneyHTML(item.quotationPrice)}</p>
               <DivButtons>
                 {
-                    valuesQuotation.length < 2 && user.profile === TYPE_USERS.MANAGER ? (
-                      <span>Ainda não há cotações suficientes.</span>
-                    ) : (
-                      <>
+                  valuesQuotation.length < 2 && user.profile === TYPE_USERS.MANAGER ? (
+                    <span>Ainda não há cotações suficientes.</span>
+                  ) : (
+                    <>
                       {
                         (user.profile === TYPE_USERS.MANAGER ||
                         user.profile === TYPE_USERS.FINANCIER) && (
-                        <BtnModalQuotation
-                          color={"#04a96d"}
-                          onClick={() => { user.profile === TYPE_USERS.MANAGER ? handleAproveQuotation(item.quotationId): handleAproveByFinancier(true)}}
-                        >
+                          <BtnModalQuotation
+                            color={"#04a96d"}
+                            onClick={() => { user.profile === TYPE_USERS.MANAGER ? handleAproveQuotation(item.quotationId): handleAproveByFinancier(true)}}
+                          >
                           Aprovar
-                        </BtnModalQuotation>
-                      )}
-                      {user.profile === TYPE_USERS.FINANCIER && (
-                        <BtnModalQuotation
-                          color={"#f44336"}
-                          onClick={() => handleAproveByFinancier(false)}
-                        >
-                          Reprovar
-                        </BtnModalQuotation>
-                      )}
+                          </BtnModalQuotation>
+                        )
+                      }
+                      {
+                        user.profile === TYPE_USERS.FINANCIER && (
+                          <BtnModalQuotation
+                            color={"#f44336"}
+                            onClick={() => handleAproveByFinancier(false)}
+                          >
+                            Reprovar
+                          </BtnModalQuotation>
+                        )
+                      }
                     </>
-                    )
+                  )
                 }
               </DivButtons>
             </DivQuotations>

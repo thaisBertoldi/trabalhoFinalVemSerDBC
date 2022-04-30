@@ -40,24 +40,20 @@ const CardItemHome = ({ id }: CardItemHomeProps) => {
         </CardItem>
         {listItens.length > 1 ? (
           <SpanMoreItens>E mais {listItens.length - 1}</SpanMoreItens>
-        ) : (
-          <SpanMoreItens></SpanMoreItens>
-        )}
+        ) : null}
         </>
       ) : (
         <>
           {loading ? (
             <LoadingItem>
               <img src={loadingImg} alt="carregando informações"/>
-              <SpanMoreItens></SpanMoreItens>
             </LoadingItem>
           ) : (
             <>
-            <CardItem>
-              <h2>Não há itens cadastrados.</h2>
-            </CardItem>
-              <SpanMoreItens></SpanMoreItens>
-              </>
+              <CardItem>
+                <h2>Não há itens cadastrados.</h2>
+              </CardItem>
+            </>
           )}
         </>
       )}

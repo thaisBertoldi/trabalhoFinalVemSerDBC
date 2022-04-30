@@ -58,14 +58,12 @@ export const handleProfile = async (
     );
     Notiflix.Notify.success(`Perfil do usuário alterado com sucesso.`);
   } catch (error: any) {
-    Notiflix.Notify.failure(
-      `Sinto muito, mas nao foi possivel alterar o perfil desse usuário. ${error.response.data.message}`
-    );
+    Notiflix.Notify.failure(`Sinto muito, mas nao foi possivel alterar o perfil desse usuário. ${error.response.data.message}`);
   } finally {
     getAllUsers(setAllUsers, page, setAllPages, setIsSearchUser);
     setIsSearchUser(false);
     setUserSearch('');
     Loading.remove();
+    formik();
   }
-  formik();
 };

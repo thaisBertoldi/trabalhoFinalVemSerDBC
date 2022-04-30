@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { hasLogin, redirectToLogin } from "../../utils/utils";
 import notFound from "../../images/notFound.png";
 import notFoundGif from "../../images/notFound.gif"
 import { Btn } from "../../global.style";
@@ -9,10 +10,10 @@ const NotFound = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // setTimeout(() => {
-    //   redirectToLogin(navigate); 
-    //   hasLogin(navigate)
-    // }, 3000);
+    setTimeout(() => {
+      redirectToLogin(navigate); 
+      hasLogin(navigate)
+    }, 3000);
   }, []);
 
   return (

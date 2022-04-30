@@ -20,13 +20,7 @@ import { ColorEnum, StatusEnum } from "../../enums/StatusEnum";
 import { TopicComponentDTO } from "../../models/TopicDTO";
 import { ENDPOINT_TOPICS, TYPE_USERS } from "../../constants";
 
-const CardTopicHome = ({
-  item,
-  user,
-  setOpenModalQuotation,
-  setOpenModalAddQuotation,
-  setOpenModalItens,
-}: TopicComponentDTO) => {
+const CardTopicHome = ({item, user, setOpenModalQuotation, setOpenModalAddQuotation,setOpenModalItens,}: TopicComponentDTO) => {
   const handleDeleteTopic = () => {
     Confirm.show(
       "Deletar Tópico",
