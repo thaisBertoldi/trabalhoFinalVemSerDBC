@@ -18,6 +18,7 @@ import { TopicComponentDTO } from "../../models/TopicDTO";
 import { ENDPOINT_TOPICS, TYPE_USERS } from "../../constants";
 import Notiflix, { Confirm } from "notiflix";
 import api from "../../service/api";
+import { maskMoneyHTML } from "../../utils/utils";
 
 const CardTopicHome = ({item, user, setOpenModalQuotation, setOpenModalAddQuotation,  setOpenModalItens}: TopicComponentDTO) =>  {
 
@@ -63,7 +64,7 @@ const CardTopicHome = ({item, user, setOpenModalQuotation, setOpenModalAddQuotat
           <MdDateRange /> {moment(item.date).format("DD/MM/YYYY")}
         </p>
         <p>
-          <GrMoney /> R$ {item.totalValue}
+          <GrMoney /> {maskMoneyHTML(item.totalValue)}
         </p>
       </InfoDataPrice>
       <DivButtonsCard>

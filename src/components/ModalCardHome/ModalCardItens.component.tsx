@@ -7,6 +7,7 @@ import {
 import { ContainerModal, BtnClose, Modal } from '../globalStyleComponents.style';
 import { AiFillCloseCircle } from "react-icons/ai";
 import { ItensInTopicDTO, ModalComponentDTO } from "../../models/ModalsDTO";
+import { maskMoneyHTML } from "../../utils/utils";
 
 const ModalCardItens = ({ id, onClick }: ModalComponentDTO) => {
   const [ItensInTopic, setItensInTopic] = useState<Array<ItensInTopicDTO>>([]);
@@ -40,7 +41,7 @@ const ModalCardItens = ({ id, onClick }: ModalComponentDTO) => {
                 alt="imagem do iten"
               />
               <p>Nome: {item.itemName.toUpperCase()}</p>
-              <p>R$ {item.value}</p>
+              <p>{maskMoneyHTML(item.value)}</p>
               <p>{item.description}</p>
             </CardItem>
           ))

@@ -28,6 +28,7 @@ export const ButtonCustom = styled.button<{ colorHover: string }>`
   display: flex;
   align-items: center;
   background-color: #e9e9e9;
+  cursor: pointer;
 
   :not([disabled]):hover {
     -moz-transform: scale(1.1);

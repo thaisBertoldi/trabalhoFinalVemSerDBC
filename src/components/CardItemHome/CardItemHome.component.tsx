@@ -11,6 +11,7 @@ import loadingImg from '../../images/loading.gif'
 import { CardItemHomeProps } from "../../models/TopicDTO";
 import { ItensInTopicDTO } from "../../models/ModalsDTO";
 import { LoadingItem } from "../../global.style";
+import { maskMoneyHTML } from "../../utils/utils";
 
 const CardItemHome = ({ id }: CardItemHomeProps) => {
   const [listItens, setListItens] = useState<Array<ItensInTopicDTO>>([]);
@@ -32,7 +33,7 @@ const CardItemHome = ({ id }: CardItemHomeProps) => {
           <CardItemInfos>
             <CardItemValueName>
               <p>Nome: {listItens[0].itemName.toUpperCase()}</p>
-              <strong><p>R$ {listItens[0].value}</p></strong>
+              <strong><p>{ maskMoneyHTML(listItens[0].value)}</p></strong>
             </CardItemValueName>
             <Desc>{listItens[0].description}</Desc>
           </CardItemInfos>

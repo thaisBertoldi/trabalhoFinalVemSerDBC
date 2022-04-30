@@ -27,7 +27,7 @@ import {
 } from "./RequestPurchase.style";
 import { Theme } from "../../theme";
 
-import { imgConverter, maskMoney } from "../../utils/utils";
+import { imgConverter, maskMoney, maskMoneyHTML } from "../../utils/utils";
 import { mySchemaPurchase } from "../../utils/yupValidations";
 import { useNavigate } from "react-router-dom";
 import { isLoggedDTO } from "../../models/UserDTO";
@@ -226,7 +226,7 @@ const RequestPurchase = ({
                   <img src={`data:image;base64,${item.file}`} alt="item" />
                   <p>{item.itemName}</p>
                   
-                  <p>R$ {item.value}</p>
+                  <p>{maskMoneyHTML(item.value)}</p>
                   <FaTrashAlt onClick={() => handleDeleteItem(item.itemId, setArrayItens, arrayItens)} />
                 </DivTopItens>
               ))

@@ -15,6 +15,7 @@ import {
 } from "../../models/ModalsDTO";
 import api from "../../service/api";
 import { RootState } from "../../store";
+import { maskMoneyHTML } from "../../utils/utils";
 import {
   BtnClose,
   ContainerModal,
@@ -117,7 +118,7 @@ const ModalQuotation = ({ user, onClick, id }: ModalQuotationDTO) => {
           valuesQuotation.map((item: ModalQuotationValuesDTO) => (
             <DivQuotations key={item.quotationId}>
               <p> Status: {StatusEnum[item.quotationStatus]}</p>
-              <p> R$: {item.quotationPrice}</p>
+              <p> {maskMoneyHTML(item.quotationPrice)}</p>
               <DivButtons>
                 {
                     valuesQuotation.length < 2 && user.profile === TYPE_USERS.MANAGER ? (
