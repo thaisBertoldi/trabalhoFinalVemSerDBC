@@ -10,6 +10,7 @@ export const HeaderNav = styled.header`
   display: flex;
   align-items: center;
   flex-direction: row-reverse;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
 
 export const DivLinksMenu = styled.div`
