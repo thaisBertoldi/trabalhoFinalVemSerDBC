@@ -83,7 +83,7 @@ const Administration = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
           height={"40px"}
           placeholder="Pesquisar"
           onChange={(event) => setUserSearch(event.target.value)}
-        ></InputForm>
+        />
         <IconSearch />
       </DivSearch>
       <CenterCustom>

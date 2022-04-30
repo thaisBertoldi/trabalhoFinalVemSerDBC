@@ -33,10 +33,16 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
 
   const [listTopics, setListTopics] = useState<Array<TopicDTO>>([]);
   const [listSearched, setListSearched] = useState<Array<TopicDTO>>([]);
+  
   const [allPages, setAllPages] = useState<number>(0);
   const [allPagesSearch, setAllPagesSearch] = useState<number>(0);
+
   const [page, setPage] = useState<number>(0);
+  const [pageSearch, setPageSeach] = useState<number>(0);
+  
+  const [isSearch, setIsSearch] = useState<boolean>(false);
   const [descriptionTopic, setDescriptionTopic] = useState("Todos os tópicos");
+  const [inputSearch, setInputSearch] = useState<string>("");
 
   const [OpenModalAddQuotation, setOpenModalAddQuotation] = useState<ModalDTO>({
     open: false,
@@ -52,10 +58,6 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
     open: false,
     id: 0,
   });
-
-  const [pageSearch, setPageSeach] = useState<number>(0);
-  const [inputSearch, setInputSearch] = useState<string>("");
-  const [isSearch, setIsSearch] = useState<boolean>(false);
 
   const handleUserSearch = async () => {
     try {
@@ -91,7 +93,6 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
     if(User?.token) {
       api.defaults.headers.common['Authorization'] = User?.token;
     }
-
     redirectToLogin(navigate);
     redirectAdmin(navigate, user.profile);
     getDescriptionTopic();
@@ -119,7 +120,7 @@ const Home = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
           height={"40px"}
           placeholder="Pesquisar"
           onChange={(e) => setInputSearch(e.target.value)}
-        ></InputForm>
+        />
         <IconSearch onClick={() => handleUserSearch()} />
       </DivSearch>
       <DivDescriptionTopic>

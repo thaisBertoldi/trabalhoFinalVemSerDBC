@@ -45,10 +45,8 @@ const ModalCreateUserAdm = ({ onClick }: ModalComponentDTO) => {
       );
       Notiflix.Notify.success(`Usuário cadastrado com sucesso.`);
       onClick();
-    } catch (error: any) {
-      Notiflix.Notify.failure(
-        `Sinto muito, mas nao foi possivel acessar a api. ${error.response.data.message}`
-      );
+    } catch (error) {
+      Notiflix.Notify.failure(`Sinto muito, mas nao foi possivel acessar a api.`);
     } finally {
       Loading.remove();
     }

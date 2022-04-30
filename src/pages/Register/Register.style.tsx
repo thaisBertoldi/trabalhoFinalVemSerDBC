@@ -1,19 +1,21 @@
 import styled from 'styled-components';
+import { Theme } from '../../theme';
 
-export const DivLabelFile = styled.div`
-  width: 100%;
+export const DivEyeRegister = styled.div`
 
-  input[type="file"] {
-    display: none;
+  position: absolute;
+  font-size: 20px;
+  right: 30px;
+  bottom: 41%;
+  color: ${Theme.color.white};
+
+  @media (max-width: 700px) {
+    bottom: 41%;
   }
-
-  label {
-    width: 1000px;
-    background-color: #156ebe;
-    padding: 5px;
-    font-size: 14px;
-    color: #fff;
-    border: none;
-    border-bottom: 2px solid #25292a;
+  @media (max-width: 480px) {
+    bottom: 43%;
+  }
+  @media (max-width: 380px) {
+    visibility: hidden;
   }
 `;

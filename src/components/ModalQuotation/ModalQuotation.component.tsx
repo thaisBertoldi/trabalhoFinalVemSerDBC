@@ -29,9 +29,7 @@ import {
 } from "./ModalQuotation.style";
 
 const ModalQuotation = ({ user, onClick, id }: ModalQuotationDTO) => {
-  const [valuesQuotation, setValuesQuotation] = useState<
-    Array<ModalQuotationValuesDTO>
-  >([]);
+  const [valuesQuotation, setValuesQuotation] = useState<Array<ModalQuotationValuesDTO>>([]);
 
   const getQuotation = async (id: number | undefined) => {
     try {
@@ -39,8 +37,8 @@ const ModalQuotation = ({ user, onClick, id }: ModalQuotationDTO) => {
         `${ENDPOINT_QUOTATION.MAIN_PAGE_QUOTATION}/${id}`
       );
       setValuesQuotation(data);
-    } catch (error: any) {
-      console.log(error.response.data.message);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -50,10 +48,8 @@ const ModalQuotation = ({ user, onClick, id }: ModalQuotationDTO) => {
         `${ENDPOINT_MANAGER.REPROVE_ALL_QUOTATIONS}/${id}`
       );
       Notiflix.Notify.success(`Tópico reprovado.`);
-    } catch (error: any) {
-      Notiflix.Notify.failure(
-        `Sinto muito, mas nao foi possível reprovar esse tópico. ${error.response.data.message}`
-      );
+    } catch (error) {
+      Notiflix.Notify.failure(`Sinto muito, mas nao foi possível reprovar esse tópico.`);
     } finally {
       onClick();
       getQuotation(id);
@@ -66,11 +62,9 @@ const ModalQuotation = ({ user, onClick, id }: ModalQuotationDTO) => {
         `${ENDPOINT_MANAGER.APROVE_QUOTATION}/${idQuotation}`
       );
       Notiflix.Notify.success(`Cotação aprovada.`);
-    } catch (error: any) {
+    } catch (error) {
       console.log(error);
-      Notiflix.Notify.failure(
-        `Sinto muito, mas nao foi possível aprovar essa cotação. ${error.response.data.message}`
-      );
+      Notiflix.Notify.failure(`Sinto muito, mas nao foi possível aprovar essa cotação.`);
     } finally {
       onClick();
       getQuotation(id);
@@ -83,10 +77,8 @@ const ModalQuotation = ({ user, onClick, id }: ModalQuotationDTO) => {
         `${ENDPOINT_FINANCIER.UPDATE_STATUS}/${id}/${status}`
       );
       Notiflix.Notify.success(`Cotação aprovada.`);
-    } catch (error: any) {
-      Notiflix.Notify.failure(
-        `Sinto muito, mas nao foi possível aprovar essa cotação. ${error.response.data.message}`
-      );
+    } catch (error) {
+      Notiflix.Notify.failure(`Sinto muito, mas nao foi possível aprovar essa cotação.`);
     } finally {
       onClick();
     }
@@ -121,30 +113,33 @@ const ModalQuotation = ({ user, onClick, id }: ModalQuotationDTO) => {
               <p> {maskMoneyHTML(item.quotationPrice)}</p>
               <DivButtons>
                 {
-                    valuesQuotation.length < 2 && user.profile === TYPE_USERS.MANAGER ? (
-                      <span>Ainda não há cotações suficientes.</span>
-                    ) : (
-                      <>
+                  valuesQuotation.length < 2 && user.profile === TYPE_USERS.MANAGER ? (
+                    <span>Ainda não há cotações suficientes.</span>
+                  ) : (
+                    <>
                       {
                         (user.profile === TYPE_USERS.MANAGER ||
                         user.profile === TYPE_USERS.FINANCIER) && (
-                        <BtnModalQuotation
-                          color={"#04a96d"}
-                          onClick={() => { user.profile === TYPE_USERS.MANAGER ? handleAproveQuotation(item.quotationId): handleAproveByFinancier(true)}}
-                        >
+                          <BtnModalQuotation
+                            color={"#04a96d"}
+                            onClick={() => { user.profile === TYPE_USERS.MANAGER ? handleAproveQuotation(item.quotationId): handleAproveByFinancier(true)}}
+                          >
                           Aprovar
-                        </BtnModalQuotation>
-                      )}
-                      {user.profile === TYPE_USERS.FINANCIER && (
-                        <BtnModalQuotation
-                          color={"#f44336"}
-                          onClick={() => handleAproveByFinancier(false)}
-                        >
-                          Reprovar
-                        </BtnModalQuotation>
-                      )}
+                          </BtnModalQuotation>
+                        )
+                      }
+                      {
+                        user.profile === TYPE_USERS.FINANCIER && (
+                          <BtnModalQuotation
+                            color={"#f44336"}
+                            onClick={() => handleAproveByFinancier(false)}
+                          >
+                            Reprovar
+                          </BtnModalQuotation>
+                        )
+                      }
                     </>
-                    )
+                  )
                 }
               </DivButtons>
             </DivQuotations>

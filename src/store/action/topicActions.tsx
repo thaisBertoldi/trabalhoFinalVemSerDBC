@@ -17,8 +17,6 @@ export const getTopics = async (
   }
 };
 
-
-
 export const getItensTopic = async (id: number, setListItens: Function, setLoading: Function) => {
   try {
     const { data } = await api.get(

@@ -7,12 +7,13 @@ import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Logo from "../../components/Logo/Logo";
 import { Theme } from "../../theme";
-import { DivEye, DivInputsLogin, DivLogo } from "../Login/Login.style";
 import { isLoggedDTO, RegisterDTO } from "../../models/UserDTO";
 import { handleRegister } from "../../store/action/authActions";
 import { hasLogin, imgConverter } from "../../utils/utils";
 import { RootState } from "../../store";
 import { mySchemaRegister } from "../../utils/yupValidations";
+import { DivInputsLogin, DivLogo } from "../Login/Login.style";
+import { DivEyeRegister } from "./Register.style";
 import {
   Btn,
   Input,
@@ -116,16 +117,15 @@ const Register = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
               {formik.errors.password && formik.touched.password ? (
                 <DivErrorYup>{formik.errors.password}</DivErrorYup>
               ) : <DivErrorYup></DivErrorYup>}
-              <DivEye>
+              <DivEyeRegister>
                 {showPassword ? (
                   <FaEye onClick={() => setShowPassword(!showPassword)} />
                 ) : (
                   <FaEyeSlash onClick={() => setShowPassword(!showPassword)} />
                 )}
-              </DivEye>
-            </div>
+              </DivEyeRegister>
 
-            {formik.values.password.length > 0 && (
+              {formik.values.password.length > 0 && (
               <PasswordStrengthBar
                 password={formik.values.password}
                 barColors={[
@@ -139,6 +139,9 @@ const Register = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
                 minLength={8}
               />
             )}
+            </div>
+
+            
 
             <Input
               width="99%"

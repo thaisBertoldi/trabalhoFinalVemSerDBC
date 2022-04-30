@@ -11,10 +11,8 @@ export const handleLogin = async (values: LoginDTO, dispatch: AppDispatch, navig
     const {data} = await api.post(ENDPOINT_AUTH.LOGIN, values);
     setLogin(dispatch, data);
     navigate('/');
-  } catch (error: any) {
-    Notiflix.Notify.failure(
-      `Sinto muito, mas nao foi possivel acessar a api.`
-    );
+  } catch (error) {
+    Notiflix.Notify.failure(`Sinto muito, mas nao foi possivel acessar a api.`);
   } finally {
     Loading.remove();
   }
@@ -26,19 +24,14 @@ export const handleRegister = async (values: RegisterDTO, dispatch: AppDispatch,
   formData.append('username', values.username);
   formData.append('fullName', values.fullName);
   formData.append('password', values.password);
-
   try {
     Loading.circle();
     const {data} = await api.post(ENDPOINT_AUTH.SING, formData);
     setLogin(dispatch, data);
-    Notiflix.Notify.success(
-      `Usuário cadastrado com sucesso.`
-    );
+    Notiflix.Notify.success(`Usuário cadastrado com sucesso.`);
     navigate('/login');
-  } catch (error: any) {
-    Notiflix.Notify.failure(
-      `Sinto muito, mas nao foi possivel acessar a api. ${error.response.data.message}`
-    );
+  } catch (error) {
+    Notiflix.Notify.failure(`Sinto muito, mas nao foi possivel acessar a api.`);
   } finally {
     Loading.remove();
   }
@@ -64,6 +57,8 @@ export const setLogin = (dispatch: AppDispatch, data: isLoggedDTO["user"]) => {
 export const handleLogout = (dispatch: AppDispatch, navigate: Function) => {
   Loading.circle();
   localStorage.removeItem('token');
+  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+  api.defaults.headers.common["Authorization"];
   dispatch({type: 'SET_LOGOUT'});
   navigate('/login');
   Loading.remove();
