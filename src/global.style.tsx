@@ -136,6 +136,7 @@ export const BtnForm = styled.button<{ width: string }>`
   border: none;
   color: ${Theme.color.white};
   margin-top: 5px;
+  cursor: pointer;
 
   :disabled {
     background: gray;

@@ -125,7 +125,7 @@ const Register = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
               </DivEye>
             </div>
 
-            {formik.values.password.length && (
+            {formik.values.password.length > 0 && (
               <PasswordStrengthBar
                 password={formik.values.password}
                 barColors={[

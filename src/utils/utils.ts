@@ -39,6 +39,11 @@ export const removeMaskMoney = (value: string) => {
   return value.replace("R$ ", "").replace(".", "").replace(",", ".");
 };
 
+export const maskMoneyHTML = (value: string|number) => {
+  let convertText =  value.toString()
+  return `R$ ${convertText.replace('.', ',')}`
+}
+
 export const imgConverter = (
   event: React.ChangeEvent<HTMLInputElement>,
   formik: Function,

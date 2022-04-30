@@ -53,8 +53,8 @@ export const BtnAdm = styled.button<{
   outline: none;
   border: none;
   color: ${(props) => props.color};
-  cursor: pointer;
   font-size: 14px;
+  cursor: pointer;
 
   :hover {
     background: ${Theme.color.grayDark};

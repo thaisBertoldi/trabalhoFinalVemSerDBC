@@ -18,6 +18,14 @@ import api from "../../service/api";
 import { ColorEnum, StatusEnum } from "../../enums/StatusEnum";
 import { TopicComponentDTO } from "../../models/TopicDTO";
 import { ENDPOINT_TOPICS, TYPE_USERS } from "../../constants";
+<<<<<<< HEAD
+=======
+import Notiflix, { Confirm } from "notiflix";
+import api from "../../service/api";
+import { maskMoneyHTML } from "../../utils/utils";
+
+const CardTopicHome = ({item, user, setOpenModalQuotation, setOpenModalAddQuotation,  setOpenModalItens}: TopicComponentDTO) =>  {
+>>>>>>> 3b1981c1a5c17d2191912e2d46ffdb68c85bc18e
 
 const CardTopicHome = ({
   item,
@@ -68,7 +76,7 @@ const CardTopicHome = ({
           <MdDateRange /> {moment(item.date).format("DD/MM/YYYY")}
         </p>
         <p>
-          <GrMoney /> R$ {item.totalValue}
+          <GrMoney /> {maskMoneyHTML(item.totalValue)}
         </p>
       </InfoDataPrice>
       <DivButtonsCard>
