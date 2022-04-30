@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import api from "../../service/api";
+import upload from "../../images/upload.svg";
 import { Theme } from "../../theme";
 import { imgConverter } from "../../utils/utils";
 import { ENDPOINT_ADMIN } from "../../constants";
@@ -13,8 +14,8 @@ import { mySchemaRegister } from "../../utils/yupValidations";
 import {
   Btn,
   DivErrorYup,
-  DivInputFile,
   DivStrengthBar,
+  DivInputFileIMG
 } from "../../global.style";
 import {
   ModalAdm,
@@ -182,8 +183,10 @@ const ModalCreateUserAdm = ({ onClick }: ModalComponentDTO) => {
             <DivErrorYup></DivErrorYup>
           )}
 
-          <DivInputFile>
-            <span>Escolha uma imagem</span>
+          <DivInputFileIMG>
+            <label htmlFor="profileImage">
+                    <img src={upload} alt="envio de arquivo" />
+            </label>
             <input
               width={"100%"}
               height={"40px"}
@@ -195,7 +198,7 @@ const ModalCreateUserAdm = ({ onClick }: ModalComponentDTO) => {
                 imgConverter(event, formik.setFieldValue, "profileImage")
               }
             />
-          </DivInputFile>
+          </DivInputFileIMG>
           {formik.errors.profileImage && formik.touched.profileImage ? (
             <DivErrorYup>{formik.errors.profileImage}</DivErrorYup>
           ) : null}

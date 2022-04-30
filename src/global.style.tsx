@@ -244,6 +244,38 @@ export const DivInputFile = styled.div`
   }
 `;
 
+
+export const DivInputFileIMG = styled.div`
+
+  label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 2px dotted #7d7d7d;
+    border-radius: 10px;
+
+    padding: 30px 50px;
+    margin-top: 20px  ;
+
+    gap: 5px;
+
+    font-size: 14px;
+    font-weight: 400;
+    color: #7d7d7d;
+    cursor: pointer;
+
+    img {
+      width: 80px;
+      height: 80px;
+    }
+  }
+
+  input {
+    display: none;
+  }
+`;
+
 export const LoadingItem = styled.div`
   display: flex;
   width: 100%;

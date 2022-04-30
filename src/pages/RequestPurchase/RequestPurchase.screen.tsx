@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { connect, DispatchProp } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { FaTrashAlt } from "react-icons/fa";
+import upload from "../../images/upload.svg";
 import { Theme } from "../../theme";
 import { RootState } from "../../store";
 import { imgConverter, maskMoney, maskMoneyHTML } from "../../utils/utils";
@@ -16,8 +17,8 @@ import {
   Container,
   InputForm,
   DivErrorYup,
-  DivInputFile,
   CenterCustom,
+  DivInputFileIMG,
 } from "../../global.style";
 import {
   handleDeleteItem,
@@ -32,7 +33,6 @@ import {
   ContainerRequest,
   ContainerRequestForm,
 } from "./RequestPurchase.style";
-
 const RequestPurchase = ({
   user,
   auth,
@@ -166,8 +166,10 @@ const RequestPurchase = ({
                 <DivErrorYup>{formik.errors.value}</DivErrorYup>
               ) :  <DivErrorYup></DivErrorYup>}
 
-              <DivInputFile>
-                <span>Escolha uma imagem</span>
+              <DivInputFileIMG>
+                <label htmlFor="file">
+                  <img src={upload} alt="envio de arquivo" />
+                </label>
                 <input
                   width={"100%"}
                   height={"40px"}
@@ -178,11 +180,10 @@ const RequestPurchase = ({
                     imgConverter(event, formik.setFieldValue, "file")
                   }
                 />
-              </DivInputFile>
+              </DivInputFileIMG>
               {formik.errors.file && formik.touched.file ? (
                 <DivErrorYup>{formik.errors.file}</DivErrorYup>
               ) :  <DivErrorYup></DivErrorYup>}
-
               <CenterCustom>
                 <BtnForm width={"300px"} color={"#25292a"} type="submit">
                   Adicionar

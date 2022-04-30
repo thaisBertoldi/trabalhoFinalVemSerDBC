@@ -40,12 +40,12 @@ export const DivEyeAdm = styled.div`
   font-size: 25px;
   position: absolute;
   right: 30.5%;
-  top: 45%;
+  top: 40%;
   color: ${Theme.color.black};
 
   @media (max-width: 1024px) {
-    right: 20%;
-    top: 45%; 
+    right: 21%;
+    top: 39%; 
   }
 `;
 
