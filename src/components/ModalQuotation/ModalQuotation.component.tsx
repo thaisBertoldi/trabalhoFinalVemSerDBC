@@ -49,9 +49,7 @@ const ModalQuotation = ({ user, onClick, id }: ModalQuotationDTO) => {
       );
       Notiflix.Notify.success(`Tópico reprovado.`);
     } catch (error) {
-      Notiflix.Notify.failure(
-        `Sinto muito, mas nao foi possível reprovar esse tópico.`
-      );
+      Notiflix.Notify.failure(`Sinto muito, mas nao foi possível reprovar esse tópico.`);
     } finally {
       onClick();
       getQuotation(id);
@@ -66,9 +64,7 @@ const ModalQuotation = ({ user, onClick, id }: ModalQuotationDTO) => {
       Notiflix.Notify.success(`Cotação aprovada.`);
     } catch (error) {
       console.log(error);
-      Notiflix.Notify.failure(
-        `Sinto muito, mas nao foi possível aprovar essa cotação.`
-      );
+      Notiflix.Notify.failure(`Sinto muito, mas nao foi possível aprovar essa cotação.`);
     } finally {
       onClick();
       getQuotation(id);
@@ -82,9 +78,7 @@ const ModalQuotation = ({ user, onClick, id }: ModalQuotationDTO) => {
       );
       Notiflix.Notify.success(`Cotação aprovada.`);
     } catch (error) {
-      Notiflix.Notify.failure(
-        `Sinto muito, mas nao foi possível aprovar essa cotação.`
-      );
+      Notiflix.Notify.failure(`Sinto muito, mas nao foi possível aprovar essa cotação.`);
     } finally {
       onClick();
     }

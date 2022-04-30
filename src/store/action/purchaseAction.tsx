@@ -74,9 +74,7 @@ export const handleFinallyTopic = async (
     formikTopicReset()
     setIsTopicCreate(false)
   } catch (error) {
-    Notiflix.Notify.failure(
-      `Sinto muito, mas nao foi possivel finalizar o tópico.`
-    );
+    Notiflix.Notify.failure(`Sinto muito, mas nao foi possivel finalizar o tópico.`);
   } finally {
     Loading.remove();
   }

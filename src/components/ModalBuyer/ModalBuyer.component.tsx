@@ -20,14 +20,10 @@ const ModalBuyer = ({onClick, id}: ModalComponentDTO) => {
     Loading.circle();
     try {
       const {data} = await api.post(`${ENDPOINT_QUOTATION.CREATE_QUOTATION}/${id}?preco=${price}`);
-      Notiflix.Notify.success(
-        `Cotação criada com sucesso.`
-      );
+      Notiflix.Notify.success(`Cotação criada com sucesso.`);
       onClick()
     } catch (error) {
-      Notiflix.Notify.failure(
-        `Sinto muito, mas nao foi possivel adicionar a cotação.`
-      );
+      Notiflix.Notify.failure(`Sinto muito, mas nao foi possivel adicionar a cotação.`);
     } finally {
       Loading.remove();
     }
