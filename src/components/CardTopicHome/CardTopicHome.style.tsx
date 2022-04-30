@@ -12,6 +12,14 @@ export const ContainerCard = styled.div`
   padding-bottom: 20px;
   -webkit-box-shadow: 0px 1px 31px 9px rgba(0, 0, 0, 0.46);
   box-shadow: 0px 1px 31px 9px rgba(105, 105, 105, 0.46);
+  -moz-transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  :hover {
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
 
   p {
     overflow: hidden;
@@ -22,7 +30,6 @@ export const ContainerCard = styled.div`
   }
 
   @media (max-width: 1620px) {
-    
   }
 `;
 
@@ -57,10 +64,10 @@ export const TopicName = styled.div`
   }
 `;
 
-export const DivStatus = styled.div<{color: string}>`
+export const DivStatus = styled.div<{ color: string }>`
   display: flex;
   justify-content: flex-end;
-  color: ${props => props.color}
+  color: ${(props) => props.color};
 `;
 
 export const InfoDataPrice = styled.div`
