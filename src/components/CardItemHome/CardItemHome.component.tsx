@@ -40,7 +40,7 @@ const CardItemHome = ({ id }: CardItemHomeProps) => {
         </CardItem>
         {listItens.length > 1 ? (
           <SpanMoreItens>E mais {listItens.length - 1}</SpanMoreItens>
-        ) : null}
+        ) : <SpanMoreItens></SpanMoreItens>}
         </>
       ) : (
         <>
