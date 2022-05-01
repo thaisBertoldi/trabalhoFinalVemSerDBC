@@ -49,6 +49,9 @@ const ModalCreateUserAdm = ({ onClick }: ModalComponentDTO) => {
       Notiflix.Notify.failure(`Sinto muito, mas nao foi possivel acessar a api.`);
     } finally {
       Loading.remove();
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
     }
   };
 
