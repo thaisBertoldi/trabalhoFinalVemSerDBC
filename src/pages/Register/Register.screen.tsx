@@ -141,8 +141,6 @@ const Register = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
             )}
             </div>
 
-            
-
             <Input
               width="99%"
               height="40px"
@@ -175,7 +173,6 @@ const Register = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
             {formik.errors.profileImage && formik.touched.profileImage ? (
                 <DivErrorYup>{formik.errors.profileImage}</DivErrorYup>
               ) : <DivErrorYup></DivErrorYup>}
-
 
             <Btn width="100%" type="submit" color={Theme.color.primary}>
               Submit

@@ -26,8 +26,6 @@ const Login = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState<boolean>(true);
-  const [hasUserName, setHasUserName] = useState<boolean>(true);
-  const [allUsers, setAllUsers] = useState<Array<UsersAdmDTO>>([]);
 
   useEffect(() => {
     hasLogin(navigate);
@@ -74,11 +72,7 @@ const Login = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
               {formik.errors.username && formik.touched.username ? (
                 <DivErrorYup>{formik.errors.username}</DivErrorYup>
               ) : null}
-              {!hasUserName && (
-                <DivErrorYup>
-                  Esse usuário não está cadastrado no sistema.
-                </DivErrorYup>
-              )}
+
               <div>
                 <Input
                   width="99%"

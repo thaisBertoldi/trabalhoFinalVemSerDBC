@@ -3,6 +3,8 @@ import { connect, DispatchProp } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { MdMenu } from "react-icons/md";
 import { IoMdArrowDropdown } from "react-icons/io";
+import Hamburguer from "./Hamburguer.component";
+import ItensMenu from "./ItensMenu.component";
 import {
   UlNav,
   DivArrow,
@@ -12,8 +14,6 @@ import {
   MenuHamburguer,
   ParagraphNameUser,
 } from "./Header.style";
-import Hamburguer from "./Hamburguer.component";
-import ItensMenu from "./ItensMenu.component";
 import { handleLogout } from "../../store/action/authActions";
 import { DefaultImage } from "../../constants";
 import { RootState } from "../../store";

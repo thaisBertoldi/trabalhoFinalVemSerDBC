@@ -33,6 +33,7 @@ import {
   ContainerRequest,
   ContainerRequestForm,
 } from "./RequestPurchase.style";
+
 const RequestPurchase = ({user, auth, dispatch}: isLoggedDTO & PurchaseDTO & DispatchProp) => {
   const [arrayItens, setArrayItens] = useState<NewRequestPurchase[]>([]);
   const [idTopic, setIdTopic] = useState(0);

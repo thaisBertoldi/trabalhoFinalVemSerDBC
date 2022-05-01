@@ -11,7 +11,7 @@ export const TYPE_USERS = {
 
 export const ENDPOINT_AUTH = {
   LOGIN: "/auth/login", 
-  SING: "/auth/sign-up",
+  SIGN: "/auth/sign-up",
 };
 
 export const ENDPOINT_TOPICS = {

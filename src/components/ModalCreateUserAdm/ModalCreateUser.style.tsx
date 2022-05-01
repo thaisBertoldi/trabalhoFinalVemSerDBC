@@ -10,10 +10,13 @@ export const ModalAdm = styled.div`
   border-radius: 5px;
   padding: 25px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-
+  -webkit-animation: scale-in 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation: scale-in 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  
   @media (max-width: 1024px) {
     width: 60%;
   }
+
   form {
     width: 100%;
     margin: 0 auto;
@@ -23,8 +26,6 @@ export const ModalAdm = styled.div`
     gap: 25px;
   }
 
-  -webkit-animation: scale-in 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  animation: scale-in 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 `;
 
 export const DivClose = styled.div`

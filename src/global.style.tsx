@@ -71,14 +71,11 @@ export const ContainerGetInfo = styled.div`
 export const Input = styled.input`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
-
   margin-bottom: 10px;
-
   border: none;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
   border-bottom: 2px solid ${Theme.color.white};
-
   background: none;
   color: ${Theme.color.white};
   font-size: ${Theme.fontSize};
@@ -102,7 +99,6 @@ export const InputForm = styled.input`
   border: 1px ${Theme.color.primary} solid;
   @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
   font-family: "Poppins", sans-serif;
-
   padding: 0 10px;
   box-sizing: border-box;
 
@@ -153,13 +149,12 @@ export const Paragraph = styled.p`
 
   a {
     list-style: none;
-  text-decoration: none;
-  background: radial-gradient(circle, #6dd1ff 20%, #1c91f7 100%);
-  color: black;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-
+    text-decoration: none;
+    background: radial-gradient(circle, #6dd1ff 20%, #1c91f7 100%);
+    color: black;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     list-style: none;
     text-decoration: none;
   }
@@ -182,17 +177,16 @@ export const CenterCustom = styled.div`
 export const SelectCustom = styled.select<{ width: string; height: string }>`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
-  :focus {
-    outline: none;
-  }
-
   @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
   font-family: "Poppins", sans-serif;
   border-radius: 4px;
   border: 1px ${Theme.color.primary} solid;
-
   padding: 0 10px;
-  box-sizing: border-box;
+  box-sizing: border-box;  
+  
+  :focus {
+    outline: none;
+  }
 `;
 
 export const IconSearch = styled(FaSearch)`
@@ -244,22 +238,17 @@ export const DivInputFile = styled.div`
   }
 `;
 
-
 export const DivInputFileIMG = styled.div`
 
   label {
     display: flex;
     align-items: center;
     justify-content: center;
-
     border: 2px dotted #7d7d7d;
     border-radius: 10px;
-
     padding: 30px 50px;
     margin-top: 20px  ;
-
     gap: 5px;
-
     font-size: 14px;
     font-weight: 400;
     color: #7d7d7d;

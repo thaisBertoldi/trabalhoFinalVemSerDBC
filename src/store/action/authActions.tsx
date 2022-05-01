@@ -26,7 +26,7 @@ export const handleRegister = async (values: RegisterDTO, dispatch: AppDispatch,
   formData.append('password', values.password);
   try {
     Loading.circle();
-    const {data} = await api.post(ENDPOINT_AUTH.SING, formData);
+    const {data} = await api.post(ENDPOINT_AUTH.SIGN, formData);
     setLogin(dispatch, data);
     Notiflix.Notify.success(`Usuário cadastrado com sucesso.`);
     navigate('/login');

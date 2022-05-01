@@ -3,7 +3,6 @@ export interface LoginDTO {
   password: string;
 }
 
-
 export interface isLoggedDTO {
   user: {
     username: string;
@@ -14,6 +13,7 @@ export interface isLoggedDTO {
     profileImage?: string;
   };
 }
+
 export interface RegisterDTO {
   username: string;
   fullName: string;

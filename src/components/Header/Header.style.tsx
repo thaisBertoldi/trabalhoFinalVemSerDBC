@@ -41,7 +41,6 @@ export const UlNav = styled.ul`
   align-items: center;
   justify-content: space-between;
 
-
   figure {
     width: 60px;
     height: 60px;

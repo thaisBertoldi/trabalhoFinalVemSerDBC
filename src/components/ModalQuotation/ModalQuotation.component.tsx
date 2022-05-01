@@ -4,18 +4,18 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import { connect } from "react-redux";
 import api from "../../service/api";
 import { StatusEnum } from "../../enums/StatusEnum";
+import { RootState } from "../../store";
+import { maskMoneyHTML } from "../../utils/utils";
+import {
+  ModalQuotationDTO,
+  ModalQuotationValuesDTO,
+} from "../../models/ModalsDTO";
 import {
   TYPE_USERS,
   ENDPOINT_MANAGER,
   ENDPOINT_QUOTATION,
   ENDPOINT_FINANCIER,
 } from "../../constants";
-import {
-  ModalQuotationDTO,
-  ModalQuotationValuesDTO,
-} from "../../models/ModalsDTO";
-import { RootState } from "../../store";
-import { maskMoneyHTML } from "../../utils/utils";
 import {
   Modal,
   BtnClose,

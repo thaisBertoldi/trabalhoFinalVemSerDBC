@@ -4,6 +4,7 @@ import { GrMoney } from "react-icons/gr";
 import { MdSegment, MdDateRange } from "react-icons/md";
 import { BiAddToQueue, BiDetail, BiDollarCircle } from "react-icons/bi";
 import CardItemHome from "../CardItemHome/CardItemHome.component";
+import api from "../../service/api";
 import {
   TitleCard,
   TopicName,
@@ -14,7 +15,6 @@ import {
   ContainerCard,
   DivButtonsCard,
 } from "./CardTopicHome.style";
-import api from "../../service/api";
 import { maskMoneyHTML } from "../../utils/utils";
 import { ColorEnum, StatusEnum } from "../../enums/StatusEnum";
 import { TopicComponentDTO } from "../../models/TopicDTO";

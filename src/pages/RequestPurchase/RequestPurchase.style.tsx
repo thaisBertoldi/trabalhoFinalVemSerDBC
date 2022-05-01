@@ -38,7 +38,6 @@ export const DivItens = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
   background-color: #fff;
   border-radius: 5px;
   padding: 20px;

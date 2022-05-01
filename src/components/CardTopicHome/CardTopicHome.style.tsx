@@ -1,5 +1,5 @@
-import { BsTrash } from "react-icons/bs";
 import styled from "styled-components";
+import { BsTrash } from "react-icons/bs";
 import { Theme } from "../../theme";
 
 export const ContainerCard = styled.div`
@@ -27,9 +27,6 @@ export const ContainerCard = styled.div`
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
-  }
-
-  @media (max-width: 1620px) {
   }
 `;
 

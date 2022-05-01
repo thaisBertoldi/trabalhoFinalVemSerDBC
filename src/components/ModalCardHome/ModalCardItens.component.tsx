@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
-import { ENDPOINT_TOPICS } from "../../constants";
 import api from "../../service/api";
-import {
-  CardItem,
-} from "./ModalCardItens.style";
+import { ENDPOINT_TOPICS } from "../../constants";
+import { CardItem } from "./ModalCardItens.style";
 import { ContainerModal, BtnClose, Modal } from '../globalStyleComponents.style';
 import { ItensInTopicDTO, ModalComponentDTO } from "../../models/ModalsDTO";
 import { maskMoneyHTML } from "../../utils/utils";

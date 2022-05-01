@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { Theme } from '../../theme';
 
 export const DivEyeRegister = styled.div`
-
   position: absolute;
   font-size: 20px;
   right: 30px;

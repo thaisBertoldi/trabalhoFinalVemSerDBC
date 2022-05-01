@@ -15,13 +15,13 @@ export const BtnAdm = styled.button<{
   color: ${(props) => props.color};
   cursor: pointer;
   font-size: 14px;
+  @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+  font-family: "Poppins", sans-serif;
 
   :hover {
     box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
       0 17px 50px 0 rgba(0, 0, 0, 0.19);
   }
-  @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
-  font-family: "Poppins", sans-serif;
 `;
 
 export const ContainerAdmin = styled.div`

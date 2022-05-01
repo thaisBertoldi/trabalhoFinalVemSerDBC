@@ -2,9 +2,7 @@ import styled from 'styled-components';
 
 export const Modal = styled.div`
   width: 40%;
-
   margin: 0 auto;
-
   background-color: #fff;
   border-radius: 5px;
   padding: 20px;
@@ -16,7 +14,6 @@ export const Modal = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-
     margin-top: 20px;
     gap: 15px;
 
@@ -24,7 +21,6 @@ export const Modal = styled.div`
       width: 80%;
     }
   }
-
 `;
 
 export const ButtonCard = styled.button`
