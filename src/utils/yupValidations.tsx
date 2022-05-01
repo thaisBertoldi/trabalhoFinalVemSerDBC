@@ -28,7 +28,6 @@ export const mySchemaRegister = Yup.object().shape({
       password ? field.required().oneOf([Yup.ref("password")]) : field
     ),
     profileImage: Yup.mixed()
-      .required("Você precisa anexar um arquivo")
       .test(
         "fileSize",
         "Este arquivo é muito grande",

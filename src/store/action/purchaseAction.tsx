@@ -16,8 +16,8 @@ export const handleCreateTopic = async (
     setIdTopic(data);
     Notiflix.Notify.success(`Tópico ${valuesTopic.title} criado com sucesso.`);
     setIsTopicCreate(true)
-  } catch (error) {
-    Notiflix.Notify.failure(`Sinto muito, mas nao foi possivel criar o tópico.`);
+  } catch (error: any) {
+    Notiflix.Notify.failure(`Sinto muito, mas nao foi possivel criar o tópico.${error.response.data.message}`);
   } finally {
     Loading.remove();
   }
