@@ -113,7 +113,7 @@ const Register = ({ user, dispatch }: isLoggedDTO & DispatchProp) => {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.password}
-              />
+              ></Input>
               {formik.errors.password && formik.touched.password ? (
                 <DivErrorYup>{formik.errors.password}</DivErrorYup>
               ) : <DivErrorYup></DivErrorYup>}
